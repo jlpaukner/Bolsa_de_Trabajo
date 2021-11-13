@@ -14,15 +14,14 @@ function ctabla($tabla,$columnas,$alias,$tituloIdDueño,$iddueño,$idFila,$form,
               echo '</tr></thead><tbody>';
               foreach($filas as $fila){ 
                   echo '<tr>';
-                  $a=''; $b='';
                   foreach($columnas as $columna){                    
                       printf('<td style="padding:20px">%s</td>',$fila[$columna]); };
                 ?>
                   <td>
-                  <form action=<?php echo $form?> method="POST"> 
-                  <input type = "hidden" name = <?php echo $idFila?> value = "<?php echo $fila[$idFila]?>">
-                  <input type=  "submit" class="btn btn-primary" name="boton" value ="Modificar"> 
-                  </form>
+                    <form action=<?php echo $form?> method="POST"> 
+                      <input type = "hidden" name = <?php echo $idFila?> value = "<?php echo $fila[$idFila]?>">
+                      <input type=  "submit" class="btn btn-primary" name="boton" value ="Modificar"> 
+                    </form>
                   </td>
                   <td>
                   <form action=borraregistro.php method="POST">
@@ -34,10 +33,8 @@ function ctabla($tabla,$columnas,$alias,$tituloIdDueño,$iddueño,$idFila,$form,
                   </form>
                   </td>
                 </tr>
-                <?php
-
-                  echo '</tr>';                           
-              }
+                <?php echo '</tr>';                           
+                 }
               echo '</table></tbody>'; 
               return true;              
             }              

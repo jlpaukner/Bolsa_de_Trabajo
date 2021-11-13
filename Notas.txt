@@ -1,0 +1,7 @@
+El usuario root
+
+conectar a db
+        $servername = "localhost";
+        $username = "bot";
+        $password = "f4ideEb85YrUIXuU";
+        $dbname = "bolsatrabajo"; 

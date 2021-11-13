@@ -1,6 +1,9 @@
 <?php
 require __DIR__ . '/dbcon.php';
 require __DIR__ . '/encabezadoadmin.php';
+if(!isset($_GET["ms"])){
+    $_GET["ms"]="nada";
+}
 switch ($_GET["ms"]) {
     case "dpx":
         $mensaje = "Datos personales guardados exitosamente";
@@ -16,6 +19,3 @@ switch ($_GET["ms"]) {
     };
 ?>
 <div class="card-header bg-dark bg-opacity-75 text-white fs-4 fw-bolder "><?php echo $mensaje?></div>
-
-
- 

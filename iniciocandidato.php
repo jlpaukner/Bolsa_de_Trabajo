@@ -1,6 +1,9 @@
 <?php
 require __DIR__ . '/dbcon.php';
 require __DIR__ . '/encabezadoc.php';
+if(!isset($_GET["ms"])){
+    $_GET["ms"]="nada";
+}
 switch ($_GET["ms"]) {
     case "dpx":
         $mensaje = "Datos personales guardados exitosamente";

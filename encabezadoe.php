@@ -1,5 +1,5 @@
 <?php
-session_start();
+if(!isset($_SESSION)){session_start();};
 if ($_SESSION["abierta"]!="si") header("Location:index.php");
 require __DIR__ . '/extensionB.php';
 ?>
