@@ -1,34 +1,43 @@
 <?php
-include __DIR__ . '/dbcon.php';
 include __DIR__ . '/herramientas.php';
-session_start();
+// include __DIR__ . '/dbcon.php';
+// include __DIR__ . '/encabezadoadmin.php';
+// session_start();
 $consulta=sprintf("SELECT * FROM busquedas WHERE idEmpresa='%s' ",$_SESSION['id']);
 $busquedas=cunsultadbmultiple($consulta);
 $busqueda=array_pop($busquedas);
 $EdadMaxima=nacimiento($busqueda['EdadMaxima']);
 $EdadMinima=nacimiento($busqueda['EdadMinima']);;
-var_dump($busqueda);
+// var_dump($busqueda);
 $consulta=
 "SELECT * from 
 candidatos JOIN estudios on candidatos.DNI = estudios.DNI 
 join experiencia on candidatos.DNI = experiencia.DNI 
-where id_Carrera ='200'
-and id_Puesto='074'
-and Nacimiento <{$EdadMaxima}
-and {$EdadMinima} < Nacimiento
+join puestos on puestos.Id_puesto=experiencia.Id_puesto 
+join carreras on Carreras.Id_carrera=estudios.id_Carrera 
+where estudios.id_Carrera ='200'
+and experiencia.id_Puesto ='074'
+and {$EdadMaxima} < Nacimiento 
+and Nacimiento > {$EdadMinima}
 ";
+// echo $consulta;
 $candidatosEncontrados=cunsultadbmultiple($consulta);
-var_dump($candidatosEncontrados);
+// echo $consulta;
+// var_dump($candidatosEncontrados);
+if(sizeof($candidatosEncontrados)>0){
+    echo "Su busqueda obtuvo resultados<br>";
+    // echo "Su consulta (IdBusqueda".$busqueda['IdBusqueda'].") tuvo resultados<br>";
+    $dat=array('DNI','Apellido','Nombre','Comentario','Contacto','Email','Licencia','LugarNac','Movilidad','Nacimiento','Nacionalidad','NumDireccion','Postal','RedSocial1','RedSocial2','estado_civil','Institucion','tx_carrera','Empresa','tx_puesto');
+    foreach($candidatosEncontrados as $e){
+        $i=0;
+          foreach($dat as $d){
+           $i=$i+1;
+           $i= $i % 3;
+           echo "<div style='display: inline;width:250px;'><h6 style='display: inline;padding-left: 2cm;'>$d:</h6>  $e[$d]</div>";
+           if($i==0){echo"<br>";}
+       };
+    };
+}
+else {echo "le comunicaremos cuando la busqueda obtenga un candidato";};
+
 ?>
-
-
-<!-- 
-'IdBusqueda' => string '22' (length=2)
-'IdEmpresa' => string '20146156776' (length=11)
-'EstadoCivil' => string 'Soltero' (length=7)
-'Localidad' => null
-'EdadMaxima' => string '20' (length=2)
-'EdadMinima' => string '0' (length=1)
-'Carreras' => string 'No requiere experencia' (length=22)
-'titulos' 
--->

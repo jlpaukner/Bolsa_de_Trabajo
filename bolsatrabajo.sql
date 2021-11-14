@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 11-11-2021 a las 21:26:10
+-- Tiempo de generación: 14-11-2021 a las 22:35:02
 -- Versión del servidor: 5.7.31
 -- Versión de PHP: 7.3.21
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `busquedas` (
   `Carreras` varchar(100) COLLATE utf8_bin NOT NULL,
   `titulos` varchar(60) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`IdBusqueda`)
-) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `busquedas`
@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS `busquedas` (
 
 INSERT INTO `busquedas` (`IdBusqueda`, `IdEmpresa`, `EstadoCivil`, `Localidad`, `EdadMaxima`, `EdadMinima`, `Carreras`, `titulos`) VALUES
 (21, '33171618113', 'Casado', NULL, 20, 30, 'Ayudante de obra', 'Administración de Agencias de Viajes y Turismo'),
-(22, '20146156776', 'Soltero', NULL, 20, 0, 'No requiere experencia', 'No requiere estudios'),
-(18, '33189859071', 'Soltero', NULL, 60, 20, 'Auxiliar en topografía', 'Agente de Viajes y Turismo');
+(18, '33189859071', 'Soltero', NULL, 60, 20, 'Auxiliar en topografía', 'Agente de Viajes y Turismo'),
+(22, '20146156776', 'Soltero', NULL, 20, 20, 'No requiere experencia', 'No requiere estudios');
 
 -- --------------------------------------------------------
 
@@ -25327,7 +25327,7 @@ INSERT INTO `estudios` (`ID_Estudio`, `DNI`, `id_Carrera`, `Institucion`, `Local
 (172, 20505987, '209', 'UN Nro: 73', '', 'Provincia de La Rioja', '', '2016-10-07', '2021-10-07'),
 (173, 20543989, '210', 'Upriv Nro: 74', '', 'Provincia de Mendoza', '', '2016-10-07', '2021-10-07'),
 (174, 20581991, '211', 'UN Nro: 75', '', 'Provincia de Misiones', '', '2016-10-07', '2021-10-07'),
-(175, 20619993, '212', 'Upriv Nro: 76', '', 'Provincia del Neuquen', '', '2016-10-07', '2021-10-07'),
+(175, 20619993, '200', 'Upriv Nro: 76', '', 'Provincia del Neuquen', '', '2016-10-07', '2021-10-07'),
 (176, 20657995, '213', 'UN Nro: 77', '', 'Provincia de Rio Negro', '', '2016-10-07', '2021-10-07'),
 (177, 20695997, '214', 'Upriv Nro: 78', '', 'Provincia de Salta', '', '2016-10-07', '2021-10-07'),
 (178, 20733999, '215', 'UN Nro: 79', '', 'Provincia de San Juan', '', '2016-10-07', '2021-10-07'),
@@ -28355,7 +28355,7 @@ INSERT INTO `estudios` (`ID_Estudio`, `DNI`, `id_Carrera`, `Institucion`, `Local
 (3194, 22406087, '279', 'Inst Sup Nro: 90', '', 'Provincia de Santa Fe', '', '2018-10-07', '2021-10-07'),
 (3195, 22444089, '280', 'Inst Sup Nro: 91', '', 'Provincia de Santiago del Este', '', '2018-10-07', '2021-10-07'),
 (3196, 22482091, '281', 'Inst Sup Nro: 92', '', 'Provincia de Tierra del Fuego,', '', '2018-10-07', '2021-10-07'),
-(3197, 22520093, '282', 'Inst Sup Nro: 93', '', 'Provincia de Tucuman', '', '2018-10-07', '2021-10-07'),
+(3197, 22520093, '200', 'Inst Sup Nro: 93', '', 'Provincia de Tucuman', '', '2018-10-07', '2021-10-07'),
 (3198, 22558095, '283', 'Inst Sup Nro: 94', '', 'Provincia de Buenos Aires', '', '2018-10-07', '2021-10-07'),
 (3199, 22596097, '284', 'Inst Sup Nro: 95', '', 'Provincia de Catamarca', '', '2018-10-07', '2021-10-07'),
 (3200, 22634099, '285', 'Inst Sup Nro: 96', '', 'Provincia del Chaco', '', '2018-10-07', '2021-10-07'),

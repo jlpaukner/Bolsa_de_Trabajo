@@ -15,7 +15,7 @@ switch ($_GET["ms"]) {
         $mensaje = "Información de experiencia guardada exitosamente";
         break;
     default:
-        $mensaje="  ";
+        $mensaje=" ";
     };
 ?>
 <div class="card-header bg-dark bg-opacity-75 text-white fs-4 fw-bolder "><?php echo $mensaje?></div>
