@@ -1,12 +1,10 @@
 <?php
 include __DIR__ . '/herramientas.php';
-// include __DIR__ . '/dbcon.php';
-// include __DIR__ . '/encabezadoadmin.php';
 // session_start();
 $consulta=sprintf("SELECT * FROM busquedas WHERE idEmpresa='%s' ",$_SESSION['id']);
 $busquedas=cunsultadbmultiple($consulta);
 $busqueda=array_pop($busquedas);
-var_dump($busqueda);
+// var_dump($busqueda);
 $EdadMaxima=nacimiento($busqueda['EdadMaxima']);
 $EdadMinima=nacimiento($busqueda['EdadMinima']);
 $id_Carrera=$busqueda['id_Carrera'];
@@ -23,7 +21,7 @@ and experiencia.id_Puesto ={$Id_puesto}
 and {$EdadMaxima} < Nacimiento 
 and Nacimiento > {$EdadMinima}
 ";
-echo $consulta;
+// echo $consulta;
 $candidatosEncontrados=cunsultadbmultiple($consulta);
 // echo $consulta;
 // var_dump($candidatosEncontrados);

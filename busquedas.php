@@ -14,7 +14,7 @@ $tablagenerada=tabla($filas,$alias,"fbusqueda.php","IdBusqueda","busquedas","bus
 if (!$tablagenerada)
 {
 echo "<h2>No ha cargado búsquedas aún</h2>";
-echo $consulta;
+// echo $consulta;
 }
 ?>
 <hr>

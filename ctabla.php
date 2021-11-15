@@ -67,7 +67,7 @@ function ctabla($tabla,$columnas,$alias,$tituloIdDueño,$iddueño,$idFila,$form,
                   <form action=borraregistro.php method="POST">
                           <input type = "hidden" name = "tabla" value = "<?php echo $tabla?>">
                           <input type = "hidden" name = "nombreID" value = "<?php echo $idFila?>">
-                          <input type = "hidden" name = "pagina" value = "<?php echo $return?>">
+                          <input type = "hidden" name = "retorno" value = "<?php echo $return?>">
                           <input type = "hidden" name = "valorID" value = "<?php echo $fila[$idFila]?>">
                           <input type=  "submit" name="boton" class="btn btn-warning" value ="Borrar" onclick="return confirm('¿Seguro? Perderá esos datos.')"> 
                   </form>
