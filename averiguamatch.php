@@ -6,21 +6,24 @@ include __DIR__ . '/herramientas.php';
 $consulta=sprintf("SELECT * FROM busquedas WHERE idEmpresa='%s' ",$_SESSION['id']);
 $busquedas=cunsultadbmultiple($consulta);
 $busqueda=array_pop($busquedas);
+var_dump($busqueda);
 $EdadMaxima=nacimiento($busqueda['EdadMaxima']);
-$EdadMinima=nacimiento($busqueda['EdadMinima']);;
-// var_dump($busqueda);
+$EdadMinima=nacimiento($busqueda['EdadMinima']);
+$id_Carrera=$busqueda['id_Carrera'];
+$Id_puesto=$busqueda['Id_puesto'];
+
 $consulta=
 "SELECT * from 
 candidatos JOIN estudios on candidatos.DNI = estudios.DNI 
 join experiencia on candidatos.DNI = experiencia.DNI 
 join puestos on puestos.Id_puesto=experiencia.Id_puesto 
 join carreras on Carreras.Id_carrera=estudios.id_Carrera 
-where estudios.id_Carrera ='200'
-and experiencia.id_Puesto ='074'
+where estudios.id_Carrera ={$id_Carrera}
+and experiencia.id_Puesto ={$Id_puesto}
 and {$EdadMaxima} < Nacimiento 
 and Nacimiento > {$EdadMinima}
 ";
-// echo $consulta;
+echo $consulta;
 $candidatosEncontrados=cunsultadbmultiple($consulta);
 // echo $consulta;
 // var_dump($candidatosEncontrados);

@@ -4,7 +4,6 @@ require __DIR__ . '/dbcon.php';
 require __DIR__ . '/herramientas.php';
 echo var_dump($_POST);
 $_POST['IdEmpresa']=$_SESSION['id'];
-$_POST["Carreras"]=implode("_", $_POST["Carreras"]);
 
 $IdBusqueda=$_POST['IdBusqueda'];
 if ($_POST['IdBusqueda']=="0")

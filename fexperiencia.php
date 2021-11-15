@@ -56,7 +56,7 @@ else
 </div>
 
 
-<form class="formulario bg-white fst-italic " action="submitformexperiencia.php" method="POST" onsubmit="experienciaId()">>
+<form class="formulario bg-white fst-italic " action="submitformexperiencia.php" method="POST" onsubmit="experienciaId()">
     <div class="row">
         <div class="col-sm-4">
             <div class="row">
