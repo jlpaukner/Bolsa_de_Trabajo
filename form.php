@@ -1,6 +1,6 @@
 <?php
  session_start();
-require __DIR__ . '/encabezadoe.php';
+ require __DIR__ . '/encabezadoadmin.php';
 $campos=$_SESSION['cols'];
 $tabl=$_SESSION['tabl'];
 $ntabla=$_POST['ntabla'];
@@ -41,6 +41,7 @@ zoom: 100%;
     for($i = 0; $i < count($fila);$i++){
     ?>
         <div class="row text-dark">
+        <div class="col-sm-4"></div>
             <div class="col-sm-4">
                 <div class="container">
                     <div class="row"> 
@@ -71,7 +72,8 @@ zoom: 100%;
                     </div>             
                 </div>
             </div> 
-        </div>  
+            <div class="col-sm-4"></div>
+                </div>  
     <?php
         }
     ?>

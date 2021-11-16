@@ -18,4 +18,12 @@ switch ($_GET["ms"]) {
         $mensaje=" ";
     };
 ?>
-<div class="card-header bg-dark bg-opacity-75 text-white fs-4 fw-bolder "><?php echo $mensaje?></div>
+<body>
+    <div class="card-header bg-dark bg-opacity-75 text-white fs-4 fw-bolder ">
+    <div class="card-header bg-dark bg-opacity-75 text-white fs-4 fw-bolder "><?php echo $mensaje?></div>
+
+    </div>
+
+</body>
+
+

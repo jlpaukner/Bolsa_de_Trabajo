@@ -3,9 +3,9 @@
 if ($_SESSION["abierta"]!="si") header("Location:index.php");
 ?>
 <?php require __DIR__ . '/extensionB.php';?>
-<body class="bg-dark">
+<body class="bg-danger fst-italic">
     <!--Nuevo encabezado-->
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark border border-success " >
+    <nav id="barra" class="navbar sticky-top navbar-expand-lg navbar-dark bg-danger bg-dark bg-opacity-50 border border-success fst-italic" >
   <div class="container-fluid">
     <a class="navbar-brand" href="">
     <img src="imagenes/logoyj.PNG" alt="" width="75" height="24">
@@ -16,27 +16,57 @@ if ($_SESSION["abierta"]!="si") header("Location:index.php");
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <h3  style="text-align:center;color:cadetblue">Administracion</h3>
+        <!-- <a class="nav-link active" aria-current="page" href="paginaadmin.php">Perfil administrativo</a> -->
+        <h3>   Administrador  </h3>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" id="dd">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            TABLAS
+          ABM-Registros
           </a>
-          <ul class="dropdown-menu bg-dark border border-2 border-white" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="rtabla.php?t=candidatos">Candidatos</a></li>
-            <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="rtabla.php?t=carreras">Carreras</a></li>
-            <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="rtabla.php?t=Estudios">Estudios</a></li>
-            <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="rtabla.php?t=Empresa">Empresa</a></li>
+          <ul class="dropdown-menu bg-dark bg-opacity-50 border border-2 border-white" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=empresa"> Empresa </a></li>
+            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=candidatos"> Candidatos </a></li>
+            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=login"> Login </a></li>
+            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=busquedas"> Busquedas </a></li>
+            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=carreras"> Carreras </a></li>
+            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=codigo_postales"> Cod-Postal </a></li>
+            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=estudios"> Estudios </a></li>
+            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=carreras"> Carreras </a></li>
+            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=experiencia"> Experiencia </a></li>
+            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=postulantes"> Postulantes </a></li>
+            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=provincias"> Provincias </a></li>
+            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=puestos"> Puestos </a></li>
+            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=requisitos"> Requisitos </a></li>
           </ul>
-        </li>
-      </ul>
-    </div>
-    <div class="col-sm-2 border border-info border-opacity-2">
-                <!--tercera columna-->
-        <a class=" text-center text-white fst-italic text-opacity-50" href="cerrarsession.php"><h5 >Cerrar sesión</h5></a>
-    </div>
+          </li>
+        <!-- <li class="nav-item"> -->
+          <!-- <div class="d-flex justify-content-center fst-italic">
+            <form class="form-center" action=<?php// echo 'form.php'?> method="POST">  -->
+              <!--label>?=ucfirst($tabla)?></!--label>
+              <input type = "hidden" name = "ntabla" value = "<php echo $tabla?>"-->
+              <!-- <input type = "hidden" name = "nkey" value = "<?php //echo $idFila?>"> -->
+              <!-- <input type = "hidden" name = "key" value = "nuevo"> -->
+              <!-- <input type = "hidden" name = "pagretorno" value = "<?php //echo 'rtabla?t='.$tabla?>"> -->
+              <!-- <input type = "submit" class="btn btn-dark bg-danger fst-italic bg-opacity-50" name="crear" value ="Nuevo Registro">  -->
+            <!-- </form> -->
+          <!-- </div> -->
+        <!-- </li> -->
+      <!-- </ul> -->
+    <!-- </div> -->
+<li class="nav ml-auto justify-content-end">
+        <a class=" text-center text-white fst-italic text-opacity-50" href="cerrarsession.php">
+          <h5 >Cerrar sesión</h5>
+        </a>
+</li>
+
 </nav>
     <!--Termina encabezado-->
-
+<!--Logo grande-->
+<figure class="text-center">
+  <blockquote class="blockquote ">
+    <div class="p-3 mb-2  bg-dark bg-opacity-50  border border-primary-25"><p><img src="imagenes/tituloyj.PNG" alt="" width="300" height="100"></p></div>
+  </blockquote>
+</figure>
+<!--Fin Logo grande-->
 </body>
 </html>

@@ -1188,7 +1188,7 @@ $jscomp.polyfill("Array.prototype.find", function (l) {
         for (var f = 0, g = h.length; f < g; f++)
             e[0][f] = new Option("number" === typeof d[f] ? a.fnFormatNumber(d[f]) : d[f],
                     h[f]);
-        var k = l("<div><label/></div>").addClass(b.sLength);
+        var k = l("<div style='display:none'><label/></div>").addClass(b.sLength);
         a.aanFeatures.l || (k[0].id = c + "_length");
         k.children().append(a.oLanguage.sLengthMenu.replace("_MENU_", e[0].outerHTML));
         l("select", k).val(a._iDisplayLength).on("change.DT", function (m) {
