@@ -29,14 +29,9 @@ if ($_SESSION["abierta"]!="si") header("Location:index.php");
             <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=login"> Login </a></li>
             <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=busquedas"> Busquedas </a></li>
             <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=carreras"> Carreras </a></li>
-            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=codigo_postales"> Cod-Postal </a></li>
             <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=estudios"> Estudios </a></li>
-            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=carreras"> Carreras </a></li>
             <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=experiencia"> Experiencia </a></li>
-            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=postulantes"> Postulantes </a></li>
-            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=provincias"> Provincias </a></li>
             <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=puestos"> Puestos </a></li>
-            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=requisitos"> Requisitos </a></li>
           </ul>
           </li>
         <!-- <li class="nav-item"> -->

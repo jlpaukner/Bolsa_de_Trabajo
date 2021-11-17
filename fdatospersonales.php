@@ -128,7 +128,12 @@ zoom: 100%;
                     <div class="row">
                         <div class="col-sm-6">
                             <label for="Estado" class="font-weight-bold fs-5 text-black ">Estado Civil:</label><br>
-                            <input type="text"  lid="Estado" name="Estado" placeholder="Ingresar E. Civil" class="form-control border border-primary text-center fw-bold fs-5" value="<?php echo $Estado?>">
+                            <!-- <input type="text"  lid="Estado" name="Estado" placeholder="Ingresar E. Civil" class="form-control border border-primary text-center fw-bold fs-5" value="<?php// echo $Estado?>"> -->
+                            <select class="form-control border border-primary text-center fw-bold fs-5" name="Estado" id="Estado">
+                            <option value="Casado">Casado</option>
+                            <option value="Soltero">Soltero</option>
+                            <option value="Divorciado">Divorciado</option>
+                            </select>
                         </div>
                         <div class="col-sm-6">
                             <label for="Hijos" class="font-weight-bold fs-5 text-black ">Hijos:</label>

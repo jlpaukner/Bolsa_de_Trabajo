@@ -3,10 +3,7 @@
 require __DIR__ . '/dbcon.php';
 $strtohash=$_POST['usuario_registrarse'].$_POST['password_registrarse'];
 $hashpass= hash("sha256",$strtohash);
-$consulta = "SELECT `id` FROM `login` WHERE `userpass` = '$hashpass' ";
-$resultado = cunsultadb($consulta);
-$tipo=$_POST['tipo'];
-// var_dump($resultado);
+
 ?>
 
 <!DOCTYPE html>
@@ -23,9 +20,7 @@ $tipo=$_POST['tipo'];
 </head>
 
 
-<body>
-    
-
+<body>   
 <figure class="text-center">
   <blockquote class="blockquote ">
     <div class="p-3 mb-2 bg-dark  border border-primary-25"><p><img src="imagenes/tituloyj.PNG" alt="" width="300" height="100"></p></div>
@@ -34,22 +29,55 @@ $tipo=$_POST['tipo'];
 
 
 <?php
-if ($resultado!=0) 
-    {
-        echo "ya existe esa combinación de usuario y contraseña";
-        echo '<br>  <a href="fsubs.php">Volver a intentar </a>' ;
+$nuevoID=1;
+$id=$_POST['id'];
+$consulta = "SELECT `id` FROM `login` WHERE `id` = '$id' ";
+$resultado = cunsultadb($consulta);
+$tipo=$_POST['tipo'];
+if ($tipo==1)
+    {$ret="u";
+    $doc="DNI";
     }
-else
-    {
-        $id=$_POST['id'];
-        $insertar = "INSERT INTO `login` (`id`, `userpass`, `tipo`) VALUES ('$id', '$hashpass','$tipo')";
-        $resultado = operaciondb($insertar);
-        if ($resultado==1)
-        {
-        echo "<center><h2> La suscripción se realizó  exitosamente <h2></center><br>";
-        echo "<center><h4> para continuar seleccione el siguiente link  <h4></center><br>";
-        }
-        echo '  <center><a href="index.php">Ir a inicio </center></a>' ;
+    else
+    {$ret="e";
+     $doc="CUIL";    
     };
+
+
+
+if ($resultado!=0) 
+    {$nuevoID=0; 
+     $error=1; 
+        echo "<p style='text-align:center'>Ya existe ese {$doc} registrado</p>";
+    }
+else{
+    $consulta = "SELECT `id` FROM `login` WHERE `userpass` = '$hashpass' ";
+    $resultado = cunsultadb($consulta);
+    if ($resultado!=0 ) 
+        {
+            echo "<p style='text-align:center'>Ya existe esa combinación de usuario y contraseña.</p>";
+            $error=1;        
+        }
+    else
+        {   $error=1;          
+            $insertar = "INSERT INTO `login` (`id`, `userpass`, `tipo`) VALUES ('$id', '$hashpass','$tipo')";
+            $resultado = operaciondb($insertar);
+            if ($resultado==1 )
+            {
+            $error=0;     
+            echo "<center><h2> La suscripción se realizó  exitosamente <h2></center><br>";
+            echo "<center><h4> para continuar seleccione el siguiente link  <h4></center><br>";
+            }
+            
+        };
+    }
+
+    if($error){
+        printf('<center><a href="fsubs.php?t=%s">Volver a intentar </center></a>',$ret)  ;
+    }
+    else{
+        echo '  <center><a href="index.php">Ir a inicio </center></a>' ;
+    }
+
 ?>
 <body>

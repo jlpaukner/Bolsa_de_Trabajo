@@ -1,6 +1,6 @@
 <?php
 session_start();
-require __DIR__ . '/dbcon.php';
+ini_set("default_charset", "UTF-8");require __DIR__ . '/dbcon.php';
 // concatena usuario password y hace el hash
 $strtohash=$_POST['usuario'].$_POST['password'];
 $hashpass= hash("sha256",$strtohash);

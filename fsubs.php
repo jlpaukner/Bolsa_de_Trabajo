@@ -62,10 +62,10 @@ zoom: 100%;
           <a class="nav-link active" aria-current="page" href="info_who_are_we.php">¿Quienes somos?</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="info_empresa.php">Empresas</a>
+          <!-- <a class="nav-link" href="info_empresa.php">Empresas</a> -->
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="info_candidato.php">Candidatos</a>
+          <!-- <a class="nav-link" href="info_candidato.php">Candidatos</a> -->
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -108,7 +108,7 @@ zoom: 100%;
       </div>
     </div>
     <div class="col-sm-4">
-                <form class=" text-center bg-white centroventana text-stars border border-white" action="inscribe.php" method="POST">
+                <form class=" text-center bg-white centroventana text-stars border border-white" action="submitsubs.php" method="POST">
                     <!-- ingreso de dato de nombre usuario-->
                     <div class="mb-3">
                         <label  for="usuario_registrarse" class="font-weight-bold fs-4 fst-italic" > <?php echo $nombre?></label>

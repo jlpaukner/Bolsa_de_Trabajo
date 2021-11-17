@@ -22,4 +22,6 @@ echo "<h2>No ha cargado búsquedas aún</h2>";
     <input type = "hidden" name = "IdBusqueda" value = "0" >
     <input type=  "submit" name="boton" value ="Añadir busqueda"> 
 </form>
-<?php require __DIR__ . '/averiguamatch.php'; ?>
+ <?php 
+//  require __DIR__ . '/averiguamatch.php';
+  ?> 

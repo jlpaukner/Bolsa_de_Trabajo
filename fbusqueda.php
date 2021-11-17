@@ -86,8 +86,8 @@ else{
                     <?php                    
                         $consulta=sprintf("SELECT `Id_puesto`,`tx_puesto` FROM `puestos`");
                         $puestos=cunsultadbmultiple($consulta);
-                        printf('<option value="%s">%s</option>',"No requiere experiencia","No requiere experiencia");
-                        echo '<option disabled="disabled">———————————————————————</option>';
+                        // printf( '<option data="%s" value="%s">','0' ,'No requiere');
+                        // echo '<option disabled="disabled">———————————————————————</option>';
                         foreach($puestos as $puesto){
                         printf( '<option data="%s" value="%s">',$puesto["Id_puesto"] ,$puesto["tx_puesto"]);
                     };                
@@ -102,9 +102,9 @@ else{
             <?php                    
                 $consulta=sprintf("SELECT `id_carrera`,`tx_carrera`,`tipo_Carrera`,`nivel` FROM `carreras`");
                 $titulos=cunsultadbmultiple($consulta);
-                printf('<option value="%s">%s</option>',"No requiere estudios","No requiere estudios");
-                echo '<option disabled="disabled">———————————————————————</option>';
-                echo var_dump($titulos); 
+                // printf( '<option data="%s" value="%s">','0' ,'No requiere');
+                // echo '<option disabled="disabled">———————————————————————</option>';
+                // echo var_dump($titulos); 
                 foreach($titulos as $titulo){
                 printf( '<option data="%s" value="%s">',$titulo["id_carrera"] ,$titulo["tx_carrera"].'  (Tipo: '.$titulo["tipo_Carrera"].' Nivel: '.$titulo["nivel"].')');
             };                

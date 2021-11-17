@@ -28,10 +28,10 @@
           <a class="nav-link active" aria-current="page" href="info_who_are_we.php">¿Quienes somos?</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="info_empresa.php">Empresas</a>
+          <a hidden class="nav-link" href="info_empresa.php">Empresas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="info_candidato.php">Candidatos</a>
+          <a hidden class="nav-link" href="info_candidato.php">Candidatos</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
