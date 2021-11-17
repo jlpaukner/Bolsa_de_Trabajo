@@ -29,6 +29,10 @@ require __DIR__ . '/extensionB.php';?>
             <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="fdatospersonales.php">Datos Personales</a></li>
             <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="experiencia.php">Experiencia Laboral</a></li>
             <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="estudios.php">Formación Académica</a></li>
+            <li><form action=borrarcuenta.php method="POST">
+                  <input type="submit" name="boton" class="dropdown-item text-danger text-center border border-red fst-italic" value ="Eliminar Cuenta" onclick="return confirm('¿Seguro? Perderá todos los datos de su cuenta.')"> 
+                </form>
+            </li>
           </ul>
         </li>
       </ul>

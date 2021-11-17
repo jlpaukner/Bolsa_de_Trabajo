@@ -35,6 +35,10 @@ require __DIR__ . '/extensionB.php';
           <ul class="dropdown-menu bg-success border border-2 border-white" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item text-dark text-center border border-white fst-italic" href="fdatosempresa.php">Datos Empresa</a></li>
             <li><a class="dropdown-item text-dark text-center border border-white fst-italic" href="busquedas.php">Búsqueda</a></li>            
+            <li><form action=borrarcuenta.php method="POST">
+                  <input type="submit" name="boton" class="dropdown-item text-danger text-center border border-red fst-italic" value ="Eliminar Cuenta" onclick="return confirm('¿Seguro? Perderá todos los datos de su cuenta.')"> 
+                </form>
+            </li>
           </ul>
         </li>
       </ul>

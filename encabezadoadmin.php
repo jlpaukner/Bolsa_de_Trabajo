@@ -34,20 +34,7 @@ if ($_SESSION["abierta"]!="si") header("Location:index.php");
             <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=puestos"> Puestos </a></li>
           </ul>
           </li>
-        <!-- <li class="nav-item"> -->
-          <!-- <div class="d-flex justify-content-center fst-italic">
-            <form class="form-center" action=<?php// echo 'form.php'?> method="POST">  -->
-              <!--label>?=ucfirst($tabla)?></!--label>
-              <input type = "hidden" name = "ntabla" value = "<php echo $tabla?>"-->
-              <!-- <input type = "hidden" name = "nkey" value = "<?php //echo $idFila?>"> -->
-              <!-- <input type = "hidden" name = "key" value = "nuevo"> -->
-              <!-- <input type = "hidden" name = "pagretorno" value = "<?php //echo 'rtabla?t='.$tabla?>"> -->
-              <!-- <input type = "submit" class="btn btn-dark bg-danger fst-italic bg-opacity-50" name="crear" value ="Nuevo Registro">  -->
-            <!-- </form> -->
-          <!-- </div> -->
-        <!-- </li> -->
-      <!-- </ul> -->
-    <!-- </div> -->
+
 <li class="nav ml-auto justify-content-end">
         <a class=" text-center text-white fst-italic text-opacity-50" href="cerrarsession.php">
           <h5 >Cerrar sesión</h5>
