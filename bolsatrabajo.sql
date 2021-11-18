@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 17-11-2021 a las 01:52:57
+-- Tiempo de generación: 18-11-2021 a las 02:01:56
 -- Versión del servidor: 5.7.31
 -- Versión de PHP: 7.3.21
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `busquedas` (
   `id_Carrera` varchar(60) COLLATE utf8_bin DEFAULT NULL,
   `Id_puesto` varchar(60) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`IdBusqueda`)
-) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `busquedas`
@@ -46,10 +46,8 @@ CREATE TABLE IF NOT EXISTS `busquedas` (
 INSERT INTO `busquedas` (`IdBusqueda`, `IdEmpresa`, `EstadoCivil`, `EdadMaxima`, `EdadMinima`, `id_Carrera`, `Id_puesto`) VALUES
 (21, '33171618113', 'Casado', 20, 30, 'Ayudante de obra', 'Administración de Agencias de Viajes y Turismo'),
 (18, '33189859071', 'Soltero', 60, 20, 'Auxiliar en topografía', 'Agente de Viajes y Turismo'),
-(31, '20155277250', 'Soltero', 20, 0, '0', '0'),
-(24, '20146156776', 'Soltero', 60, 20, '111', '87'),
-(32, '20146156776', 'Casado', 60, 30, '45', '27'),
-(33, '20146156776', 'Casado', 60, 20, '18', '136');
+(35, '25', 'Soltero', 20, 0, '24', '76'),
+(34, '33189859071', 'Casado', 60, 20, '1', '1');
 
 -- --------------------------------------------------------
 
@@ -86,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `candidatos` (
 --
 
 INSERT INTO `candidatos` (`DNI`, `Apellido`, `Comentario`, `Contacto`, `Domicilio`, `Email`, `Estado`, `Hijos`, `Licencia`, `LugarNac`, `Movilidad`, `Nacimiento`, `Nacionalidad`, `Nombre`, `NumDireccion`, `Postal`, `RedSocial1`, `RedSocial2`, `estado_civil`) VALUES
-(111111, 'Motzart', 'Quiero hacer lo que me gusta: Ganar Plata', '1527151545', 'Calle Requiem', 'Amadeus@Yahoo.com', 'Divorciado', '', '', 'Salsburgo', 'Automovil', '1957-01-27', 'Austriaco', 'Wolfgang Amadeus', '1970', 1011, 'Musical@tinder.com', 'Orquesta@twich.com', ''),
+(111111, 'Motzart', 'Quiero hacer lo que me gusta: Ganar Plata', '1527151545', 'Calle Requiem', 'Amadeus@Yahoo.com', 'Casado', '2', '', 'Salsburgo', 'Automovil', '1957-01-27', 'Austriaco', 'Wolfgang Amadeus', '1970', 1011, 'Musical@tinder.com', 'Orquesta@twich.com', ''),
 (31032541, 'AXIOMA', 'Necesito dinero para comprar comida', '1122045599', 'BAHIA BLANCA ', 'TIAGO_AXIOMA@gmail.com', 'activo', '1', 'Profesional', 'Tucuman', 'No', '2002-07-16', 'Argentina', 'TIAGO', ' 1434', 2550, 'TIAGOAXIOMA.facebook.com', 'AXIOMATIAGO.instagram', 'Divorciado'),
 (31070543, 'AYABAR', 'Necesito dinero para comprar comida', '1122045603', 'BALBASTRO ', 'TINOCO_AYABAR@gmail.com', 'activo', '1', 'Profesional', 'Tucuman', 'No', '2001-07-15', 'Argentina', 'TINOCO', ' 1435', 2551, 'TINOCOAYABAR.facebook.com', 'AYABARTINOCO.instagram', 'Separado'),
 (31108545, 'AYAIL', 'Necesito dinero para comprar comida', '1122045604', 'BALCARCE ', 'TOLENTINO_AYAIL@gmail.com', 'activo', '0', 'Particular', 'Tucuman', 'No', '2000-07-14', 'Argentina', 'TOLENTINO', ' 1436', 2555, 'TOLENTINOAYAIL.facebook.com', 'AYAILTOLENTINO.instagram', 'Soltero'),
@@ -899,26 +897,26 @@ CREATE TABLE IF NOT EXISTS `empresa` (
 --
 
 INSERT INTO `empresa` (`Cuit`, `Apellido_Apoderado`, `Num_DNI_Apoderado`, `Razon_Social`, `FC_Inicio_Actividades`, `Domicilio`, `Cd_postal`, `Rubro`, `Tel_Contacto`, `Email`, `Nombre_Apoderado`) VALUES
-('20140076450', 'anti Perez', 28711212, 'Administracion Enrique Duhau Saac', '2000-01-01', 'Sarmiento 663', 1001, 'Administracion Consorcios', '1122041052', 'AdministracionEnriqueDuhauSaac@FULLCERO.COM', 'Josedro'),
-('20141596534', '1979-01-02', 2345, 'Albergue Transitorio Del Sur', '2000-01-01', 'Florida 253', 1015, 'Hoteleria', '1122041076', 'AlbergueTransitorioDelSur@FULLCERO.COM', 'Anapatricialda'),
+('20140076450', 'Perez', 28711212, 'Administracion Enrique Duhau Saac', '2000-01-01', 'Sarmiento 663', 1001, 'Administracion Consorcios', '1122041052', 'AdministracionEnriqueDuhauSaac@FULLCERO.COM', 'Josedro'),
+('20141596534', 'Basaldo', 2345, 'Albergue Transitorio Del Sur', '2000-01-01', 'Florida 253', 1015, 'Hoteleria', '1122041076', 'AlbergueTransitorioDelSur@FULLCERO.COM', 'Anapatricialda'),
 ('20143116618', 'Aparicio', 25050505, 'Albergue Transitorio Los Pinos', '2000-01-01', 'Sarmiento 725 ', 1029, 'Hoteleria', '1122041098', 'AlbergueTransitorioLosPinos@FULLCERO.COM', 'Friederick'),
 ('20144636692', 'Johanness', 432463, 'Amoblamientos Mats', '2000-01-01', 'Av R S Peña 720', 1043, 'Muebles', '1122041110', 'AmoblamientosMats@FULLCERO.COM', 'Pablin'),
-('20146156776', NULL, NULL, 'Articulos DJ Publicidad', '2000-01-01', 'Sarmiento 664', 4334, NULL, NULL, 'ArticulosDJPublicidad@Telecentro.COM', NULL),
+('20146156776', 'Sanchez', NULL, 'Articulos DJ Publicidad', '2000-01-01', 'Sarmiento 664', 4334, NULL, NULL, 'ArticulosDJPublicidad@Telecentro.COM', NULL),
 ('20149196934', 'Aaragorn', 3232, 'Camara De Comercio Argentino Mexicana', '2000-01-01', 'Sarmiento 725', 1085, 'Camaras Industriales', '1122041142', 'CamaraDeComercioArgentino@Telecentro.COM', 'Trancos'),
-('20150717018', '', 0, 'Cancha Futbol 6 El polaco', '2000-01-01', 'Av R S Peña 720', 1099, 'Clubes', '1122041174', 'CanchaFutbol6El@gmail.COM', ''),
-('20152237092', '', 0, 'Capelle Hermanos', '2000-01-01', 'Sarmiento 665', 1113, 'Clubes', '1122041205', 'CapelleHermanos@gmail.COM', ''),
-('20153757176', '', 0, 'Cia Arg De Transp Maritimos Sa', '2000-01-01', 'Florida 253', 1127, 'Transportes Maritimos', '1122041227', 'CiaArgDeTransp@gmail.COM', ''),
-('20155277250', '', 0, 'Coordinadora De Las Ind De Prod Alcoholicos', '2000-01-01', 'Sarmiento 725', 1141, 'Alimenticios', '1122041266', 'CoordinadoraDeLasInd@FULLCERO.COM', ''),
-('20156797334', '', 0, 'Eagle Service Group Srl Cargas Aereas Y Maritimas', '2000-01-01', 'Av R S Peña 720', 1155, '', '1122041286', 'EagleServiceGroupSrl@FULLCERO.COM', ''),
-('20159837492', '', 0, 'Esmeralda 351 - Capital Federal (CP 1035)', '2000-01-01', 'Florida 253', 1183, '', '1122041361', 'Esmeralda351-Capital@FULLCERO.COM', ''),
-('20161357576', '', 0, 'Estancias Schajman Sacayc', '2000-01-01', 'Sarmiento 725', 1197, '', '1122041370', 'EstanciasSchajmanSacayc@FULLCERO.COM', ''),
-('20162877650', '', 0, 'Faktoring Sa', '2000-01-01', 'Av R S Peña 720', 1211, '', '1122041382', 'FaktoringSa@FULLCERO.COM', ''),
-('20165917818', '', 0, 'Furega Hernan', '2000-01-01', 'Florida 253', 1239, '', '1122041443', 'FuregaHernan@FULLCERO.COM', ''),
-('20167437892', '', 0, 'Gruas Dancer Srl', '2000-01-01', 'Sarmiento 725', 1253, '', '1122041469', 'GruasDancerSrl@FULLCERO.COM', ''),
-('20168957976', '', 0, 'Herman Miller', '2000-01-01', 'Av R S Peña 720', 1267, '', '1122041484', 'HermanMiller@FULLCERO.COM', ''),
-('20170478050', '', 0, 'Hotel Español ', '2000-01-01', 'Sarmiento 668', 1281, '', '1122041501', 'HotelEspañol@FULLCERO.COM', ''),
-('20171998134', '', 0, 'Hotel Los Pinos', '2000-01-01', 'Florida 253', 1295, '', '1122041513', 'HotelLosPinos@FULLCERO.COM', ''),
-('20173518218', '', 0, 'Hotel Sindicato Maderero', '2000-01-01', 'Sarmiento 725', 1311, '', '1122041545', 'HotelSindicatoMaderero@FULLCERO.COM', ''),
+('20150717018', 'Gimli', 0, 'Cancha Futbol 6 El polaco', '2000-01-01', 'Av R S Peña 720', 1099, 'Clubes', '1122041174', 'CanchaFutbol6El@gmail.COM', ''),
+('20152237092', 'Bolson', 0, 'Capelle Hermanos', '2000-01-01', 'Sarmiento 665', 1113, 'Clubes', '1122041205', 'CapelleHermanos@gmail.COM', ''),
+('20153757176', 'Bilbo', 0, 'Cia Arg De Transp Maritimos Sa', '2000-01-01', 'Florida 253', 1127, 'Transportes Maritimos', '1122041227', 'CiaArgDeTransp@gmail.COM', ''),
+('20155277250', 'Vivaldi', 0, 'Coordinadora De Las Ind De Prod Alcoholicos', '2000-01-01', 'Sarmiento 725', 1141, 'Alimenticios', '1122041266', 'CoordinadoraDeLasInd@FULLCERO.COM', ''),
+('20156797334', 'Strauss', 0, 'Eagle Service Group Srl Cargas Aereas Y Maritimas', '2000-01-01', 'Av R S Peña 720', 1155, '', '1122041286', 'EagleServiceGroupSrl@FULLCERO.COM', ''),
+('20159837492', 'Maquintosh', 0, 'Esmeralda 351 - Capital Federal (CP 1035)', '2000-01-01', 'Florida 253', 1183, '', '1122041361', 'Esmeralda351-Capital@FULLCERO.COM', ''),
+('20161357576', 'Borguess', 0, 'Estancias Schajman Sacayc', '2000-01-01', 'Sarmiento 725', 1197, '', '1122041370', 'EstanciasSchajmanSacayc@FULLCERO.COM', ''),
+('20162877650', 'Ululeto', 0, 'Faktoring Sa', '2000-01-01', 'Av R S Peña 720', 1211, '', '1122041382', 'FaktoringSa@FULLCERO.COM', ''),
+('20165917818', 'Batracino', 0, 'Furega Hernan', '2000-01-01', 'Florida 253', 1239, '', '1122041443', 'FuregaHernan@FULLCERO.COM', ''),
+('20167437892', 'Porcianel', 0, 'Gruas Dancer Srl', '2000-01-01', 'Sarmiento 725', 1253, '', '1122041469', 'GruasDancerSrl@FULLCERO.COM', ''),
+('20168957976', 'Baratustro', 0, 'Herman Miller', '2000-01-01', 'Av R S Peña 720', 1267, '', '1122041484', 'HermanMiller@FULLCERO.COM', ''),
+('20170478050', 'Almirado', 0, 'Hotel Español ', '2000-01-01', 'Sarmiento 668', 1281, '', '1122041501', 'HotelEspañol@FULLCERO.COM', ''),
+('20171998134', 'Conancio', 0, 'Hotel Los Pinos', '2000-01-01', 'Florida 253', 1295, '', '1122041513', 'HotelLosPinos@FULLCERO.COM', ''),
+('20173518218', 'Yonson', 0, 'Hotel Sindicato Maderero', '2000-01-01', 'Sarmiento 725', 1311, '', '1122041545', 'HotelSindicatoMaderero@FULLCERO.COM', ''),
 ('20175038292', '', 0, 'Hotel Sindicato Textil', '2000-01-01', 'Av R S Peña 720', 1325, '', '1122041564', 'HotelSindicatoTextil@FULLCERO.COM', ''),
 ('20176558376', '', 0, 'kiosco El polaco', '2000-01-01', 'Sarmiento 669', 1339, '', '1122041592', 'kioscoElpolaco@FULLCERO.COM', ''),
 ('20178078450', '', 0, 'La Central', '2000-01-01', 'Florida 253', 1353, '', '1122041602', 'LaCentral@FULLCERO.COM', ''),
@@ -978,7 +976,7 @@ INSERT INTO `empresa` (`Cuit`, `Apellido_Apoderado`, `Num_DNI_Apoderado`, `Razon
 ('24198219513', '', 0, 'supermerdado Pelotas', '2000-01-01', 'Florida 345', 1649, '', '1122041932', 'supermerdadoPelotas@Arnet.COM', ''),
 ('24199739597', '', 0, 'Talcahuano 736, Centro (San Nicolas), Ciudad de Buenos Aires, Argentina', '2000-01-01', 'Florida 142 4 108', 1649, '', '1122041965', 'Talcahuano736Centro@Arnet.COM', ''),
 ('24201259671', '', 0, 'Vinoteca el Franjamareado', '2000-01-01', 'TGral J Peron 679', 1653, '', '1122041976', 'VinotecaelFranjamareado@Arnet.COM', ''),
-('25', 'Apoderardo', 25050505, 'Gran Empresa Feliz', '2000-01-01', 'avenida', 555, 'rubron', '123213321', 'email', 'juan perez'),
+('25', NULL, NULL, 'Gran Empresa Feliz', NULL, 'avenida', 3000, NULL, NULL, 'email', NULL),
 ('27140836492', 'Perez', 28710312, 'Aguaribay Sca', '2000-01-01', 'TGral J Peron 683', 1006, 'Bebidas', '1122041058', 'AguaribaySca@FULLCERO.COM', 'Norberto'),
 ('27142356576', '', 0, 'Albergue Transitorio Gonzalez', '2000-01-01', 'Florida 165', 1020, 'Hoteleria', '1122041082', 'AlbergueTransitorioGonzalez@FULLCERO.COM', ''),
 ('27143876650', '', 0, 'Albergue Transitorio Unidos', '2000-01-01', 'Av R S Peña 710', 1034, 'Hoteleria', '1122041103', 'AlbergueTransitorioUnidos@FULLCERO.COM', ''),
@@ -1049,6 +1047,7 @@ INSERT INTO `empresa` (`Cuit`, `Apellido_Apoderado`, `Num_DNI_Apoderado`, `Razon
 ('33183778755', '', 0, 'Panalpina Transportes Mundiales', '2000-01-01', 'TGral J Peron 683', 1402, '', '1122041692', 'PanalpinaTransportesMundiales@FULLCERO.COM', ''),
 ('33185298839', '', 0, 'Rabinovich Efrain Y Cia Sca', '2000-01-01', 'Sarmiento 725', 1420, '', '1122041706', 'RabinovichEfrainYCia@FULLCERO.COM', ''),
 ('33186818913', '', 0, 'Repuestos  Agustin', '2000-01-01', 'Av R S Peña 720', 1434, '', '1122041728', 'RepuestosAgustin@FULLCERO.COM', ''),
+('33189859071', 'Perez', 28711212, 'Administracion Enrique Duhau Saac', '2000-01-01', 'Sarmiento 663', 1001, 'Administracion Consorcios', '1122041052', 'AdministracionEnriqueDuhauSaac@FULLCERO.COM', 'Josedro'),
 ('33191379155', '', 0, 'Repuestos  Pepe', '2000-01-01', 'Sarmiento 725', 1629, '', '1122041872', 'RepuestosPepe@Speedy.COM', ''),
 ('33192899239', '', 0, 'Sarmiento 663, Centro (San Nicolas), Ciudad de Buenos Aires, Argentina', '2000-01-01', 'Av R S Peña 720', 1638, '', '1122041880', 'Sarmiento663Centro(San@Speedy.COM', ''),
 ('33194419313', '', 0, 'Sistemas Y Soluciones Digitales Srl', '2000-01-01', 'Florida 173', 1647, '', '1122041888', 'SistemasYSolucionesDigitales@Speedy.COM', ''),
@@ -1739,7 +1738,7 @@ INSERT INTO `estudios` (`ID_Estudio`, `DNI`, `id_Carrera`, `Institucion`, `Local
 (3632, 39050963, '15', 'Inst Sup Nro: 60', '', 'Provincia de Santiago del Este', '', '2018-10-07', '2021-10-07'),
 (3633, 39088965, '16', 'Inst Sup Nro: 61', '', 'Provincia de Tierra del Fuego,', '', '2018-10-07', '2021-10-07'),
 (3636, 39202971, '19', 'Inst Sup Nro: 64', '', 'Provincia de Catamarca', '', '2018-10-07', '2021-10-07'),
-(3639, 111111, '9', 'Instituto', 'Aqui', 'BS AS', 'Arg', '2021-11-19', '2021-11-20');
+(3639, 111111, '24', 'Instituto', 'Aqui', 'BS AS', 'Arg', '2021-11-19', '2021-11-20');
 
 -- --------------------------------------------------------
 
@@ -1760,7 +1759,7 @@ CREATE TABLE IF NOT EXISTS `experiencia` (
   `Sector` varchar(30) NOT NULL,
   `Descripcion` varchar(100) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=747 DEFAULT CHARSET=utf8 COMMENT='Tabla complementaria para poder asociar la experiencia laboral';
+) ENGINE=InnoDB AUTO_INCREMENT=752 DEFAULT CHARSET=utf8 COMMENT='Tabla complementaria para poder asociar la experiencia laboral';
 
 --
 -- Volcado de datos para la tabla `experiencia`
@@ -2495,9 +2494,9 @@ INSERT INTO `experiencia` (`Id`, `DNI`, `Empresa`, `Contacto`, `Cont_Tel`, `Id_p
 (726, 41559095, 'kiosco Compu', '', 'Francisco ', '054', '2015-06-23', '2014-12-18', 'finanzas', 'administrativo'),
 (727, 41597097, 'kiosco El polaco', '', 'Franchesco', '055', '2020-06-21', '2019-12-17', 'operario', 'tareas mantenimiento'),
 (728, 41635099, 'kiosco Tomy', '', 'Lautaro Go', '056', '2019-06-21', '2018-12-16', 'tecnico', 'Electrico'),
-(743, 111111, 'empresa', '32432', NULL, '6', '2021-11-06', '2021-12-11', 'logistica', 'estelar'),
-(745, 111111, 'empresa', 'aguatero', NULL, '177', '2021-11-12', '2021-11-20', 'acuatico', 'tenia muchas esperanzas'),
-(746, 14235657, 'Coto', '1122043603', NULL, '87', '2020-09-29', '2020-03-26', 'operario', 'tareas de marketing');
+(746, 14235657, 'Coto', '1122043603', NULL, '87', '2020-09-29', '2020-03-26', 'operario', 'tareas de marketing'),
+(750, 111111, 'empresa', 'aguatero', NULL, '2', '2021-11-12', '2021-11-20', 'acuatico', 'tenia muchas esperanzas'),
+(751, 111111, 'empresa', 'llamar 1127145325', NULL, '76', '2021-11-06', '2021-12-11', 'logistica', 'Tenia gente a cargo');
 
 -- --------------------------------------------------------
 
@@ -2518,11 +2517,10 @@ CREATE TABLE IF NOT EXISTS `login` (
 --
 
 INSERT INTO `login` (`id`, `userpass`, `tipo`) VALUES
-(20155277250, '8b5cc4df7eec7d32a7814eca4af047ae33b2d52342667715682e19c25b0b9faa', 2),
+(133189859071, '4b0e27ca51d536eb87c843ebfdc2fdfc18496ec10bf9bb46bde9f91db67e5911', 2),
 (44751263, '2c3a4249d77070058649dbd822dcaf7957586fce428cfb2ca88b94741eda8b07', 1),
 (14235657, 'c4ffa7146bc75b1b1b3352d536340198f1f1e10ab4b2323b0523a1ccffb7e21c', 1),
 (99, '25f43b1486ad95a1398e3eeb3d83bc4010015fcc9bedb35b432e00298d5021f7', 3),
-(20146156776, '4b0e27ca51d536eb87c843ebfdc2fdfc18496ec10bf9bb46bde9f91db67e5911', 2),
 (14843689, '4814d92093ac8a0f4a2163ab87dee509ba306a58f5888be0edcb2fcd0712028b', 1),
 (111111, 'f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114', 1);
 
