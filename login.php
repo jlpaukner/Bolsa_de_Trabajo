@@ -20,7 +20,7 @@ if ($resultado!=0)
                 $_SESSION['iniciosesion']="Location:inicioempresa.php?ms=d";
                 break;
             case 3:
-                $_SESSION['iniciosesion']="Location:inicioadmin.php?ms=d";
+                $_SESSION['iniciosesion']="Location:inicioadmin.php?";
                 break;
         endswitch;        
         $_SESSION['abierta']="si";

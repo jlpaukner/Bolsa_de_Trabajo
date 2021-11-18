@@ -41,6 +41,11 @@ require __DIR__ . '/extensionB.php';
             </li>
           </ul>
         </li>
+        <?php 
+          if(isset($_SESSION['adminID'])){
+          require __DIR__ .'/cabecerarep.php';
+          }
+          ;?>
       </ul>
     </div>
     <div class="col-sm-2 border border-success border-opacity-2">

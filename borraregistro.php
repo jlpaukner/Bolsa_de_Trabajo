@@ -6,6 +6,6 @@ $nombreID=$_POST["nombreID"];
 $valorID=$_POST["valorID"];
 $aborrar = sprintf(" DELETE FROM $tabla WHERE `$nombreID`='$valorID'");
 operaciondb($aborrar);
-$retorno="Location:".$_POST["retorno"];
+$retorno="Location:".$_POST["pagretorno"];
 header($retorno);
 ?>

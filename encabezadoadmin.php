@@ -17,7 +17,7 @@ if ($_SESSION["abierta"]!="si") header("Location:index.php");
       <ul class="navbar-nav">
         <li class="nav-item">
         <!-- <a class="nav-link active" aria-current="page" href="paginaadmin.php">Perfil administrativo</a> -->
-        <h3>   Administrador  </h3>
+        <a class="dropdown-item text-white text-center fst-italic" href="inicioadmin.php"> Administrador </a>   
         </li>
         <li class="nav-item dropdown" id="dd">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,6 +32,15 @@ if ($_SESSION["abierta"]!="si") header("Location:index.php");
             <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=estudios"> Estudios </a></li>
             <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=experiencia"> Experiencia </a></li>
             <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=puestos"> Puestos </a></li>
+          </ul>
+          </li>
+          <li class="nav-item dropdown" id="dd">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Representar
+          </a>
+          <ul class="dropdown-menu bg-dark bg-opacity-50 border border-2 border-white" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="escojerep.php?t=empresa"> Empresa </a></li>
+            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="escojerep.php?t=candidatos"> Candidatos </a></li>
           </ul>
           </li>
 

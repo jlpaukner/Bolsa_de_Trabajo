@@ -19,6 +19,6 @@ else
 $resultado = operaciondb($insertar);
 if ($resultado==1)
     {
-// header("location:iniciocandidato.php?ms=lx");
+ header("location:experiencia.php");
     }
 ?>

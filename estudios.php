@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/encabezadoc.php';
 include __DIR__ . '/dbcon.php';
-$consulta=sprintf("SELECT * FROM `estudios` WHERE `DNI`='%s' ",$_SESSION['id']);
+$consulta=sprintf("SELECT * FROM `estudios`JOIN carreras on estudios.id_Carrera=carreras.Id_carrera where `DNI`='%s' ",$_SESSION['id']);
 /*echo "<br>";
 echo $consulta;
 echo "<br>";*/
@@ -50,7 +50,7 @@ if (count($estudios)>0)
 
 foreach ($estudios as $fila) 
 {
-    printf(" <div class='col-sm-2 text-center border-bottom border-info '>%s</div> <div class='col-sm-2 text-center border-bottom border-info'>%s</div> <div class='col-sm-1 text-center border-bottom border-info'>%s</div> <div class='col-sm-1 text-center border-bottom border-info'>%s</div> <div class='col-sm-1 text-center border-bottom border-info '>%s</div> <div class='col-sm-3 border-bottom border-info'><div class='row '> <div class='col-sm-6 text-center '>%s</div> <div class='col-sm-6 text-center'>%s</div></div></div> ",$fila['Institucion'],$fila['id_Carrera'],$fila['Localidad'],$fila['Provincia'],$fila['Pais'],$fila['Fc_inicio'],$fila['Fc_fin']);
+    printf(" <div class='col-sm-2 text-center border-bottom border-info '>%s</div> <div class='col-sm-2 text-center border-bottom border-info'>%s</div> <div class='col-sm-1 text-center border-bottom border-info'>%s</div> <div class='col-sm-1 text-center border-bottom border-info'>%s</div> <div class='col-sm-1 text-center border-bottom border-info '>%s</div> <div class='col-sm-3 border-bottom border-info'><div class='row '> <div class='col-sm-6 text-center '>%s</div> <div class='col-sm-6 text-center'>%s</div></div></div> ",$fila['Institucion'],$fila['tx_carrera'],$fila['Localidad'],$fila['Provincia'],$fila['Pais'],$fila['Fc_inicio'],$fila['Fc_fin']);
     ?>
     <div class="col-sm-2 border-bottom border-info">
         <div class="row">
