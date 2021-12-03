@@ -3,7 +3,7 @@
 if ($_SESSION["abierta"]!="si") header("Location:index.php");
 ?>
 <?php require __DIR__ . '/extensionB.php';?>
-<body class="bg-danger fst-italic">
+<body class="bg-dark bg-opacity-50 fst-italic">
     <!--Nuevo encabezado-->
     <nav id="barra" class="navbar sticky-top navbar-expand-lg navbar-dark bg-danger bg-dark bg-opacity-50 border border-success fst-italic" >
   <div class="container-fluid">
@@ -15,10 +15,19 @@ if ($_SESSION["abierta"]!="si") header("Location:index.php");
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
-        <li class="nav-item">
-        <!-- <a class="nav-link active" aria-current="page" href="paginaadmin.php">Perfil administrativo</a> -->
-        <a class="dropdown-item text-white text-center fst-italic" href="inicioadmin.php"> Administrador </a>   
+        <!--li class="nav-item">
+        < <a class="nav-link active" aria-current="page" href="paginaadmin.php">Perfil administrativo</a> >
+        <a-- class="dropdown-item text-white text-center fst-italic" href="inicioadmin.php"> Administrador </a-->   
         </li>
+        <li class="nav-item dropdown" id="dd">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Administrador
+          </a>
+          <ul class="dropdown-menu bg-dark bg-opacity-50 border border-2 border-white" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="inicioadmin.php"> Inicio </a></li>
+            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="cerrarsession.php"> Cerrar sesión </a></li>
+          </ul>
+          </li>
         <li class="nav-item dropdown" id="dd">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           ABM-Registros
@@ -26,7 +35,6 @@ if ($_SESSION["abierta"]!="si") header("Location:index.php");
           <ul class="dropdown-menu bg-dark bg-opacity-50 border border-2 border-white" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=empresa"> Empresa </a></li>
             <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=candidatos"> Candidatos </a></li>
-            <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=login"> Login </a></li>
             <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=busquedas"> Busquedas </a></li>
             <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=carreras"> Carreras </a></li>
             <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="rtabla.php?t=estudios"> Estudios </a></li>
@@ -43,12 +51,6 @@ if ($_SESSION["abierta"]!="si") header("Location:index.php");
             <li><a class="dropdown-item text-white text-center border border-white fst-italic" href="escojerep.php?t=candidatos"> Candidatos </a></li>
           </ul>
           </li>
-
-<li class="nav ml-auto justify-content-end">
-        <a class=" text-center text-white fst-italic text-opacity-50" href="cerrarsession.php">
-          <h5 >Cerrar sesión</h5>
-        </a>
-</li>
 
 </nav>
     <!--Termina encabezado-->

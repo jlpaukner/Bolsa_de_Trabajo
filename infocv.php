@@ -2,7 +2,7 @@
 
 <?php
 $consulta=sprintf("SELECT * FROM experiencia JOIN puestos on experiencia.Id_puesto=puestos.Id_puesto WHERE DNI='%s' ",$_SESSION['id']);
-echo $consulta;
+//echo $consulta;
 $experiencias=cunsultadbmultiple($consulta);
 $consulta=sprintf("SELECT * FROM estudios join carreras on estudios.id_Carrera=carreras.Id_carrera WHERE DNI='%s' ",$_SESSION['id']);
 $estudios=cunsultadbmultiple($consulta);
@@ -95,7 +95,7 @@ $estudios=cunsultadbmultiple($consulta);
             <div class="row">
             <div class="card border-light mb-3" style="max-width: S3rem;">
                 <div class="card-header bg-dark bg-opacity-75 text-white fs-4 fw-bolder ">Formación Académica</div><hr>
-                <!--Empezar el foreach-->
+                <!--Empezar el foreach para la formacion academica-->
                 <?php if (count($estudios)>0)
                 {            
                 foreach ($estudios as $fila) 
@@ -126,7 +126,7 @@ $estudios=cunsultadbmultiple($consulta);
             <div class="row">            
             <div class="card border-light mb-3" style="max-width: S3rem;">
                 <div class="card-header bg-dark bg-opacity-75 fw-bolder text-white fs-4">Experiencia Laboral</div><hr>
-                <!--Empezar el foreach-->
+                <!--Empezar el foreach para la experiencia laboral-->
                 <?php if (count($experiencias)>0)
                 {            
                 foreach ($experiencias as $fila) 

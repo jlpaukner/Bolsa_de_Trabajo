@@ -3723,7 +3723,7 @@ $jscomp.polyfill("Array.prototype.find", function (l) {
             sLengthMenu: "Muestra _MENU_ filas",
             sLoadingRecords: "Loading...",
             sProcessing: "Processing...",
-            sSearch: "Busca:",
+            sSearch: "<h6 class='text-white'>Buscar:</h6>",
             sSearchPlaceholder: "",
             sUrl: "",
             sZeroRecords: "No matching records found"

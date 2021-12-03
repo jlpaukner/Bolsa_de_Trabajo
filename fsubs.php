@@ -3,13 +3,13 @@
 switch ($_GET["t"]){
     case "u": //es un candidato
         $registre="Registro usuario nuevo";
-        $nombre="Nombre de usuario";
+        $nombre="Email de usuario";
         $docum="Numero de DNI";
         $tipo=1;
         break;
     case "e":
         $registre="Registro de nueva empresa";
-        $nombre="Nombre de la empresa";
+        $nombre="Email de la empresa";
         $docum="Numero de CUIT";
         $tipo=2;
         break;
@@ -48,7 +48,7 @@ zoom: 100%;
 </head>
 <body class="">
     <!--Nuevo encabezado-->
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark border border-success " >
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark bg-opacity-75 border border-success " >
   <div class="container-fluid">
     <a class="navbar-brand" href="index.php">
     <img src="imagenes/logoyj.PNG" alt="" width="75" height="24">
@@ -112,20 +112,20 @@ zoom: 100%;
                     <!-- ingreso de dato de nombre usuario-->
                     <div class="mb-3">
                         <label  for="usuario_registrarse" class="font-weight-bold fs-4 fst-italic" > <?php echo $nombre?></label>
-                        <input type="text" class="form-control border border-primary fst-italic text-center  fs-5" name="usuario_registrarse" id="usuario_registrarse"required placeholder="Ingrese el nombre">
+                        <input type="email" class="form-control border border-primary fst-italic text-center  fs-5" name="usuario_registrarse" id="usuario_registrarse"required placeholder="Ingrese el Email">
                         
                     </div>
                     <!-- ingreso de dato de dni o cuit-->
                     <div class="mb-3">
                         <label for="id" class=" font-weight-bold fs-4 fst-italic" > <?php echo $docum?></label>
-                        <input type="number"  class="form-control border border-primary fst-italic text-center  fs-5" name="id" id="id" patter="[0-9]+" aria-describedby="emailHelp" min="4"  max="9999999999999" placeholder="Ingrese su número">
+                        <input type="number"  class="form-control border border-primary fst-italic text-center  fs-5" name="id" id="id" patter="[0-9]+" aria-describedby="emailHelp" min="8000000"  required  max="99999999999" placeholder="Ingrese su número">
                      
 
                     </div>
                     <!-- ingreso de dato de password-->
                     <div class="mb-3">
                         <label  for="password_registrarse"class=" font-weight-bold fs-4 fst-italic" > Contraseña</label>
-                        <input type="password" class="form-control border border-primary fst-italic text-center  fs-5" name="password_registrarse" id="password_registrarse" required  placeholder="Ingrese la contraseña">
+                        <input type="password" minlength="8"class="form-control border border-primary fst-italic text-center  fs-5" name="password_registrarse" id="password_registrarse" required  placeholder="Ingrese la contraseña">
                     </div>
                     <input type="text" hidden name="tipo" value="<?php echo $tipo ?>">
                     <!-- Boton de guardar-->

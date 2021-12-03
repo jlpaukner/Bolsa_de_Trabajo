@@ -6,13 +6,13 @@ if(!isset($_GET["ms"])){
 }
 switch ($_GET["ms"]) {
     case "dpx":
-        $mensaje = "Datos personales guardados exitosamente";
+        $mensaje = "<h3 class=' text-center fst-italic'>Datos personales guardados exitosamente</h3>";
         break;
     case "ex":
-        $mensaje = "Información de estudios guardada exitosamente";
+        $mensaje = "<h3 class=' text-center fst-italic'>Información de estudios guardada exitosamente</h3>";
         break;
     case "lx":
-        $mensaje = "Información de experiencia guardada exitosamente";
+        $mensaje = "<h3 class=' text-center fst-italic'>Información de experiencia guardada exitosamente</h3>";
         break;
     default:
         $mensaje="  ";

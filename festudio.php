@@ -77,28 +77,28 @@ else
             <!--Institución-->
             <div class="row">
                 <label for="Institucion" class="font-weight-bold fs-4 fst-italic">Institucion:</label><br>
-                <input type="text" id="Institucion" required  placeholder="Ingrese Institución" class="form-control border border-primary fst-italic text-center  fs-5"  name="Institucion" value= "<?php echo $institucion?>" ><br>
+                <input type="text" maxlength="30" id="Institucion" required  placeholder="Ingrese Institución" class="form-control border border-primary fst-italic text-center  fs-5"  name="Institucion" value= "<?php echo $institucion?>" ><br>
             </div>
             <!--Localidad-->
             <div class="row">
                 <label for="Localidad" class="font-weight-bold fs-4 fst-italic">Localidad:</label><br>
-                <input type="text" id="Localidad" required  placeholder="Ingrese Localidad" class="form-control border border-primary fst-italic text-center  fs-5" name="Localidad" value="<?php echo $localidad?>"><br>
+                <input type="text" maxlength="100" id="Localidad" required  placeholder="Ingrese Localidad" class="form-control border border-primary fst-italic text-center  fs-5" name="Localidad" value="<?php echo $localidad?>"><br>
             </div>
             <!--Provincia-->
             <div class="row">
                 <label for="Provincia" class="font-weight-bold fs-4 fst-italic">Provincia:</label><br>
-                <input type="text" id="Provincia" required  placeholder="Ingrese Provincia" class="form-control border border-primary fst-italic text-center  fs-5" name="Provincia" value="<?php echo $provincia?>"><br>
+                <input type="text" maxlength="30" id="Provincia" required  placeholder="Ingrese Provincia" class="form-control border border-primary fst-italic text-center  fs-5" name="Provincia" value="<?php echo $provincia?>"><br>
             </div>
             <!--Pais-->
             <div class="row">
                 <label for="Pais" class="font-weight-bold fs-4 fst-italic">Pais:</label><br>
-                <input type="text" id="Pais" required  placeholder="Ingrese Pais" class="form-control border border-primary fst-italic text-center  fs-5" name="Pais"  value="<?php echo $pais?>"><br>
+                <input type="text" maxlength="30" id="Pais" required  placeholder="Ingrese Pais" class="form-control border border-primary fst-italic text-center  fs-5" name="Pais"  value="<?php echo $pais?>"><br>
             </div>
             <!--Titulo adquirido-->
             <div class="row">
 
             <label for="id_Carrera" class="font-weight-bold fs-4 fst-italic">Titulo adquirido:</label><br>
-                <input type="list" required  placeholder="Ingrese estudio" class="form-control border border-primary fst-italic text-center  fs-5" list="estudios" id="id_Carrera" name="id_Carrera" placeholder="<?php echo $id_Carrera?>"><br>
+                <input type="list" maxlength="100" required  placeholder="Ingrese estudio" class="form-control border border-primary fst-italic text-center  fs-5" list="estudios" id="id_Carrera" name="id_Carrera" placeholder="<?php echo $id_Carrera?>"><br>
                 <datalist id="estudios">
                     <?php                    
                         $consulta=sprintf("SELECT `id_carrera`,`tx_carrera`,`tipo_Carrera`,`nivel` FROM `carreras`");

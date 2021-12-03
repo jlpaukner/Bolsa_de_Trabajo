@@ -3,12 +3,17 @@
 <html>
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<title>ADMIN</title>
-	<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css"> -->
+	<title>Administrador</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
     <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>	
     <?php include __DIR__ . '/javas1.php'; ?>
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <style>
+        table{table-layout: fixed;}
+        td{word-wrap:break-word}
+    </style>
 </head>
 <script type="text/javascript" class="init">
         function muevenodo(){ 
@@ -45,20 +50,25 @@ $return='ret';
 $alias=array();
 ?>
 <!----------------para alta de registro ----------->
+    <div class="row">
+        <div class="col-sm-10 text-center text-white text-opacity-50 fst-italic "><h3 class="fw-light ">Tabla: <?=ucfirst($tabla)?></h3></div>
+        <div class="col-sm-2">
+            <form action=<?php echo 'form.php'?> method="POST"> 
+                <input type = "hidden" name = "ntabla" value = "<?php echo $tabla?>">
+                <input type = "hidden" name = "nkey" value = "<?php echo $idFila?>">
+                <input type = "hidden" name = "key" value = "nuevo">
+                <input type = "hidden" name = "pagretorno" value = "<?php echo 'rtabla?t='.$tabla?>">
+                <input type = "submit" class="btn btn-primary" name="crear" value ="Nuevo Registro"> 
+                </form>
+        </div>
+        <!--div class="d-flex justify-content-between bd-highlight mb-3 text-center">
+            <div class="  text-end">    </div>
 
-<div class="d-flex justify-content-between bd-highlight mb-3">
-    <div class="p-2 bd-highlight">    <h3>Tabla: <?=ucfirst($tabla)?></h3></div>
-    <div class="p-2 bd-highlight">    </div>
-    <div class="p-2 bd-highlight">    </div>
-    <div class="p-2 bd-highlight"><form action=<?php echo 'form.php'?> method="POST"> 
-    <input type = "hidden" name = "ntabla" value = "<?php echo $tabla?>">
-    <input type = "hidden" name = "nkey" value = "<?php echo $idFila?>">
-    <input type = "hidden" name = "key" value = "nuevo">
-    <input type = "hidden" name = "pagretorno" value = "<?php echo 'rtabla?t='.$tabla?>">
-    <input type = "submit" class="btn btn-primary" name="crear" value ="Nuevo Registro"> 
-</form></div>
+            <div-- class="p-2 bd-highlight">
 
-</div>
+            </div-->
+        
+    </div>
 
 
 
@@ -68,8 +78,10 @@ $alias=array();
     foreach($columnas as $columna){
         array_push($alias,$columna['COLUMN_NAME'] );
     }
- ?>   
-<table id="example" class="table table-striped table-bordered bg-dark bg-opacity-50" style="width:100%">
+ ?>
+<div class="container-xxl">
+<div class="table-responsive">
+<table id="example" style="width:auto; height:20px;" class="table table-condensed table-bordered table-hover align-middle table-dark table-striped  text-center table-bordered text-info fw-light fst-italic bg-dark bg-opacity-50" style="width:100%">
 <thead>
     <tr>
     <?php foreach($alias as $alia){ printf('<th>%s</th>',$alia);} ?>
@@ -90,7 +102,7 @@ $alias=array();
             <input type = "hidden" name = "nkey" value = "<?php echo $idFila?>">
             <input type = "hidden" name = "key" value = "<?php echo $fila[$idFila]?>">
             <input type = "hidden" name = "pagretorno" value = "<?php echo 'rtabla?t='.$tabla?>">
-            <input type=  "submit" class="form-control btn btn-danger btn-opacity-50" name="boton" value ="Modificar"> 
+            <input type=  "submit" class="form-control btn btn-primary btn-opacity-50" name="boton" value ="Modificar"> 
         </form>
         </td>
         <td>
@@ -100,7 +112,7 @@ $alias=array();
                 <input type = "hidden" name = "pagina" value = "<?php echo $return?>">
                 <input type = "hidden" name = "valorID" value = "<?php echo $fila[$idFila]?>">
                 <input type = "hidden" name = "pagretorno" value = "<?php echo 'rtabla?t='.$tabla?>">
-                <input type=  "submit" name="boton" class="form-control btn btn-danger btn-opacity-50" value ="Eliminar" onclick="return confirm('¿Seguro? Perderá esos datos.')"> 
+                <input type=  "submit" name="boton" class="form-control btn btn-primary btn-opacity-50" value ="Eliminar" onclick="return confirm('¿Seguro? Perderá esos datos.')"> 
         </form>
         </td></tr>
     <?php                       
@@ -110,6 +122,9 @@ $alias=array();
 
 </tbody>
 </table>
+</div>
+</div>
+  
 
 <!-------------- fin tabla--------------------------------->
                 </div>

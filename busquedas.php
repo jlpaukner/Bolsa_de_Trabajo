@@ -19,9 +19,16 @@ echo "<h2>No ha cargado búsquedas aún</h2>";
 ?>
 <hr>
 <form action=fbusqueda.php method="POST"> 
-    <input type = "hidden" name = "IdBusqueda" value = "0" >
-    <input type=  "submit" name="boton" value ="Añadir busqueda"> 
+  <div class="row">
+    <div class="col-sm-5"></div>
+    <div class="col-sm-2">
+      <input type = "hidden" name = "IdBusqueda" value = "0" >
+      <button type="submit" name="boton" class="form-control btn btn-dark centroventana border border-primary" value="Añadir busqueda">Añadir busqueda</button>
+    </div>
+    <div class="col-sm-5"></div>
+  </div>
+ 
 </form>
  <?php 
-//  require __DIR__ . '/averiguamatch.php';
+ // require __DIR__ . '/averiguamatch.php';
   ?> 

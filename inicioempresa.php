@@ -4,8 +4,39 @@ require __DIR__ . '/encabezadoe.php';
 if(!isset($_GET["ms"])){
     $_GET["ms"]="nada";
 }
+$_SESSION['abierta']="si";
+
+$Razon_Social="";
+$FC_Inicio_Actividades="";
+$Domicilio="";
+//$Localidad="";
+$Cd_postal="";
+//$Pais="un ";
+$Rubro="";
+$Apellido_Apoderado="";
+$Nombre_Apoderado="";
+$Tel_Contacto="";
+$Email="";
 $Cuit=$_SESSION['id'];
 $consulta = "SELECT * FROM `empresa` WHERE `Cuit`='$Cuit'";
+$resultado = cunsultadb($consulta);
+if ($resultado=="0"){
+   // echo"<h3 class='text-center text-dark'> Cargue los campos vacíos</h3>";
+}
+else{
+   if ($resultado!="0"){
+       $Razon_Social=$resultado['Razon_Social'];
+       $FC_Inicio_Actividades=$resultado['FC_Inicio_Actividades'];
+       $Domicilio=$resultado['Domicilio'];
+       $Cd_postal=$resultado['Cd_postal'];
+       $Cuit=$resultado['Cuit'];
+       $Rubro=$resultado['Rubro'];
+       $Apellido_Apoderado=$resultado['Apellido_Apoderado'];
+       $Nombre_Apoderado=$resultado['Nombre_Apoderado'];
+       $Tel_Contacto=$resultado['Tel_Contacto'];
+       $Email=$resultado['Email'];
+   } 
+}
 // $resultado = cunsultadb($consulta);
 // var_dump($resultado);
 // if ($resultado=="0"){    $_GET["ms"]="nada";   }
@@ -34,6 +65,93 @@ switch ($_GET["ms"]) {
 <h1> El Email de la empresa es 
     <?//=$resultado["Email"]   ?>
     <h1><br> -->
-<?php 
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <h1 class="text-center fst-italic text-decoration-underline"><?php echo $Razon_Social?></h1>
+            </div>
+            <div class="col-sm-4"></div>
+        </div><hr>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h6 class="fst-italic text-end fw-light">Rubro:</h6>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h6 class="fst-italic text-start"><?php echo $Rubro?></h6>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-5"><h6 class="fst-italic text-end fw-light ">Apoderado: </h6></div>
+                                <div class="col-sm-7"><h6 class="text-start fst-italic"><?php echo $Nombre_Apoderado?>  <?php echo $Apellido_Apoderado?></h6></div>                                
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <div class="col-sm-4"><h6 class="fst-italic text-end fw-light ">Cuit: </h6></div>
+                                <div class="col-sm-8"><h6 class="text-start fst-italic"><?php echo $Cuit?></h6></div>
+                            </div>                                            
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="row">
+                                <div class="col-sm-6"><h6 class="fst-italic text-end fw-light">Domicilio: </h6></div>
+                                <div class="col-sm-6"><h6 class="text-start fst-italic"><?php echo $Domicilio?></h6></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row">
+                                <div class="col-sm-6"><h6 class="fst-italic text-end fw-light">C.Postal: </h6></div>
+                                <div class="col-sm-6"><h6 class="text-start fst-italic"><?php echo $Cd_postal?></h6></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row">
+                                <div class="col-sm-7"><h6 class="fst-italic text-end fw-light">Inicio de actividad: </h6></div>
+                                <div class="col-sm-5"><h6 class="text-start fst-italic"><?php echo $FC_Inicio_Actividades?></h6></div>
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <div class="col-sm-6"><h6 class="fst-italic text-end fw-light">Teléfono: </h6></div>
+                                <div class="col-sm-6"><h6 class="text-start fst-italic"><?php echo $Tel_Contacto?></h6></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <div class="col-sm-6"><h6 class="fst-italic text-end fw-light">E-mail: </h6></div>
+                                <div class="col-sm-6"><h6 class="text-start fst-italic"><?php echo $Email?></h6></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <hr>
+
+
+    </div>
+
+</body>
+
+
+
+<?php
 require __DIR__ . '/averiguamatch.php';
   ?> 

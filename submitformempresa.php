@@ -2,7 +2,12 @@
 session_start();
 require __DIR__ . '/dbcon.php';
 echo var_dump($_POST);
-$_POST['Cuit']=$_SESSION['id'];
+$Cuit=$_SESSION['id'];
+$_POST['Cuit']=$Cuit;
+
+$tabla = "empresa";
+$nombrellave="Cuit";
+$valorllave=$_SESSION['id'];
 
 $Cuit=$_POST['Cuit'];
 if ($Cuit=="0")
@@ -19,6 +24,6 @@ else
     }
     echo $inserta;
 if ($resultado==1){
-    header("location:inicioempresa?ms=demx.php");
+    header("location:inicioempresa.php?ms=ini");
     }
 ?>

@@ -59,7 +59,7 @@ $columnas=array_keys($filas[0]);
         <form action=<?php echo 'representar.php'?> method="POST"> 
             <input type = "hidden" name = "repID" value = "<?php echo $fila[$idFila]?>">
             <input type = "hidden" name = "tipousuario" value = "<?php echo $tabla?>">
-            <input type=  "submit" class="form-control btn btn-danger btn-opacity-50" name="boton" value ="REPRESENTAR"> 
+            <input type=  "submit" class="form-control btn btn-primary btn-opacity-50" name="boton" value ="REPRESENTAR"> 
         </form>
         </td>
 </tr>

@@ -8,6 +8,28 @@
     <title>Your Job</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="icono.PNG">
+<style>
+    .fab {
+    padding: 20px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+    }
+
+    .fab:hover {
+    opacity: 0.7;
+    }
+
+    .fa-whatsapp {
+    background: #45bbff;
+    color: white;
+    }
+</style>
+
+    
 </head>
 
 <body class="bg-dark">
@@ -231,7 +253,7 @@
     <div class="col-sm-6 ">
       <div class="row">
         <div class="col-sm-1"></div>
-        <div class="col-sm-10  bg-info bg-opacity-50 border border-dark border-3">
+        <div class="col-sm-10  bg-secondary bg-opacity-50 border border-white border-3">
           <div class="container">
               <div class="row">
                 <div class="col-sm-8">
@@ -264,7 +286,7 @@
         
           <div class="row">
             <div class="col-sm-1"></div>
-            <div class="col-sm-10 bg-secondary bg-opacity-50 border border-3 border-dark">
+            <div class="col-sm-10 bg-secondary bg-opacity-50 border border-3 border-white">
               <div class="container">
                 <div class="row">
                   <div class="col-sm-4">
@@ -303,7 +325,7 @@
           <div class="col-sm-1"></div>
           <div class="col-sm-10">
             <div class="card bg-dark bg-opacity-50 border border-3 border-white" style="width: 18rem;">
-              <img src="imagenes/card1.png" class="card-img-top" alt="...">
+              <img src="imagenes/card1.png" class="card-img-top" alt="..." width="150" height="350">
               <div class="card-body">
               <p class="card-text text-white text-center fst-italic">Contamos con los mejores profesionales seleccionados, para ese puesto vacío que tanto necesitas cubrir.</p>
               </div>
@@ -320,7 +342,7 @@
           <div class="col-sm-1"></div>
           <div class="col-sm-10">
             <div class="card bg-dark bg-opacity-50 border border-3 border-white" style="width: 18rem;">
-              <img src="imagenes/card2.png" class="card-img-top" alt="...">
+              <img src="imagenes/card2.png" class="card-img-top" alt="..." width="150" height="350">
               <div class="card-body">
               <p class="card-text text-white text-center fst-italic">Nuestros desarrolladores estan comprometidos para que tengas una experiencia épica en nuestra platadorma.</p>
               </div>
@@ -338,7 +360,7 @@
           <div class="col-sm-1"></div>
           <div class="col-sm-10">
             <div class="card bg-dark bg-opacity-50 border border-3 border-white" style="width: 18rem;">
-              <img src="imagenes/card3.png" class="card-img-top" alt="...">
+              <img src="imagenes/card3.png" class="card-img-top" alt="..." width="150" height="350">
               <div class="card-body">
               <p class="card-text text-white text-center fst-italic">Aprovecha esta oportunidad única, para que puedas insertarte en el mundo laboral profesional.</p>
               </div>
@@ -353,6 +375,26 @@
   </div>
   <br><br>
     <!-- Pie de Pagina -->
-    <div class="p-3 mb-2 bg-dark text-white text-center fst-italic"> <h3>¡Tu oportunidad esta aquí!</h3></div>     
+    <div class="p-3 mb-2  text-white text-center fst-italic"> <h3>¡Tu oportunidad esta aquí!</h3></div>     
+
+    <footer class="bg-primary bg-opacity-25">
+      <br>
+      <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2">
+          <a class="text-success " href="whatsapp://send?text=Hola, Index.pe&phone=+51 935 849 143&abid=+51 935 849 143">Whatsapp</a>
+          <a href="https://wa.me/34555005500/?text=tu%20texto%20personalizado" target="_blank">
+          <img src="imagenes/icono_whats.png" width="40" height="40"><br><br> </a>
+        </div>
+      </div>
+
+
+  
+
+    </footer>
 
 </body>

@@ -12,6 +12,7 @@ if ($experiencia=="0")
     //es una nueva entrada
     $Empresa="";
     $Contacto="";
+    $Cont_Tel="0";
     $Puesto="";
     $Finicio=null;
     $Fin=null;
@@ -22,6 +23,7 @@ if ($experiencia=="0")
 else
 {
     $Empresa=$experiencia['Empresa'];
+    $Cont_Tel=$experiencia['Cont_Tel'];
     $Contacto=$experiencia['Contacto'];
     $Puesto=$experiencia['Id_puesto'];
     $Finicio=$experiencia['Fc_inicio'];
@@ -46,12 +48,26 @@ else
                  puesto.value=data;
             }
 </script>
+<style>
+/* <  estilos para quitar las flechas de input type number> */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
 
+    -webkit-appearance: none;
+    margin: 0; 
+}
+input[type=number] {
+    -moz-appearance:textfield; 
+} 
+#my{
+zoom: 100%;
+}
+</style>
 
 
 <div class="container">
     <div class="row">
-        <div class="p-3 mb-2  text-info  text-opacity-50 text-center fw-bold text-decoration-underline fst-italic"><h1> Datos de la experiencia laboral</h1></div>
+        <div class="  text-white  text-opacity-25 text-center  text-decoration-underline fw-lighter fst-italic"><h2> Datos de la experiencia laboral</h2></div>
     </div>
 </div>
 
@@ -77,24 +93,29 @@ else
         <div class="col-sm-4"><br>
             <!--Empresa-->
             <div class="row">
-                <label for="Empresa" class="font-weight-bold fs-4 fst-italic">Empresa:</label><br>
-                <input type="text" required  placeholder="Escriba el nombre de la empresa en que trabajó" class="form-control border border-primary fst-italic text-center  fs-5" id="Empresa" name="Empresa" value= "<?php echo $Empresa?>" ><br>
-            </div>
+                <label for="Empresa" class="fw-lighter fs-4 fst-italic">Empresa:</label><br>
+                <input type="text" required maxlength="100"  placeholder="Nombre de la empresa" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Empresa" maxlength="30" name="Empresa" value= "<?php echo $Empresa?>" >
+            </div><br>
             <!--contacto-->
             <div class="row">
-                <label for="Contacto" class="font-weight-bold fs-4 fst-italic">Datos de contacto:</label><br>
-                <input type="text" required  placeholder="Ingrese Nombre y número telefónico del contacto laboral " class="form-control border border-primary fst-italic text-center  fs-5" id="Contacto" name="Contacto" value="<?php echo $Contacto?>"><br>
-            </div>
+                <label for="Contacto" class="fw-lighter fs-4 fst-italic">Datos de contacto:</label><br>
+                <input type="text" required maxlength="30" placeholder="Nombre del contacto laboral " class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Contacto" name="Contacto" value="<?php echo $Contacto?>">
+            </div><br>
+            <!--Teléfono del contacto-->
+            <div class="row">
+                <label for="Cont_Tel" class="fw-lighter fs-4 fst-italic">Teléfono del contacto:</label><br>
+                <input type="number" min="1100000000" max="1599999999" required  placeholder="Número telefónico del contacto " class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Cont_Tel" name="Cont_Tel" value="<?php echo $Cont_Tel?>">
+            </div><br>
             <!--sector-->
             <div class="row">
-                <label for="Sector" class="font-weight-bold fs-4 fst-italic">Sector:</label><br>
-                <input type="text" required  placeholder="Ingrese Sector en que se desempeñó " class="form-control border border-primary fst-italic text-center  fs-5" id="Sector" name="Sector" value="<?php echo $Sector?>"><br>
-            </div>
+                <label for="Sector" class="fw-lighter fs-4 fst-italic">Sector:</label><br>
+                <input type="text" required maxlength="30" placeholder="Sector en que se desempeñó " class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Sector" name="Sector" value="<?php echo $Sector?>">
+            </div><br>
             <!--Indentificación-->
             <div class="row">
 
-            <label for="Id_puesto" class="font-weight-bold fs-4 fst-italic">Identificacion del puesto:</label><br>
-                <input type="list" required  placeholder="Ingrese el puesto ejercido" class="form-control border border-primary fst-italic text-center  fs-5" list="puestos" id="Id_puesto" name="Id_puesto" placeholder="<?php echo $Puesto?>"><br>
+            <label for="Id_puesto" class="fw-lighter fs-4 fst-italic">Identificacion del puesto:</label><br>
+                <input type="list" required maxlength="30" placeholder="Puesto ejercido" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" list="puestos" id="Id_puesto" name="Id_puesto" placeholder="<?php echo $Puesto?>">
                 <datalist id="puestos">
                     <?php                    
                         $consulta=sprintf("SELECT `Id_puesto`,`tx_puesto` FROM `puestos`");
@@ -104,23 +125,23 @@ else
                     };                
                     ?>
                 </datalist>
-            </div>
+            </div><br>
 
             <!--Fecha inicio-->
             <div class="row">
-                <label for="Estado" class="font-weight-bold fs-4 fst-italic">Fecha Inicio (aproximada):</label><br>
-                <input type="date" required  placeholder="Fecha aproximada de ingreso?" class="form-control border border-primary fst-italic text-center  fs-5" id="Fc_inicio" name="Fc_inicio"  value="<?php echo $Finicio?>"><br>
-            </div>
+                <label for="Estado" class="fw-lighter fs-4 fst-italic">Fecha Inicio (aproximada):</label><br>
+                <input type="date" required  placeholder="Fecha aproximada de ingreso?" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Fc_inicio" name="Fc_inicio"  value="<?php echo $Finicio?>">
+            </div><br>
             <!--fecha final-->
             <div class="row">
-                <label for="Fc_fin" class="font-weight-bold fs-4 fst-italic">Fecha Fin (aproximada):</label><br>
-                <input type="date" required  placeholder="Fecha aproximada de egreso?" class="form-control border border-primary fst-italic text-center  fs-5" id="Fc_fin" name="Fc_fin"  value="<?php echo $Fin?>"><br>
-            </div>
+                <label for="Fc_fin" class="fw-lighter fs-4 fst-italic">Fecha Fin (aproximada):</label><br>
+                <input type="date" required  placeholder="Fecha aproximada de egreso?" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Fc_fin" name="Fc_fin"  value="<?php echo $Fin?>">
+            </div><br>
             <!--descripción-->
             <div class="row">
-                <label for="Descripcion" class="font-weight-bold fs-4 fst-italic">Descripcion:</label><br>
-                <input type="text" required  placeholder="Ingrese descripcion del puesto " class="form-control border border-primary fst-italic text-center  fs-5" id="Descripcion" name="Descripcion" value="<?php echo $Descripcion?>"><br>
-            </div>
+                <label for="Descripcion" class="fw-lighter fs-4 fst-italic">Descripcion:</label><br>
+                <input type="text" required  maxlength="100" placeholder="Ingrese descripcion del puesto " class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Descripcion" name="Descripcion" value="<?php echo $Descripcion?>">
+            </div><br>
         </div>
         <div class="col-sm-4">
             <div class="row">
@@ -158,7 +179,7 @@ else
                     </div>
                     <!--boton cancelar-->
                     <div class="col-sm-6">
-                        <button class=" form-control btn btn-dark centroventana border border-info fst-italic" > <a class="text-decoration-none text-light" href="puestos.php">Cancelar</a></button>
+                        <button class=" form-control btn btn-dark centroventana border border-info fst-italic" > <a class="text-decoration-none text-light" href="experiencia.php">Cancelar</a></button>
                     </div>
                 </div>
             </div>

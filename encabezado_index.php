@@ -14,7 +14,7 @@
 
 <body>
     
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark border border-success " >
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark bg-opacity-50 border border-success " >
   <div class="container-fluid">
     <a class="navbar-brand" href="index.php">
     <img src="imagenes/logoyj.PNG" alt="" width="75" height="24">
@@ -58,9 +58,9 @@
     <!--Primer container del  Titulo-->
 
         
-<figure class="text-center">
+<figure class="text-center ">
   <blockquote class="blockquote ">
-    <div class="p-3 mb-2 bg-dark  border border-primary-25"><p><img src="imagenes/tituloyj.PNG" alt="" width="300" height="100"></p></div>
+    <div class="p-3 mb-2 bg-dark bg-opacity-50 border border-primary-25"><p><img src="imagenes/tituloyj.PNG" alt="" width="300" height="100"></p></div>
   </blockquote>
 </figure>
 

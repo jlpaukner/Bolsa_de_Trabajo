@@ -22,9 +22,9 @@ foreach($busquedas as $busqueda)
     join puestos on puestos.Id_puesto=experiencia.Id_puesto 
     join carreras on Carreras.Id_carrera=estudios.id_Carrera 
     where estudios.id_Carrera ={$id_Carrera}
-    and experiencia.id_Puesto ={$Id_puesto}
-    and {$EdadMaxima} < Nacimiento 
-    and Nacimiento > {$EdadMinima}
+    or experiencia.id_Puesto ={$Id_puesto}
+    or {$EdadMaxima} < Nacimiento 
+    or Nacimiento > {$EdadMinima}
     limit 10
     ";
 
