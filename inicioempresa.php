@@ -37,12 +37,6 @@ else{
        $Email=$resultado['Email'];
    } 
 }
-// $resultado = cunsultadb($consulta);
-// var_dump($resultado);
-// if ($resultado=="0"){    $_GET["ms"]="nada";   }
-// else{
-// var_dump($resultado);
-// }
 
 switch ($_GET["ms"]) {
     case "demx":
@@ -150,8 +144,54 @@ switch ($_GET["ms"]) {
 
 </body>
 
+<?php  // para mostrar si hay matchs a la busquedas
+include __DIR__ . '/herramientas.php';
 
+$consulta=sprintf("SELECT * FROM busquedas WHERE idEmpresa='%s' ",$_SESSION['id']);
+$busquedas=cunsultadbmultiple($consulta);
+if(sizeof($busquedas)==0){
+echo "Realize una búsqueda de personal seleccoinando 'Busqueda' en el menú";
 
-<?php
-require __DIR__ . '/averiguamatch.php';
-  ?> 
+}
+foreach($busquedas as $busqueda) 
+{
+    $idBusqueda=$busqueda['IdBusqueda'];
+    $FDnacMinima=nacimiento($busqueda['EdadMaxima']);
+    $FDnacMaxima=nacimiento($busqueda['EdadMinima']);
+    $id_Carrera=$busqueda['id_Carrera'];
+    $Id_puesto=$busqueda['Id_puesto'];
+    $consulta=
+    "SELECT * from 
+    candidatos JOIN estudios on candidatos.DNI = estudios.DNI 
+    join experiencia on candidatos.DNI = experiencia.DNI 
+    join puestos on puestos.Id_puesto=experiencia.Id_puesto 
+    join carreras on Carreras.Id_carrera=estudios.id_Carrera 
+    where estudios.id_Carrera ={$id_Carrera}
+    and experiencia.id_Puesto ={$Id_puesto}
+    and '{$FDnacMinima}' < Nacimiento 
+    and Nacimiento < '{$FDnacMaxima}'
+    ";
+    $candidatosEncontrados=cunsultadbmultiple($consulta);
+    if(sizeof($candidatosEncontrados)>0){
+        // añadir a tabla resultados   
+        $aborrar = " DELETE FROM resultados WHERE idBusqueda = '{$idBusqueda}'";
+        operaciondb($aborrar);
+        foreach($candidatosEncontrados as $candidato)
+        {
+         $inserta="INSERT into Resultados (idBusqueda,DNI) VALUES ('{$idBusqueda}','{$candidato['DNI']}')";
+         operaciondb($inserta);
+        };
+        echo "Su busqueda (id{$busqueda['IdBusqueda']}) obtuvo resultados";
+    ?>
+        <form action= muestramatchs.php method="POST" style="display: inline-block;"> 
+        <input type = "hidden" name = "idBusqueda" value = <?=$idBusqueda?> >
+        <input type=  "submit" class="form-control btn btn-dark centroventana border border-success fst-italic  lh-1" name="boton" value ="Ver candidatos"  >
+        </form>
+        <br>
+    <?php 
+    }
+    else {echo "   <p align='center'>  Le comunicaremos cuando sus busqueda (id{$busqueda['IdBusqueda']}) obtenga candidatos.<p>";};
+    echo"<hr>";
+}
+
+?> 

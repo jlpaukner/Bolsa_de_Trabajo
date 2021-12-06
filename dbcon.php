@@ -37,7 +37,6 @@ function cunsultadb($consulta)
         // Realiza query
         $resultado = $conn->query($consulta);
         $arrayRes=array();
-        // var_dump($resultado);
         if($resultado){
         while($fila = $resultado->fetch_assoc()) 
         {
@@ -60,6 +59,8 @@ function cunsultadb($consulta)
         if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error);}
         // para ´ñ y tildes
         $conn->query("SET NAMES 'utf8'");
+        //quita burocracia respoecto forenign keys in db       
+        $conn->query("SET FOREIGN_KEY_CHECKS=0;SET GLOBAL FOREIGN_KEY_CHECKS=0");
         // Realiza query
         $resultado = $conn->query($inserta);
         if ($resultado === TRUE)
@@ -71,17 +72,15 @@ function cunsultadb($consulta)
             $retorna = "0";
             echo"<br> fallo la query<br>";
             echo $inserta;
+            // muestra el error que sale en la query de phph myadmin
             echo $conn->error;
         }     
         return $retorna;
     }
 
-    function construyeinsert($columnas,$tabla,$llave = "poner nombre de columna llave si se necesita nuevo registro")
+    function construyeinsert($columnas,$tabla,$nombrellave)
     {   // construye query para insertar datos
-        // se necesita nombre de la llave para autoasignar
-        if ( array_key_exists( $llave, $columnas) ){
-            unset($columnas[$llave]);
-        }            
+        if ( array_key_exists( $nombrellave, $columnas) ){unset($columnas[$nombrellave]);};  //para autoasignar valor de llave       
         $q1="INSERT INTO `".$tabla."` (";
         $q2=" VALUES (";
         foreach(array_keys($columnas) as $campo){
@@ -93,7 +92,18 @@ function cunsultadb($consulta)
         $insertar=$q1.$q2;
         return $insertar;
     }
-
-
+    
+    function construyeupdate($columnas,$tabla,$nombrellave,$valorllave)
+    {   // construye query para actualizar datos   
+        unset($columnas[$nombrellave]); //no se actualiza la llave del update  
+        $q1="UPDATE {$tabla} SET ";
+        $q2="";
+        foreach(array_keys($columnas) as $campo)
+            { $q2=$q2."{$campo} = '{$columnas[$campo]}',";};
+        $q2=substr($q2, 0, -1);
+        $q3= " WHERE {$nombrellave} = {$valorllave} ";
+        $actualizar=$q1.$q2.$q3;
+        return $actualizar;
+    }
 
  ?>

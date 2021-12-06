@@ -13,12 +13,9 @@ if ($_POST['IdBusqueda']=="0")
     } 
 else
     {
-        $aborrar = sprintf(" DELETE FROM `busquedas` WHERE `IdBusqueda`='$IdBusqueda'");
-        operaciondb($aborrar);
-        $inserta=construyeinsert($_POST,"busquedas");
-        $resultado =operaciondb($inserta);
+        $actualiza=construyeupdate($_POST,"busquedas","Idbusqueda",$IdBusqueda);
+        $resultado =operaciondb($actualiza);
     }
-    echo $inserta;
 if ($resultado==1){
     header("location:busquedas.php");
     }

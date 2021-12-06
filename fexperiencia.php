@@ -99,23 +99,23 @@ zoom: 100%;
             <!--contacto-->
             <div class="row">
                 <label for="Contacto" class="fw-lighter fs-4 fst-italic">Datos de contacto:</label><br>
-                <input type="text" required maxlength="30" placeholder="Nombre del contacto laboral " class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Contacto" name="Contacto" value="<?php echo $Contacto?>">
+                <input type="text" required maxlength="60" placeholder="Nombre del contacto laboral " class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Contacto" name="Contacto" value="<?php echo $Contacto?>">
             </div><br>
             <!--Teléfono del contacto-->
             <div class="row">
                 <label for="Cont_Tel" class="fw-lighter fs-4 fst-italic">Teléfono del contacto:</label><br>
-                <input type="number" min="1100000000" max="1599999999" required  placeholder="Número telefónico del contacto " class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Cont_Tel" name="Cont_Tel" value="<?php echo $Cont_Tel?>">
+                <input type="tel" pattern="[0-9]{2}[0-9]{8}" required  placeholder=" numero de 10 cifras" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Cont_Tel" name="Cont_Tel" value="<?php echo $Cont_Tel?>">
             </div><br>
             <!--sector-->
             <div class="row">
                 <label for="Sector" class="fw-lighter fs-4 fst-italic">Sector:</label><br>
-                <input type="text" required maxlength="30" placeholder="Sector en que se desempeñó " class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Sector" name="Sector" value="<?php echo $Sector?>">
+                <input type="text" required maxlength="60" placeholder="Sector en que se desempeñó " class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Sector" name="Sector" value="<?php echo $Sector?>">
             </div><br>
             <!--Indentificación-->
             <div class="row">
 
             <label for="Id_puesto" class="fw-lighter fs-4 fst-italic">Identificacion del puesto:</label><br>
-                <input type="list" required maxlength="30" placeholder="Puesto ejercido" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" list="puestos" id="Id_puesto" name="Id_puesto" placeholder="<?php echo $Puesto?>">
+                <input type="list" required maxlength="60" placeholder="Puesto ejercido" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" list="puestos" id="Id_puesto" name="Id_puesto" placeholder="<?php echo $Puesto?>">
                 <datalist id="puestos">
                     <?php                    
                         $consulta=sprintf("SELECT `Id_puesto`,`tx_puesto` FROM `puestos`");
@@ -160,7 +160,8 @@ zoom: 100%;
             </div>
         </div>
     </div><br>
-    <input type="hidden" id="Id" name="Id"value="<?php echo $ID?>">
+    <input type="hidden" id="Id" name="Id"value="<?=$ID?>">
+    <input type="hidden" id="DNI" name="DNI"value="<?=$dni?>">
     <datalist id="puestos">
         <?php
             foreach($ocupaciones as $ocupacion){

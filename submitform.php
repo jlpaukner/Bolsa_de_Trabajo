@@ -17,10 +17,8 @@ if ($llave=="0")
     } 
 else
     {
-        $aborrar = sprintf(" DELETE FROM $ntabla WHERE $nllave='$llave'");
-        operaciondb($aborrar);
-        $inserta=construyeinsert($_POST,$ntabla);
-        $resultado =operaciondb($inserta);
+        $actualiza=construyeupdate($_POST,$ntabla,$nllave,$llave);
+        $resultado =operaciondb($actualiza);
     }
     echo $inserta;
 if ($resultado==1){

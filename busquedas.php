@@ -4,9 +4,10 @@ include __DIR__ . '/dbcon.php';
 include __DIR__ . '/ctabla.php';
 
 $iddueño= $_SESSION['id'];
-// $tablagenerada=ctabla('busquedas',$columnas,$alias,'idEmpresa',$iddueño,'IdBusqueda','fbusqueda.php','busquedas.php');
 $consulta=sprintf("SELECT IdBusqueda,EstadoCivil,EdadMaxima,EdadMinima,tx_puesto,tx_carrera
-FROM `busquedas` join puestos on busquedas.Id_puesto=puestos.Id_puesto join carreras on busquedas.id_Carrera=carreras.Id_carrera where `IdEmpresa`='%s' ",$iddueño);
+FROM `busquedas` join puestos on busquedas.Id_puesto=puestos.Id_puesto 
+join carreras on busquedas.id_Carrera=carreras.Id_carrera 
+where `IdEmpresa`='%s' ",$iddueño);
 $filas=cunsultadbmultiple($consulta);
 $alias= Array('IdBusqueda','Estado Civil','Edad Máxima','Edad Mínima','Puesto','Carrera');
 $tablagenerada=tabla($filas,$alias,"fbusqueda.php","IdBusqueda","busquedas","busquedas.php");
@@ -14,7 +15,6 @@ $tablagenerada=tabla($filas,$alias,"fbusqueda.php","IdBusqueda","busquedas","bus
 if (!$tablagenerada)
 {
 echo "<h2>No ha cargado búsquedas aún</h2>";
-// echo $consulta;
 }
 ?>
 <hr>
@@ -27,8 +27,4 @@ echo "<h2>No ha cargado búsquedas aún</h2>";
     </div>
     <div class="col-sm-5"></div>
   </div>
- 
-</form>
- <?php 
- // require __DIR__ . '/averiguamatch.php';
-  ?> 
+ </form>
