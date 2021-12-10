@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 06-12-2021 a las 02:31:18
+-- Tiempo de generación: 10-12-2021 a las 00:01:17
 -- Versión del servidor: 5.7.31
 -- Versión de PHP: 7.3.21
 
@@ -609,7 +609,7 @@ CREATE TABLE IF NOT EXISTS `busquedas` (
   KEY `Cuit` (`idEmpresa`),
   KEY `id_Carrera` (`id_Carrera`,`Id_puesto`),
   KEY `Id_puesto` (`Id_puesto`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `busquedas`
@@ -3377,7 +3377,7 @@ CREATE TABLE IF NOT EXISTS `resultados` (
   PRIMARY KEY (`idResultado`),
   KEY `idBusqueda` (`idBusqueda`,`DNI`),
   KEY `idCandidato` (`DNI`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `resultados`
@@ -3385,8 +3385,8 @@ CREATE TABLE IF NOT EXISTS `resultados` (
 
 INSERT INTO `resultados` (`idResultado`, `idBusqueda`, `DNI`) VALUES
 (1, 1, 111111),
-(10, 42, 111111),
-(11, 42, 31298555);
+(14, 42, 111111),
+(15, 42, 31298555);
 
 --
 -- Restricciones para tablas volcadas
