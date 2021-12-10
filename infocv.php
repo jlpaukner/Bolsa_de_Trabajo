@@ -1,17 +1,17 @@
-<?php $datosp = cunsultadb($consulta); ?>
-
-<?php
+<?php 
+//--------------------
+if(!isset($_SESSION)) session_start();
+//require __DIR__ . '/dbcon.php';
+$dni=$_SESSION['id'];
+//--------------------
+$datosp = cunsultadb($consulta);
+if(!isset($consulta)) $consulta = "SELECT * FROM `candidatos` WHERE `DNI`='{$dni}'";
 $consulta=sprintf("SELECT * FROM experiencia JOIN puestos on experiencia.Id_puesto=puestos.Id_puesto WHERE DNI='%s' ",$_SESSION['id']);
-//echo $consulta;
 $experiencias=cunsultadbmultiple($consulta);
 $consulta=sprintf("SELECT * FROM estudios join carreras on estudios.id_Carrera=carreras.Id_carrera WHERE DNI='%s' ",$_SESSION['id']);
 $estudios=cunsultadbmultiple($consulta);
-//  echo $consulta;
-// var_dump($experiencias);
+
 ?>
-
-
-<!-- <body class="bg-dark">    -->
 <body >   
 <div class="container bg-dark fst-italic border border-info">
             <div class="row">
@@ -21,11 +21,11 @@ $estudios=cunsultadbmultiple($consulta);
 <div class="container fst-italic">
     <div class="row">
         <div class="col-2 bg-primary bg-opacity-25 ">
-            <!--Photo del candidato-->
-            <!--hr><img class="rounded-circle"src="imagenes/photo.jpg" alt="" width="165" height="200"--><!--aqui va la foto-->
 
             <hr width="100%" color="white">
             <!--Nacionalidad-->
+            <h6 class="card-title text-white">DNI:</h6>
+            <p class="card-text text-white text-center break text-break"><?php echo $_SESSION['id'];?></p>
             <h6 class="card-title text-white">Nacionalidad:</h6>
             <p class="card-text text-white text-center break text-break"><?php echo $datosp['Nacionalidad'];?></p>
 
@@ -69,12 +69,6 @@ $estudios=cunsultadbmultiple($consulta);
             <p class="card-text text-white text-center text-break"><?php echo $datosp['RedSocial2'];?></p>
 
             <hr width="100%" color="white">
-
-            <!--Puesto a postular-->
-            <!-- <h6 class="card-title text-white">Puesto a postular:</h6>
-            <p class="card-text text-white text-center text-break"><?php 
-            // echo $datosp['PuestoPostular'];
-            ?></p> -->
             
             <!--Licencia-->
             <h6 class="card-title text-white">Licencia:</h6>
@@ -118,8 +112,6 @@ $estudios=cunsultadbmultiple($consulta);
                         };   
                     }; 
                 ?>
-
-
                 <!--Termina el Foreach-->
             </div>
             </div>
@@ -147,18 +139,12 @@ $estudios=cunsultadbmultiple($consulta);
 
                         </div>",$fila['tx_puesto'],$fila['Empresa'],$fila['Sector'],$fila['Contacto'],$fila['Descripcion'],$fila['Fc_inicio'],$fila['Fc_fin']);?>
                         <hr width="100%" color="white"><?php
-
                         };   
                     }; 
                 ?>
-
-
             </div>
             </div>
         </div>
-
-
-
     </div>
 </div>
 </body>

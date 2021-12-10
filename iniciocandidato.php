@@ -20,7 +20,12 @@ switch ($_GET["ms"]) {
 ?>
 <div class="card-header bg-dark bg-opacity-75 text-white fs-4 fw-bolder "><?php echo $mensaje?></div>
 <?php
+$dni= $_SESSION['id'];
+$consulta= "SELECT idBusqueda FROM resultados WHERE DNI='{$dni}'";
+$filas=cunsultadbmultiple($consulta);
+$numRes= count($filas);
+if( $numRes > 0){
+echo "<h4 style='color:white;'> Fuiste encontrado en {$numRes} busquedas de personal.  </h4>";
+};
 require __DIR__ . '/curriculum.php';
 ?>
-
- 

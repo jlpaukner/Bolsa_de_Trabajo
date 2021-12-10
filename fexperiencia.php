@@ -3,9 +3,6 @@ require __DIR__ . '/dbcon.php'; //funciones para conectar con la base de datos
 require __DIR__ . '/encabezadoc.php';
 $dni=$_SESSION['id'];
 $consulta=sprintf("SELECT * FROM `experiencia` WHERE `Id`='%s' ",$_POST['Id']);
-// echo '<br>'.$consulta.'<br>';
-// echo var_dump($_POST);
-// echo '<br>';
 $experiencia=cunsultadb($consulta);
 if ($experiencia=="0")
     {
@@ -104,7 +101,7 @@ zoom: 100%;
             <!--Teléfono del contacto-->
             <div class="row">
                 <label for="Cont_Tel" class="fw-lighter fs-4 fst-italic">Teléfono del contacto:</label><br>
-                <input type="tel" pattern="[0-9]{2}[0-9]{8}" required  placeholder=" numero de 10 cifras" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Cont_Tel" name="Cont_Tel" value="<?php echo $Cont_Tel?>">
+                <input type="tel" pattern="[0-9]{10}" required  placeholder=" numero de 10 cifras" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Cont_Tel" name="Cont_Tel" value="<?php echo $Cont_Tel?>">
             </div><br>
             <!--sector-->
             <div class="row">
