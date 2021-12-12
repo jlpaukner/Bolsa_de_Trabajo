@@ -39,7 +39,7 @@ $estudios=cunsultadbmultiple($consulta);
 
             <!--Estado Civil-->
             <h6 class="card-title text-white">Estado Civil:</h6>
-            <p class="card-text text-white text-center text-break"><?php echo $datosp['Estado'];?></p>
+            <p class="card-text text-white text-center text-break"><?php echo $datosp['estado_civil'];?></p>
 
             <!--Cantidad de hijos-->
             <h6 class="card-title text-white">Cantidad de hijos:</h6>

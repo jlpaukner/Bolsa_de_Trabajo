@@ -183,8 +183,18 @@ zoom: 100%;
             <div class="col-sm-4">
                 <div class="row">
                     <div class="col-sm-6">
-                        <label for="Licencia" class="font-weight-bold  fs-6 text-black">Tipo de Licencia:</label><br>
-                        <input type="text"  maxlength="30" lid="Licencia" name="Licencia" placeholder="Ingresar Licencia de conducir" class="form-control border border-primary text-center    fs-6" value="<?php echo $Licencia ?>"><br> 
+                        <label for="Licencia" class="  fs-6 text-black ">Tipo de Licencia:</label><br>
+                        <select  class="form-control border border-primary text-center fs-6" required placeholder="Ingrese tipo de licencia" name="Licencia" id="Licencia" value="<?php echo $Licencia ?>"  >
+                        <option value="A">Clase A</option>
+                        <option value="B">Clase B</option>
+                        <option value="C">Clase C</option>
+                        <option value="D">Clase D</option>
+                        <option value="E">Clase E</option>
+                        <option value="F">Clase F</option>
+                        </select>
+                    </div>
+
+
                     </div>
                     <div class="col-sm-6">
                         <label for="Movilidad"  maxlength="30" class="font-weight-bold  fs-6 text-black"for="Movilidad">Movilidad:</label><br>
