@@ -27,12 +27,6 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="info_who_are_we.php">¿Quienes somos?</a>
         </li>
-        <li class="nav-item">
-          <a hidden class="nav-link" href="info_empresa.php">Empresas</a>
-        </li>
-        <li class="nav-item">
-          <a hidden class="nav-link" href="info_candidato.php">Candidatos</a>
-        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Registrate
@@ -41,6 +35,9 @@
             <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="fsubs.php?t=e">Empresa</a></li>
             <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="fsubs.php?t=u">Candidato</a></li>
           </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="recupero.php">¿olvidaste tu contraseña?</a>
         </li>
       </ul>
     </div>

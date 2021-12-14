@@ -3,10 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 10-12-2021 a las 00:01:17
+-- Tiempo de generación: 14-12-2021 a las 23:55:42
 -- Versión del servidor: 5.7.31
 -- Versión de PHP: 7.3.21
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -609,7 +610,7 @@ CREATE TABLE IF NOT EXISTS `busquedas` (
   KEY `Cuit` (`idEmpresa`),
   KEY `id_Carrera` (`id_Carrera`,`Id_puesto`),
   KEY `Id_puesto` (`Id_puesto`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `busquedas`
@@ -621,7 +622,8 @@ INSERT INTO `busquedas` (`IdBusqueda`, `idEmpresa`, `EstadoCivil`, `EdadMaxima`,
 (34, '33189859071', 'Casado', 60, 20, 1, 1),
 (35, '25', 'Soltero', 20, 0, 24, 76),
 (41, '133189859071', 'Sin Restriccion', 30, 20, 371, 1),
-(42, '133189859071', 'Soltero', 70, 18, 24, 76);
+(42, '133189859071', 'Soltero', 70, 18, 24, 76),
+(43, '20140076450', NULL, 60, 20, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -3098,9 +3100,10 @@ INSERT INTO `experiencia` (`Id`, `DNI`, `Empresa`, `Contacto`, `Cont_Tel`, `Id_p
 
 DROP TABLE IF EXISTS `login`;
 CREATE TABLE IF NOT EXISTS `login` (
-  `id` bigint(30) NOT NULL,
+  `id` bigint(11) NOT NULL,
   `userpass` varchar(64) COLLATE utf8_bin NOT NULL,
   `tipo` int(1) NOT NULL,
+  `recupero` varchar(64) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -3108,13 +3111,33 @@ CREATE TABLE IF NOT EXISTS `login` (
 -- Volcado de datos para la tabla `login`
 --
 
-INSERT INTO `login` (`id`, `userpass`, `tipo`) VALUES
-(133189859071, '4b0e27ca51d536eb87c843ebfdc2fdfc18496ec10bf9bb46bde9f91db67e5911', 2),
-(44751263, '2c3a4249d77070058649dbd822dcaf7957586fce428cfb2ca88b94741eda8b07', 1),
-(14235657, 'c4ffa7146bc75b1b1b3352d536340198f1f1e10ab4b2323b0523a1ccffb7e21c', 1),
-(99, '25f43b1486ad95a1398e3eeb3d83bc4010015fcc9bedb35b432e00298d5021f7', 3),
-(14843689, '4814d92093ac8a0f4a2163ab87dee509ba306a58f5888be0edcb2fcd0712028b', 1),
-(111111, 'f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114', 1);
+INSERT INTO `login` (`id`, `userpass`, `tipo`, `recupero`) VALUES
+(133189859071, '4b0e27ca51d536eb87c843ebfdc2fdfc18496ec10bf9bb46bde9f91db67e5911', 2, ''),
+(44751263, '2c3a4249d77070058649dbd822dcaf7957586fce428cfb2ca88b94741eda8b07', 1, ''),
+(14235657, 'c4ffa7146bc75b1b1b3352d536340198f1f1e10ab4b2323b0523a1ccffb7e21c', 1, ''),
+(99, '25f43b1486ad95a1398e3eeb3d83bc4010015fcc9bedb35b432e00298d5021f7', 3, ''),
+(14843689, '4814d92093ac8a0f4a2163ab87dee509ba306a58f5888be0edcb2fcd0712028b', 1, ''),
+(111111, 'f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114', 1, ''),
+(123456, 'd82494f05d6917ba02f7aaa29689ccb444bb73f20380876cb05d1f37537b7892', 3, ''),
+(432213456, 'df03496a85adf0604432db55e5285dae9aae35e6a1ff5795cfea0fc943be416a', 1, ''),
+(0, 'bdddede8ee815b0c32b9032ebe17a383df95629d2532fcbd77c0abddd7a2656e', 1, ''),
+(21313, 'cdfaa9a27022fa2416f974684b2dd3ffa0076c52d04beea5035e1380e4fc427a', 1, ''),
+(123123, 'ac9e1a7f02dcafa2656c4bfb545f7109b5eef2efac5ad02d4f1b7acb3fed21e4', 1, ''),
+(23423344, '200673fc989af34aa249539a34d0e0980de4621f3c08c462dca945ff07fb8b11', 1, ''),
+(2312312311, '89e3d8f833ad3c5c0779c7e1aab729691bc56630e23223700ab611ffa478f225', 1, ''),
+(123123123, 'fff1e3ab75dc0cd5d1512fb521dc79a5f8d3904466d1a272dd42fd02bd706f93', 1, ''),
+(12345678, '864912711cab3a20b1551045afab1d19aacb9e99786164a0c2ffd3e820602c4d', 1, ''),
+(12313233, '2a21d59d399f071bc1690f0c25fa1e28b9ad90e00de967b2dbb8945d4f9456b1', 1, ''),
+(4323423423, '481be406bd8b2a957b43d1b9760bee4bb241c8fba81f425d46135f00f1a57236', 1, ''),
+(90909090, 'acf4b53cd9d6e2bdc53cb59ac7959baf4a8e4bb5670ca681bcc64c6bc7fcf9e2', 2, 'acf4b53cd9d6e2bdc53cb59ac7959baf4a8e4bb5670ca681bcc64c6bc7fcf9e2'),
+(22334455, '15fe76b301cf64d0aa333d72d1d2d0cfce25494de067212a476490169ac70e70', 1, 'ad12deba9024e12815d04101c4860263587a6ba0f9f23f965dd6de315d958bc2'),
+(33445566, '6b3e853d75211964fb10c03c33fdb335e595a26db04807d7db54a0a738a135f8', 1, '678e731ce5cd1b257ae029de9a557c1bd2cb0783f487bbf244c7f8c789162800'),
+(123345678, '3818f06138f8eac7f0c6a1a334cc2cc086af15e4567d656c72fba0686d56d007', 1, '540b4f218f5631d9a98bc606f029a7c2dbde8013bfd5f778b2388ecd60f87154'),
+(77778888, 'f4f91ae5c32530054d07f7cf9e9f9861973efa55a1a3b9f99198bdcb647e3246', 1, '0d13fee574fc634c89dbeeb23155c6e655d8ef064cb685dd959b2e45ba9cdad2'),
+(30123456781, 'e8ac80cab3d29e20bdff202e16751ad984d70f44a7aa528d5e32cf637836336c', 2, 'd37d9b156d8b93380a88551223977e57caabc558461c4b5acfda1f242ce6aa86'),
+(45454545, 'cc55de49503ecee66a3a923efdec26ba2ab3217178454fa0dd0957cf645cb3a8', 1, '67499191496a4f77d512a8f0bec620822ba6a2229bdb8f9bda54e135eb3a5ea6'),
+(22345678, 'ded0817d7fa88d134659d992c4819ed7aca68922400b3c070f6ff7691b931ea2', 3, '1978b0c3efc170bd3571ecee31f350fb3882f818289666692df4891b89d129f0'),
+(23454455, '07bc75b7dc94ede5405bf988bfe7feb0899a091dda1e0a67b9b99647cc573e0a', 1, '07659f333b2517c2b878e92b3294a8decfc70f12f7f8b12441b543bdfd47a482');
 
 -- --------------------------------------------------------
 
@@ -3377,7 +3400,7 @@ CREATE TABLE IF NOT EXISTS `resultados` (
   PRIMARY KEY (`idResultado`),
   KEY `idBusqueda` (`idBusqueda`,`DNI`),
   KEY `idCandidato` (`DNI`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `resultados`
@@ -3385,8 +3408,8 @@ CREATE TABLE IF NOT EXISTS `resultados` (
 
 INSERT INTO `resultados` (`idResultado`, `idBusqueda`, `DNI`) VALUES
 (1, 1, 111111),
-(14, 42, 111111),
-(15, 42, 31298555);
+(18, 42, 111111),
+(19, 42, 31298555);
 
 --
 -- Restricciones para tablas volcadas
@@ -3397,34 +3420,40 @@ INSERT INTO `resultados` (`idResultado`, `idBusqueda`, `DNI`) VALUES
 --
 ALTER TABLE `busquedas`
   ADD CONSTRAINT `busquedas_ibfk_2` FOREIGN KEY (`Id_puesto`) REFERENCES `puestos` (`Id_puesto`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `busquedas_ibfk_3` FOREIGN KEY (`id_Carrera`) REFERENCES `carreras` (`Id_carrera`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `busquedas_ibfk_3` FOREIGN KEY (`id_Carrera`) REFERENCES `carreras` (`Id_carrera`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `busquedas_ibfk_4` FOREIGN KEY (`idEmpresa`) REFERENCES `empresa` (`Cuit`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `empresa`
+-- Filtros para la tabla `candidatos`
 --
-ALTER TABLE `empresa`
-  ADD CONSTRAINT `empresa_ibfk_1` FOREIGN KEY (`Cuit`) REFERENCES `busquedas` (`idEmpresa`) ON DELETE CASCADE;
+ALTER TABLE `candidatos`
+  ADD CONSTRAINT `candidatos_ibfk_1` FOREIGN KEY (`DNI`) REFERENCES `estudios` (`DNI`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `estudios`
 --
 ALTER TABLE `estudios`
-  ADD CONSTRAINT `estudios_ibfk_1` FOREIGN KEY (`id_Carrera`) REFERENCES `carreras` (`Id_carrera`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_estudios_candidatos` FOREIGN KEY (`DNI`) REFERENCES `candidatos` (`DNI`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `estudios_ibfk_1` FOREIGN KEY (`id_Carrera`) REFERENCES `carreras` (`Id_carrera`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `experiencia`
 --
 ALTER TABLE `experiencia`
-  ADD CONSTRAINT `experiencia_ibfk_1` FOREIGN KEY (`DNI`) REFERENCES `candidatos` (`DNI`),
-  ADD CONSTRAINT `experiencia_ibfk_2` FOREIGN KEY (`Id_puesto`) REFERENCES `puestos` (`Id_puesto`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `experiencia_ibfk_1` FOREIGN KEY (`DNI`) REFERENCES `candidatos` (`DNI`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `puestos`
+--
+ALTER TABLE `puestos`
+  ADD CONSTRAINT `puestos_ibfk_1` FOREIGN KEY (`Id_puesto`) REFERENCES `experiencia` (`Id_puesto`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `resultados`
 --
 ALTER TABLE `resultados`
-  ADD CONSTRAINT `resultados_ibfk_1` FOREIGN KEY (`DNI`) REFERENCES `candidatos` (`DNI`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `resultados_ibfk_2` FOREIGN KEY (`idBusqueda`) REFERENCES `busquedas` (`IdBusqueda`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `resultados_ibfk_1` FOREIGN KEY (`idBusqueda`) REFERENCES `busquedas` (`IdBusqueda`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `resultados_ibfk_2` FOREIGN KEY (`DNI`) REFERENCES `candidatos` (`DNI`) ON DELETE CASCADE ON UPDATE CASCADE;
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

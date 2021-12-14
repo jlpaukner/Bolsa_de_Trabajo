@@ -148,8 +148,8 @@ else{
         <div class="row">
             <div class="col-sm-3"></div>
             <div class="col-sm-3">
-                <label class="font-weight-bold  fs-4 fst-italic" for="Edad_Minima">Edad Minima:</label><br>
-                <select class="form-control border border-success fst-italic text-center  fs-5" id="Edad_Minima" name="Edad_Minima">
+                <label class="font-weight-bold  fs-4 fst-italic" for="EdadMinima">Edad Minima:</label><br>
+                <select class="form-control border border-success fst-italic text-center  fs-5" id="EdadMinima" name="EdadMinima">
                     <option value="18">sin restricción</option>
                     <option value="20">20</option>
                     <option value="30">30</option>
@@ -159,8 +159,8 @@ else{
                 </select>
             </div>
             <div class="col-sm-3">
-                <label class="font-weight-bold  fs-4 fst-italic" for="Edad_Maxima">Edad Maxima:</label><br>
-                <select type="number" min="18" max="70" class="form-control border border-success fst-italic text-center  fs-5" id="Edad_Maxima" name="Edad_Maxima">
+                <label class="font-weight-bold  fs-4 fst-italic" for="EdadMaxima">Edad Maxima:</label><br>
+                <select type="number" min="18" max="70" class="form-control border border-success fst-italic text-center  fs-5" id="EdadMaxima" name="EdadMaxima">
                     <option value="20">20</option>
                     <option value="30">30</option>
                     <option value="40">40</option>

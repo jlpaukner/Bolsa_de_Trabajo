@@ -6,12 +6,18 @@ switch ($_GET["t"]){
         $nombre="Email de usuario";
         $docum="Numero de DNI";
         $tipo=1;
+        $min = 20000000;
+        $max = 99999999;
+        $longitud = "[0-8]+";
         break;
-    case "e":
+    case "e"://es una empresa
         $registre="Registro de nueva empresa";
         $nombre="Email de la empresa";
         $docum="Numero de CUIT";
         $tipo=2;
+        $min = 2099999999;
+        $max = 30999999999;
+        $longitud = '[0-11]+';
         break;
     default:
         header("Location: /403.php");
@@ -67,15 +73,7 @@ zoom: 100%;
         <li class="nav-item">
           <!-- <a class="nav-link" href="info_candidato.php">Candidatos</a> -->
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Registrate
-          </a>
-          <ul class="dropdown-menu bg-dark border border-2 border-white" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="fsubs.php?t=e">Empresa</a></li>
-            <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="fsubs.php?t=u">Candidato</a></li>
-          </ul>
-        </li>
+
       </ul>
     </div>
 
@@ -118,7 +116,7 @@ zoom: 100%;
                     <!-- ingreso de dato de dni o cuit-->
                     <div class="mb-3">
                         <label for="id" class=" font-weight-bold fs-4 fst-italic" > <?php echo $docum?></label>
-                        <input type="number"  class="form-control border border-primary fst-italic text-center  fs-5" name="id" id="id" patter="[0-9]+" aria-describedby="emailHelp" min="8000000"  required  max="99999999999" placeholder="Ingrese su número">
+                        <input type="number"  class="form-control border border-primary fst-italic text-center  fs-5" name="id" id="id" patter="[0-9]+" aria-describedby="emailHelp" min="<?php echo $min?>"  required  max="<?php echo $max?>" placeholder="Ingrese su número">
                      
 
                     </div>
@@ -151,6 +149,9 @@ zoom: 100%;
     <div class="col-12"> <br><br> <br><br> <br> </div>
   </div>
   <!-- Pie de Pagina -->
-  <div class="p-3 mb-2 bg-dark text-white text-center fst-italic"> <h3>Tu oportunidad esta aquí!</h3></div>
+  <!--div class="p-3 mb-2 bg-dark text-white text-center fst-italic"> <h3>Tu oportunidad esta aquí!</h3></div-->
+  <footer class="p-3 mb-2 bg-dark">
+    <h3 class="  text-white text-center fst-italic">¡Tu oportunidad esta aquí!</h3>
+  </footer>
 </body>
 </html>
