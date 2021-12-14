@@ -3,27 +3,29 @@ session_start();
 require __DIR__ . '/dbcon.php';
 echo var_dump($_POST);
 $Cuit=$_SESSION['id'];
-$_POST['Cuit']=$Cuit;
-
 $tabla = "empresa";
+$_POST['Cuit']=$Cuit;
+echo var_dump($_POST);    
 $nombrellave="Cuit";
-$valorllave=$_SESSION['id'];
-
-$Cuit=$_POST['Cuit'];
-if ($Cuit=="0")
-    {    
-        $inserta=construyeinsert($_POST,"empresa","Cuit");
-        $resultado =operaciondb($inserta);
-    } 
-else
-    {
-        $aborrar = sprintf(" DELETE FROM `empresa` WHERE `Cuit`='$Cuit'");
-        operaciondb($aborrar);
-        $inserta=construyeinsert($_POST,"empresa");
-        $resultado =operaciondb($inserta);
-    }
-    echo $inserta;
-if ($resultado==1){
+$valorllave=$Cuit;   
+$consulta = sprintf("SELECT `%s` FROM `%s` WHERE `%s` = '%s' ",$nombrellave ,$tabla, $nombrellave ,$valorllave);
+    $resultado = cunsultadb($consulta);
+    if ($resultado==0)
+        {
+            echo "inserta <br>";
+            $insertar=construyeinsert($_POST,"$tabla",$nombrellave);
+            echo $insertar;
+            $resultado = operaciondb($insertar);
+            if ($resultado==1)  {  echo "si lo hizo";};
+            
+        }
+    else
+        {           
+            echo "actualiza <br>";
+            $actualiza=construyeupdate($_POST,"$tabla",$nombrellave,$valorllave);
+            $resultado = operaciondb($actualiza);
+            if ($resultado==1)  {  echo "si lo hizo";       };
+        } ;
+    
     header("location:inicioempresa.php?ms=ini");
-    }
 ?>

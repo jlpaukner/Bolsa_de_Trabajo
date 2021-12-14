@@ -4,8 +4,6 @@
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 	<title>ESCOJE A REPRESENTAR</title>
-	<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css"> -->
     <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>	
     <?php include __DIR__ . '/javas1.php'; ?>
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>

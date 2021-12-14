@@ -3,8 +3,6 @@
 function creaform(){
 
 
-
-
 }
 
 
@@ -17,10 +15,6 @@ $nkey=$_POST['nkey'];
 $resp= array_search($key, array_column($tabl, $nkey));
 $fila= $tabl[$resp];
 $_SESSION['pagretorno']=$_POST['pagretorno'];
-// var_dump($_POST);
-// var_dump($fila);
-// var_dump($campos);
-// var_dump($_SESSION);
 ?>
 
 <style>

@@ -48,9 +48,9 @@ else{
     }
 </script>
 
-
 <form class="formulario text-center" action="submitformbusqueda.php" method="POST" onsubmit="IDS()">
     <input type="hidden" id="IdBusqueda" name="IdBusqueda"value="<?php echo $IdBusqueda?>">
+    <input type="hidden" id="IdEmpresa" name="IdEmpresa"value="<?php echo $_SESSION['id']?>">
     <div class="container">
         <!-- Primera Fiia-->
         <div class="row">
@@ -105,7 +105,7 @@ else{
                         ?>
                     </datalist>
             </div>
-            <div class="col-sm-3">
+            <!-- <div class="col-sm-3">
                 <label class="font-weight-bold  fs-4 fst-italic" for="EstadoCivil">Idioma:</label><br>
                     <select class="form-control border border-success fst-italic text-center  fs-5" id="" name="">
                         <option value="Español">Español</option>
@@ -119,13 +119,13 @@ else{
                         <option value="Italiano_Ingles">Italiano y Ingles</option>
                         <option value="Varios">Varios</option>
                     </select>
-            </div>
+            </div> -->
             <div class="col-sm-3"></div>
         </div>
         <!-- Tercera Fiia-->
         <div class="row">
             <div class="col-sm-3"></div>
-            <div class="col-sm-3">
+            <!-- <div class="col-sm-3">
                 <label class="font-weight-bold  fs-4 fst-italic" for="EstadoCivil">Estado Civil:</label><br>
                 <select class="form-control border border-success fst-italic text-center  fs-5" id="EstadoCivil" name="EstadoCivil">
                     <option value="Soltero">Soltero/a</option>
@@ -133,7 +133,7 @@ else{
                     <option value="Concuvino">Concuvino/a</option>
                     <option value="Sin Restriccion">Sin Restriccion</option>
                 </select>
-            </div>
+            </div> -->
             <div class="col-sm-3">
                 <label class="font-weight-bold  fs-4 fst-italic" for="">Genero:</label><br>
                     <select class="form-control border border-success fst-italic text-center  fs-5" id="" name="">
@@ -148,8 +148,8 @@ else{
         <div class="row">
             <div class="col-sm-3"></div>
             <div class="col-sm-3">
-                <label class="font-weight-bold  fs-4 fst-italic" for="EdadMinima">Edad Minima:</label><br>
-                <select class="form-control border border-success fst-italic text-center  fs-5" id="EdadMinima" name="EdadMinima">
+                <label class="font-weight-bold  fs-4 fst-italic" for="Edad_Minima">Edad Minima:</label><br>
+                <select class="form-control border border-success fst-italic text-center  fs-5" id="Edad_Minima" name="Edad_Minima">
                     <option value="18">sin restricción</option>
                     <option value="20">20</option>
                     <option value="30">30</option>
@@ -159,8 +159,8 @@ else{
                 </select>
             </div>
             <div class="col-sm-3">
-                <label class="font-weight-bold  fs-4 fst-italic" for="EdadMaxima">Edad Maxima:</label><br>
-                <select type="number" min="18" max="70" class="form-control border border-success fst-italic text-center  fs-5" id="EdadMaxima" name="EdadMaxima">
+                <label class="font-weight-bold  fs-4 fst-italic" for="Edad_Maxima">Edad Maxima:</label><br>
+                <select type="number" min="18" max="70" class="form-control border border-success fst-italic text-center  fs-5" id="Edad_Maxima" name="Edad_Maxima">
                     <option value="20">20</option>
                     <option value="30">30</option>
                     <option value="40">40</option>

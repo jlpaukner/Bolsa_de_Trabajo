@@ -4,14 +4,14 @@ include __DIR__ . '/dbcon.php';
 include __DIR__ . '/ctabla.php';
 
 $iddueño= $_SESSION['id'];
-$consulta=sprintf("SELECT IdBusqueda,EstadoCivil,EdadMaxima,EdadMinima,tx_puesto,tx_carrera
+$consulta=sprintf("SELECT IdBusqueda,Edad_Maxima,Edad_Minima,tx_puesto,tx_carrera
 FROM `busquedas` join puestos on busquedas.Id_puesto=puestos.Id_puesto 
 join carreras on busquedas.id_Carrera=carreras.Id_carrera 
 where `IdEmpresa`='%s' ",$iddueño);
+echo $consulta;
 $filas=cunsultadbmultiple($consulta);
-$alias= Array('IdBusqueda','Estado Civil','Edad Máxima','Edad Mínima','Puesto','Carrera');
+$alias= Array('IdBusqueda','Edad Máxima','Edad Mínima','Puesto','Carrera');
 $tablagenerada=tabla($filas,$alias,"fbusqueda.php","IdBusqueda","busquedas","busquedas.php");
-
 if (!$tablagenerada)
 {
 echo "<h2>No ha cargado búsquedas aún</h2>";
