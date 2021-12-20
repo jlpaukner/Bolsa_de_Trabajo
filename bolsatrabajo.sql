@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 20-12-2021 a las 06:35:05
+-- Tiempo de generación: 20-12-2021 a las 15:20:16
 -- Versión del servidor: 5.7.31
 -- Versión de PHP: 7.3.21
 
@@ -32,8 +32,8 @@ CREATE TABLE IF NOT EXISTS `busquedas` (
   `IdBusqueda` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id tabla',
   `IdEmpresa` bigint(11) NOT NULL COMMENT 'fk tbl empresa',
   `id_Carrera` int(10) DEFAULT NULL COMMENT 'fk tbl carrra',
-  `EstadoCivil` int(1) NOT NULL,
-  `cdniveleducminimo` int(2) NOT NULL,
+  `EstadoCivil` int(1) DEFAULT NULL,
+  `cdniveleducminimo` int(2) DEFAULT NULL,
   `Cd_CP` int(4) DEFAULT NULL,
   `Cd_Prov` int(2) DEFAULT NULL COMMENT 'es para por prov  filtrar',
   `EdadMinima` int(2) DEFAULT NULL COMMENT 'edad desde a filtrar',
@@ -47,14 +47,14 @@ CREATE TABLE IF NOT EXISTS `busquedas` (
   PRIMARY KEY (`IdBusqueda`),
   KEY `IdEmpresa` (`IdEmpresa`),
   KEY `id_Carrera` (`id_Carrera`,`EstadoCivil`,`cdniveleducminimo`,`Cd_CP`,`Cd_Prov`,`Id_puesto`,`Genero`,`Movilidad_Propia`,`Estadobusqueda`)
-) ENGINE=InnoDB AUTO_INCREMENT=400 DEFAULT CHARSET=utf8 COMMENT='tabla complementaria para solicitar candidatos o publicar los req para el puesto';
+) ENGINE=InnoDB AUTO_INCREMENT=401 DEFAULT CHARSET=utf8 COMMENT='tabla complementaria para solicitar candidatos o publicar los req para el puesto';
 
 --
 -- Volcado de datos para la tabla `busquedas`
 --
 
 INSERT INTO `busquedas` (`IdBusqueda`, `IdEmpresa`, `id_Carrera`, `EstadoCivil`, `cdniveleducminimo`, `Cd_CP`, `Cd_Prov`, `EdadMinima`, `EdadMaxima`, `Id_puesto`, `Genero`, `Movilidad_Propia`, `FC_HM_lim_req`, `Estadobusqueda`, `fc_alta`) VALUES
-(1, 20140076450, 335, 0, 1, 1050, 3, 18, 55, 38, 0, 'Si', '2021-11-16', 0, '2021-09-16'),
+(1, 20002222222, 335, 0, 1, 1050, 3, 18, 55, 38, 0, 'Si', '2021-11-16', 0, '2021-09-16'),
 (2, 27140836492, 335, 0, 2, 1078, 3, 23, 60, 39, 1, 'Si', '2021-11-21', 0, '2021-09-15'),
 (3, 33141216513, 335, 0, 3, 1050, 3, 18, 34, 40, 2, 'Si', '2021-11-26', 0, '2021-09-14'),
 (4, 20141596534, 137, 0, 4, 1045, 3, 33, 52, 41, 3, 'Si', '2021-12-01', 0, '2021-09-13'),
@@ -452,7 +452,8 @@ INSERT INTO `busquedas` (`IdBusqueda`, `IdEmpresa`, `id_Carrera`, `EstadoCivil`,
 (396, 27146916818, 160, 0, 0, 0, 0, 29, 48, 55, 0, 'Si', '2021-11-01', 0, '2021-08-17'),
 (397, 20140076450, 161, 0, 0, 0, 0, 33, 52, 56, 0, 'Si', '2021-11-16', 0, '2021-08-16'),
 (398, 27140836492, 162, 0, 0, 0, 0, 21, 40, 57, 0, 'Si', '2021-11-21', 0, '2021-08-15'),
-(399, 33141216513, 163, 0, 0, 0, 0, 22, 41, 58, 0, 'Si', '2021-11-26', 0, '2021-08-14');
+(399, 33141216513, 163, 0, 0, 0, 0, 22, 41, 58, 0, 'Si', '2021-11-26', 0, '2021-08-14'),
+(400, 20002222222, 3, 4, NULL, NULL, 2, 30, 60, 1, 0, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -492,7 +493,7 @@ CREATE TABLE IF NOT EXISTS `candidatos` (
 --
 
 INSERT INTO `candidatos` (`DNI`, `Apellido`, `Comentario`, `Contacto`, `Domicilio`, `Email`, `Estado`, `Hijos`, `Licencia`, `LugarNac`, `Movilidad`, `Nacimiento`, `Nacionalidad`, `idgenero`, `Nombre`, `NumDireccion`, `Postal`, `idprov`, `RedSocial1`, `RedSocial2`, `estado_civil`) VALUES
-(10000003, 'ASOC', 'En busca de empleo como plan de mejora de calidad de vida', '1122045379', 'ARMENIA ', 'RUZO_ASOC@gmail.com', 1, 4, 'Particular', 'Santa Fe', 'Si', '1990-08-29', 'Argentina', 1, 'RUZO', '140', 2417, 0, 'RUZOASOC.facebook.com', 'ASOCRUZO.instagram', 3),
+(111111, 'ASOC', 'En busca de empleo como plan de mejora de calidad de vida', '1122045379', 'ARMENIA ', 'RUZO_ASOC@gmail.com', 1, 4, 'Particular', 'Santa Fe', 'Si', '1990-08-29', 'Argentina', 1, 'RUZO', '140', 2417, 0, 'RUZOASOC.facebook.com', 'ASOCRUZO.instagram', 3),
 (10000018, 'ARRIETA', 'En busca de empleo como plan de mejora de calidad de vida', '1122046086', 'CALLE 146 ', 'OSORIO_ARRIETA@gmail.com', 1, 4, 'Particular', 'Tucuman', 'Si', '1982-05-01', 'Argentina', 1, 'OSORIO', '665', 2720, 0, 'OSORIOARRIETA.facebook.com', 'ARRIETAOSORIO.instagram', 1),
 (10000033, 'BAGNIOTTI', 'En busca de empleo como plan de mejora de calidad de vida', '1122040345', 'DR JOSE MANUEL GALVEZ ', 'SEGOVIA_BAGNIOTTI@gmail.com', 1, 4, 'Particular', 'Santiago Del Estero', 'Si', '2002-01-01', 'Venezuela', 1, 'SEGOVIA', '1190', 3011, 0, 'SEGOVIABAGNIOTTI.facebook.com', 'BAGNIOTTISEGOVIA.instagram', 1),
 (10000048, 'AZERRAD', 'En busca de empleo como plan de mejora de calidad de vida', '1122041136', 'AV 29 - AV EVA DUARTE DE PERON', 'POTRO_AZERRAD@gmail.com', 1, 4, '', 'Santiago Del Estero', 'No', '1993-09-03', 'Bolivia', 1, 'POTRO', '1715', 3116, 0, 'POTROAZERRAD.facebook.com', 'AZERRADPOTRO.instagram', 1),
@@ -5294,7 +5295,7 @@ CREATE TABLE IF NOT EXISTS `empresa` (
 --
 
 INSERT INTO `empresa` (`Cuit`, `Apellido_Apoderado`, `Num_DNI_Apoderado`, `Razon_Social`, `FC_Inicio_Actividades`, `Domicilio`, `Cd_postal`, `cdProv`, `Rubro`, `Tel_Contacto`, `Email`, `Nombre_Apoderado`, `Estado`, `fc_alta`) VALUES
-(20140076450, 'Perez', 28711212, 'Administracion Enrique Duhau Saac', '2006-10-07', 'Sarmiento 663', 1001, 4, 'Administracion Consorcios', '1122041052', 'AdministracionEnriqueDuhauSaac@FULLCERO.COM', 'Jose', 1, '2020-10-06'),
+(20002222222, 'Perez', 28711212, 'Administracion Enrique Duhau Saac', '2006-10-07', 'Sarmiento 663', 1001, 4, 'Administracion Consorcios', '1122041052', 'AdministracionEnriqueDuhauSaac@FULLCERO.COM', 'Jose', 1, '2020-10-06'),
 (20141596534, '', 0, 'Albergue Transitorio Del Sur', '2002-10-11', 'Florida 253', 1015, 4, 'Hoteleria', '1122041076', 'AlbergueTransitorioDelSur@FULLCERO.COM', '', 1, '2020-11-06'),
 (20143116618, '', 0, 'Albergue Transitorio Los Pinos', '1998-10-15', 'Sarmiento 725 ', 1029, 4, 'Hoteleria', '1122041098', 'AlbergueTransitorioLosPinos@FULLCERO.COM', '', 1, '2020-10-06'),
 (20144636692, '', 0, 'Amoblamientos Mats', '1994-10-19', 'Av R S Peña 720', 1043, 4, 'Muebles', '1122041110', 'AmoblamientosMats@FULLCERO.COM', '', 1, '2021-10-06'),
@@ -5310,9 +5311,9 @@ INSERT INTO `empresa` (`Cuit`, `Apellido_Apoderado`, `Num_DNI_Apoderado`, `Razon
 (27145396734, '', 0, 'Articulos HCD Publicidad', '1992-10-21', 'Sarmiento 559', 1048, 4, 'Publidades', '1122041114', 'ArticulosHCDPublicidad@Telecentro.COM', '', 1, '2020-09-08'),
 (27146916818, '', 0, 'Articulos DJr Publicidad', '1988-10-10', 'TGral J Peron 683', 1062, 4, 'Publidades', '1122041125', 'ArticulosDJrPublicidad@Telecentro.COM', '', 1, '2020-10-06'),
 (33141216513, '', 0, 'Albergue Transitorio Conociendonos', '2003-10-11', 'TGral J Peron 683', 1008, 4, 'Hoteleria', '1122041071', 'AlbergueTransitorioConociendonos@FULLCERO.COM', '', 1, '2020-10-06'),
-(33142736597, 'Carreras', 28711215, 'Albergue Transitorio Los Liros', '1999-10-15', 'Sarmiento 725 ', 1022, 4, 'Hoteleria', '1122041089', 'AlbergueTransitorioLosLiros@FULLCERO.COM', 'Juan', 1, '2020-10-06'),
 (33144256671, 'Lobazano', 28711217, 'American Vart', '1995-10-19', 'Av R S Peña 720', 1036, 4, 'Hoteleria', '1122041104', 'AmericanVart@FULLCERO.COM', 'Ezequiel', 1, '2020-11-06'),
-(33145776755, 'Belleza', 28709417, 'Articulos Hmr Publicidad', '1991-10-08', 'Florida 165 ', 1050, 4, 'Publidades', '1122041118', 'ArticulosHmrPublicidad@Telecentro.COM', 'Hernan', 1, '2020-10-06');
+(33145776755, 'Belleza', 28709417, 'Articulos Hmr Publicidad', '1991-10-08', 'Florida 165 ', 1050, 4, 'Publidades', '1122041118', 'ArticulosHmrPublicidad@Telecentro.COM', 'Hernan', 1, '2020-10-06'),
+(133189859071, 'Carreras', 28711215, 'Albergue Transitorio Los Liros', '1999-10-15', 'Sarmiento 725 ', 1022, 4, 'Hoteleria', '1122041089', 'AlbergueTransitorioLosLiros@FULLCERO.COM', 'Juan', 1, '2020-10-06');
 
 -- --------------------------------------------------------
 
@@ -6670,7 +6671,7 @@ CREATE TABLE IF NOT EXISTS `login` (
 --
 
 INSERT INTO `login` (`id`, `userpass`, `tipo`, `recupero`) VALUES
-(133189859071, '4b0e27ca51d536eb87c843ebfdc2fdfc18496ec10bf9bb46bde9f91db67e5911', 2, ''),
+(20002222222, '4b0e27ca51d536eb87c843ebfdc2fdfc18496ec10bf9bb46bde9f91db67e5911', 2, ''),
 (44751263, '2c3a4249d77070058649dbd822dcaf7957586fce428cfb2ca88b94741eda8b07', 1, ''),
 (14235657, 'c4ffa7146bc75b1b1b3352d536340198f1f1e10ab4b2323b0523a1ccffb7e21c', 1, ''),
 (99, '25f43b1486ad95a1398e3eeb3d83bc4010015fcc9bedb35b432e00298d5021f7', 3, ''),
@@ -6692,7 +6693,7 @@ INSERT INTO `login` (`id`, `userpass`, `tipo`, `recupero`) VALUES
 (33445566, '6b3e853d75211964fb10c03c33fdb335e595a26db04807d7db54a0a738a135f8', 1, '678e731ce5cd1b257ae029de9a557c1bd2cb0783f487bbf244c7f8c789162800'),
 (123345678, '3818f06138f8eac7f0c6a1a334cc2cc086af15e4567d656c72fba0686d56d007', 1, '540b4f218f5631d9a98bc606f029a7c2dbde8013bfd5f778b2388ecd60f87154'),
 (77778888, 'f4f91ae5c32530054d07f7cf9e9f9861973efa55a1a3b9f99198bdcb647e3246', 1, '0d13fee574fc634c89dbeeb23155c6e655d8ef064cb685dd959b2e45ba9cdad2'),
-(30123456781, 'e8ac80cab3d29e20bdff202e16751ad984d70f44a7aa528d5e32cf637836336c', 2, 'd37d9b156d8b93380a88551223977e57caabc558461c4b5acfda1f242ce6aa86'),
+(20001222232, 'e8ac80cab3d29e20bdff202e16751ad984d70f44a7aa528d5e32cf637836336c', 2, 'd37d9b156d8b93380a88551223977e57caabc558461c4b5acfda1f242ce6aa86'),
 (45454545, 'cc55de49503ecee66a3a923efdec26ba2ab3217178454fa0dd0957cf645cb3a8', 1, '67499191496a4f77d512a8f0bec620822ba6a2229bdb8f9bda54e135eb3a5ea6'),
 (22345678, 'ded0817d7fa88d134659d992c4819ed7aca68922400b3c070f6ff7691b931ea2', 3, '1978b0c3efc170bd3571ecee31f350fb3882f818289666692df4891b89d129f0'),
 (23454455, '07bc75b7dc94ede5405bf988bfe7feb0899a091dda1e0a67b9b99647cc573e0a', 1, '07659f333b2517c2b878e92b3294a8decfc70f12f7f8b12441b543bdfd47a482');
@@ -8643,24 +8644,24 @@ INSERT INTO `puestos` (`Id_puesto`, `tx_puesto`, `accion`) VALUES
 DROP TABLE IF EXISTS `resultados`;
 CREATE TABLE IF NOT EXISTS `resultados` (
   `idResultado` int(11) NOT NULL AUTO_INCREMENT,
-  `idBusqueda` int(10) NOT NULL,
-  `DNI` int(10) NOT NULL,
+  `idBusqueda` int(10) DEFAULT NULL,
+  `DNI` int(10) DEFAULT NULL,
   `fcestado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `cdestado` int(2) NOT NULL,
-  `cdestadoimpresion` int(2) NOT NULL,
+  `cdestado` int(2) DEFAULT NULL,
+  `cdestadoimpresion` int(2) DEFAULT NULL,
   `fcestadoimpresion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idResultado`),
   KEY `idBusqueda` (`idBusqueda`,`DNI`),
   KEY `idCandidato` (`DNI`),
   KEY `cdestado` (`cdestado`,`cdestadoimpresion`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `resultados`
 --
 
 INSERT INTO `resultados` (`idResultado`, `idBusqueda`, `DNI`, `fcestado`, `cdestado`, `cdestadoimpresion`, `fcestadoimpresion`) VALUES
-(1, 1, 111111, '2021-12-20 03:01:21', 0, 0, '2021-12-20 03:01:21');
+(25, 1, 33000057, '2021-12-20 12:19:02', NULL, NULL, '2021-12-20 12:19:02');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
