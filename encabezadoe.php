@@ -4,7 +4,7 @@ if ($_SESSION["abierta"]!="si") header("Location:index.php");
 if (!isset($_SESSION['tiempo'])) {
   $_SESSION['tiempo']=time();
 }
-else if (time() - $_SESSION['tiempo'] > 6000) {
+else if (time() - $_SESSION['tiempo'] > 600) {
   session_destroy();
   /* Aquí redireccionas a la url especifica */
   header("Location:index.php");
@@ -12,6 +12,28 @@ else if (time() - $_SESSION['tiempo'] > 6000) {
 }
 $_SESSION['tiempo']=time(); //Si hay actividad seteamos el valor al tiempo actual
 require __DIR__ . '/extensionB.php';
+require_once('./dbcon.php');
+
+$_SESSION['abierta']="si";
+$Cuit=$_SESSION['id'];
+
+$consulta = "SELECT * FROM `empresa` WHERE `Cuit`='$Cuit'";
+$resultado = cunsultadb($consulta);
+
+
+if($resultado['Estado'] == 1){
+  $estado_actual = "<a class='nav-link dropdown-toggle text-white   btn btn-sm btn-success rounded-pill '  id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Cuenta Activa</a>";
+  $cambio_cuenta = "<li><a class='dropdown-item text-danger text-center border border-white fst-italic' href='cambiar_estado.php?estado=eliminar_empresa'>Eliminar Cuenta</a></li>";
+}
+else if($resultado['Estado'] == 0){
+  $estado_actual = "<a class='nav-link dropdown-toggle text-white   btn btn-sm btn-danger rounded-pill '  id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Cuenta Inactiva</a>";
+  $cambio_cuenta = "<li><a class='dropdown-item text-success text-center border border-white fst-italic' href='cambiar_estado.php?estado=activa_empresa'>Activar Cuenta</a></li>";
+}
+else{
+  $estado_actual = "<a class='nav-link dropdown-toggle text-white   btn btn-sm btn-secundary rounded-pill '  id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Cuenta Pendiente</a>";
+  $cambio_cuenta ="";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +60,16 @@ require __DIR__ . '/extensionB.php';
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="inicioempresa.php?ms=ini">Perfil</a>
         </li>
+        <!--prueba-->
+        <li class="nav-item dropdown ">
+          <?php echo $estado_actual; ?>
+          <!--a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"><hp echo $estado_actual;?></!a-->
+          <ul class="dropdown-menu  bg-dark bg-opacity-25 border border-2 border-white" aria-labelledby="navbarDropdownMenuLink">
+            <?php echo $cambio_cuenta; ?>
+
+          </ul>
+        </li>
+            <!--Fin de prueba-->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Menú
@@ -49,6 +81,7 @@ require __DIR__ . '/extensionB.php';
                   <input type="submit" name="boton" class="dropdown-item text-danger text-center border border-red fst-italic" value ="Eliminar Cuenta" onclick="return confirm('¿Seguro? Perderá todos los datos de su cuenta.')"> 
                 </form>
             </li>
+
           </ul>
         </li>
         <?php 

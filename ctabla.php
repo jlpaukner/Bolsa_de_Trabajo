@@ -1,5 +1,6 @@
 
 <?php
+// funciones para visualisar cualquier tabla
 function ctabla($tabla,$columnas,$alias,$tituloIdDueño,$iddueño,$idFila,$form,$return)
     {   
         $consulta=sprintf("SELECT * FROM `%s` WHERE `%s`='%s' ",$tabla,$tituloIdDueño,$iddueño);

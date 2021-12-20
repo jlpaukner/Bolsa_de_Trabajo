@@ -1,6 +1,6 @@
 <?php
-require __DIR__ . '/encabezadoc.php';
-include __DIR__ . '/dbcon.php';
+require_once('./encabezadoc.php');
+require_once('./dbcon.php');
 $consulta=sprintf("SELECT * FROM `estudios`JOIN carreras on estudios.id_Carrera=carreras.Id_carrera where `DNI`='%s' ",$_SESSION['id']);
 /*echo "<br>";
 echo $consulta;

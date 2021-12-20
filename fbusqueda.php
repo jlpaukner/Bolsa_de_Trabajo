@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . '/encabezadoe.php';
-include __DIR__ . '/dbcon.php';
+require_once('./dbcon.php');
+//include __DIR__ . '/dbcon.php';
 $_SESSION['abierta']="si";
 //echo "<br>";
 $IdBusqueda=$_POST["IdBusqueda"];
@@ -22,29 +23,24 @@ else{
 ?>
        
 <script> 
+//para cambiar el texto seleccionado en el formulario por su valor real (id por ejemplo) a ser insertado en la db
+    function reemplaza(nomDB,nomDatalist){
+        var campo=document.getElementById(nomDB);
+            var data='';
+            const dataList = document.getElementById(nomDatalist);
+            const textInput = campo.value;
+            var data='';
+            for (let i = 0; i < dataList.options.length; i++) {
+                if (dataList.options[i].value === textInput) {
+                    data=dataList.options[i].getAttribute("data");
+                    }
+                    }
+        campo.value=data;
+    };
     function IDS(){
-    var estudio=document.getElementById("id_Carrera");
-    var data='';
-    const dataList = document.getElementById("estudios");
-    const textInput = estudio.value;
-    var data='';
-    for (let i = 0; i < dataList.options.length; i++) {
-        if (dataList.options[i].value === textInput) {
-            data=dataList.options[i].getAttribute("data");
-            }
-            }
-    estudio.value=data;
-    var puesto=document.getElementById("Id_puesto");
-    var data='';
-    const dataList2 = document.getElementById("puestos");
-    const textInput2 = puesto.value;
-    var data='';
-    for (let i = 0; i < dataList2.options.length; i++) {
-        if (dataList2.options[i].value === textInput2) {
-            data=dataList2.options[i].getAttribute("data");
-            }
-            }
-            puesto.value=data;
+        reemplaza("id_Carrera","estudios");
+        reemplaza("Id_puesto","puestos");
+        reemplaza("Cd_Prov","lprov");    
     }
 </script>
 
@@ -90,21 +86,25 @@ else{
         </div>
         <!-- Segunda Fiia-->
         <div class="row">
+
             <div class="col-sm-3"></div>
+
             <div class="col-sm-3">
-                <label for="" class="font-weight-bold  fs-4 fst-italic">Provincia:</label>
-                <input type="list" required  placeholder="Ingrese Provincia" class="form-control border border-success fst-italic text-center  fs-5" list="" id="" name="" >
-                    <datalist id="">
-                        <?php 
-                                         
-                            $consulta=sprintf("SELECT `Id_puesto`,`tx_puesto` FROM `puestos`");
-                            $puestos=cunsultadbmultiple($consulta);
-                            foreach($puestos as $puesto){
-                            printf( '<option data="%s" value="%s">',$puesto["Id_puesto"] ,$puesto["tx_puesto"]);
-                        };              
+                <label for="idprov" class="font-weight-bold  fs-4 fst-italic">Provincia:</label>
+                <input type="list" required  placeholder="Ingrese provincia " class="form-control border border-success fst-italic text-center  fs-5" list="lprov" id="Cd_Prov" name="Cd_Prov" >
+                    <datalist id="lprov">
+                        <?php                    
+                             $consulta=sprintf("SELECT DISTINCT `idprov`,`provincia` FROM `cod_postal_prov` order by idprov ");
+                            $opciones=cunsultadbmultiple($consulta);
+                            // printf( '<option data="%s" value="%s">','0' ,'No requiere');
+                            // echo '<option disabled="disabled">———————————————————————</option>';
+                            foreach($opciones as $op){
+                            printf( '<option data="%s" value="%s">',$op["idprov"] ,$op["provincia"]);
+                        };                
                         ?>
                     </datalist>
             </div>
+
             <!-- <div class="col-sm-3">
                 <label class="font-weight-bold  fs-4 fst-italic" for="EstadoCivil">Idioma:</label><br>
                     <select class="form-control border border-success fst-italic text-center  fs-5" id="" name="">
@@ -125,21 +125,24 @@ else{
         <!-- Tercera Fiia-->
         <div class="row">
             <div class="col-sm-3"></div>
-            <!-- <div class="col-sm-3">
-                <label class="font-weight-bold  fs-4 fst-italic" for="EstadoCivil">Estado Civil:</label><br>
-                <select class="form-control border border-success fst-italic text-center  fs-5" id="EstadoCivil" name="EstadoCivil">
-                    <option value="Soltero">Soltero/a</option>
-                    <option value="Casado">Casado/a</option>
-                    <option value="Concuvino">Concuvino/a</option>
-                    <option value="Sin Restriccion">Sin Restriccion</option>
-                </select>
-            </div> -->
             <div class="col-sm-3">
-                <label class="font-weight-bold  fs-4 fst-italic" for="">Genero:</label><br>
-                    <select class="form-control border border-success fst-italic text-center  fs-5" id="" name="">
-                        <option value="Ambos">Ambos</option>
-                        <option value="Mujer">Mujer</option>
-                        <option value="Hombre">Hombre</option>
+                <label class="font-weight-bold  fs-4 fst-italic" for="Genero">Genero:</label><br>
+                <select class="form-control border border-success fst-italic text-center  fs-5" id="Genero" name="Genero">
+                    <option value="0">No Aplica</option>
+                    <option value="1">Masculino</option>
+                    <option value="2">Femenino</option>
+                    <option value="3">Otro</option>
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <label class="font-weight-bold  fs-4 fst-italic" for="">Estado Civil::</label><br>
+                    <select class="form-control border border-success fst-italic text-center  fs-5" id="EstadoCivil" name="EstadoCivil">
+                        <option value="0"> No Aplica </option>
+                        <option value="1">Casada/o</option>
+                        <option value="2">En Concuvinato</option>
+                        <option value="3">Divorciada/o</option>
+                        <option value="4">Separada/o</option>
+                        <option value="5">Soltera/o</option>
                     </select>
             </div>
             <div class="col-sm-3"></div>

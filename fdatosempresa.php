@@ -1,6 +1,7 @@
 <?php
-require __DIR__ . '/dbcon.php';
-require __DIR__ . '/encabezadoe.php';
+
+require_once('./encabezadoe.php');
+require_once('./dbcon.php');
 $_SESSION['abierta']="si";
 //llena el formulario
 //valores default -----------------
@@ -15,13 +16,17 @@ $Apellido_Apoderado="";
 $Nombre_Apoderado="";
 $Tel_Contacto="";
 $Email="";
+$Estado = 1;
 //---------------------------------
 $Cuit=$_SESSION['id'];
+//$consulta = "SELECT * FROM `empresa` WHERE `Cuit`='$Cuit'";
 $consulta = "SELECT * FROM `empresa` WHERE `Cuit`='$Cuit'";
 $resultado = cunsultadb($consulta);
+
 // var_dump($resultado);
-if ($resultado=="0"){
+if ($resultado== 0){
      echo"<h3 class='text-center text-dark'> Cargue los campos vacíos</h3>";
+     
 }
 else{
     if ($resultado!="0"){
@@ -124,7 +129,9 @@ zoom: 100%;
         <div class="col-sm-4">
             <div class="row">
                 <div class="col-sm-6"><!--boton guardar-->
+                
                 <button type="submit" class="form-control btn btn-dark centroventana border border-primary" value="Enviar">Guardar</button>
+
                 </div>
                 <div class="col-sm-6"><!--boton cancelar-->
                 <button class=" form-control btn btn-dark centroventana border border-success fst-italic" ><a class=" text-decoration-none text-light" href="inicioempresa?ms=ini.php">Cancelar</a></button>
@@ -133,9 +140,10 @@ zoom: 100%;
         </div>
         <div class="col-sm-4"></div>
     </div>
+    <input type="hidden"   name="Estado" value="<?php echo $Estado?>"><br>
             <!--Cuit-->
-    <label for="Cuit" hidden >Cuit :</label><br>
-    <input type="number" hidden required id="Cuit" name="Cuit" value="<?php echo $Cuit?>"><br>
+    <!--label for="Cuit" hidden >Cuit :</!--label><br>
+    <input type="number" hidden required id="Cuit" name="Cuit" value="<php echo $Cuit?>"><br-->
             
 
 </form> 

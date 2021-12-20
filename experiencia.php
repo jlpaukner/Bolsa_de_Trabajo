@@ -1,6 +1,6 @@
 <?php
-include __DIR__ . '/encabezadoc.php';
-include __DIR__ . '/dbcon.php';
+require_once('./encabezadoc.php');
+require_once('./dbcon.php');
 $consulta=sprintf("SELECT * FROM `experiencia` join puestos on experiencia.Id_puesto=puestos.Id_puesto WHERE `DNI`='%s' ",$_SESSION['id']);
 $experiencias=cunsultadbmultiple($consulta);
 // echo $consulta;

@@ -1,27 +1,28 @@
 <?php
 function cunsultadb($consulta)
-    {   // para devolver solo una fila 
-        $servername = "localhost";
-        $username = "bot";
-        $password = "f4ideEb85YrUIXuU";
-        $dbname = "bolsatrabajo"; 
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        // Revisa connection
-        if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error);}
-        // para ´ñ y tildes
-        $conn->query("SET NAMES 'utf8'");
-        // Realiza query
-        $resultado = $conn->query($consulta);
-        $respfila="0";
-        if (!empty($resultado))
+{   // para devolver solo una fila 
+    $servername = "localhost";
+    $username = "bot";
+    $password = "f4ideEb85YrUIXuU";
+    $dbname = "bolsatrabajo"; 
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Revisa connection
+    if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error);}
+    // para ´ñ y tildes
+    $conn->query("SET NAMES 'utf8'");
+    // Realiza query
+    $resultado = $conn->query($consulta);
+    $respfila="0";
+    if (!empty($resultado))
+    {
+        while($fila = $resultado->fetch_assoc()) 
         {
-            while($fila = $resultado->fetch_assoc()) 
-            {
-                $respfila=$fila;
-            }
-        } 
-        return $respfila;
-    }
+            $respfila=$fila;
+        }
+    } 
+    return $respfila;
+}
+
 
     function cunsultadbmultiple($consulta)
     {   // para devolver varias filas 

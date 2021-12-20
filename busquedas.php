@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/encabezadoe.php';
-include __DIR__ . '/dbcon.php';
+require_once('./dbcon.php');
 include __DIR__ . '/ctabla.php';
 
 $iddueño= $_SESSION['id'];
