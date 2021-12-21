@@ -8,7 +8,7 @@ $consulta=sprintf("SELECT IdBusqueda,EdadMaxima,EdadMinima,tx_puesto,tx_carrera
 FROM `busquedas` join puestos on busquedas.Id_puesto=puestos.Id_puesto 
 join carreras on busquedas.id_Carrera=carreras.Id_carrera 
 where `IdEmpresa`='%s' ",$iddueño);
-echo $consulta;
+//echo $consulta;
 $filas=cunsultadbmultiple($consulta);
 $alias= Array('IdBusqueda','Edad Máxima','Edad Mínima','Puesto','Carrera');
 $tablagenerada=tabla($filas,$alias,"fbusqueda.php","IdBusqueda","busquedas","busquedas.php");

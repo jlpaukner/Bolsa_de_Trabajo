@@ -64,7 +64,7 @@ foreach ($estudios as $fila)
                 <form action=borraregistro.php method="POST">
                     <input type = "hidden" name = "tabla" value = "estudios" >
                     <input type = "hidden" name = "nombreID" value = "ID_Estudio" >
-                    <input type = "hidden" name = "pagina" value = "estudios.php" >
+                    <input type = "hidden" name = "retorno" value = "estudios.php" >
                     <input type = "hidden" name = "valorID" value = "<?php echo $fila["ID_Estudio"]?>" >
                     <input type=  "submit" name="boton" class="form-control centroventana btn btn-dark border border-info text-center" value ="Borrar"> 
                 </form>

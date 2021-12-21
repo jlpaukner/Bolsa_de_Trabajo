@@ -11,7 +11,7 @@ else if (time() - $_SESSION['tiempo'] > 600) {
   die();  
 }
 $_SESSION['tiempo']=time(); //Si hay actividad seteamos el valor al tiempo actual
-require __DIR__ . '/extensionB.php';
+require_once('./extensionB.php');
 require_once('./dbcon.php');
 
 $_SESSION['abierta']="si";

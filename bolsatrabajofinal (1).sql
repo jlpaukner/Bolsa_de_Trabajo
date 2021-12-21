@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 20-12-2021 a las 15:20:16
--- Versión del servidor: 5.7.31
--- Versión de PHP: 7.3.21
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 21-12-2021 a las 17:15:53
+-- Versión del servidor: 10.4.20-MariaDB
+-- Versión de PHP: 7.3.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `bolsatrabajo`
+-- Base de datos: `bolsatrabajofinal`
 --
 
 -- --------------------------------------------------------
@@ -27,13 +27,12 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `busquedas`
 --
 
-DROP TABLE IF EXISTS `busquedas`;
-CREATE TABLE IF NOT EXISTS `busquedas` (
-  `IdBusqueda` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id tabla',
+CREATE TABLE `busquedas` (
+  `IdBusqueda` int(10) NOT NULL COMMENT 'id tabla',
   `IdEmpresa` bigint(11) NOT NULL COMMENT 'fk tbl empresa',
   `id_Carrera` int(10) DEFAULT NULL COMMENT 'fk tbl carrra',
-  `EstadoCivil` int(1) DEFAULT NULL,
-  `cdniveleducminimo` int(2) DEFAULT NULL,
+  `EstadoCivil` int(1) NOT NULL,
+  `cdniveleducminimo` int(2) NOT NULL,
   `Cd_CP` int(4) DEFAULT NULL,
   `Cd_Prov` int(2) DEFAULT NULL COMMENT 'es para por prov  filtrar',
   `EdadMinima` int(2) DEFAULT NULL COMMENT 'edad desde a filtrar',
@@ -43,18 +42,15 @@ CREATE TABLE IF NOT EXISTS `busquedas` (
   `Movilidad_Propia` varchar(2) DEFAULT NULL COMMENT 'si requiere tener movilidad propia para el puesto',
   `FC_HM_lim_req` date DEFAULT NULL,
   `Estadobusqueda` int(2) DEFAULT NULL,
-  `fc_alta` date DEFAULT NULL,
-  PRIMARY KEY (`IdBusqueda`),
-  KEY `IdEmpresa` (`IdEmpresa`),
-  KEY `id_Carrera` (`id_Carrera`,`EstadoCivil`,`cdniveleducminimo`,`Cd_CP`,`Cd_Prov`,`Id_puesto`,`Genero`,`Movilidad_Propia`,`Estadobusqueda`)
-) ENGINE=InnoDB AUTO_INCREMENT=401 DEFAULT CHARSET=utf8 COMMENT='tabla complementaria para solicitar candidatos o publicar los req para el puesto';
+  `fc_alta` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='tabla complementaria para solicitar candidatos o publicar los req para el puesto';
 
 --
 -- Volcado de datos para la tabla `busquedas`
 --
 
 INSERT INTO `busquedas` (`IdBusqueda`, `IdEmpresa`, `id_Carrera`, `EstadoCivil`, `cdniveleducminimo`, `Cd_CP`, `Cd_Prov`, `EdadMinima`, `EdadMaxima`, `Id_puesto`, `Genero`, `Movilidad_Propia`, `FC_HM_lim_req`, `Estadobusqueda`, `fc_alta`) VALUES
-(1, 20002222222, 335, 0, 1, 1050, 3, 18, 55, 38, 0, 'Si', '2021-11-16', 0, '2021-09-16'),
+(1, 20140076450, 335, 0, 1, 1050, 3, 18, 55, 38, 0, 'Si', '2021-11-16', 0, '2021-09-16'),
 (2, 27140836492, 335, 0, 2, 1078, 3, 23, 60, 39, 1, 'Si', '2021-11-21', 0, '2021-09-15'),
 (3, 33141216513, 335, 0, 3, 1050, 3, 18, 34, 40, 2, 'Si', '2021-11-26', 0, '2021-09-14'),
 (4, 20141596534, 137, 0, 4, 1045, 3, 33, 52, 41, 3, 'Si', '2021-12-01', 0, '2021-09-13'),
@@ -452,8 +448,7 @@ INSERT INTO `busquedas` (`IdBusqueda`, `IdEmpresa`, `id_Carrera`, `EstadoCivil`,
 (396, 27146916818, 160, 0, 0, 0, 0, 29, 48, 55, 0, 'Si', '2021-11-01', 0, '2021-08-17'),
 (397, 20140076450, 161, 0, 0, 0, 0, 33, 52, 56, 0, 'Si', '2021-11-16', 0, '2021-08-16'),
 (398, 27140836492, 162, 0, 0, 0, 0, 21, 40, 57, 0, 'Si', '2021-11-21', 0, '2021-08-15'),
-(399, 33141216513, 163, 0, 0, 0, 0, 22, 41, 58, 0, 'Si', '2021-11-26', 0, '2021-08-14'),
-(400, 20002222222, 3, 4, NULL, NULL, 2, 30, 60, 1, 0, NULL, NULL, NULL, NULL);
+(399, 33141216513, 163, 0, 0, 0, 0, 22, 41, 58, 0, 'Si', '2021-11-26', 0, '2021-08-14');
 
 -- --------------------------------------------------------
 
@@ -461,8 +456,7 @@ INSERT INTO `busquedas` (`IdBusqueda`, `IdEmpresa`, `id_Carrera`, `EstadoCivil`,
 -- Estructura de tabla para la tabla `candidatos`
 --
 
-DROP TABLE IF EXISTS `candidatos`;
-CREATE TABLE IF NOT EXISTS `candidatos` (
+CREATE TABLE `candidatos` (
   `DNI` int(10) NOT NULL,
   `Apellido` varchar(30) DEFAULT NULL,
   `Comentario` varchar(150) DEFAULT NULL,
@@ -483,9 +477,7 @@ CREATE TABLE IF NOT EXISTS `candidatos` (
   `idprov` int(2) NOT NULL,
   `RedSocial1` varchar(100) DEFAULT NULL,
   `RedSocial2` varchar(100) DEFAULT NULL,
-  `estado_civil` int(1) DEFAULT NULL,
-  PRIMARY KEY (`DNI`),
-  KEY `idgenero` (`idgenero`,`Estado`,`Movilidad`,`Postal`,`idprov`,`estado_civil`)
+  `estado_civil` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -493,7 +485,8 @@ CREATE TABLE IF NOT EXISTS `candidatos` (
 --
 
 INSERT INTO `candidatos` (`DNI`, `Apellido`, `Comentario`, `Contacto`, `Domicilio`, `Email`, `Estado`, `Hijos`, `Licencia`, `LugarNac`, `Movilidad`, `Nacimiento`, `Nacionalidad`, `idgenero`, `Nombre`, `NumDireccion`, `Postal`, `idprov`, `RedSocial1`, `RedSocial2`, `estado_civil`) VALUES
-(111111, 'ASOC', 'En busca de empleo como plan de mejora de calidad de vida', '1122045379', 'ARMENIA ', 'RUZO_ASOC@gmail.com', 1, 4, 'Particular', 'Santa Fe', 'Si', '1990-08-29', 'Argentina', 1, 'RUZO', '140', 2417, 0, 'RUZOASOC.facebook.com', 'ASOCRUZO.instagram', 3),
+(111111, 'Rodriguez', '', '1123423234', 'Av.Rivadavia', 'okahito18@gmail.com', 0, 3, 'B', 'Buenos Aires', '', '2021-12-23', 'Argentino', 0, 'Diego', '12', 1232, 0, 'Facebook', 'Instagram', 0),
+(10000003, 'Perez', 'En busca de empleo como plan de mejora de calidad de vida', '1122045379', 'ARMENIA ', 'RUZO_ASOC@gmail.com', 1, 4, 'Particular', 'Santa Fe', 'Si', '1990-08-29', 'Argentina', 1, 'Manuel', '140', 2417, 0, 'RUZOASOC.facebook.com', 'ASOCRUZO.instagram', 3),
 (10000018, 'ARRIETA', 'En busca de empleo como plan de mejora de calidad de vida', '1122046086', 'CALLE 146 ', 'OSORIO_ARRIETA@gmail.com', 1, 4, 'Particular', 'Tucuman', 'Si', '1982-05-01', 'Argentina', 1, 'OSORIO', '665', 2720, 0, 'OSORIOARRIETA.facebook.com', 'ARRIETAOSORIO.instagram', 1),
 (10000033, 'BAGNIOTTI', 'En busca de empleo como plan de mejora de calidad de vida', '1122040345', 'DR JOSE MANUEL GALVEZ ', 'SEGOVIA_BAGNIOTTI@gmail.com', 1, 4, 'Particular', 'Santiago Del Estero', 'Si', '2002-01-01', 'Venezuela', 1, 'SEGOVIA', '1190', 3011, 0, 'SEGOVIABAGNIOTTI.facebook.com', 'BAGNIOTTISEGOVIA.instagram', 1),
 (10000048, 'AZERRAD', 'En busca de empleo como plan de mejora de calidad de vida', '1122041136', 'AV 29 - AV EVA DUARTE DE PERON', 'POTRO_AZERRAD@gmail.com', 1, 4, '', 'Santiago Del Estero', 'No', '1993-09-03', 'Bolivia', 1, 'POTRO', '1715', 3116, 0, 'POTROAZERRAD.facebook.com', 'AZERRADPOTRO.instagram', 1),
@@ -1068,16 +1061,14 @@ INSERT INTO `candidatos` (`DNI`, `Apellido`, `Comentario`, `Contacto`, `Domicili
 -- Estructura de tabla para la tabla `carreras`
 --
 
-DROP TABLE IF EXISTS `carreras`;
-CREATE TABLE IF NOT EXISTS `carreras` (
+CREATE TABLE `carreras` (
   `Id_carrera` int(10) NOT NULL COMMENT 'codigo propio ',
   `tx_carrera` varchar(100) NOT NULL COMMENT 'descripcion sacada de listados oficiales',
   `tipo_Carrera` varchar(30) DEFAULT NULL COMMENT 'descripcion sacada de listados oficiales',
   `nivel` varchar(30) DEFAULT NULL COMMENT 'informacio Propia',
   `cd_nivel` int(2) NOT NULL,
   `accion` varchar(30) NOT NULL,
-  `accionnivel` varchar(30) NOT NULL,
-  PRIMARY KEY (`Id_carrera`)
+  `accionnivel` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabla que complementa la informacion del candidato y lo que necesita el cliente ';
 
 --
@@ -1464,15 +1455,13 @@ INSERT INTO `carreras` (`Id_carrera`, `tx_carrera`, `tipo_Carrera`, `nivel`, `cd
 -- Estructura de tabla para la tabla `cod_postal_prov`
 --
 
-DROP TABLE IF EXISTS `cod_postal_prov`;
-CREATE TABLE IF NOT EXISTS `cod_postal_prov` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cod_postal_prov` (
+  `id` int(11) NOT NULL,
   `id_cp` int(4) NOT NULL,
   `provincia` varchar(100) NOT NULL,
   `idprov` int(3) NOT NULL,
-  `accion` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3782 DEFAULT CHARSET=utf8;
+  `accion` varchar(30) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `cod_postal_prov`
@@ -5270,8 +5259,7 @@ INSERT INTO `cod_postal_prov` (`id`, `id_cp`, `provincia`, `idprov`, `accion`) V
 -- Estructura de tabla para la tabla `empresa`
 --
 
-DROP TABLE IF EXISTS `empresa`;
-CREATE TABLE IF NOT EXISTS `empresa` (
+CREATE TABLE `empresa` (
   `Cuit` bigint(11) NOT NULL,
   `Apellido_Apoderado` varchar(30) DEFAULT NULL,
   `Num_DNI_Apoderado` int(10) DEFAULT NULL,
@@ -5285,9 +5273,7 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   `Email` varchar(100) DEFAULT NULL,
   `Nombre_Apoderado` varchar(30) DEFAULT NULL,
   `Estado` int(2) NOT NULL COMMENT 'con tbl estados',
-  `fc_alta` date NOT NULL,
-  PRIMARY KEY (`Cuit`),
-  KEY `Cd_postal` (`Cd_postal`,`cdProv`,`Estado`)
+  `fc_alta` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -5295,7 +5281,7 @@ CREATE TABLE IF NOT EXISTS `empresa` (
 --
 
 INSERT INTO `empresa` (`Cuit`, `Apellido_Apoderado`, `Num_DNI_Apoderado`, `Razon_Social`, `FC_Inicio_Actividades`, `Domicilio`, `Cd_postal`, `cdProv`, `Rubro`, `Tel_Contacto`, `Email`, `Nombre_Apoderado`, `Estado`, `fc_alta`) VALUES
-(20002222222, 'Perez', 28711212, 'Administracion Enrique Duhau Saac', '2006-10-07', 'Sarmiento 663', 1001, 4, 'Administracion Consorcios', '1122041052', 'AdministracionEnriqueDuhauSaac@FULLCERO.COM', 'Jose', 1, '2020-10-06'),
+(20140076450, 'Perez', 28711212, 'Administracion Enrique Duhau Saac', '2006-10-07', 'Sarmiento 663', 1001, 4, 'Administracion Consorcios', '1122041052', 'AdministracionEnriqueDuhauSaac@FULLCERO.COM', 'Jose', 1, '2020-10-06'),
 (20141596534, '', 0, 'Albergue Transitorio Del Sur', '2002-10-11', 'Florida 253', 1015, 4, 'Hoteleria', '1122041076', 'AlbergueTransitorioDelSur@FULLCERO.COM', '', 1, '2020-11-06'),
 (20143116618, '', 0, 'Albergue Transitorio Los Pinos', '1998-10-15', 'Sarmiento 725 ', 1029, 4, 'Hoteleria', '1122041098', 'AlbergueTransitorioLosPinos@FULLCERO.COM', '', 1, '2020-10-06'),
 (20144636692, '', 0, 'Amoblamientos Mats', '1994-10-19', 'Av R S Peña 720', 1043, 4, 'Muebles', '1122041110', 'AmoblamientosMats@FULLCERO.COM', '', 1, '2021-10-06'),
@@ -5311,9 +5297,9 @@ INSERT INTO `empresa` (`Cuit`, `Apellido_Apoderado`, `Num_DNI_Apoderado`, `Razon
 (27145396734, '', 0, 'Articulos HCD Publicidad', '1992-10-21', 'Sarmiento 559', 1048, 4, 'Publidades', '1122041114', 'ArticulosHCDPublicidad@Telecentro.COM', '', 1, '2020-09-08'),
 (27146916818, '', 0, 'Articulos DJr Publicidad', '1988-10-10', 'TGral J Peron 683', 1062, 4, 'Publidades', '1122041125', 'ArticulosDJrPublicidad@Telecentro.COM', '', 1, '2020-10-06'),
 (33141216513, '', 0, 'Albergue Transitorio Conociendonos', '2003-10-11', 'TGral J Peron 683', 1008, 4, 'Hoteleria', '1122041071', 'AlbergueTransitorioConociendonos@FULLCERO.COM', '', 1, '2020-10-06'),
+(33142736597, 'Carreras', 28711215, 'Albergue Transitorio Los Liros', '1999-10-15', 'Sarmiento 725 ', 1022, 4, 'Hoteleria', '1122041089', 'AlbergueTransitorioLosLiros@FULLCERO.COM', 'Juan', 1, '2020-10-06'),
 (33144256671, 'Lobazano', 28711217, 'American Vart', '1995-10-19', 'Av R S Peña 720', 1036, 4, 'Hoteleria', '1122041104', 'AmericanVart@FULLCERO.COM', 'Ezequiel', 1, '2020-11-06'),
-(33145776755, 'Belleza', 28709417, 'Articulos Hmr Publicidad', '1991-10-08', 'Florida 165 ', 1050, 4, 'Publidades', '1122041118', 'ArticulosHmrPublicidad@Telecentro.COM', 'Hernan', 1, '2020-10-06'),
-(133189859071, 'Carreras', 28711215, 'Albergue Transitorio Los Liros', '1999-10-15', 'Sarmiento 725 ', 1022, 4, 'Hoteleria', '1122041089', 'AlbergueTransitorioLosLiros@FULLCERO.COM', 'Juan', 1, '2020-10-06');
+(33145776755, 'Belleza', 28709417, 'Articulos Hmr Publicidad', '1991-10-08', 'Florida 165 ', 1050, 4, 'Publidades', '1122041118', 'ArticulosHmrPublicidad@Telecentro.COM', 'Hernan', 1, '2020-10-06');
 
 -- --------------------------------------------------------
 
@@ -5321,11 +5307,9 @@ INSERT INTO `empresa` (`Cuit`, `Apellido_Apoderado`, `Num_DNI_Apoderado`, `Razon
 -- Estructura de tabla para la tabla `estados`
 --
 
-DROP TABLE IF EXISTS `estados`;
-CREATE TABLE IF NOT EXISTS `estados` (
+CREATE TABLE `estados` (
   `idestado` int(2) NOT NULL,
-  `txestado` varchar(15) NOT NULL,
-  PRIMARY KEY (`idestado`)
+  `txestado` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -5346,12 +5330,10 @@ INSERT INTO `estados` (`idestado`, `txestado`) VALUES
 -- Estructura de tabla para la tabla `estado_civil`
 --
 
-DROP TABLE IF EXISTS `estado_civil`;
-CREATE TABLE IF NOT EXISTS `estado_civil` (
+CREATE TABLE `estado_civil` (
   `codestadocivil` varchar(2) NOT NULL,
   `txestadocivil` varchar(20) NOT NULL,
-  `accion` varchar(30) NOT NULL COMMENT 'es para facilitar coinidencias',
-  PRIMARY KEY (`codestadocivil`)
+  `accion` varchar(30) NOT NULL COMMENT 'es para facilitar coinidencias'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -5372,504 +5354,503 @@ INSERT INTO `estado_civil` (`codestadocivil`, `txestadocivil`, `accion`) VALUES
 -- Estructura de tabla para la tabla `estudios`
 --
 
-DROP TABLE IF EXISTS `estudios`;
-CREATE TABLE IF NOT EXISTS `estudios` (
+CREATE TABLE `estudios` (
   `ID_Estudio` int(10) NOT NULL,
   `DNI` int(10) NOT NULL,
-  `id_Carrera` int(100) NOT NULL,
+  `id_Carrera` int(10) NOT NULL,
   `Institucion` varchar(30) NOT NULL,
   `Localidad` varchar(100) DEFAULT NULL,
   `Provincia` varchar(30) NOT NULL,
   `Fc_inicio` date DEFAULT NULL,
   `Fc_fin` date DEFAULT NULL,
-  PRIMARY KEY (`ID_Estudio`),
-  KEY `DNI` (`DNI`,`id_Carrera`)
+  `Pais` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='complementa tabla candidato';
 
 --
 -- Volcado de datos para la tabla `estudios`
 --
 
-INSERT INTO `estudios` (`ID_Estudio`, `DNI`, `id_Carrera`, `Institucion`, `Localidad`, `Provincia`, `Fc_inicio`, `Fc_fin`) VALUES
-(1, 14007645, 335, 'CEIP Nro: 1', '', 'Provincia de Buenos Aires', '2014-10-07', '2021-10-06'),
-(2, 14045647, 335, 'CEIP Nro: 2', '', 'Provincia de Catamarca', '2014-10-07', '2021-10-07'),
-(3, 28220393, 335, 'CEIP Nro: 3', '', 'Provincia del Chaco', '2014-10-07', '2021-10-07'),
-(4, 28790423, 335, 'CEIP Nro: 4', '', 'Provincia del Chubut', '2014-10-07', '2021-10-07'),
-(5, 10000003, 335, 'CEIP Nro: 5', '', 'Provincia de Cordoba', '2014-10-07', '2021-10-07'),
-(6, 29930483, 335, 'CEIP Nro: 6', '', 'Provincia de Corrientes', '2014-10-07', '2021-10-07'),
-(7, 30500513, 335, 'CEIP Nro: 7', '', 'Provincia de Entre Rios', '2014-10-07', '2021-10-07'),
-(8, 31070543, 335, 'CEIP Nro: 8', '', 'Provincia de Formosa', '2014-10-07', '2021-10-07'),
-(9, 31640573, 335, 'CEIP Nro: 9', '', 'Provincia de Jujuy', '2014-10-07', '2021-10-07'),
-(10, 32210603, 335, 'CEIP Nro: 10', '', 'Provincia de La Pampa', '2014-10-07', '2021-10-07'),
-(11, 32780633, 335, 'CEIP Nro: 11', '', 'Provincia de La Rioja', '2014-10-07', '2021-10-07'),
-(12, 33350663, 335, 'CEIP Nro: 12', '', 'Provincia de Mendoza', '2014-10-07', '2021-10-07'),
-(13, 10000018, 335, 'CEIP Nro: 13', '', 'Provincia de Misiones', '2014-10-07', '2021-10-07'),
-(14, 34490723, 335, 'CEIP Nro: 14', '', 'Provincia del Neuquen', '2014-10-07', '2021-10-07'),
-(15, 35060753, 335, 'CEIP Nro: 15', '', 'Provincia de Rio Negro', '2014-10-07', '2021-10-07'),
-(16, 35630783, 335, 'CEIP Nro: 16', '', 'Provincia de Salta', '2014-10-07', '2021-10-07'),
-(17, 36200813, 335, 'CEIP Nro: 17', '', 'Provincia de San Juan', '2014-10-07', '2021-10-07'),
-(18, 36770843, 335, 'CEIP Nro: 18', '', 'Provincia de San Luis', '2014-10-07', '2021-10-07'),
-(19, 37340873, 335, 'CEIP Nro: 19', '', 'Provincia de Santa Cruz', '2014-10-07', '2021-10-07'),
-(20, 37910903, 335, 'CEIP Nro: 20', '', 'Provincia de Santa Fe', '2014-10-07', '2021-10-07'),
-(21, 10000033, 335, 'CEIP Nro: 21', '', 'Provincia de Santiago del Este', '2014-10-07', '2021-10-07'),
-(22, 39050963, 335, 'CEIP Nro: 22', '', 'Provincia de Tierra del Fuego,', '2014-10-07', '2021-10-07'),
-(23, 39620993, 335, 'CEIP Nro: 23', '', 'Provincia de Tucuman', '2014-10-07', '2021-10-07'),
-(24, 40191023, 335, 'CEIP Nro: 24', '', 'Provincia de Buenos Aires', '2014-10-07', '2021-10-07'),
-(25, 40761053, 335, 'CEIP Nro: 25', '', 'Provincia de Catamarca', '2014-10-07', '2021-10-07'),
-(26, 41331083, 335, 'CEIP Nro: 26', '', 'Provincia del Chaco', '2014-10-07', '2021-10-07'),
-(27, 41901113, 335, 'CEIP Nro: 27', '', 'Provincia del Chubut', '2014-10-07', '2021-10-07'),
-(28, 42471143, 335, 'CEIP Nro: 28', '', 'Provincia de Cordoba', '2014-10-07', '2021-10-07'),
-(29, 10000048, 335, 'CEIP Nro: 29', '', 'Provincia de Corrientes', '2014-10-07', '2021-10-07'),
-(30, 43611203, 335, 'CEIP Nro: 30', '', 'Provincia de Entre Rios', '2014-10-07', '2021-10-07'),
-(31, 44181233, 335, 'CEIP Nro: 31', '', 'Provincia de Formosa', '2014-10-07', '2021-10-07'),
-(32, 44751263, 335, 'CEIP Nro: 32', '', 'Provincia de Jujuy', '2014-10-07', '2021-10-07'),
-(33, 45321293, 335, 'CEIP Nro: 33', '', 'Provincia de La Pampa', '2014-10-07', '2021-10-07'),
-(34, 10000060, 335, 'CEIP Nro: 34', '', 'Provincia de La Rioja', '2014-10-07', '2021-10-07'),
-(35, 33000012, 335, 'CEIP Nro: 35', '', 'Provincia de Mendoza', '2014-10-07', '2021-10-07'),
-(36, 33000027, 335, 'CEIP Nro: 36', '', 'Provincia de Misiones', '2014-10-07', '2021-10-07'),
-(37, 33000042, 335, 'CEIP Nro: 37', '', 'Provincia del Neuquen', '2014-10-07', '2021-10-07'),
-(38, 33000057, 335, 'CEIP Nro: 38', '', 'Provincia de Rio Negro', '2014-10-07', '2021-10-07'),
-(39, 33000072, 335, 'CEIP Nro: 39', '', 'Provincia de Salta', '2014-10-07', '2021-10-07'),
-(40, 33000087, 335, 'CEIP Nro: 40', '', 'Provincia de San Juan', '2014-10-07', '2021-10-07'),
-(41, 33000102, 335, 'CEIP Nro: 41', '', 'Provincia de San Luis', '2014-10-07', '2021-10-07'),
-(42, 33000117, 335, 'CEIP Nro: 42', '', 'Provincia de Santa Cruz', '2014-10-07', '2021-10-07'),
-(43, 33000132, 335, 'CEIP Nro: 43', '', 'Provincia de Santa Fe', '2014-10-07', '2021-10-07'),
-(44, 33000147, 335, 'CEIP Nro: 44', '', 'Provincia de Santiago del Este', '2014-10-07', '2021-10-07'),
-(45, 33000162, 335, 'CEIP Nro: 45', '', 'Provincia de Tierra del Fuego,', '2014-10-07', '2021-10-07'),
-(46, 33000177, 335, 'CEIP Nro: 46', '', 'Provincia de Tucuman', '2014-10-07', '2021-10-07'),
-(47, 33000192, 335, 'CEIP Nro: 47', '', 'Provincia de Buenos Aires', '2014-10-07', '2021-10-07'),
-(48, 33000207, 335, 'CEIP Nro: 48', '', 'Provincia de Catamarca', '2014-10-07', '2021-10-07'),
-(49, 33000222, 335, 'CEIP Nro: 49', '', 'Provincia del Chaco', '2014-10-07', '2021-10-07'),
-(50, 33000237, 335, 'CEIP Nro: 50', '', 'Provincia del Chubut', '2014-10-07', '2021-10-07'),
-(51, 33000252, 335, 'CEIP Nro: 51', '', 'Provincia de Cordoba', '2014-10-07', '2021-10-07'),
-(52, 33000267, 335, 'CEIP Nro: 52', '', 'Provincia de Corrientes', '2014-10-07', '2021-10-07'),
-(53, 33000282, 335, 'CEIP Nro: 53', '', 'Provincia de Entre Rios', '2014-10-07', '2021-10-07'),
-(54, 33000297, 335, 'CEIP Nro: 54', '', 'Provincia de Formosa', '2014-10-07', '2021-10-07'),
-(55, 33000312, 335, 'CEIP Nro: 55', '', 'Provincia de Jujuy', '2014-10-07', '2021-10-07'),
-(56, 33000327, 335, 'CEIP Nro: 56', '', 'Provincia de La Pampa', '2014-10-07', '2021-10-07'),
-(57, 33000342, 335, 'CEIP Nro: 57', '', 'Provincia de La Rioja', '2014-10-07', '2021-10-07'),
-(58, 33000357, 335, 'CEIP Nro: 58', '', 'Provincia de Mendoza', '2014-10-07', '2021-10-07'),
-(59, 33000372, 335, 'CEIP Nro: 59', '', 'Provincia de Misiones', '2014-10-07', '2021-10-07'),
-(60, 33000387, 335, 'CEIP Nro: 60', '', 'Provincia del Neuquen', '2014-10-07', '2021-10-07'),
-(61, 33000402, 335, 'CEIP Nro: 61', '', 'Provincia de Rio Negro', '2014-10-07', '2021-10-07'),
-(62, 33000417, 335, 'CEIP Nro: 62', '', 'Provincia de Salta', '2014-10-07', '2021-10-07'),
-(63, 33000432, 335, 'CEIP Nro: 63', '', 'Provincia de San Juan', '2014-10-07', '2021-10-07'),
-(64, 33000447, 335, 'CEIP Nro: 64', '', 'Provincia de San Luis', '2014-10-07', '2021-10-07'),
-(65, 33000462, 335, 'CEIP Nro: 65', '', 'Provincia de Santa Cruz', '2014-10-07', '2021-10-07'),
-(66, 33000477, 335, 'CEIP Nro: 66', '', 'Provincia de Santa Fe', '2014-10-07', '2021-10-07'),
-(67, 33000492, 335, 'CEIP Nro: 67', '', 'Provincia de Santiago del Este', '2014-10-07', '2021-10-07'),
-(68, 33000507, 335, 'CEIP Nro: 68', '', 'Provincia de Tierra del Fuego,', '2014-10-07', '2021-10-07'),
-(69, 33000522, 335, 'CEIP Nro: 69', '', 'Provincia de Tucuman', '2014-10-07', '2021-10-07'),
-(70, 33000537, 335, 'CEIP Nro: 70', '', 'Provincia de Buenos Aires', '2014-10-07', '2021-10-07'),
-(71, 33000552, 335, 'CEIP Nro: 71', '', 'Provincia de Catamarca', '2014-10-07', '2021-10-07'),
-(72, 33000567, 335, 'CEIP Nro: 72', '', 'Provincia del Chaco', '2014-10-07', '2021-10-07'),
-(73, 33000582, 335, 'CEIP Nro: 73', '', 'Provincia del Chubut', '2014-10-07', '2021-10-07'),
-(74, 33000597, 335, 'CEIP Nro: 74', '', 'Provincia de Cordoba', '2014-10-07', '2021-10-07'),
-(75, 33000612, 335, 'CEIP Nro: 75', '', 'Provincia de Corrientes', '2014-10-07', '2021-10-07'),
-(76, 33000627, 335, 'CEIP Nro: 76', '', 'Provincia de Entre Rios', '2014-10-07', '2021-10-07'),
-(77, 33000642, 335, 'CEIP Nro: 77', '', 'Provincia de Formosa', '2014-10-07', '2021-10-07'),
-(78, 33000657, 335, 'CEIP Nro: 78', '', 'Provincia de Jujuy', '2014-10-07', '2021-10-07'),
-(79, 33000672, 335, 'CEIP Nro: 79', '', 'Provincia de La Pampa', '2014-10-07', '2021-10-07'),
-(80, 33000687, 335, 'CEIP Nro: 80', '', 'Provincia de La Rioja', '2014-10-07', '2021-10-07'),
-(81, 33000702, 335, 'CEIP Nro: 81', '', 'Provincia de Mendoza', '2014-10-07', '2021-10-07'),
-(82, 33000717, 335, 'CEIP Nro: 82', '', 'Provincia de Misiones', '2014-10-07', '2021-10-07'),
-(83, 33000732, 335, 'CEIP Nro: 83', '', 'Provincia del Neuquen', '2014-10-07', '2021-10-07'),
-(84, 33000747, 335, 'CEIP Nro: 84', '', 'Provincia de Rio Negro', '2014-10-07', '2021-10-07'),
-(85, 33000762, 335, 'CEIP Nro: 85', '', 'Provincia de Salta', '2014-10-07', '2021-10-07'),
-(86, 33000777, 335, 'CEIP Nro: 86', '', 'Provincia de San Juan', '2014-10-07', '2021-10-07'),
-(87, 33000792, 335, 'CEIP Nro: 87', '', 'Provincia de San Luis', '2014-10-07', '2021-10-07'),
-(88, 33000807, 335, 'CEIP Nro: 88', '', 'Provincia de Santa Cruz', '2014-10-07', '2021-10-07'),
-(89, 33000822, 335, 'CEIP Nro: 89', '', 'Provincia de Santa Fe', '2014-10-07', '2021-10-07'),
-(90, 33000837, 335, 'CEIP Nro: 90', '', 'Provincia de Santiago del Este', '2014-10-07', '2021-10-07'),
-(91, 33000852, 335, 'CEIP Nro: 91', '', 'Provincia de Tierra del Fuego,', '2014-10-07', '2021-10-07'),
-(92, 33000867, 335, 'CEIP Nro: 92', '', 'Provincia de Tucuman', '2014-10-07', '2021-10-07'),
-(93, 33000882, 335, 'CEIP Nro: 93', '', 'Provincia de Buenos Aires', '2014-10-07', '2021-10-07'),
-(94, 33000897, 335, 'CEIP Nro: 94', '', 'Provincia de Catamarca', '2014-10-07', '2021-10-07'),
-(95, 33000912, 335, 'CEIP Nro: 95', '', 'Provincia del Chaco', '2014-10-07', '2021-10-07'),
-(96, 33000927, 335, 'CEIP Nro: 96', '', 'Provincia del Chubut', '2014-10-07', '2021-10-07'),
-(97, 33000942, 335, 'CEIP Nro: 97', '', 'Provincia de Cordoba', '2014-10-07', '2021-10-07'),
-(98, 33000957, 335, 'CEIP Nro: 98', '', 'Provincia de Corrientes', '2014-10-07', '2021-10-07'),
-(99, 33000972, 335, 'CEIP Nro: 99', '', 'Provincia de Entre Rios', '2014-10-07', '2021-10-07'),
-(100, 33000987, 137, 'UN Nro: 1', '', 'Provincia de Formosa', '2016-10-07', '2021-10-07'),
-(101, 33001002, 138, 'Upriv Nro: 2', '', 'Provincia de Jujuy', '2016-10-07', '2021-10-07'),
-(102, 33001017, 139, 'UN Nro: 3', '', 'Provincia de La Pampa', '2016-10-07', '2021-10-07'),
-(103, 33001032, 140, 'Upriv Nro: 4', '', 'Provincia de La Rioja', '2016-10-07', '2021-10-07'),
-(104, 33001047, 141, 'UN Nro: 5', '', 'Provincia de Mendoza', '2016-10-07', '2021-10-07'),
-(105, 33001062, 142, 'Upriv Nro: 6', '', 'Provincia de Misiones', '2016-10-07', '2021-10-07'),
-(106, 33001077, 143, 'UN Nro: 7', '', 'Provincia del Neuquen', '2016-10-07', '2021-10-07'),
-(107, 33001092, 144, 'Upriv Nro: 8', '', 'Provincia de Rio Negro', '2016-10-07', '2021-10-07'),
-(108, 33001107, 145, 'UN Nro: 9', '', 'Provincia de Salta', '2016-10-07', '2021-10-07'),
-(109, 33001122, 146, 'Upriv Nro: 10', '', 'Provincia de San Juan', '2016-10-07', '2021-10-07'),
-(110, 33001137, 147, 'UN Nro: 11', '', 'Provincia de San Luis', '2016-10-07', '2021-10-07'),
-(111, 33001152, 148, 'Upriv Nro: 12', '', 'Provincia de Santa Cruz', '2016-10-07', '2021-10-07'),
-(112, 33001167, 149, 'UN Nro: 13', '', 'Provincia de Santa Fe', '2016-10-07', '2021-10-07'),
-(113, 33001182, 150, 'Upriv Nro: 14', '', 'Provincia de Santiago del Este', '2016-10-07', '2021-10-07'),
-(114, 33001197, 151, 'UN Nro: 15', '', 'Provincia de Tierra del Fuego,', '2016-10-07', '2021-10-07'),
-(115, 33001212, 152, 'Upriv Nro: 16', '', 'Provincia de Tucuman', '2016-10-07', '2021-10-07'),
-(116, 33001227, 153, 'UN Nro: 17', '', 'Provincia de Buenos Aires', '2016-10-07', '2021-10-07'),
-(117, 33001242, 154, 'Upriv Nro: 18', '', 'Provincia de Catamarca', '2016-10-07', '2021-10-07'),
-(118, 33001257, 155, 'UN Nro: 19', '', 'Provincia del Chaco', '2016-10-07', '2021-10-07'),
-(119, 33001272, 156, 'Upriv Nro: 20', '', 'Provincia del Chubut', '2016-10-07', '2021-10-07'),
-(120, 33001287, 157, 'UN Nro: 21', '', 'Provincia de Cordoba', '2016-10-07', '2021-10-07'),
-(121, 33001302, 158, 'Upriv Nro: 22', '', 'Provincia de Corrientes', '2016-10-07', '2021-10-07'),
-(122, 33001317, 159, 'UN Nro: 23', '', 'Provincia de Entre Rios', '2016-10-07', '2021-10-07'),
-(123, 33001332, 160, 'Upriv Nro: 24', '', 'Provincia de Formosa', '2016-10-07', '2021-10-07'),
-(124, 33001347, 161, 'UN Nro: 25', '', 'Provincia de Jujuy', '2016-10-07', '2021-10-07'),
-(125, 33001362, 162, 'Upriv Nro: 26', '', 'Provincia de La Pampa', '2016-10-07', '2021-10-07'),
-(126, 33001377, 163, 'UN Nro: 27', '', 'Provincia de La Rioja', '2016-10-07', '2021-10-07'),
-(127, 33001392, 164, 'Upriv Nro: 28', '', 'Provincia de Mendoza', '2016-10-07', '2021-10-07'),
-(128, 33001407, 165, 'UN Nro: 29', '', 'Provincia de Misiones', '2016-10-07', '2021-10-07'),
-(129, 33001422, 166, 'Upriv Nro: 30', '', 'Provincia del Neuquen', '2016-10-07', '2021-10-07'),
-(130, 33001437, 167, 'UN Nro: 31', '', 'Provincia de Rio Negro', '2016-10-07', '2021-10-07'),
-(131, 33001452, 168, 'Upriv Nro: 32', '', 'Provincia de Salta', '2016-10-07', '2021-10-07'),
-(132, 33001467, 169, 'UN Nro: 33', '', 'Provincia de San Juan', '2016-10-07', '2021-10-07'),
-(133, 33001482, 170, 'Upriv Nro: 34', '', 'Provincia de San Luis', '2016-10-07', '2021-10-07'),
-(134, 33001497, 171, 'UN Nro: 35', '', 'Provincia de Santa Cruz', '2016-10-07', '2021-10-07'),
-(135, 33001512, 172, 'Upriv Nro: 36', '', 'Provincia de Santa Fe', '2016-10-07', '2021-10-07'),
-(136, 33001527, 173, 'UN Nro: 37', '', 'Provincia de Santiago del Este', '2016-10-07', '2021-10-07'),
-(137, 33001542, 174, 'Upriv Nro: 38', '', 'Provincia de Tierra del Fuego,', '2016-10-07', '2021-10-07'),
-(138, 33001557, 175, 'UN Nro: 39', '', 'Provincia de Tucuman', '2016-10-07', '2021-10-07'),
-(139, 33001572, 176, 'Upriv Nro: 40', '', 'Provincia de Buenos Aires', '2016-10-07', '2021-10-07'),
-(140, 33001587, 177, 'UN Nro: 41', '', 'Provincia de Catamarca', '2016-10-07', '2021-10-07'),
-(141, 33001602, 178, 'Upriv Nro: 42', '', 'Provincia del Chaco', '2016-10-07', '2021-10-07'),
-(142, 33001617, 179, 'UN Nro: 43', '', 'Provincia del Chubut', '2016-10-07', '2021-10-07'),
-(143, 33001632, 180, 'Upriv Nro: 44', '', 'Provincia de Cordoba', '2016-10-07', '2021-10-07'),
-(144, 33001647, 181, 'UN Nro: 45', '', 'Provincia de Corrientes', '2016-10-07', '2021-10-07'),
-(145, 33001662, 182, 'Upriv Nro: 46', '', 'Provincia de Entre Rios', '2016-10-07', '2021-10-07'),
-(146, 33001677, 183, 'UN Nro: 47', '', 'Provincia de Formosa', '2016-10-07', '2021-10-07'),
-(147, 33001692, 184, 'Upriv Nro: 48', '', 'Provincia de Jujuy', '2016-10-07', '2021-10-07'),
-(148, 33001707, 185, 'UN Nro: 49', '', 'Provincia de La Pampa', '2016-10-07', '2021-10-07'),
-(149, 33001722, 186, 'Upriv Nro: 50', '', 'Provincia de La Rioja', '2016-10-07', '2021-10-07'),
-(150, 33001737, 187, 'UN Nro: 51', '', 'Provincia de Mendoza', '2016-10-07', '2021-10-07'),
-(151, 33001752, 188, 'Upriv Nro: 52', '', 'Provincia de Misiones', '2016-10-07', '2021-10-07'),
-(152, 33001767, 189, 'UN Nro: 53', '', 'Provincia del Neuquen', '2016-10-07', '2021-10-07'),
-(153, 33001782, 190, 'Upriv Nro: 54', '', 'Provincia de Rio Negro', '2016-10-07', '2021-10-07'),
-(154, 33001797, 191, 'UN Nro: 55', '', 'Provincia de Salta', '2016-10-07', '2021-10-07'),
-(155, 33001812, 192, 'Upriv Nro: 56', '', 'Provincia de San Juan', '2016-10-07', '2021-10-07'),
-(156, 33001827, 193, 'UN Nro: 57', '', 'Provincia de San Luis', '2016-10-07', '2021-10-07'),
-(157, 33001842, 194, 'Upriv Nro: 58', '', 'Provincia de Santa Cruz', '2016-10-07', '2021-10-07'),
-(158, 33001857, 195, 'UN Nro: 59', '', 'Provincia de Santa Fe', '2016-10-07', '2021-10-07'),
-(159, 33001872, 196, 'Upriv Nro: 60', '', 'Provincia de Santiago del Este', '2016-10-07', '2021-10-07'),
-(160, 33001887, 197, 'UN Nro: 61', '', 'Provincia de Tierra del Fuego,', '2016-10-07', '2021-10-07'),
-(161, 33001902, 198, 'Upriv Nro: 62', '', 'Provincia de Tucuman', '2016-10-07', '2021-10-07'),
-(162, 33001917, 199, 'UN Nro: 63', '', 'Provincia de Buenos Aires', '2016-10-07', '2021-10-07'),
-(163, 33001932, 200, 'Upriv Nro: 64', '', 'Provincia de Catamarca', '2016-10-07', '2021-10-07'),
-(164, 33001947, 201, 'UN Nro: 65', '', 'Provincia del Chaco', '2016-10-07', '2021-10-07'),
-(165, 33001962, 202, 'Upriv Nro: 66', '', 'Provincia del Chubut', '2016-10-07', '2021-10-07'),
-(166, 33001977, 203, 'UN Nro: 67', '', 'Provincia de Cordoba', '2016-10-07', '2021-10-07'),
-(167, 33001992, 204, 'Upriv Nro: 68', '', 'Provincia de Corrientes', '2016-10-07', '2021-10-07'),
-(168, 33002007, 205, 'UN Nro: 69', '', 'Provincia de Entre Rios', '2016-10-07', '2021-10-07'),
-(169, 33002022, 206, 'Upriv Nro: 70', '', 'Provincia de Formosa', '2016-10-07', '2021-10-07'),
-(170, 33002037, 207, 'UN Nro: 71', '', 'Provincia de Jujuy', '2016-10-07', '2021-10-07'),
-(171, 33002052, 208, 'Upriv Nro: 72', '', 'Provincia de La Pampa', '2016-10-07', '2021-10-07'),
-(172, 33002067, 209, 'UN Nro: 73', '', 'Provincia de La Rioja', '2016-10-07', '2021-10-07'),
-(173, 33002082, 210, 'Upriv Nro: 74', '', 'Provincia de Mendoza', '2016-10-07', '2021-10-07'),
-(174, 33002097, 211, 'UN Nro: 75', '', 'Provincia de Misiones', '2016-10-07', '2021-10-07'),
-(175, 33002112, 212, 'Upriv Nro: 76', '', 'Provincia del Neuquen', '2016-10-07', '2021-10-07'),
-(176, 33002127, 213, 'UN Nro: 77', '', 'Provincia de Rio Negro', '2016-10-07', '2021-10-07'),
-(177, 33002142, 214, 'Upriv Nro: 78', '', 'Provincia de Salta', '2016-10-07', '2021-10-07'),
-(178, 33002157, 215, 'UN Nro: 79', '', 'Provincia de San Juan', '2016-10-07', '2021-10-07'),
-(179, 33002172, 216, 'Upriv Nro: 80', '', 'Provincia de San Luis', '2016-10-07', '2021-10-07'),
-(180, 33002187, 217, 'UN Nro: 81', '', 'Provincia de Santa Cruz', '2016-10-07', '2021-10-07'),
-(181, 33002202, 218, 'Upriv Nro: 82', '', 'Provincia de Santa Fe', '2016-10-07', '2021-10-07'),
-(182, 33002217, 219, 'UN Nro: 83', '', 'Provincia de Santiago del Este', '2016-10-07', '2021-10-07'),
-(183, 33002232, 220, 'Upriv Nro: 84', '', 'Provincia de Tierra del Fuego,', '2016-10-07', '2021-10-07'),
-(184, 33002247, 221, 'UN Nro: 85', '', 'Provincia de Tucuman', '2016-10-07', '2021-10-07'),
-(185, 33002262, 222, 'Upriv Nro: 86', '', 'Provincia de Buenos Aires', '2016-10-07', '2021-10-07'),
-(186, 33002277, 223, 'UN Nro: 87', '', 'Provincia de Catamarca', '2016-10-07', '2021-10-07'),
-(187, 33002292, 224, 'Upriv Nro: 88', '', 'Provincia del Chaco', '2016-10-07', '2021-10-07'),
-(188, 33002307, 225, 'UN Nro: 89', '', 'Provincia del Chubut', '2016-10-07', '2021-10-07'),
-(189, 33002322, 226, 'Upriv Nro: 90', '', 'Provincia de Cordoba', '2016-10-07', '2021-10-07'),
-(190, 33002337, 227, 'UN Nro: 91', '', 'Provincia de Corrientes', '2016-10-07', '2021-10-07'),
-(191, 33002352, 228, 'Upriv Nro: 92', '', 'Provincia de Entre Rios', '2016-10-07', '2021-10-07'),
-(192, 33002367, 229, 'UN Nro: 93', '', 'Provincia de Formosa', '2016-10-07', '2021-10-07'),
-(193, 33002382, 230, 'Upriv Nro: 94', '', 'Provincia de Jujuy', '2016-10-07', '2021-10-07'),
-(194, 33002397, 231, 'UN Nro: 95', '', 'Provincia de La Pampa', '2016-10-07', '2021-10-07'),
-(195, 33002412, 232, 'Upriv Nro: 96', '', 'Provincia de La Rioja', '2016-10-07', '2021-10-07'),
-(196, 33002427, 233, 'UN Nro: 97', '', 'Provincia de Mendoza', '2016-10-07', '2021-10-07'),
-(197, 33002442, 234, 'Upriv Nro: 98', '', 'Provincia de Misiones', '2016-10-07', '2021-10-07'),
-(198, 33002457, 235, 'UN Nro: 99', '', 'Provincia del Neuquen', '2016-10-07', '2021-10-07'),
-(199, 33002472, 236, 'Upriv Nro: 1', '', 'Provincia de Rio Negro', '2016-10-07', '2021-10-07'),
-(200, 33002487, 237, 'UN Nro: 2', '', 'Provincia de Salta', '2016-10-07', '2021-10-07'),
-(201, 33002502, 238, 'Upriv Nro: 3', '', 'Provincia de San Juan', '2016-10-07', '2021-10-07'),
-(202, 33002517, 239, 'UN Nro: 4', '', 'Provincia de San Luis', '2016-10-07', '2021-10-07'),
-(203, 33002532, 240, 'Upriv Nro: 5', '', 'Provincia de Santa Cruz', '2016-10-07', '2021-10-07'),
-(204, 33002547, 241, 'UN Nro: 6', '', 'Provincia de Santa Fe', '2016-10-07', '2021-10-07'),
-(205, 33002562, 242, 'Upriv Nro: 7', '', 'Provincia de Santiago del Este', '2016-10-07', '2021-10-07'),
-(206, 33002577, 243, 'UN Nro: 8', '', 'Provincia de Tierra del Fuego,', '2016-10-07', '2021-10-07'),
-(207, 33002592, 244, 'Upriv Nro: 9', '', 'Provincia de Tucuman', '2016-10-07', '2021-10-07'),
-(208, 33002607, 245, 'UN Nro: 10', '', 'Provincia de Buenos Aires', '2016-10-07', '2021-10-07'),
-(209, 33002622, 246, 'Upriv Nro: 11', '', 'Provincia de Catamarca', '2016-10-07', '2021-10-07'),
-(210, 33002637, 247, 'UN Nro: 12', '', 'Provincia del Chaco', '2016-10-07', '2021-10-07'),
-(211, 33002652, 248, 'Upriv Nro: 13', '', 'Provincia del Chubut', '2016-10-07', '2021-10-07'),
-(212, 33002667, 249, 'UN Nro: 14', '', 'Provincia de Cordoba', '2016-10-07', '2021-10-07'),
-(213, 33002682, 250, 'Upriv Nro: 15', '', 'Provincia de Corrientes', '2016-10-07', '2021-10-07'),
-(214, 33002697, 251, 'UN Nro: 16', '', 'Provincia de Entre Rios', '2016-10-07', '2021-10-07'),
-(215, 33002712, 252, 'Upriv Nro: 17', '', 'Provincia de Formosa', '2016-10-07', '2021-10-07'),
-(216, 33002727, 253, 'UN Nro: 18', '', 'Provincia de Jujuy', '2016-10-07', '2021-10-07'),
-(217, 33002742, 254, 'Upriv Nro: 19', '', 'Provincia de La Pampa', '2016-10-07', '2021-10-07'),
-(218, 33002757, 255, 'UN Nro: 20', '', 'Provincia de La Rioja', '2016-10-07', '2021-10-07'),
-(219, 33002772, 256, 'Upriv Nro: 21', '', 'Provincia de Mendoza', '2016-10-07', '2021-10-07'),
-(220, 33002787, 257, 'UN Nro: 22', '', 'Provincia de Misiones', '2016-10-07', '2021-10-07'),
-(221, 33002802, 258, 'Upriv Nro: 23', '', 'Provincia del Neuquen', '2016-10-07', '2021-10-07'),
-(222, 33002817, 259, 'UN Nro: 24', '', 'Provincia de Rio Negro', '2016-10-07', '2021-10-07'),
-(223, 33002832, 260, 'Upriv Nro: 25', '', 'Provincia de Salta', '2016-10-07', '2021-10-07'),
-(224, 33002847, 261, 'UN Nro: 26', '', 'Provincia de San Juan', '2016-10-07', '2021-10-07'),
-(225, 33002862, 262, 'Upriv Nro: 27', '', 'Provincia de San Luis', '2016-10-07', '2021-10-07'),
-(226, 33002877, 263, 'UN Nro: 28', '', 'Provincia de Santa Cruz', '2016-10-07', '2021-10-07'),
-(227, 33002892, 264, 'Upriv Nro: 29', '', 'Provincia de Santa Fe', '2016-10-07', '2021-10-07'),
-(228, 33002907, 265, 'UN Nro: 30', '', 'Provincia de Santiago del Este', '2016-10-07', '2021-10-07'),
-(229, 33002922, 266, 'Upriv Nro: 31', '', 'Provincia de Tierra del Fuego,', '2016-10-07', '2021-10-07'),
-(230, 33002937, 267, 'UN Nro: 32', '', 'Provincia de Tucuman', '2016-10-07', '2021-10-07'),
-(231, 33002952, 268, 'Upriv Nro: 33', '', 'Provincia de Buenos Aires', '2016-10-07', '2021-10-07'),
-(232, 33002967, 269, 'UN Nro: 34', '', 'Provincia de Catamarca', '2016-10-07', '2021-10-07'),
-(233, 33002982, 270, 'Upriv Nro: 35', '', 'Provincia del Chaco', '2016-10-07', '2021-10-07'),
-(234, 33002997, 271, 'UN Nro: 36', '', 'Provincia del Chubut', '2016-10-07', '2021-10-07'),
-(235, 33003012, 272, 'Upriv Nro: 37', '', 'Provincia de Cordoba', '2016-10-07', '2021-10-07'),
-(236, 33003027, 273, 'UN Nro: 38', '', 'Provincia de Corrientes', '2016-10-07', '2021-10-07'),
-(237, 33003042, 274, 'Upriv Nro: 39', '', 'Provincia de Entre Rios', '2016-10-07', '2021-10-07'),
-(238, 33003057, 275, 'UN Nro: 40', '', 'Provincia de Formosa', '2016-10-07', '2021-10-07'),
-(239, 33003072, 276, 'Upriv Nro: 41', '', 'Provincia de Jujuy', '2016-10-07', '2021-10-07'),
-(240, 33003087, 277, 'UN Nro: 42', '', 'Provincia de La Pampa', '2016-10-07', '2021-10-07'),
-(241, 33003102, 278, 'Upriv Nro: 43', '', 'Provincia de La Rioja', '2016-10-07', '2021-10-07'),
-(242, 33003117, 279, 'UN Nro: 44', '', 'Provincia de Mendoza', '2016-10-07', '2021-10-07'),
-(243, 33003132, 280, 'Upriv Nro: 45', '', 'Provincia de Misiones', '2016-10-07', '2021-10-07'),
-(244, 33003147, 281, 'UN Nro: 46', '', 'Provincia del Neuquen', '2016-10-07', '2021-10-07'),
-(245, 33003162, 282, 'Upriv Nro: 47', '', 'Provincia de Rio Negro', '2016-10-07', '2021-10-07'),
-(246, 33003177, 283, 'UN Nro: 48', '', 'Provincia de Salta', '2016-10-07', '2021-10-07'),
-(247, 33003192, 284, 'Upriv Nro: 49', '', 'Provincia de San Juan', '2016-10-07', '2021-10-07'),
-(248, 33003207, 285, 'UN Nro: 50', '', 'Provincia de San Luis', '2016-10-07', '2021-10-07'),
-(249, 33003222, 286, 'Upriv Nro: 51', '', 'Provincia de Santa Cruz', '2016-10-07', '2021-10-07'),
-(250, 33003237, 287, 'UN Nro: 52', '', 'Provincia de Santa Fe', '2016-10-07', '2021-10-07'),
-(251, 33003252, 288, 'Upriv Nro: 53', '', 'Provincia de Santiago del Este', '2016-10-07', '2021-10-07'),
-(252, 33003267, 289, 'UN Nro: 54', '', 'Provincia de Tierra del Fuego,', '2016-10-07', '2021-10-07'),
-(253, 33003282, 290, 'Upriv Nro: 55', '', 'Provincia de Tucuman', '2016-10-07', '2021-10-07'),
-(254, 33003297, 291, 'UN Nro: 56', '', 'Provincia de Buenos Aires', '2016-10-07', '2021-10-07'),
-(255, 33003312, 292, 'Upriv Nro: 57', '', 'Provincia de Catamarca', '2016-10-07', '2021-10-07'),
-(256, 33003327, 293, 'UN Nro: 58', '', 'Provincia del Chaco', '2016-10-07', '2021-10-07'),
-(257, 33003342, 294, 'Upriv Nro: 59', '', 'Provincia del Chubut', '2016-10-07', '2021-10-07'),
-(258, 33003357, 295, 'UN Nro: 60', '', 'Provincia de Cordoba', '2016-10-07', '2021-10-07'),
-(259, 33003372, 296, 'Upriv Nro: 61', '', 'Provincia de Corrientes', '2016-10-07', '2021-10-07'),
-(260, 33003387, 297, 'UN Nro: 62', '', 'Provincia de Entre Rios', '2016-10-07', '2021-10-07'),
-(261, 33003402, 298, 'Upriv Nro: 63', '', 'Provincia de Formosa', '2016-10-07', '2021-10-07'),
-(262, 33003417, 299, 'UN Nro: 64', '', 'Provincia de Jujuy', '2016-10-07', '2021-10-07'),
-(263, 33003432, 300, 'Upriv Nro: 65', '', 'Provincia de La Pampa', '2016-10-07', '2021-10-07'),
-(264, 33003447, 301, 'UN Nro: 66', '', 'Provincia de La Rioja', '2016-10-07', '2021-10-07'),
-(265, 33003462, 302, 'Upriv Nro: 67', '', 'Provincia de Mendoza', '2016-10-07', '2021-10-07'),
-(266, 33003477, 303, 'UN Nro: 68', '', 'Provincia de Misiones', '2016-10-07', '2021-10-07'),
-(267, 33003492, 304, 'Upriv Nro: 69', '', 'Provincia del Neuquen', '2016-10-07', '2021-10-07'),
-(268, 33003507, 305, 'UN Nro: 70', '', 'Provincia de Rio Negro', '2016-10-07', '2021-10-07'),
-(269, 33003522, 306, 'Upriv Nro: 71', '', 'Provincia de Salta', '2016-10-07', '2021-10-07'),
-(270, 33003537, 307, 'UN Nro: 72', '', 'Provincia de San Juan', '2016-10-07', '2021-10-07'),
-(271, 33003552, 308, 'Upriv Nro: 73', '', 'Provincia de San Luis', '2016-10-07', '2021-10-07'),
-(272, 33003567, 309, 'UN Nro: 74', '', 'Provincia de Santa Cruz', '2016-10-07', '2021-10-07'),
-(273, 33003582, 310, 'Upriv Nro: 75', '', 'Provincia de Santa Fe', '2016-10-07', '2021-10-07'),
-(274, 33003597, 311, 'UN Nro: 76', '', 'Provincia de Santiago del Este', '2016-10-07', '2021-10-07'),
-(275, 33003612, 312, 'Upriv Nro: 77', '', 'Provincia de Tierra del Fuego,', '2016-10-07', '2021-10-07'),
-(276, 33003627, 313, 'UN Nro: 78', '', 'Provincia de Tucuman', '2016-10-07', '2021-10-07'),
-(277, 33003642, 314, 'Upriv Nro: 79', '', 'Provincia de Buenos Aires', '2016-10-07', '2021-10-07'),
-(278, 33003657, 315, 'UN Nro: 80', '', 'Provincia de Catamarca', '2016-10-07', '2021-10-07'),
-(279, 33003672, 316, 'Upriv Nro: 81', '', 'Provincia del Chaco', '2016-10-07', '2021-10-07'),
-(280, 33003687, 317, 'UN Nro: 82', '', 'Provincia del Chubut', '2016-10-07', '2021-10-07'),
-(281, 33003702, 318, 'Upriv Nro: 83', '', 'Provincia de Cordoba', '2016-10-07', '2021-10-07'),
-(282, 33003717, 319, 'UN Nro: 84', '', 'Provincia de Corrientes', '2016-10-07', '2021-10-07'),
-(283, 33003732, 320, 'Upriv Nro: 85', '', 'Provincia de Entre Rios', '2016-10-07', '2021-10-07'),
-(284, 33003747, 321, 'UN Nro: 86', '', 'Provincia de Formosa', '2016-10-07', '2021-10-07'),
-(285, 33003762, 322, 'Upriv Nro: 87', '', 'Provincia de Jujuy', '2016-10-07', '2021-10-07'),
-(286, 33003777, 323, 'UN Nro: 88', '', 'Provincia de La Pampa', '2016-10-07', '2021-10-07'),
-(287, 33003792, 324, 'Upriv Nro: 89', '', 'Provincia de La Rioja', '2016-10-07', '2021-10-07'),
-(288, 33003807, 325, 'UN Nro: 90', '', 'Provincia de Mendoza', '2016-10-07', '2021-10-07'),
-(289, 33003822, 326, 'Upriv Nro: 91', '', 'Provincia de Misiones', '2016-10-07', '2021-10-07'),
-(290, 33003837, 327, 'UN Nro: 92', '', 'Provincia del Neuquen', '2016-10-07', '2021-10-07'),
-(291, 33003852, 328, 'Upriv Nro: 93', '', 'Provincia de Rio Negro', '2016-10-07', '2021-10-07'),
-(292, 33003867, 329, 'UN Nro: 94', '', 'Provincia de Salta', '2016-10-07', '2021-10-07'),
-(293, 33003882, 330, 'Upriv Nro: 95', '', 'Provincia de San Juan', '2016-10-07', '2021-10-07'),
-(294, 33003897, 331, 'UN Nro: 96', '', 'Provincia de San Luis', '2016-10-07', '2021-10-07'),
-(295, 33003912, 332, 'Upriv Nro: 97', '', 'Provincia de Santa Cruz', '2016-10-07', '2021-10-07'),
-(296, 33003927, 333, 'UN Nro: 98', '', 'Provincia de Santa Fe', '2016-10-07', '2021-10-07'),
-(297, 33003942, 1, 'Inst Sup Nro: 1', '', 'Provincia de Santiago del Este', '2018-10-07', '2021-10-07'),
-(298, 33003957, 2, 'Inst Sup Nro: 2', '', 'Provincia de Tierra del Fuego,', '2018-10-07', '2021-10-07'),
-(299, 33003972, 3, 'Inst Sup Nro: 3', '', 'Provincia de Tucuman', '2018-10-07', '2021-10-07'),
-(300, 33003987, 4, 'Inst Sup Nro: 4', '', 'Provincia de Buenos Aires', '2018-10-07', '2021-10-07'),
-(301, 33004002, 5, 'Inst Sup Nro: 5', '', 'Provincia de Catamarca', '2018-10-07', '2021-10-07'),
-(302, 33004017, 6, 'Inst Sup Nro: 6', '', 'Provincia del Chaco', '2018-10-07', '2021-10-07'),
-(303, 33004032, 7, 'Inst Sup Nro: 7', '', 'Provincia del Chubut', '2018-10-07', '2021-10-07'),
-(304, 33004047, 8, 'Inst Sup Nro: 8', '', 'Provincia de Cordoba', '2018-10-07', '2021-10-07'),
-(305, 33004062, 9, 'Inst Sup Nro: 9', '', 'Provincia de Corrientes', '2018-10-07', '2021-10-07'),
-(306, 33004077, 10, 'Inst Sup Nro: 10', '', 'Provincia de Entre Rios', '2018-10-07', '2021-10-07'),
-(307, 33004092, 11, 'Inst Sup Nro: 11', '', 'Provincia de Formosa', '2018-10-07', '2021-10-07'),
-(308, 33004107, 12, 'Inst Sup Nro: 12', '', 'Provincia de Jujuy', '2018-10-07', '2021-10-07'),
-(309, 33004122, 13, 'Inst Sup Nro: 13', '', 'Provincia de La Pampa', '2018-10-07', '2021-10-07'),
-(310, 33004137, 14, 'Inst Sup Nro: 14', '', 'Provincia de La Rioja', '2018-10-07', '2021-10-07'),
-(311, 33004152, 15, 'Inst Sup Nro: 15', '', 'Provincia de Mendoza', '2018-10-07', '2021-10-07'),
-(312, 33004167, 16, 'Inst Sup Nro: 16', '', 'Provincia de Misiones', '2018-10-07', '2021-10-07'),
-(313, 33004182, 17, 'Inst Sup Nro: 17', '', 'Provincia del Neuquen', '2018-10-07', '2021-10-07'),
-(314, 33004197, 18, 'Inst Sup Nro: 18', '', 'Provincia de Rio Negro', '2018-10-07', '2021-10-07'),
-(315, 33004212, 19, 'Inst Sup Nro: 19', '', 'Provincia de Salta', '2018-10-07', '2021-10-07'),
-(316, 33004227, 20, 'Inst Sup Nro: 20', '', 'Provincia de San Juan', '2018-10-07', '2021-10-07'),
-(317, 33004242, 21, 'Inst Sup Nro: 21', '', 'Provincia de San Luis', '2018-10-07', '2021-10-07'),
-(318, 33004257, 22, 'Inst Sup Nro: 22', '', 'Provincia de Santa Cruz', '2018-10-07', '2021-10-07'),
-(319, 33004272, 23, 'Inst Sup Nro: 23', '', 'Provincia de Santa Fe', '2018-10-07', '2021-10-07'),
-(320, 33004287, 24, 'Inst Sup Nro: 24', '', 'Provincia de Santiago del Este', '2018-10-07', '2021-10-07'),
-(321, 33004302, 25, 'Inst Sup Nro: 25', '', 'Provincia de Tierra del Fuego,', '2018-10-07', '2021-10-07'),
-(322, 33004317, 26, 'Inst Sup Nro: 26', '', 'Provincia de Tucuman', '2018-10-07', '2021-10-07'),
-(323, 33004332, 27, 'Inst Sup Nro: 27', '', 'Provincia de Buenos Aires', '2018-10-07', '2021-10-07'),
-(324, 33004347, 28, 'Inst Sup Nro: 28', '', 'Provincia de Catamarca', '2018-10-07', '2021-10-07'),
-(325, 33004362, 29, 'Inst Sup Nro: 29', '', 'Provincia del Chaco', '2018-10-07', '2021-10-07'),
-(326, 33004377, 30, 'Inst Sup Nro: 30', '', 'Provincia del Chubut', '2018-10-07', '2021-10-07'),
-(327, 33004392, 31, 'Inst Sup Nro: 31', '', 'Provincia de Cordoba', '2018-10-07', '2021-10-07'),
-(328, 33004407, 32, 'Inst Sup Nro: 32', '', 'Provincia de Corrientes', '2018-10-07', '2021-10-07'),
-(329, 33004422, 33, 'Inst Sup Nro: 33', '', 'Provincia de Entre Rios', '2018-10-07', '2021-10-07'),
-(330, 33004437, 34, 'Inst Sup Nro: 34', '', 'Provincia de Formosa', '2018-10-07', '2021-10-07'),
-(331, 33004452, 35, 'Inst Sup Nro: 35', '', 'Provincia de Jujuy', '2018-10-07', '2021-10-07'),
-(332, 33004467, 36, 'Inst Sup Nro: 36', '', 'Provincia de La Pampa', '2018-10-07', '2021-10-07'),
-(333, 33004482, 37, 'Inst Sup Nro: 37', '', 'Provincia de La Rioja', '2018-10-07', '2021-10-07'),
-(334, 33004497, 38, 'Inst Sup Nro: 38', '', 'Provincia de Mendoza', '2018-10-07', '2021-10-07'),
-(335, 33004512, 39, 'Inst Sup Nro: 39', '', 'Provincia de Misiones', '2018-10-07', '2021-10-07'),
-(336, 33004527, 40, 'Inst Sup Nro: 40', '', 'Provincia del Neuquen', '2018-10-07', '2021-10-07'),
-(337, 33004542, 41, 'Inst Sup Nro: 41', '', 'Provincia de Rio Negro', '2018-10-07', '2021-10-07'),
-(338, 33004557, 42, 'Inst Sup Nro: 42', '', 'Provincia de Salta', '2018-10-07', '2021-10-07'),
-(339, 33004572, 43, 'Inst Sup Nro: 43', '', 'Provincia de San Juan', '2018-10-07', '2021-10-07'),
-(340, 33004587, 44, 'Inst Sup Nro: 44', '', 'Provincia de San Luis', '2018-10-07', '2021-10-07'),
-(341, 33004602, 45, 'Inst Sup Nro: 45', '', 'Provincia de Santa Cruz', '2018-10-07', '2021-10-07'),
-(342, 33004617, 46, 'Inst Sup Nro: 46', '', 'Provincia de Santa Fe', '2018-10-07', '2021-10-07'),
-(343, 33004632, 47, 'Inst Sup Nro: 47', '', 'Provincia de Santiago del Este', '2018-10-07', '2021-10-07'),
-(344, 33004647, 48, 'Inst Sup Nro: 48', '', 'Provincia de Tierra del Fuego,', '2018-10-07', '2021-10-07'),
-(345, 33004662, 49, 'Inst Sup Nro: 49', '', 'Provincia de Tucuman', '2018-10-07', '2021-10-07'),
-(346, 33004677, 50, 'Inst Sup Nro: 50', '', 'Provincia de Buenos Aires', '2018-10-07', '2021-10-07'),
-(347, 33004692, 51, 'Inst Sup Nro: 51', '', 'Provincia de Catamarca', '2018-10-07', '2021-10-07'),
-(348, 33004707, 52, 'Inst Sup Nro: 52', '', 'Provincia del Chaco', '2018-10-07', '2021-10-07'),
-(349, 33004722, 53, 'Inst Sup Nro: 53', '', 'Provincia del Chubut', '2018-10-07', '2021-10-07'),
-(350, 33004737, 54, 'Inst Sup Nro: 54', '', 'Provincia de Cordoba', '2018-10-07', '2021-10-07'),
-(351, 33004752, 55, 'Inst Sup Nro: 55', '', 'Provincia de Corrientes', '2018-10-07', '2021-10-07'),
-(352, 33004767, 56, 'Inst Sup Nro: 56', '', 'Provincia de Entre Rios', '2018-10-07', '2021-10-07'),
-(353, 33004782, 57, 'Inst Sup Nro: 57', '', 'Provincia de Formosa', '2018-10-07', '2021-10-07'),
-(354, 33004797, 58, 'Inst Sup Nro: 58', '', 'Provincia de Jujuy', '2018-10-07', '2021-10-07'),
-(355, 33004812, 59, 'Inst Sup Nro: 59', '', 'Provincia de La Pampa', '2018-10-07', '2021-10-07'),
-(356, 33004827, 60, 'Inst Sup Nro: 60', '', 'Provincia de La Rioja', '2018-10-07', '2021-10-07'),
-(357, 33004842, 61, 'Inst Sup Nro: 61', '', 'Provincia de Mendoza', '2018-10-07', '2021-10-07'),
-(358, 33004857, 62, 'Inst Sup Nro: 62', '', 'Provincia de Misiones', '2018-10-07', '2021-10-07'),
-(359, 33004872, 63, 'Inst Sup Nro: 63', '', 'Provincia del Neuquen', '2018-10-07', '2021-10-07'),
-(360, 33004887, 64, 'Inst Sup Nro: 64', '', 'Provincia de Rio Negro', '2018-10-07', '2021-10-07'),
-(361, 33004902, 65, 'Inst Sup Nro: 65', '', 'Provincia de Salta', '2018-10-07', '2021-10-07'),
-(362, 33004917, 66, 'Inst Sup Nro: 66', '', 'Provincia de San Juan', '2018-10-07', '2021-10-07'),
-(363, 33004932, 67, 'Inst Sup Nro: 67', '', 'Provincia de San Luis', '2018-10-07', '2021-10-07'),
-(364, 33004947, 68, 'Inst Sup Nro: 68', '', 'Provincia de Santa Cruz', '2018-10-07', '2021-10-07'),
-(365, 33004962, 69, 'Inst Sup Nro: 69', '', 'Provincia de Santa Fe', '2018-10-07', '2021-10-07'),
-(366, 33004977, 70, 'Inst Sup Nro: 70', '', 'Provincia de Santiago del Este', '2018-10-07', '2021-10-07'),
-(367, 33004992, 71, 'Inst Sup Nro: 71', '', 'Provincia de Tierra del Fuego,', '2018-10-07', '2021-10-07'),
-(368, 33005007, 72, 'Inst Sup Nro: 72', '', 'Provincia de Tucuman', '2018-10-07', '2021-10-07'),
-(369, 33005022, 73, 'Inst Sup Nro: 73', '', 'Provincia de Buenos Aires', '2018-10-07', '2021-10-07'),
-(370, 33005037, 74, 'Inst Sup Nro: 74', '', 'Provincia de Catamarca', '2018-10-07', '2021-10-07'),
-(371, 33005052, 75, 'Inst Sup Nro: 75', '', 'Provincia del Chaco', '2018-10-07', '2021-10-07'),
-(372, 33005067, 76, 'Inst Sup Nro: 76', '', 'Provincia del Chubut', '2018-10-07', '2021-10-07'),
-(373, 33005082, 77, 'Inst Sup Nro: 77', '', 'Provincia de Cordoba', '2018-10-07', '2021-10-07'),
-(374, 33005097, 78, 'Inst Sup Nro: 78', '', 'Provincia de Corrientes', '2018-10-07', '2021-10-07'),
-(375, 33005112, 79, 'Inst Sup Nro: 79', '', 'Provincia de Entre Rios', '2018-10-07', '2021-10-07'),
-(376, 33005127, 80, 'Inst Sup Nro: 80', '', 'Provincia de Formosa', '2018-10-07', '2021-10-07'),
-(377, 33005142, 81, 'Inst Sup Nro: 81', '', 'Provincia de Jujuy', '2018-10-07', '2021-10-07'),
-(378, 33005157, 82, 'Inst Sup Nro: 82', '', 'Provincia de La Pampa', '2018-10-07', '2021-10-07'),
-(379, 33005172, 83, 'Inst Sup Nro: 83', '', 'Provincia de La Rioja', '2018-10-07', '2021-10-07'),
-(380, 33005187, 84, 'Inst Sup Nro: 84', '', 'Provincia de Mendoza', '2018-10-07', '2021-10-07'),
-(381, 33005202, 85, 'Inst Sup Nro: 85', '', 'Provincia de Misiones', '2018-10-07', '2021-10-07'),
-(382, 33005217, 86, 'Inst Sup Nro: 86', '', 'Provincia del Neuquen', '2018-10-07', '2021-10-07'),
-(383, 33005232, 87, 'Inst Sup Nro: 87', '', 'Provincia de Rio Negro', '2018-10-07', '2021-10-07'),
-(384, 33005247, 88, 'Inst Sup Nro: 88', '', 'Provincia de Salta', '2018-10-07', '2021-10-07'),
-(385, 33005262, 89, 'Inst Sup Nro: 89', '', 'Provincia de San Juan', '2018-10-07', '2021-10-07'),
-(386, 33005277, 90, 'Inst Sup Nro: 90', '', 'Provincia de San Luis', '2018-10-07', '2021-10-07'),
-(387, 33005292, 91, 'Inst Sup Nro: 91', '', 'Provincia de Santa Cruz', '2018-10-07', '2021-10-07'),
-(388, 33005307, 92, 'Inst Sup Nro: 92', '', 'Provincia de Santa Fe', '2018-10-07', '2021-10-07'),
-(389, 33005322, 93, 'Inst Sup Nro: 93', '', 'Provincia de Santiago del Este', '2018-10-07', '2021-10-07'),
-(390, 33005337, 94, 'Inst Sup Nro: 94', '', 'Provincia de Tierra del Fuego,', '2018-10-07', '2021-10-07'),
-(391, 33005352, 95, 'Inst Sup Nro: 95', '', 'Provincia de Tucuman', '2018-10-07', '2021-10-07'),
-(392, 33005367, 96, 'Inst Sup Nro: 96', '', 'Provincia de Buenos Aires', '2018-10-07', '2021-10-07'),
-(393, 33005382, 97, 'Inst Sup Nro: 97', '', 'Provincia de Catamarca', '2018-10-07', '2021-10-07'),
-(394, 33005397, 98, 'Inst Sup Nro: 98', '', 'Provincia del Chaco', '2018-10-07', '2021-10-07'),
-(395, 33005412, 99, 'Inst Sup Nro: 99', '', 'Provincia del Chubut', '2018-10-07', '2021-10-07'),
-(396, 33005427, 100, 'Inst Sup Nro: 1', '', 'Provincia de Cordoba', '2018-10-07', '2021-10-07'),
-(397, 33005442, 101, 'Inst Sup Nro: 2', '', 'Provincia de Corrientes', '2018-10-07', '2021-10-07'),
-(398, 33005457, 102, 'Inst Sup Nro: 3', '', 'Provincia de Entre Rios', '2018-10-07', '2021-10-07'),
-(399, 33005472, 103, 'Inst Sup Nro: 4', '', 'Provincia de Formosa', '2018-10-07', '2021-10-07'),
-(400, 33005487, 104, 'Inst Sup Nro: 5', '', 'Provincia de Jujuy', '2018-10-07', '2021-10-07'),
-(401, 33005502, 105, 'Inst Sup Nro: 6', '', 'Provincia de La Pampa', '2018-10-07', '2021-10-07'),
-(402, 33005517, 106, 'Inst Sup Nro: 7', '', 'Provincia de La Rioja', '2018-10-07', '2021-10-07'),
-(403, 33005532, 107, 'Inst Sup Nro: 8', '', 'Provincia de Mendoza', '2018-10-07', '2021-10-07'),
-(404, 33005547, 108, 'Inst Sup Nro: 9', '', 'Provincia de Misiones', '2018-10-07', '2021-10-07'),
-(405, 33005562, 109, 'Inst Sup Nro: 10', '', 'Provincia del Neuquen', '2018-10-07', '2021-10-07'),
-(406, 33005577, 110, 'Inst Sup Nro: 11', '', 'Provincia de Rio Negro', '2018-10-07', '2021-10-07'),
-(407, 33005592, 111, 'Inst Sup Nro: 12', '', 'Provincia de Salta', '2018-10-07', '2021-10-07'),
-(408, 33005607, 112, 'Inst Sup Nro: 13', '', 'Provincia de San Juan', '2018-10-07', '2021-10-07'),
-(409, 33005622, 113, 'Inst Sup Nro: 14', '', 'Provincia de San Luis', '2018-10-07', '2021-10-07'),
-(410, 33005637, 114, 'Inst Sup Nro: 15', '', 'Provincia de Santa Cruz', '2018-10-07', '2021-10-07'),
-(411, 33005652, 115, 'Inst Sup Nro: 16', '', 'Provincia de Santa Fe', '2018-10-07', '2021-10-07'),
-(412, 33005667, 116, 'Inst Sup Nro: 17', '', 'Provincia de Santiago del Este', '2018-10-07', '2021-10-07'),
-(413, 33005682, 117, 'Inst Sup Nro: 18', '', 'Provincia de Tierra del Fuego,', '2018-10-07', '2021-10-07'),
-(414, 33005697, 118, 'Inst Sup Nro: 19', '', 'Provincia de Tucuman', '2018-10-07', '2021-10-07'),
-(415, 33005712, 119, 'Inst Sup Nro: 20', '', 'Provincia de Buenos Aires', '2018-10-07', '2021-10-07'),
-(416, 33005727, 120, 'Inst Sup Nro: 21', '', 'Provincia de Catamarca', '2018-10-07', '2021-10-07'),
-(417, 33005742, 121, 'Inst Sup Nro: 22', '', 'Provincia del Chaco', '2018-10-07', '2021-10-07'),
-(418, 33005757, 122, 'Inst Sup Nro: 23', '', 'Provincia del Chubut', '2018-10-07', '2021-10-07'),
-(419, 33005772, 123, 'Inst Sup Nro: 24', '', 'Provincia de Cordoba', '2018-10-07', '2021-10-07'),
-(420, 33005787, 124, 'Inst Sup Nro: 25', '', 'Provincia de Corrientes', '2018-10-07', '2021-10-07'),
-(421, 33005802, 125, 'Inst Sup Nro: 26', '', 'Provincia de Entre Rios', '2018-10-07', '2021-10-07'),
-(422, 33005817, 126, 'Inst Sup Nro: 27', '', 'Provincia de Formosa', '2018-10-07', '2021-10-07'),
-(423, 33005832, 127, 'Inst Sup Nro: 28', '', 'Provincia de Jujuy', '2018-10-07', '2021-10-07'),
-(424, 33005847, 128, 'Inst Sup Nro: 29', '', 'Provincia de La Pampa', '2018-10-07', '2021-10-07'),
-(425, 33005862, 129, 'Inst Sup Nro: 30', '', 'Provincia de La Rioja', '2018-10-07', '2021-10-07'),
-(426, 33005877, 130, 'Inst Sup Nro: 31', '', 'Provincia de Mendoza', '2018-10-07', '2021-10-07'),
-(427, 33005892, 131, 'Inst Sup Nro: 32', '', 'Provincia de Misiones', '2018-10-07', '2021-10-07'),
-(428, 33005907, 132, 'Inst Sup Nro: 33', '', 'Provincia del Neuquen', '2018-10-07', '2021-10-07'),
-(429, 33005922, 133, 'Inst Sup Nro: 34', '', 'Provincia de Rio Negro', '2018-10-07', '2021-10-07'),
-(430, 33005937, 134, 'Inst Sup Nro: 35', '', 'Provincia de Salta', '2018-10-07', '2021-10-07'),
-(431, 33005952, 135, 'Inst Sup Nro: 36', '', 'Provincia de San Juan', '2018-10-07', '2021-10-07'),
-(432, 33005967, 136, 'Inst Sup Nro: 37', '', 'Provincia de San Luis', '2018-10-07', '2021-10-07'),
-(433, 33005982, 336, 'Centro de Formacion Profesiona', '', 'Provincia de Santa Cruz', '2021-04-07', '2021-10-07'),
-(434, 33005997, 337, 'Centro de Formacion Profesiona', '', 'Provincia de Santa Fe', '2021-04-07', '2021-10-07'),
-(435, 33006012, 338, 'Centro de Formacion Profesiona', '', 'Provincia de Santiago del Este', '2021-04-07', '2021-10-07'),
-(436, 33006027, 339, 'Centro de Formacion Profesiona', '', 'Provincia de Tierra del Fuego,', '2021-04-07', '2021-10-07'),
-(437, 33006042, 340, 'Centro de Formacion Profesiona', '', 'Provincia de Tucuman', '2021-04-07', '2021-10-07'),
-(438, 33006057, 341, 'Centro de Formacion Profesiona', '', 'Provincia de Buenos Aires', '2021-04-07', '2021-10-07'),
-(439, 33006072, 342, 'Centro de Formacion Profesiona', '', 'Provincia de Catamarca', '2021-04-07', '2021-10-07'),
-(440, 33006087, 343, 'Centro de Formacion Profesiona', '', 'Provincia del Chaco', '2021-04-07', '2021-10-07'),
-(441, 33006102, 344, 'Inst Sup en Ideomas Nro: 101', '', 'Provincia del Chubut', '2018-10-07', '2021-10-07'),
-(442, 33006117, 345, 'Inst Sup en Ideomas Nro: 102', '', 'Provincia de Cordoba', '2018-10-07', '2021-10-07'),
-(443, 33006132, 346, 'Inst Sup en Ideomas Nro: 103', '', 'Provincia de Corrientes', '2018-10-07', '2021-10-07'),
-(444, 33006147, 347, 'Inst Sup en Ideomas Nro: 104', '', 'Provincia de Entre Rios', '2018-10-07', '2021-10-07'),
-(445, 33006162, 348, 'Inst Sup en Ideomas Nro: 105', '', 'Provincia de Formosa', '2018-10-07', '2021-10-07'),
-(446, 33006177, 349, 'Inst Sup en Ideomas Nro: 106', '', 'Provincia de Jujuy', '2018-10-07', '2021-10-07'),
-(447, 33006192, 350, 'Inst Sup en Ideomas Nro: 107', '', 'Provincia de La Pampa', '2018-10-07', '2021-10-07'),
-(448, 33006207, 351, 'Inst Sup en Ideomas Nro: 108', '', 'Provincia de La Rioja', '2018-10-07', '2021-10-07'),
-(449, 33006222, 352, 'Inst Sup en Ideomas Nro: 109', '', 'Provincia de Mendoza', '2018-10-07', '2021-10-07'),
-(450, 33006237, 353, 'Inst Sup en Ideomas Nro: 110', '', 'Provincia de Misiones', '2018-10-07', '2021-10-07'),
-(451, 33006252, 354, 'UN Nro: 120', '', 'Provincia del Neuquen', '2017-10-07', '2021-10-07'),
-(452, 33006267, 355, 'Upriv Nro: 121', '', 'Provincia de Rio Negro', '2017-10-07', '2021-10-07'),
-(453, 33006282, 356, 'UN Nro: 122', '', 'Provincia de Salta', '2017-10-07', '2021-10-07'),
-(454, 33006297, 357, 'Upriv Nro: 123', '', 'Provincia de San Juan', '2017-10-07', '2021-10-07'),
-(455, 33006312, 358, 'UN Nro: 124', '', 'Provincia de San Luis', '2017-10-07', '2021-10-07'),
-(456, 33006327, 359, 'Upriv Nro: 125', '', 'Provincia de Santa Cruz', '2017-10-07', '2021-10-07'),
-(457, 33006342, 360, 'UN Nro: 126', '', 'Provincia de Santa Fe', '2017-10-07', '2021-10-07'),
-(458, 33006357, 361, 'Upriv Nro: 127', '', 'Provincia de Santiago del Este', '2017-10-07', '2021-10-07'),
-(459, 33006372, 362, 'UN Nro: 128', '', 'Provincia de Tierra del Fuego,', '2017-10-07', '2021-10-07'),
-(460, 33006387, 363, 'Upriv Nro: 129', '', 'Provincia de Tucuman', '2017-10-07', '2021-10-07'),
-(461, 33006402, 364, 'UN Nro: 130', '', 'Provincia de Buenos Aires', '2017-10-07', '2021-10-07'),
-(462, 33006417, 365, 'Upriv Nro: 131', '', 'Provincia de Catamarca', '2017-10-07', '2021-10-07'),
-(463, 33006432, 366, 'UN Nro: 132', '', 'Provincia del Chaco', '2017-10-07', '2021-10-07'),
-(464, 33006447, 367, 'Upriv Nro: 133', '', 'Provincia del Chubut', '2017-10-07', '2021-10-07'),
-(465, 33006462, 368, 'UN Nro: 134', '', 'Provincia de Cordoba', '2017-10-07', '2021-10-07'),
-(466, 33006477, 369, 'Upriv Nro: 135', '', 'Provincia de Corrientes', '2017-10-07', '2021-10-07'),
-(467, 33006492, 370, 'UN Nro: 136', '', 'Provincia de Entre Rios', '2017-10-07', '2021-10-07'),
-(468, 33006507, 371, 'Upriv Nro: 137', '', 'Provincia de Formosa', '2017-10-07', '2021-10-07'),
-(469, 33006522, 137, 'CEIP Nro: 1', '', 'Provincia de Jujuy', '2014-10-07', '2021-10-07'),
-(470, 33006537, 138, 'CEIP Nro: 2', '', 'Provincia de La Pampa', '2014-10-07', '2021-10-07'),
-(471, 33006552, 139, 'CEIP Nro: 3', '', 'Provincia de La Rioja', '2014-10-07', '2021-10-07'),
-(472, 33006567, 140, 'CEIP Nro: 4', '', 'Provincia de Mendoza', '2014-10-07', '2021-10-07'),
-(473, 33006582, 141, 'CEIP Nro: 5', '', 'Provincia de Misiones', '2014-10-07', '2021-10-07'),
-(474, 33006597, 142, 'CEIP Nro: 6', '', 'Provincia del Neuquen', '2014-10-07', '2021-10-07'),
-(475, 33006612, 143, 'CEIP Nro: 7', '', 'Provincia de Rio Negro', '2014-10-07', '2021-10-07'),
-(476, 33006627, 144, 'CEIP Nro: 8', '', 'Provincia de Salta', '2014-10-07', '2021-10-07'),
-(477, 33006642, 145, 'CEIP Nro: 9', '', 'Provincia de San Juan', '2014-10-07', '2021-10-07'),
-(478, 33006657, 146, 'CEIP Nro: 10', '', 'Provincia de San Luis', '2014-10-07', '2021-10-07'),
-(479, 32172601, 147, 'CEIP Nro: 11', '', 'Provincia de Santa Cruz', '2014-10-07', '2021-10-07');
+INSERT INTO `estudios` (`ID_Estudio`, `DNI`, `id_Carrera`, `Institucion`, `Localidad`, `Provincia`, `Fc_inicio`, `Fc_fin`, `Pais`) VALUES
+(0, 0, 6, 'Pirulo', 'Lanus', ' Ciudad autonoma de bs as', '2021-12-15', '2021-12-08', 'Argentina'),
+(1, 14007645, 335, 'CEIP Nro: 1', '', 'Provincia de Buenos Aires', '2014-10-07', '2021-10-06', NULL),
+(2, 14045647, 335, 'CEIP Nro: 2', '', 'Provincia de Catamarca', '2014-10-07', '2021-10-07', NULL),
+(3, 28220393, 335, 'CEIP Nro: 3', '', 'Provincia del Chaco', '2014-10-07', '2021-10-07', NULL),
+(4, 28790423, 335, 'CEIP Nro: 4', '', 'Provincia del Chubut', '2014-10-07', '2021-10-07', NULL),
+(5, 10000003, 335, 'CEIP Nro: 5', '', 'Provincia de Cordoba', '2014-10-07', '2021-10-07', NULL),
+(6, 29930483, 335, 'CEIP Nro: 6', '', 'Provincia de Corrientes', '2014-10-07', '2021-10-07', NULL),
+(7, 30500513, 335, 'CEIP Nro: 7', '', 'Provincia de Entre Rios', '2014-10-07', '2021-10-07', NULL),
+(8, 31070543, 335, 'CEIP Nro: 8', '', 'Provincia de Formosa', '2014-10-07', '2021-10-07', NULL),
+(9, 31640573, 335, 'CEIP Nro: 9', '', 'Provincia de Jujuy', '2014-10-07', '2021-10-07', NULL),
+(10, 32210603, 335, 'CEIP Nro: 10', '', 'Provincia de La Pampa', '2014-10-07', '2021-10-07', NULL),
+(11, 32780633, 335, 'CEIP Nro: 11', '', 'Provincia de La Rioja', '2014-10-07', '2021-10-07', NULL),
+(12, 33350663, 335, 'CEIP Nro: 12', '', 'Provincia de Mendoza', '2014-10-07', '2021-10-07', NULL),
+(13, 10000018, 335, 'CEIP Nro: 13', '', 'Provincia de Misiones', '2014-10-07', '2021-10-07', NULL),
+(14, 34490723, 335, 'CEIP Nro: 14', '', 'Provincia del Neuquen', '2014-10-07', '2021-10-07', NULL),
+(15, 35060753, 335, 'CEIP Nro: 15', '', 'Provincia de Rio Negro', '2014-10-07', '2021-10-07', NULL),
+(16, 35630783, 335, 'CEIP Nro: 16', '', 'Provincia de Salta', '2014-10-07', '2021-10-07', NULL),
+(17, 36200813, 335, 'CEIP Nro: 17', '', 'Provincia de San Juan', '2014-10-07', '2021-10-07', NULL),
+(18, 36770843, 335, 'CEIP Nro: 18', '', 'Provincia de San Luis', '2014-10-07', '2021-10-07', NULL),
+(19, 37340873, 335, 'CEIP Nro: 19', '', 'Provincia de Santa Cruz', '2014-10-07', '2021-10-07', NULL),
+(20, 37910903, 335, 'CEIP Nro: 20', '', 'Provincia de Santa Fe', '2014-10-07', '2021-10-07', NULL),
+(21, 10000033, 335, 'CEIP Nro: 21', '', 'Provincia de Santiago del Este', '2014-10-07', '2021-10-07', NULL),
+(22, 39050963, 335, 'CEIP Nro: 22', '', 'Provincia de Tierra del Fuego,', '2014-10-07', '2021-10-07', NULL),
+(23, 39620993, 335, 'CEIP Nro: 23', '', 'Provincia de Tucuman', '2014-10-07', '2021-10-07', NULL),
+(24, 40191023, 335, 'CEIP Nro: 24', '', 'Provincia de Buenos Aires', '2014-10-07', '2021-10-07', NULL),
+(25, 40761053, 335, 'CEIP Nro: 25', '', 'Provincia de Catamarca', '2014-10-07', '2021-10-07', NULL),
+(26, 41331083, 335, 'CEIP Nro: 26', '', 'Provincia del Chaco', '2014-10-07', '2021-10-07', NULL),
+(27, 41901113, 335, 'CEIP Nro: 27', '', 'Provincia del Chubut', '2014-10-07', '2021-10-07', NULL),
+(28, 42471143, 335, 'CEIP Nro: 28', '', 'Provincia de Cordoba', '2014-10-07', '2021-10-07', NULL),
+(29, 10000048, 335, 'CEIP Nro: 29', '', 'Provincia de Corrientes', '2014-10-07', '2021-10-07', NULL),
+(30, 43611203, 335, 'CEIP Nro: 30', '', 'Provincia de Entre Rios', '2014-10-07', '2021-10-07', NULL),
+(31, 44181233, 335, 'CEIP Nro: 31', '', 'Provincia de Formosa', '2014-10-07', '2021-10-07', NULL),
+(32, 44751263, 335, 'CEIP Nro: 32', '', 'Provincia de Jujuy', '2014-10-07', '2021-10-07', NULL),
+(33, 45321293, 335, 'CEIP Nro: 33', '', 'Provincia de La Pampa', '2014-10-07', '2021-10-07', NULL),
+(34, 10000060, 335, 'CEIP Nro: 34', '', 'Provincia de La Rioja', '2014-10-07', '2021-10-07', NULL),
+(35, 33000012, 335, 'CEIP Nro: 35', '', 'Provincia de Mendoza', '2014-10-07', '2021-10-07', NULL),
+(36, 33000027, 335, 'CEIP Nro: 36', '', 'Provincia de Misiones', '2014-10-07', '2021-10-07', NULL),
+(37, 33000042, 335, 'CEIP Nro: 37', '', 'Provincia del Neuquen', '2014-10-07', '2021-10-07', NULL),
+(38, 33000057, 335, 'CEIP Nro: 38', '', 'Provincia de Rio Negro', '2014-10-07', '2021-10-07', NULL),
+(39, 33000072, 335, 'CEIP Nro: 39', '', 'Provincia de Salta', '2014-10-07', '2021-10-07', NULL),
+(40, 33000087, 335, 'CEIP Nro: 40', '', 'Provincia de San Juan', '2014-10-07', '2021-10-07', NULL),
+(41, 33000102, 335, 'CEIP Nro: 41', '', 'Provincia de San Luis', '2014-10-07', '2021-10-07', NULL),
+(42, 33000117, 335, 'CEIP Nro: 42', '', 'Provincia de Santa Cruz', '2014-10-07', '2021-10-07', NULL),
+(43, 33000132, 335, 'CEIP Nro: 43', '', 'Provincia de Santa Fe', '2014-10-07', '2021-10-07', NULL),
+(44, 33000147, 335, 'CEIP Nro: 44', '', 'Provincia de Santiago del Este', '2014-10-07', '2021-10-07', NULL),
+(45, 33000162, 335, 'CEIP Nro: 45', '', 'Provincia de Tierra del Fuego,', '2014-10-07', '2021-10-07', NULL),
+(46, 33000177, 335, 'CEIP Nro: 46', '', 'Provincia de Tucuman', '2014-10-07', '2021-10-07', NULL),
+(47, 33000192, 335, 'CEIP Nro: 47', '', 'Provincia de Buenos Aires', '2014-10-07', '2021-10-07', NULL),
+(48, 33000207, 335, 'CEIP Nro: 48', '', 'Provincia de Catamarca', '2014-10-07', '2021-10-07', NULL),
+(49, 33000222, 335, 'CEIP Nro: 49', '', 'Provincia del Chaco', '2014-10-07', '2021-10-07', NULL),
+(50, 33000237, 335, 'CEIP Nro: 50', '', 'Provincia del Chubut', '2014-10-07', '2021-10-07', NULL),
+(51, 33000252, 335, 'CEIP Nro: 51', '', 'Provincia de Cordoba', '2014-10-07', '2021-10-07', NULL),
+(52, 33000267, 335, 'CEIP Nro: 52', '', 'Provincia de Corrientes', '2014-10-07', '2021-10-07', NULL),
+(53, 33000282, 335, 'CEIP Nro: 53', '', 'Provincia de Entre Rios', '2014-10-07', '2021-10-07', NULL),
+(54, 33000297, 335, 'CEIP Nro: 54', '', 'Provincia de Formosa', '2014-10-07', '2021-10-07', NULL),
+(55, 33000312, 335, 'CEIP Nro: 55', '', 'Provincia de Jujuy', '2014-10-07', '2021-10-07', NULL),
+(56, 33000327, 335, 'CEIP Nro: 56', '', 'Provincia de La Pampa', '2014-10-07', '2021-10-07', NULL),
+(57, 33000342, 335, 'CEIP Nro: 57', '', 'Provincia de La Rioja', '2014-10-07', '2021-10-07', NULL),
+(58, 33000357, 335, 'CEIP Nro: 58', '', 'Provincia de Mendoza', '2014-10-07', '2021-10-07', NULL),
+(59, 33000372, 335, 'CEIP Nro: 59', '', 'Provincia de Misiones', '2014-10-07', '2021-10-07', NULL),
+(60, 33000387, 335, 'CEIP Nro: 60', '', 'Provincia del Neuquen', '2014-10-07', '2021-10-07', NULL),
+(61, 33000402, 335, 'CEIP Nro: 61', '', 'Provincia de Rio Negro', '2014-10-07', '2021-10-07', NULL),
+(62, 33000417, 335, 'CEIP Nro: 62', '', 'Provincia de Salta', '2014-10-07', '2021-10-07', NULL),
+(63, 33000432, 335, 'CEIP Nro: 63', '', 'Provincia de San Juan', '2014-10-07', '2021-10-07', NULL),
+(64, 33000447, 335, 'CEIP Nro: 64', '', 'Provincia de San Luis', '2014-10-07', '2021-10-07', NULL),
+(65, 33000462, 335, 'CEIP Nro: 65', '', 'Provincia de Santa Cruz', '2014-10-07', '2021-10-07', NULL),
+(66, 33000477, 335, 'CEIP Nro: 66', '', 'Provincia de Santa Fe', '2014-10-07', '2021-10-07', NULL),
+(67, 33000492, 335, 'CEIP Nro: 67', '', 'Provincia de Santiago del Este', '2014-10-07', '2021-10-07', NULL),
+(68, 33000507, 335, 'CEIP Nro: 68', '', 'Provincia de Tierra del Fuego,', '2014-10-07', '2021-10-07', NULL),
+(69, 33000522, 335, 'CEIP Nro: 69', '', 'Provincia de Tucuman', '2014-10-07', '2021-10-07', NULL),
+(70, 33000537, 335, 'CEIP Nro: 70', '', 'Provincia de Buenos Aires', '2014-10-07', '2021-10-07', NULL),
+(71, 33000552, 335, 'CEIP Nro: 71', '', 'Provincia de Catamarca', '2014-10-07', '2021-10-07', NULL),
+(72, 33000567, 335, 'CEIP Nro: 72', '', 'Provincia del Chaco', '2014-10-07', '2021-10-07', NULL),
+(73, 33000582, 335, 'CEIP Nro: 73', '', 'Provincia del Chubut', '2014-10-07', '2021-10-07', NULL),
+(74, 33000597, 335, 'CEIP Nro: 74', '', 'Provincia de Cordoba', '2014-10-07', '2021-10-07', NULL),
+(75, 33000612, 335, 'CEIP Nro: 75', '', 'Provincia de Corrientes', '2014-10-07', '2021-10-07', NULL),
+(76, 33000627, 335, 'CEIP Nro: 76', '', 'Provincia de Entre Rios', '2014-10-07', '2021-10-07', NULL),
+(77, 33000642, 335, 'CEIP Nro: 77', '', 'Provincia de Formosa', '2014-10-07', '2021-10-07', NULL),
+(78, 33000657, 335, 'CEIP Nro: 78', '', 'Provincia de Jujuy', '2014-10-07', '2021-10-07', NULL),
+(79, 33000672, 335, 'CEIP Nro: 79', '', 'Provincia de La Pampa', '2014-10-07', '2021-10-07', NULL),
+(80, 33000687, 335, 'CEIP Nro: 80', '', 'Provincia de La Rioja', '2014-10-07', '2021-10-07', NULL),
+(81, 33000702, 335, 'CEIP Nro: 81', '', 'Provincia de Mendoza', '2014-10-07', '2021-10-07', NULL),
+(82, 33000717, 335, 'CEIP Nro: 82', '', 'Provincia de Misiones', '2014-10-07', '2021-10-07', NULL),
+(83, 33000732, 335, 'CEIP Nro: 83', '', 'Provincia del Neuquen', '2014-10-07', '2021-10-07', NULL),
+(84, 33000747, 335, 'CEIP Nro: 84', '', 'Provincia de Rio Negro', '2014-10-07', '2021-10-07', NULL),
+(85, 33000762, 335, 'CEIP Nro: 85', '', 'Provincia de Salta', '2014-10-07', '2021-10-07', NULL),
+(86, 33000777, 335, 'CEIP Nro: 86', '', 'Provincia de San Juan', '2014-10-07', '2021-10-07', NULL),
+(87, 33000792, 335, 'CEIP Nro: 87', '', 'Provincia de San Luis', '2014-10-07', '2021-10-07', NULL),
+(88, 33000807, 335, 'CEIP Nro: 88', '', 'Provincia de Santa Cruz', '2014-10-07', '2021-10-07', NULL),
+(89, 33000822, 335, 'CEIP Nro: 89', '', 'Provincia de Santa Fe', '2014-10-07', '2021-10-07', NULL),
+(90, 33000837, 335, 'CEIP Nro: 90', '', 'Provincia de Santiago del Este', '2014-10-07', '2021-10-07', NULL),
+(91, 33000852, 335, 'CEIP Nro: 91', '', 'Provincia de Tierra del Fuego,', '2014-10-07', '2021-10-07', NULL),
+(92, 33000867, 335, 'CEIP Nro: 92', '', 'Provincia de Tucuman', '2014-10-07', '2021-10-07', NULL),
+(93, 33000882, 335, 'CEIP Nro: 93', '', 'Provincia de Buenos Aires', '2014-10-07', '2021-10-07', NULL),
+(94, 33000897, 335, 'CEIP Nro: 94', '', 'Provincia de Catamarca', '2014-10-07', '2021-10-07', NULL),
+(95, 33000912, 335, 'CEIP Nro: 95', '', 'Provincia del Chaco', '2014-10-07', '2021-10-07', NULL),
+(96, 33000927, 335, 'CEIP Nro: 96', '', 'Provincia del Chubut', '2014-10-07', '2021-10-07', NULL),
+(97, 33000942, 335, 'CEIP Nro: 97', '', 'Provincia de Cordoba', '2014-10-07', '2021-10-07', NULL),
+(98, 33000957, 335, 'CEIP Nro: 98', '', 'Provincia de Corrientes', '2014-10-07', '2021-10-07', NULL),
+(99, 33000972, 335, 'CEIP Nro: 99', '', 'Provincia de Entre Rios', '2014-10-07', '2021-10-07', NULL),
+(100, 33000987, 137, 'UN Nro: 1', '', 'Provincia de Formosa', '2016-10-07', '2021-10-07', NULL),
+(101, 33001002, 138, 'Upriv Nro: 2', '', 'Provincia de Jujuy', '2016-10-07', '2021-10-07', NULL),
+(102, 33001017, 139, 'UN Nro: 3', '', 'Provincia de La Pampa', '2016-10-07', '2021-10-07', NULL),
+(103, 33001032, 140, 'Upriv Nro: 4', '', 'Provincia de La Rioja', '2016-10-07', '2021-10-07', NULL),
+(104, 33001047, 141, 'UN Nro: 5', '', 'Provincia de Mendoza', '2016-10-07', '2021-10-07', NULL),
+(105, 33001062, 142, 'Upriv Nro: 6', '', 'Provincia de Misiones', '2016-10-07', '2021-10-07', NULL),
+(106, 33001077, 143, 'UN Nro: 7', '', 'Provincia del Neuquen', '2016-10-07', '2021-10-07', NULL),
+(107, 33001092, 144, 'Upriv Nro: 8', '', 'Provincia de Rio Negro', '2016-10-07', '2021-10-07', NULL),
+(108, 33001107, 145, 'UN Nro: 9', '', 'Provincia de Salta', '2016-10-07', '2021-10-07', NULL),
+(109, 33001122, 146, 'Upriv Nro: 10', '', 'Provincia de San Juan', '2016-10-07', '2021-10-07', NULL),
+(110, 33001137, 147, 'UN Nro: 11', '', 'Provincia de San Luis', '2016-10-07', '2021-10-07', NULL),
+(111, 33001152, 148, 'Upriv Nro: 12', '', 'Provincia de Santa Cruz', '2016-10-07', '2021-10-07', NULL),
+(112, 33001167, 149, 'UN Nro: 13', '', 'Provincia de Santa Fe', '2016-10-07', '2021-10-07', NULL),
+(113, 33001182, 150, 'Upriv Nro: 14', '', 'Provincia de Santiago del Este', '2016-10-07', '2021-10-07', NULL),
+(114, 33001197, 151, 'UN Nro: 15', '', 'Provincia de Tierra del Fuego,', '2016-10-07', '2021-10-07', NULL),
+(115, 33001212, 152, 'Upriv Nro: 16', '', 'Provincia de Tucuman', '2016-10-07', '2021-10-07', NULL),
+(116, 33001227, 153, 'UN Nro: 17', '', 'Provincia de Buenos Aires', '2016-10-07', '2021-10-07', NULL),
+(117, 33001242, 154, 'Upriv Nro: 18', '', 'Provincia de Catamarca', '2016-10-07', '2021-10-07', NULL),
+(118, 33001257, 155, 'UN Nro: 19', '', 'Provincia del Chaco', '2016-10-07', '2021-10-07', NULL),
+(119, 33001272, 156, 'Upriv Nro: 20', '', 'Provincia del Chubut', '2016-10-07', '2021-10-07', NULL),
+(120, 33001287, 157, 'UN Nro: 21', '', 'Provincia de Cordoba', '2016-10-07', '2021-10-07', NULL),
+(121, 33001302, 158, 'Upriv Nro: 22', '', 'Provincia de Corrientes', '2016-10-07', '2021-10-07', NULL),
+(122, 33001317, 159, 'UN Nro: 23', '', 'Provincia de Entre Rios', '2016-10-07', '2021-10-07', NULL),
+(123, 33001332, 160, 'Upriv Nro: 24', '', 'Provincia de Formosa', '2016-10-07', '2021-10-07', NULL),
+(124, 33001347, 161, 'UN Nro: 25', '', 'Provincia de Jujuy', '2016-10-07', '2021-10-07', NULL),
+(125, 33001362, 162, 'Upriv Nro: 26', '', 'Provincia de La Pampa', '2016-10-07', '2021-10-07', NULL),
+(126, 33001377, 163, 'UN Nro: 27', '', 'Provincia de La Rioja', '2016-10-07', '2021-10-07', NULL),
+(127, 33001392, 164, 'Upriv Nro: 28', '', 'Provincia de Mendoza', '2016-10-07', '2021-10-07', NULL),
+(128, 33001407, 165, 'UN Nro: 29', '', 'Provincia de Misiones', '2016-10-07', '2021-10-07', NULL),
+(129, 33001422, 166, 'Upriv Nro: 30', '', 'Provincia del Neuquen', '2016-10-07', '2021-10-07', NULL),
+(130, 33001437, 167, 'UN Nro: 31', '', 'Provincia de Rio Negro', '2016-10-07', '2021-10-07', NULL),
+(131, 33001452, 168, 'Upriv Nro: 32', '', 'Provincia de Salta', '2016-10-07', '2021-10-07', NULL),
+(132, 33001467, 169, 'UN Nro: 33', '', 'Provincia de San Juan', '2016-10-07', '2021-10-07', NULL),
+(133, 33001482, 170, 'Upriv Nro: 34', '', 'Provincia de San Luis', '2016-10-07', '2021-10-07', NULL),
+(134, 33001497, 171, 'UN Nro: 35', '', 'Provincia de Santa Cruz', '2016-10-07', '2021-10-07', NULL),
+(135, 33001512, 172, 'Upriv Nro: 36', '', 'Provincia de Santa Fe', '2016-10-07', '2021-10-07', NULL),
+(136, 33001527, 173, 'UN Nro: 37', '', 'Provincia de Santiago del Este', '2016-10-07', '2021-10-07', NULL),
+(137, 33001542, 174, 'Upriv Nro: 38', '', 'Provincia de Tierra del Fuego,', '2016-10-07', '2021-10-07', NULL),
+(138, 33001557, 175, 'UN Nro: 39', '', 'Provincia de Tucuman', '2016-10-07', '2021-10-07', NULL),
+(139, 33001572, 176, 'Upriv Nro: 40', '', 'Provincia de Buenos Aires', '2016-10-07', '2021-10-07', NULL),
+(140, 33001587, 177, 'UN Nro: 41', '', 'Provincia de Catamarca', '2016-10-07', '2021-10-07', NULL),
+(141, 33001602, 178, 'Upriv Nro: 42', '', 'Provincia del Chaco', '2016-10-07', '2021-10-07', NULL),
+(142, 33001617, 179, 'UN Nro: 43', '', 'Provincia del Chubut', '2016-10-07', '2021-10-07', NULL),
+(143, 33001632, 180, 'Upriv Nro: 44', '', 'Provincia de Cordoba', '2016-10-07', '2021-10-07', NULL),
+(144, 33001647, 181, 'UN Nro: 45', '', 'Provincia de Corrientes', '2016-10-07', '2021-10-07', NULL),
+(145, 33001662, 182, 'Upriv Nro: 46', '', 'Provincia de Entre Rios', '2016-10-07', '2021-10-07', NULL),
+(146, 33001677, 183, 'UN Nro: 47', '', 'Provincia de Formosa', '2016-10-07', '2021-10-07', NULL),
+(147, 33001692, 184, 'Upriv Nro: 48', '', 'Provincia de Jujuy', '2016-10-07', '2021-10-07', NULL),
+(148, 33001707, 185, 'UN Nro: 49', '', 'Provincia de La Pampa', '2016-10-07', '2021-10-07', NULL),
+(149, 33001722, 186, 'Upriv Nro: 50', '', 'Provincia de La Rioja', '2016-10-07', '2021-10-07', NULL),
+(150, 33001737, 187, 'UN Nro: 51', '', 'Provincia de Mendoza', '2016-10-07', '2021-10-07', NULL),
+(151, 33001752, 188, 'Upriv Nro: 52', '', 'Provincia de Misiones', '2016-10-07', '2021-10-07', NULL),
+(152, 33001767, 189, 'UN Nro: 53', '', 'Provincia del Neuquen', '2016-10-07', '2021-10-07', NULL),
+(153, 33001782, 190, 'Upriv Nro: 54', '', 'Provincia de Rio Negro', '2016-10-07', '2021-10-07', NULL),
+(154, 33001797, 191, 'UN Nro: 55', '', 'Provincia de Salta', '2016-10-07', '2021-10-07', NULL),
+(155, 33001812, 192, 'Upriv Nro: 56', '', 'Provincia de San Juan', '2016-10-07', '2021-10-07', NULL),
+(156, 33001827, 193, 'UN Nro: 57', '', 'Provincia de San Luis', '2016-10-07', '2021-10-07', NULL),
+(157, 33001842, 194, 'Upriv Nro: 58', '', 'Provincia de Santa Cruz', '2016-10-07', '2021-10-07', NULL),
+(158, 33001857, 195, 'UN Nro: 59', '', 'Provincia de Santa Fe', '2016-10-07', '2021-10-07', NULL),
+(159, 33001872, 196, 'Upriv Nro: 60', '', 'Provincia de Santiago del Este', '2016-10-07', '2021-10-07', NULL),
+(160, 33001887, 197, 'UN Nro: 61', '', 'Provincia de Tierra del Fuego,', '2016-10-07', '2021-10-07', NULL),
+(161, 33001902, 198, 'Upriv Nro: 62', '', 'Provincia de Tucuman', '2016-10-07', '2021-10-07', NULL),
+(162, 33001917, 199, 'UN Nro: 63', '', 'Provincia de Buenos Aires', '2016-10-07', '2021-10-07', NULL),
+(163, 33001932, 200, 'Upriv Nro: 64', '', 'Provincia de Catamarca', '2016-10-07', '2021-10-07', NULL),
+(164, 33001947, 201, 'UN Nro: 65', '', 'Provincia del Chaco', '2016-10-07', '2021-10-07', NULL),
+(165, 33001962, 202, 'Upriv Nro: 66', '', 'Provincia del Chubut', '2016-10-07', '2021-10-07', NULL),
+(166, 33001977, 203, 'UN Nro: 67', '', 'Provincia de Cordoba', '2016-10-07', '2021-10-07', NULL),
+(167, 33001992, 204, 'Upriv Nro: 68', '', 'Provincia de Corrientes', '2016-10-07', '2021-10-07', NULL),
+(168, 33002007, 205, 'UN Nro: 69', '', 'Provincia de Entre Rios', '2016-10-07', '2021-10-07', NULL),
+(169, 33002022, 206, 'Upriv Nro: 70', '', 'Provincia de Formosa', '2016-10-07', '2021-10-07', NULL),
+(170, 33002037, 207, 'UN Nro: 71', '', 'Provincia de Jujuy', '2016-10-07', '2021-10-07', NULL),
+(171, 33002052, 208, 'Upriv Nro: 72', '', 'Provincia de La Pampa', '2016-10-07', '2021-10-07', NULL),
+(172, 33002067, 209, 'UN Nro: 73', '', 'Provincia de La Rioja', '2016-10-07', '2021-10-07', NULL),
+(173, 33002082, 210, 'Upriv Nro: 74', '', 'Provincia de Mendoza', '2016-10-07', '2021-10-07', NULL),
+(174, 33002097, 211, 'UN Nro: 75', '', 'Provincia de Misiones', '2016-10-07', '2021-10-07', NULL),
+(175, 33002112, 212, 'Upriv Nro: 76', '', 'Provincia del Neuquen', '2016-10-07', '2021-10-07', NULL),
+(176, 33002127, 213, 'UN Nro: 77', '', 'Provincia de Rio Negro', '2016-10-07', '2021-10-07', NULL),
+(177, 33002142, 214, 'Upriv Nro: 78', '', 'Provincia de Salta', '2016-10-07', '2021-10-07', NULL),
+(178, 33002157, 215, 'UN Nro: 79', '', 'Provincia de San Juan', '2016-10-07', '2021-10-07', NULL),
+(179, 33002172, 216, 'Upriv Nro: 80', '', 'Provincia de San Luis', '2016-10-07', '2021-10-07', NULL),
+(180, 33002187, 217, 'UN Nro: 81', '', 'Provincia de Santa Cruz', '2016-10-07', '2021-10-07', NULL),
+(181, 33002202, 218, 'Upriv Nro: 82', '', 'Provincia de Santa Fe', '2016-10-07', '2021-10-07', NULL),
+(182, 33002217, 219, 'UN Nro: 83', '', 'Provincia de Santiago del Este', '2016-10-07', '2021-10-07', NULL),
+(183, 33002232, 220, 'Upriv Nro: 84', '', 'Provincia de Tierra del Fuego,', '2016-10-07', '2021-10-07', NULL),
+(184, 33002247, 221, 'UN Nro: 85', '', 'Provincia de Tucuman', '2016-10-07', '2021-10-07', NULL),
+(185, 33002262, 222, 'Upriv Nro: 86', '', 'Provincia de Buenos Aires', '2016-10-07', '2021-10-07', NULL),
+(186, 33002277, 223, 'UN Nro: 87', '', 'Provincia de Catamarca', '2016-10-07', '2021-10-07', NULL),
+(187, 33002292, 224, 'Upriv Nro: 88', '', 'Provincia del Chaco', '2016-10-07', '2021-10-07', NULL),
+(188, 33002307, 225, 'UN Nro: 89', '', 'Provincia del Chubut', '2016-10-07', '2021-10-07', NULL),
+(189, 33002322, 226, 'Upriv Nro: 90', '', 'Provincia de Cordoba', '2016-10-07', '2021-10-07', NULL),
+(190, 33002337, 227, 'UN Nro: 91', '', 'Provincia de Corrientes', '2016-10-07', '2021-10-07', NULL),
+(191, 33002352, 228, 'Upriv Nro: 92', '', 'Provincia de Entre Rios', '2016-10-07', '2021-10-07', NULL),
+(192, 33002367, 229, 'UN Nro: 93', '', 'Provincia de Formosa', '2016-10-07', '2021-10-07', NULL),
+(193, 33002382, 230, 'Upriv Nro: 94', '', 'Provincia de Jujuy', '2016-10-07', '2021-10-07', NULL),
+(194, 33002397, 231, 'UN Nro: 95', '', 'Provincia de La Pampa', '2016-10-07', '2021-10-07', NULL),
+(195, 33002412, 232, 'Upriv Nro: 96', '', 'Provincia de La Rioja', '2016-10-07', '2021-10-07', NULL),
+(196, 33002427, 233, 'UN Nro: 97', '', 'Provincia de Mendoza', '2016-10-07', '2021-10-07', NULL),
+(197, 33002442, 234, 'Upriv Nro: 98', '', 'Provincia de Misiones', '2016-10-07', '2021-10-07', NULL),
+(198, 33002457, 235, 'UN Nro: 99', '', 'Provincia del Neuquen', '2016-10-07', '2021-10-07', NULL),
+(199, 33002472, 236, 'Upriv Nro: 1', '', 'Provincia de Rio Negro', '2016-10-07', '2021-10-07', NULL),
+(200, 33002487, 237, 'UN Nro: 2', '', 'Provincia de Salta', '2016-10-07', '2021-10-07', NULL),
+(201, 33002502, 238, 'Upriv Nro: 3', '', 'Provincia de San Juan', '2016-10-07', '2021-10-07', NULL),
+(202, 33002517, 239, 'UN Nro: 4', '', 'Provincia de San Luis', '2016-10-07', '2021-10-07', NULL),
+(203, 33002532, 240, 'Upriv Nro: 5', '', 'Provincia de Santa Cruz', '2016-10-07', '2021-10-07', NULL),
+(204, 33002547, 241, 'UN Nro: 6', '', 'Provincia de Santa Fe', '2016-10-07', '2021-10-07', NULL),
+(205, 33002562, 242, 'Upriv Nro: 7', '', 'Provincia de Santiago del Este', '2016-10-07', '2021-10-07', NULL),
+(206, 33002577, 243, 'UN Nro: 8', '', 'Provincia de Tierra del Fuego,', '2016-10-07', '2021-10-07', NULL),
+(207, 33002592, 244, 'Upriv Nro: 9', '', 'Provincia de Tucuman', '2016-10-07', '2021-10-07', NULL),
+(208, 33002607, 245, 'UN Nro: 10', '', 'Provincia de Buenos Aires', '2016-10-07', '2021-10-07', NULL),
+(209, 33002622, 246, 'Upriv Nro: 11', '', 'Provincia de Catamarca', '2016-10-07', '2021-10-07', NULL),
+(210, 33002637, 247, 'UN Nro: 12', '', 'Provincia del Chaco', '2016-10-07', '2021-10-07', NULL),
+(211, 33002652, 248, 'Upriv Nro: 13', '', 'Provincia del Chubut', '2016-10-07', '2021-10-07', NULL),
+(212, 33002667, 249, 'UN Nro: 14', '', 'Provincia de Cordoba', '2016-10-07', '2021-10-07', NULL),
+(213, 33002682, 250, 'Upriv Nro: 15', '', 'Provincia de Corrientes', '2016-10-07', '2021-10-07', NULL),
+(214, 33002697, 251, 'UN Nro: 16', '', 'Provincia de Entre Rios', '2016-10-07', '2021-10-07', NULL),
+(215, 33002712, 252, 'Upriv Nro: 17', '', 'Provincia de Formosa', '2016-10-07', '2021-10-07', NULL),
+(216, 33002727, 253, 'UN Nro: 18', '', 'Provincia de Jujuy', '2016-10-07', '2021-10-07', NULL),
+(217, 33002742, 254, 'Upriv Nro: 19', '', 'Provincia de La Pampa', '2016-10-07', '2021-10-07', NULL),
+(218, 33002757, 255, 'UN Nro: 20', '', 'Provincia de La Rioja', '2016-10-07', '2021-10-07', NULL),
+(219, 33002772, 256, 'Upriv Nro: 21', '', 'Provincia de Mendoza', '2016-10-07', '2021-10-07', NULL),
+(220, 33002787, 257, 'UN Nro: 22', '', 'Provincia de Misiones', '2016-10-07', '2021-10-07', NULL),
+(221, 33002802, 258, 'Upriv Nro: 23', '', 'Provincia del Neuquen', '2016-10-07', '2021-10-07', NULL),
+(222, 33002817, 259, 'UN Nro: 24', '', 'Provincia de Rio Negro', '2016-10-07', '2021-10-07', NULL),
+(223, 33002832, 260, 'Upriv Nro: 25', '', 'Provincia de Salta', '2016-10-07', '2021-10-07', NULL),
+(224, 33002847, 261, 'UN Nro: 26', '', 'Provincia de San Juan', '2016-10-07', '2021-10-07', NULL),
+(225, 33002862, 262, 'Upriv Nro: 27', '', 'Provincia de San Luis', '2016-10-07', '2021-10-07', NULL),
+(226, 33002877, 263, 'UN Nro: 28', '', 'Provincia de Santa Cruz', '2016-10-07', '2021-10-07', NULL),
+(227, 33002892, 264, 'Upriv Nro: 29', '', 'Provincia de Santa Fe', '2016-10-07', '2021-10-07', NULL),
+(228, 33002907, 265, 'UN Nro: 30', '', 'Provincia de Santiago del Este', '2016-10-07', '2021-10-07', NULL),
+(229, 33002922, 266, 'Upriv Nro: 31', '', 'Provincia de Tierra del Fuego,', '2016-10-07', '2021-10-07', NULL),
+(230, 33002937, 267, 'UN Nro: 32', '', 'Provincia de Tucuman', '2016-10-07', '2021-10-07', NULL),
+(231, 33002952, 268, 'Upriv Nro: 33', '', 'Provincia de Buenos Aires', '2016-10-07', '2021-10-07', NULL),
+(232, 33002967, 269, 'UN Nro: 34', '', 'Provincia de Catamarca', '2016-10-07', '2021-10-07', NULL),
+(233, 33002982, 270, 'Upriv Nro: 35', '', 'Provincia del Chaco', '2016-10-07', '2021-10-07', NULL),
+(234, 33002997, 271, 'UN Nro: 36', '', 'Provincia del Chubut', '2016-10-07', '2021-10-07', NULL),
+(235, 33003012, 272, 'Upriv Nro: 37', '', 'Provincia de Cordoba', '2016-10-07', '2021-10-07', NULL),
+(236, 33003027, 273, 'UN Nro: 38', '', 'Provincia de Corrientes', '2016-10-07', '2021-10-07', NULL),
+(237, 33003042, 274, 'Upriv Nro: 39', '', 'Provincia de Entre Rios', '2016-10-07', '2021-10-07', NULL),
+(238, 33003057, 275, 'UN Nro: 40', '', 'Provincia de Formosa', '2016-10-07', '2021-10-07', NULL),
+(239, 33003072, 276, 'Upriv Nro: 41', '', 'Provincia de Jujuy', '2016-10-07', '2021-10-07', NULL),
+(240, 33003087, 277, 'UN Nro: 42', '', 'Provincia de La Pampa', '2016-10-07', '2021-10-07', NULL),
+(241, 33003102, 278, 'Upriv Nro: 43', '', 'Provincia de La Rioja', '2016-10-07', '2021-10-07', NULL),
+(242, 33003117, 279, 'UN Nro: 44', '', 'Provincia de Mendoza', '2016-10-07', '2021-10-07', NULL),
+(243, 33003132, 280, 'Upriv Nro: 45', '', 'Provincia de Misiones', '2016-10-07', '2021-10-07', NULL),
+(244, 33003147, 281, 'UN Nro: 46', '', 'Provincia del Neuquen', '2016-10-07', '2021-10-07', NULL),
+(245, 33003162, 282, 'Upriv Nro: 47', '', 'Provincia de Rio Negro', '2016-10-07', '2021-10-07', NULL),
+(246, 33003177, 283, 'UN Nro: 48', '', 'Provincia de Salta', '2016-10-07', '2021-10-07', NULL),
+(247, 33003192, 284, 'Upriv Nro: 49', '', 'Provincia de San Juan', '2016-10-07', '2021-10-07', NULL),
+(248, 33003207, 285, 'UN Nro: 50', '', 'Provincia de San Luis', '2016-10-07', '2021-10-07', NULL),
+(249, 33003222, 286, 'Upriv Nro: 51', '', 'Provincia de Santa Cruz', '2016-10-07', '2021-10-07', NULL),
+(250, 33003237, 287, 'UN Nro: 52', '', 'Provincia de Santa Fe', '2016-10-07', '2021-10-07', NULL),
+(251, 33003252, 288, 'Upriv Nro: 53', '', 'Provincia de Santiago del Este', '2016-10-07', '2021-10-07', NULL),
+(252, 33003267, 289, 'UN Nro: 54', '', 'Provincia de Tierra del Fuego,', '2016-10-07', '2021-10-07', NULL),
+(253, 33003282, 290, 'Upriv Nro: 55', '', 'Provincia de Tucuman', '2016-10-07', '2021-10-07', NULL),
+(254, 33003297, 291, 'UN Nro: 56', '', 'Provincia de Buenos Aires', '2016-10-07', '2021-10-07', NULL),
+(255, 33003312, 292, 'Upriv Nro: 57', '', 'Provincia de Catamarca', '2016-10-07', '2021-10-07', NULL),
+(256, 33003327, 293, 'UN Nro: 58', '', 'Provincia del Chaco', '2016-10-07', '2021-10-07', NULL),
+(257, 33003342, 294, 'Upriv Nro: 59', '', 'Provincia del Chubut', '2016-10-07', '2021-10-07', NULL),
+(258, 33003357, 295, 'UN Nro: 60', '', 'Provincia de Cordoba', '2016-10-07', '2021-10-07', NULL),
+(259, 33003372, 296, 'Upriv Nro: 61', '', 'Provincia de Corrientes', '2016-10-07', '2021-10-07', NULL),
+(260, 33003387, 297, 'UN Nro: 62', '', 'Provincia de Entre Rios', '2016-10-07', '2021-10-07', NULL),
+(261, 33003402, 298, 'Upriv Nro: 63', '', 'Provincia de Formosa', '2016-10-07', '2021-10-07', NULL),
+(262, 33003417, 299, 'UN Nro: 64', '', 'Provincia de Jujuy', '2016-10-07', '2021-10-07', NULL),
+(263, 33003432, 300, 'Upriv Nro: 65', '', 'Provincia de La Pampa', '2016-10-07', '2021-10-07', NULL),
+(264, 33003447, 301, 'UN Nro: 66', '', 'Provincia de La Rioja', '2016-10-07', '2021-10-07', NULL),
+(265, 33003462, 302, 'Upriv Nro: 67', '', 'Provincia de Mendoza', '2016-10-07', '2021-10-07', NULL),
+(266, 33003477, 303, 'UN Nro: 68', '', 'Provincia de Misiones', '2016-10-07', '2021-10-07', NULL),
+(267, 33003492, 304, 'Upriv Nro: 69', '', 'Provincia del Neuquen', '2016-10-07', '2021-10-07', NULL),
+(268, 33003507, 305, 'UN Nro: 70', '', 'Provincia de Rio Negro', '2016-10-07', '2021-10-07', NULL),
+(269, 33003522, 306, 'Upriv Nro: 71', '', 'Provincia de Salta', '2016-10-07', '2021-10-07', NULL),
+(270, 33003537, 307, 'UN Nro: 72', '', 'Provincia de San Juan', '2016-10-07', '2021-10-07', NULL),
+(271, 33003552, 308, 'Upriv Nro: 73', '', 'Provincia de San Luis', '2016-10-07', '2021-10-07', NULL),
+(272, 33003567, 309, 'UN Nro: 74', '', 'Provincia de Santa Cruz', '2016-10-07', '2021-10-07', NULL),
+(273, 33003582, 310, 'Upriv Nro: 75', '', 'Provincia de Santa Fe', '2016-10-07', '2021-10-07', NULL),
+(274, 33003597, 311, 'UN Nro: 76', '', 'Provincia de Santiago del Este', '2016-10-07', '2021-10-07', NULL),
+(275, 33003612, 312, 'Upriv Nro: 77', '', 'Provincia de Tierra del Fuego,', '2016-10-07', '2021-10-07', NULL),
+(276, 33003627, 313, 'UN Nro: 78', '', 'Provincia de Tucuman', '2016-10-07', '2021-10-07', NULL),
+(277, 33003642, 314, 'Upriv Nro: 79', '', 'Provincia de Buenos Aires', '2016-10-07', '2021-10-07', NULL),
+(278, 33003657, 315, 'UN Nro: 80', '', 'Provincia de Catamarca', '2016-10-07', '2021-10-07', NULL),
+(279, 33003672, 316, 'Upriv Nro: 81', '', 'Provincia del Chaco', '2016-10-07', '2021-10-07', NULL),
+(280, 33003687, 317, 'UN Nro: 82', '', 'Provincia del Chubut', '2016-10-07', '2021-10-07', NULL),
+(281, 33003702, 318, 'Upriv Nro: 83', '', 'Provincia de Cordoba', '2016-10-07', '2021-10-07', NULL),
+(282, 33003717, 319, 'UN Nro: 84', '', 'Provincia de Corrientes', '2016-10-07', '2021-10-07', NULL),
+(283, 33003732, 320, 'Upriv Nro: 85', '', 'Provincia de Entre Rios', '2016-10-07', '2021-10-07', NULL),
+(284, 33003747, 321, 'UN Nro: 86', '', 'Provincia de Formosa', '2016-10-07', '2021-10-07', NULL),
+(285, 33003762, 322, 'Upriv Nro: 87', '', 'Provincia de Jujuy', '2016-10-07', '2021-10-07', NULL),
+(286, 33003777, 323, 'UN Nro: 88', '', 'Provincia de La Pampa', '2016-10-07', '2021-10-07', NULL),
+(287, 33003792, 324, 'Upriv Nro: 89', '', 'Provincia de La Rioja', '2016-10-07', '2021-10-07', NULL),
+(288, 33003807, 325, 'UN Nro: 90', '', 'Provincia de Mendoza', '2016-10-07', '2021-10-07', NULL),
+(289, 33003822, 326, 'Upriv Nro: 91', '', 'Provincia de Misiones', '2016-10-07', '2021-10-07', NULL),
+(290, 33003837, 327, 'UN Nro: 92', '', 'Provincia del Neuquen', '2016-10-07', '2021-10-07', NULL),
+(291, 33003852, 328, 'Upriv Nro: 93', '', 'Provincia de Rio Negro', '2016-10-07', '2021-10-07', NULL),
+(292, 33003867, 329, 'UN Nro: 94', '', 'Provincia de Salta', '2016-10-07', '2021-10-07', NULL),
+(293, 33003882, 330, 'Upriv Nro: 95', '', 'Provincia de San Juan', '2016-10-07', '2021-10-07', NULL),
+(294, 33003897, 331, 'UN Nro: 96', '', 'Provincia de San Luis', '2016-10-07', '2021-10-07', NULL),
+(295, 33003912, 332, 'Upriv Nro: 97', '', 'Provincia de Santa Cruz', '2016-10-07', '2021-10-07', NULL),
+(296, 33003927, 333, 'UN Nro: 98', '', 'Provincia de Santa Fe', '2016-10-07', '2021-10-07', NULL),
+(297, 33003942, 1, 'Inst Sup Nro: 1', '', 'Provincia de Santiago del Este', '2018-10-07', '2021-10-07', NULL),
+(298, 33003957, 2, 'Inst Sup Nro: 2', '', 'Provincia de Tierra del Fuego,', '2018-10-07', '2021-10-07', NULL),
+(299, 33003972, 3, 'Inst Sup Nro: 3', '', 'Provincia de Tucuman', '2018-10-07', '2021-10-07', NULL),
+(300, 33003987, 4, 'Inst Sup Nro: 4', '', 'Provincia de Buenos Aires', '2018-10-07', '2021-10-07', NULL),
+(301, 33004002, 5, 'Inst Sup Nro: 5', '', 'Provincia de Catamarca', '2018-10-07', '2021-10-07', NULL),
+(302, 33004017, 6, 'Inst Sup Nro: 6', '', 'Provincia del Chaco', '2018-10-07', '2021-10-07', NULL),
+(303, 33004032, 7, 'Inst Sup Nro: 7', '', 'Provincia del Chubut', '2018-10-07', '2021-10-07', NULL),
+(304, 33004047, 8, 'Inst Sup Nro: 8', '', 'Provincia de Cordoba', '2018-10-07', '2021-10-07', NULL),
+(305, 33004062, 9, 'Inst Sup Nro: 9', '', 'Provincia de Corrientes', '2018-10-07', '2021-10-07', NULL),
+(306, 33004077, 10, 'Inst Sup Nro: 10', '', 'Provincia de Entre Rios', '2018-10-07', '2021-10-07', NULL),
+(307, 33004092, 11, 'Inst Sup Nro: 11', '', 'Provincia de Formosa', '2018-10-07', '2021-10-07', NULL),
+(308, 33004107, 12, 'Inst Sup Nro: 12', '', 'Provincia de Jujuy', '2018-10-07', '2021-10-07', NULL),
+(309, 33004122, 13, 'Inst Sup Nro: 13', '', 'Provincia de La Pampa', '2018-10-07', '2021-10-07', NULL),
+(310, 33004137, 14, 'Inst Sup Nro: 14', '', 'Provincia de La Rioja', '2018-10-07', '2021-10-07', NULL),
+(311, 33004152, 15, 'Inst Sup Nro: 15', '', 'Provincia de Mendoza', '2018-10-07', '2021-10-07', NULL),
+(312, 33004167, 16, 'Inst Sup Nro: 16', '', 'Provincia de Misiones', '2018-10-07', '2021-10-07', NULL),
+(313, 33004182, 17, 'Inst Sup Nro: 17', '', 'Provincia del Neuquen', '2018-10-07', '2021-10-07', NULL),
+(314, 33004197, 18, 'Inst Sup Nro: 18', '', 'Provincia de Rio Negro', '2018-10-07', '2021-10-07', NULL),
+(315, 33004212, 19, 'Inst Sup Nro: 19', '', 'Provincia de Salta', '2018-10-07', '2021-10-07', NULL),
+(316, 33004227, 20, 'Inst Sup Nro: 20', '', 'Provincia de San Juan', '2018-10-07', '2021-10-07', NULL),
+(317, 33004242, 21, 'Inst Sup Nro: 21', '', 'Provincia de San Luis', '2018-10-07', '2021-10-07', NULL),
+(318, 33004257, 22, 'Inst Sup Nro: 22', '', 'Provincia de Santa Cruz', '2018-10-07', '2021-10-07', NULL),
+(319, 33004272, 23, 'Inst Sup Nro: 23', '', 'Provincia de Santa Fe', '2018-10-07', '2021-10-07', NULL),
+(320, 33004287, 24, 'Inst Sup Nro: 24', '', 'Provincia de Santiago del Este', '2018-10-07', '2021-10-07', NULL),
+(321, 33004302, 25, 'Inst Sup Nro: 25', '', 'Provincia de Tierra del Fuego,', '2018-10-07', '2021-10-07', NULL),
+(322, 33004317, 26, 'Inst Sup Nro: 26', '', 'Provincia de Tucuman', '2018-10-07', '2021-10-07', NULL),
+(323, 33004332, 27, 'Inst Sup Nro: 27', '', 'Provincia de Buenos Aires', '2018-10-07', '2021-10-07', NULL),
+(324, 33004347, 28, 'Inst Sup Nro: 28', '', 'Provincia de Catamarca', '2018-10-07', '2021-10-07', NULL),
+(325, 33004362, 29, 'Inst Sup Nro: 29', '', 'Provincia del Chaco', '2018-10-07', '2021-10-07', NULL),
+(326, 33004377, 30, 'Inst Sup Nro: 30', '', 'Provincia del Chubut', '2018-10-07', '2021-10-07', NULL),
+(327, 33004392, 31, 'Inst Sup Nro: 31', '', 'Provincia de Cordoba', '2018-10-07', '2021-10-07', NULL),
+(328, 33004407, 32, 'Inst Sup Nro: 32', '', 'Provincia de Corrientes', '2018-10-07', '2021-10-07', NULL),
+(329, 33004422, 33, 'Inst Sup Nro: 33', '', 'Provincia de Entre Rios', '2018-10-07', '2021-10-07', NULL),
+(330, 33004437, 34, 'Inst Sup Nro: 34', '', 'Provincia de Formosa', '2018-10-07', '2021-10-07', NULL),
+(331, 33004452, 35, 'Inst Sup Nro: 35', '', 'Provincia de Jujuy', '2018-10-07', '2021-10-07', NULL),
+(332, 33004467, 36, 'Inst Sup Nro: 36', '', 'Provincia de La Pampa', '2018-10-07', '2021-10-07', NULL),
+(333, 33004482, 37, 'Inst Sup Nro: 37', '', 'Provincia de La Rioja', '2018-10-07', '2021-10-07', NULL),
+(334, 33004497, 38, 'Inst Sup Nro: 38', '', 'Provincia de Mendoza', '2018-10-07', '2021-10-07', NULL),
+(335, 33004512, 39, 'Inst Sup Nro: 39', '', 'Provincia de Misiones', '2018-10-07', '2021-10-07', NULL),
+(336, 33004527, 40, 'Inst Sup Nro: 40', '', 'Provincia del Neuquen', '2018-10-07', '2021-10-07', NULL),
+(337, 33004542, 41, 'Inst Sup Nro: 41', '', 'Provincia de Rio Negro', '2018-10-07', '2021-10-07', NULL),
+(338, 33004557, 42, 'Inst Sup Nro: 42', '', 'Provincia de Salta', '2018-10-07', '2021-10-07', NULL),
+(339, 33004572, 43, 'Inst Sup Nro: 43', '', 'Provincia de San Juan', '2018-10-07', '2021-10-07', NULL),
+(340, 33004587, 44, 'Inst Sup Nro: 44', '', 'Provincia de San Luis', '2018-10-07', '2021-10-07', NULL),
+(341, 33004602, 45, 'Inst Sup Nro: 45', '', 'Provincia de Santa Cruz', '2018-10-07', '2021-10-07', NULL),
+(342, 33004617, 46, 'Inst Sup Nro: 46', '', 'Provincia de Santa Fe', '2018-10-07', '2021-10-07', NULL),
+(343, 33004632, 47, 'Inst Sup Nro: 47', '', 'Provincia de Santiago del Este', '2018-10-07', '2021-10-07', NULL),
+(344, 33004647, 48, 'Inst Sup Nro: 48', '', 'Provincia de Tierra del Fuego,', '2018-10-07', '2021-10-07', NULL),
+(345, 33004662, 49, 'Inst Sup Nro: 49', '', 'Provincia de Tucuman', '2018-10-07', '2021-10-07', NULL),
+(346, 33004677, 50, 'Inst Sup Nro: 50', '', 'Provincia de Buenos Aires', '2018-10-07', '2021-10-07', NULL),
+(347, 33004692, 51, 'Inst Sup Nro: 51', '', 'Provincia de Catamarca', '2018-10-07', '2021-10-07', NULL),
+(348, 33004707, 52, 'Inst Sup Nro: 52', '', 'Provincia del Chaco', '2018-10-07', '2021-10-07', NULL),
+(349, 33004722, 53, 'Inst Sup Nro: 53', '', 'Provincia del Chubut', '2018-10-07', '2021-10-07', NULL),
+(350, 33004737, 54, 'Inst Sup Nro: 54', '', 'Provincia de Cordoba', '2018-10-07', '2021-10-07', NULL),
+(351, 33004752, 55, 'Inst Sup Nro: 55', '', 'Provincia de Corrientes', '2018-10-07', '2021-10-07', NULL),
+(352, 33004767, 56, 'Inst Sup Nro: 56', '', 'Provincia de Entre Rios', '2018-10-07', '2021-10-07', NULL),
+(353, 33004782, 57, 'Inst Sup Nro: 57', '', 'Provincia de Formosa', '2018-10-07', '2021-10-07', NULL),
+(354, 33004797, 58, 'Inst Sup Nro: 58', '', 'Provincia de Jujuy', '2018-10-07', '2021-10-07', NULL),
+(355, 33004812, 59, 'Inst Sup Nro: 59', '', 'Provincia de La Pampa', '2018-10-07', '2021-10-07', NULL),
+(356, 33004827, 60, 'Inst Sup Nro: 60', '', 'Provincia de La Rioja', '2018-10-07', '2021-10-07', NULL),
+(357, 33004842, 61, 'Inst Sup Nro: 61', '', 'Provincia de Mendoza', '2018-10-07', '2021-10-07', NULL),
+(358, 33004857, 62, 'Inst Sup Nro: 62', '', 'Provincia de Misiones', '2018-10-07', '2021-10-07', NULL),
+(359, 33004872, 63, 'Inst Sup Nro: 63', '', 'Provincia del Neuquen', '2018-10-07', '2021-10-07', NULL),
+(360, 33004887, 64, 'Inst Sup Nro: 64', '', 'Provincia de Rio Negro', '2018-10-07', '2021-10-07', NULL),
+(361, 33004902, 65, 'Inst Sup Nro: 65', '', 'Provincia de Salta', '2018-10-07', '2021-10-07', NULL),
+(362, 33004917, 66, 'Inst Sup Nro: 66', '', 'Provincia de San Juan', '2018-10-07', '2021-10-07', NULL),
+(363, 33004932, 67, 'Inst Sup Nro: 67', '', 'Provincia de San Luis', '2018-10-07', '2021-10-07', NULL),
+(364, 33004947, 68, 'Inst Sup Nro: 68', '', 'Provincia de Santa Cruz', '2018-10-07', '2021-10-07', NULL),
+(365, 33004962, 69, 'Inst Sup Nro: 69', '', 'Provincia de Santa Fe', '2018-10-07', '2021-10-07', NULL),
+(366, 33004977, 70, 'Inst Sup Nro: 70', '', 'Provincia de Santiago del Este', '2018-10-07', '2021-10-07', NULL),
+(367, 33004992, 71, 'Inst Sup Nro: 71', '', 'Provincia de Tierra del Fuego,', '2018-10-07', '2021-10-07', NULL),
+(368, 33005007, 72, 'Inst Sup Nro: 72', '', 'Provincia de Tucuman', '2018-10-07', '2021-10-07', NULL),
+(369, 33005022, 73, 'Inst Sup Nro: 73', '', 'Provincia de Buenos Aires', '2018-10-07', '2021-10-07', NULL),
+(370, 33005037, 74, 'Inst Sup Nro: 74', '', 'Provincia de Catamarca', '2018-10-07', '2021-10-07', NULL),
+(371, 33005052, 75, 'Inst Sup Nro: 75', '', 'Provincia del Chaco', '2018-10-07', '2021-10-07', NULL),
+(372, 33005067, 76, 'Inst Sup Nro: 76', '', 'Provincia del Chubut', '2018-10-07', '2021-10-07', NULL),
+(373, 33005082, 77, 'Inst Sup Nro: 77', '', 'Provincia de Cordoba', '2018-10-07', '2021-10-07', NULL),
+(374, 33005097, 78, 'Inst Sup Nro: 78', '', 'Provincia de Corrientes', '2018-10-07', '2021-10-07', NULL),
+(375, 33005112, 79, 'Inst Sup Nro: 79', '', 'Provincia de Entre Rios', '2018-10-07', '2021-10-07', NULL),
+(376, 33005127, 80, 'Inst Sup Nro: 80', '', 'Provincia de Formosa', '2018-10-07', '2021-10-07', NULL),
+(377, 33005142, 81, 'Inst Sup Nro: 81', '', 'Provincia de Jujuy', '2018-10-07', '2021-10-07', NULL),
+(378, 33005157, 82, 'Inst Sup Nro: 82', '', 'Provincia de La Pampa', '2018-10-07', '2021-10-07', NULL),
+(379, 33005172, 83, 'Inst Sup Nro: 83', '', 'Provincia de La Rioja', '2018-10-07', '2021-10-07', NULL),
+(380, 33005187, 84, 'Inst Sup Nro: 84', '', 'Provincia de Mendoza', '2018-10-07', '2021-10-07', NULL),
+(381, 33005202, 85, 'Inst Sup Nro: 85', '', 'Provincia de Misiones', '2018-10-07', '2021-10-07', NULL),
+(382, 33005217, 86, 'Inst Sup Nro: 86', '', 'Provincia del Neuquen', '2018-10-07', '2021-10-07', NULL),
+(383, 33005232, 87, 'Inst Sup Nro: 87', '', 'Provincia de Rio Negro', '2018-10-07', '2021-10-07', NULL),
+(384, 33005247, 88, 'Inst Sup Nro: 88', '', 'Provincia de Salta', '2018-10-07', '2021-10-07', NULL),
+(385, 33005262, 89, 'Inst Sup Nro: 89', '', 'Provincia de San Juan', '2018-10-07', '2021-10-07', NULL),
+(386, 33005277, 90, 'Inst Sup Nro: 90', '', 'Provincia de San Luis', '2018-10-07', '2021-10-07', NULL),
+(387, 33005292, 91, 'Inst Sup Nro: 91', '', 'Provincia de Santa Cruz', '2018-10-07', '2021-10-07', NULL),
+(388, 33005307, 92, 'Inst Sup Nro: 92', '', 'Provincia de Santa Fe', '2018-10-07', '2021-10-07', NULL),
+(389, 33005322, 93, 'Inst Sup Nro: 93', '', 'Provincia de Santiago del Este', '2018-10-07', '2021-10-07', NULL),
+(390, 33005337, 94, 'Inst Sup Nro: 94', '', 'Provincia de Tierra del Fuego,', '2018-10-07', '2021-10-07', NULL),
+(391, 33005352, 95, 'Inst Sup Nro: 95', '', 'Provincia de Tucuman', '2018-10-07', '2021-10-07', NULL),
+(392, 33005367, 96, 'Inst Sup Nro: 96', '', 'Provincia de Buenos Aires', '2018-10-07', '2021-10-07', NULL),
+(393, 33005382, 97, 'Inst Sup Nro: 97', '', 'Provincia de Catamarca', '2018-10-07', '2021-10-07', NULL),
+(394, 33005397, 98, 'Inst Sup Nro: 98', '', 'Provincia del Chaco', '2018-10-07', '2021-10-07', NULL),
+(395, 33005412, 99, 'Inst Sup Nro: 99', '', 'Provincia del Chubut', '2018-10-07', '2021-10-07', NULL),
+(396, 33005427, 100, 'Inst Sup Nro: 1', '', 'Provincia de Cordoba', '2018-10-07', '2021-10-07', NULL),
+(397, 33005442, 101, 'Inst Sup Nro: 2', '', 'Provincia de Corrientes', '2018-10-07', '2021-10-07', NULL),
+(398, 33005457, 102, 'Inst Sup Nro: 3', '', 'Provincia de Entre Rios', '2018-10-07', '2021-10-07', NULL),
+(399, 33005472, 103, 'Inst Sup Nro: 4', '', 'Provincia de Formosa', '2018-10-07', '2021-10-07', NULL),
+(400, 33005487, 104, 'Inst Sup Nro: 5', '', 'Provincia de Jujuy', '2018-10-07', '2021-10-07', NULL),
+(401, 33005502, 105, 'Inst Sup Nro: 6', '', 'Provincia de La Pampa', '2018-10-07', '2021-10-07', NULL),
+(402, 33005517, 106, 'Inst Sup Nro: 7', '', 'Provincia de La Rioja', '2018-10-07', '2021-10-07', NULL),
+(403, 33005532, 107, 'Inst Sup Nro: 8', '', 'Provincia de Mendoza', '2018-10-07', '2021-10-07', NULL),
+(404, 33005547, 108, 'Inst Sup Nro: 9', '', 'Provincia de Misiones', '2018-10-07', '2021-10-07', NULL),
+(405, 33005562, 109, 'Inst Sup Nro: 10', '', 'Provincia del Neuquen', '2018-10-07', '2021-10-07', NULL),
+(406, 33005577, 110, 'Inst Sup Nro: 11', '', 'Provincia de Rio Negro', '2018-10-07', '2021-10-07', NULL),
+(407, 33005592, 111, 'Inst Sup Nro: 12', '', 'Provincia de Salta', '2018-10-07', '2021-10-07', NULL),
+(408, 33005607, 112, 'Inst Sup Nro: 13', '', 'Provincia de San Juan', '2018-10-07', '2021-10-07', NULL),
+(409, 33005622, 113, 'Inst Sup Nro: 14', '', 'Provincia de San Luis', '2018-10-07', '2021-10-07', NULL),
+(410, 33005637, 114, 'Inst Sup Nro: 15', '', 'Provincia de Santa Cruz', '2018-10-07', '2021-10-07', NULL),
+(411, 33005652, 115, 'Inst Sup Nro: 16', '', 'Provincia de Santa Fe', '2018-10-07', '2021-10-07', NULL),
+(412, 33005667, 116, 'Inst Sup Nro: 17', '', 'Provincia de Santiago del Este', '2018-10-07', '2021-10-07', NULL),
+(413, 33005682, 117, 'Inst Sup Nro: 18', '', 'Provincia de Tierra del Fuego,', '2018-10-07', '2021-10-07', NULL),
+(414, 33005697, 118, 'Inst Sup Nro: 19', '', 'Provincia de Tucuman', '2018-10-07', '2021-10-07', NULL),
+(415, 33005712, 119, 'Inst Sup Nro: 20', '', 'Provincia de Buenos Aires', '2018-10-07', '2021-10-07', NULL),
+(416, 33005727, 120, 'Inst Sup Nro: 21', '', 'Provincia de Catamarca', '2018-10-07', '2021-10-07', NULL),
+(417, 33005742, 121, 'Inst Sup Nro: 22', '', 'Provincia del Chaco', '2018-10-07', '2021-10-07', NULL),
+(418, 33005757, 122, 'Inst Sup Nro: 23', '', 'Provincia del Chubut', '2018-10-07', '2021-10-07', NULL),
+(419, 33005772, 123, 'Inst Sup Nro: 24', '', 'Provincia de Cordoba', '2018-10-07', '2021-10-07', NULL),
+(420, 33005787, 124, 'Inst Sup Nro: 25', '', 'Provincia de Corrientes', '2018-10-07', '2021-10-07', NULL),
+(421, 33005802, 125, 'Inst Sup Nro: 26', '', 'Provincia de Entre Rios', '2018-10-07', '2021-10-07', NULL),
+(422, 33005817, 126, 'Inst Sup Nro: 27', '', 'Provincia de Formosa', '2018-10-07', '2021-10-07', NULL),
+(423, 33005832, 127, 'Inst Sup Nro: 28', '', 'Provincia de Jujuy', '2018-10-07', '2021-10-07', NULL),
+(424, 33005847, 128, 'Inst Sup Nro: 29', '', 'Provincia de La Pampa', '2018-10-07', '2021-10-07', NULL),
+(425, 33005862, 129, 'Inst Sup Nro: 30', '', 'Provincia de La Rioja', '2018-10-07', '2021-10-07', NULL),
+(426, 33005877, 130, 'Inst Sup Nro: 31', '', 'Provincia de Mendoza', '2018-10-07', '2021-10-07', NULL),
+(427, 33005892, 131, 'Inst Sup Nro: 32', '', 'Provincia de Misiones', '2018-10-07', '2021-10-07', NULL),
+(428, 33005907, 132, 'Inst Sup Nro: 33', '', 'Provincia del Neuquen', '2018-10-07', '2021-10-07', NULL),
+(429, 33005922, 133, 'Inst Sup Nro: 34', '', 'Provincia de Rio Negro', '2018-10-07', '2021-10-07', NULL),
+(430, 33005937, 134, 'Inst Sup Nro: 35', '', 'Provincia de Salta', '2018-10-07', '2021-10-07', NULL),
+(431, 33005952, 135, 'Inst Sup Nro: 36', '', 'Provincia de San Juan', '2018-10-07', '2021-10-07', NULL),
+(432, 33005967, 136, 'Inst Sup Nro: 37', '', 'Provincia de San Luis', '2018-10-07', '2021-10-07', NULL),
+(433, 33005982, 336, 'Centro de Formacion Profesiona', '', 'Provincia de Santa Cruz', '2021-04-07', '2021-10-07', NULL),
+(434, 33005997, 337, 'Centro de Formacion Profesiona', '', 'Provincia de Santa Fe', '2021-04-07', '2021-10-07', NULL),
+(435, 33006012, 338, 'Centro de Formacion Profesiona', '', 'Provincia de Santiago del Este', '2021-04-07', '2021-10-07', NULL),
+(436, 33006027, 339, 'Centro de Formacion Profesiona', '', 'Provincia de Tierra del Fuego,', '2021-04-07', '2021-10-07', NULL),
+(437, 33006042, 340, 'Centro de Formacion Profesiona', '', 'Provincia de Tucuman', '2021-04-07', '2021-10-07', NULL),
+(438, 33006057, 341, 'Centro de Formacion Profesiona', '', 'Provincia de Buenos Aires', '2021-04-07', '2021-10-07', NULL),
+(439, 33006072, 342, 'Centro de Formacion Profesiona', '', 'Provincia de Catamarca', '2021-04-07', '2021-10-07', NULL),
+(440, 33006087, 343, 'Centro de Formacion Profesiona', '', 'Provincia del Chaco', '2021-04-07', '2021-10-07', NULL),
+(441, 33006102, 344, 'Inst Sup en Ideomas Nro: 101', '', 'Provincia del Chubut', '2018-10-07', '2021-10-07', NULL),
+(442, 33006117, 345, 'Inst Sup en Ideomas Nro: 102', '', 'Provincia de Cordoba', '2018-10-07', '2021-10-07', NULL),
+(443, 33006132, 346, 'Inst Sup en Ideomas Nro: 103', '', 'Provincia de Corrientes', '2018-10-07', '2021-10-07', NULL),
+(444, 33006147, 347, 'Inst Sup en Ideomas Nro: 104', '', 'Provincia de Entre Rios', '2018-10-07', '2021-10-07', NULL),
+(445, 33006162, 348, 'Inst Sup en Ideomas Nro: 105', '', 'Provincia de Formosa', '2018-10-07', '2021-10-07', NULL),
+(446, 33006177, 349, 'Inst Sup en Ideomas Nro: 106', '', 'Provincia de Jujuy', '2018-10-07', '2021-10-07', NULL),
+(447, 33006192, 350, 'Inst Sup en Ideomas Nro: 107', '', 'Provincia de La Pampa', '2018-10-07', '2021-10-07', NULL),
+(448, 33006207, 351, 'Inst Sup en Ideomas Nro: 108', '', 'Provincia de La Rioja', '2018-10-07', '2021-10-07', NULL),
+(449, 33006222, 352, 'Inst Sup en Ideomas Nro: 109', '', 'Provincia de Mendoza', '2018-10-07', '2021-10-07', NULL),
+(450, 33006237, 353, 'Inst Sup en Ideomas Nro: 110', '', 'Provincia de Misiones', '2018-10-07', '2021-10-07', NULL),
+(451, 33006252, 354, 'UN Nro: 120', '', 'Provincia del Neuquen', '2017-10-07', '2021-10-07', NULL),
+(452, 33006267, 355, 'Upriv Nro: 121', '', 'Provincia de Rio Negro', '2017-10-07', '2021-10-07', NULL),
+(453, 33006282, 356, 'UN Nro: 122', '', 'Provincia de Salta', '2017-10-07', '2021-10-07', NULL),
+(454, 33006297, 357, 'Upriv Nro: 123', '', 'Provincia de San Juan', '2017-10-07', '2021-10-07', NULL),
+(455, 33006312, 358, 'UN Nro: 124', '', 'Provincia de San Luis', '2017-10-07', '2021-10-07', NULL),
+(456, 33006327, 359, 'Upriv Nro: 125', '', 'Provincia de Santa Cruz', '2017-10-07', '2021-10-07', NULL),
+(457, 33006342, 360, 'UN Nro: 126', '', 'Provincia de Santa Fe', '2017-10-07', '2021-10-07', NULL),
+(458, 33006357, 361, 'Upriv Nro: 127', '', 'Provincia de Santiago del Este', '2017-10-07', '2021-10-07', NULL),
+(459, 33006372, 362, 'UN Nro: 128', '', 'Provincia de Tierra del Fuego,', '2017-10-07', '2021-10-07', NULL),
+(460, 33006387, 363, 'Upriv Nro: 129', '', 'Provincia de Tucuman', '2017-10-07', '2021-10-07', NULL),
+(461, 33006402, 364, 'UN Nro: 130', '', 'Provincia de Buenos Aires', '2017-10-07', '2021-10-07', NULL),
+(462, 33006417, 365, 'Upriv Nro: 131', '', 'Provincia de Catamarca', '2017-10-07', '2021-10-07', NULL),
+(463, 33006432, 366, 'UN Nro: 132', '', 'Provincia del Chaco', '2017-10-07', '2021-10-07', NULL),
+(464, 33006447, 367, 'Upriv Nro: 133', '', 'Provincia del Chubut', '2017-10-07', '2021-10-07', NULL),
+(465, 33006462, 368, 'UN Nro: 134', '', 'Provincia de Cordoba', '2017-10-07', '2021-10-07', NULL),
+(466, 33006477, 369, 'Upriv Nro: 135', '', 'Provincia de Corrientes', '2017-10-07', '2021-10-07', NULL),
+(467, 33006492, 370, 'UN Nro: 136', '', 'Provincia de Entre Rios', '2017-10-07', '2021-10-07', NULL),
+(468, 33006507, 371, 'Upriv Nro: 137', '', 'Provincia de Formosa', '2017-10-07', '2021-10-07', NULL),
+(469, 33006522, 137, 'CEIP Nro: 1', '', 'Provincia de Jujuy', '2014-10-07', '2021-10-07', NULL),
+(470, 33006537, 138, 'CEIP Nro: 2', '', 'Provincia de La Pampa', '2014-10-07', '2021-10-07', NULL),
+(471, 33006552, 139, 'CEIP Nro: 3', '', 'Provincia de La Rioja', '2014-10-07', '2021-10-07', NULL),
+(472, 33006567, 140, 'CEIP Nro: 4', '', 'Provincia de Mendoza', '2014-10-07', '2021-10-07', NULL),
+(473, 33006582, 141, 'CEIP Nro: 5', '', 'Provincia de Misiones', '2014-10-07', '2021-10-07', NULL),
+(474, 33006597, 142, 'CEIP Nro: 6', '', 'Provincia del Neuquen', '2014-10-07', '2021-10-07', NULL),
+(475, 33006612, 143, 'CEIP Nro: 7', '', 'Provincia de Rio Negro', '2014-10-07', '2021-10-07', NULL),
+(476, 33006627, 144, 'CEIP Nro: 8', '', 'Provincia de Salta', '2014-10-07', '2021-10-07', NULL),
+(477, 33006642, 145, 'CEIP Nro: 9', '', 'Provincia de San Juan', '2014-10-07', '2021-10-07', NULL),
+(478, 33006657, 146, 'CEIP Nro: 10', '', 'Provincia de San Luis', '2014-10-07', '2021-10-07', NULL),
+(479, 32172601, 147, 'CEIP Nro: 11', '', 'Provincia de Santa Cruz', '2014-10-07', '2021-10-07', NULL);
 
 -- --------------------------------------------------------
 
@@ -5877,9 +5858,8 @@ INSERT INTO `estudios` (`ID_Estudio`, `DNI`, `id_Carrera`, `Institucion`, `Local
 -- Estructura de tabla para la tabla `experiencia`
 --
 
-DROP TABLE IF EXISTS `experiencia`;
-CREATE TABLE IF NOT EXISTS `experiencia` (
-  `Id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Cod Experiencia Personalizada',
+CREATE TABLE `experiencia` (
+  `Id` int(10) NOT NULL COMMENT 'Cod Experiencia Personalizada',
   `DNI` int(10) NOT NULL COMMENT 'Codigo Dni de TBL Candidato',
   `Empresa` varchar(100) DEFAULT NULL,
   `Contacto` varchar(30) DEFAULT NULL,
@@ -5888,9 +5868,8 @@ CREATE TABLE IF NOT EXISTS `experiencia` (
   `Fc_inicio` date NOT NULL,
   `Fc_fin` date NOT NULL,
   `Sector` varchar(30) NOT NULL,
-  `Descripcion` varchar(100) NOT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=729 DEFAULT CHARSET=utf8 COMMENT='Tabla complementaria para poder asociar la experiencia laboral';
+  `Descripcion` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabla complementaria para poder asociar la experiencia laboral';
 
 --
 -- Volcado de datos para la tabla `experiencia`
@@ -6633,13 +6612,11 @@ INSERT INTO `experiencia` (`Id`, `DNI`, `Empresa`, `Contacto`, `Cont_Tel`, `Id_p
 -- Estructura de tabla para la tabla `generos`
 --
 
-DROP TABLE IF EXISTS `generos`;
-CREATE TABLE IF NOT EXISTS `generos` (
-  `idgenero` int(2) NOT NULL AUTO_INCREMENT COMMENT 'IdGenero',
+CREATE TABLE `generos` (
+  `idgenero` int(2) NOT NULL COMMENT 'IdGenero',
   `txgenero` varchar(15) NOT NULL COMMENT 'descripción',
-  `Accion` varchar(30) NOT NULL,
-  PRIMARY KEY (`idgenero`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  `Accion` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `generos`
@@ -6657,13 +6634,11 @@ INSERT INTO `generos` (`idgenero`, `txgenero`, `Accion`) VALUES
 -- Estructura de tabla para la tabla `login`
 --
 
-DROP TABLE IF EXISTS `login`;
-CREATE TABLE IF NOT EXISTS `login` (
+CREATE TABLE `login` (
   `id` bigint(11) NOT NULL,
   `userpass` varchar(64) COLLATE utf8_bin NOT NULL,
   `tipo` int(1) NOT NULL,
-  `recupero` varchar(64) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`)
+  `recupero` varchar(64) COLLATE utf8_bin NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -6671,12 +6646,12 @@ CREATE TABLE IF NOT EXISTS `login` (
 --
 
 INSERT INTO `login` (`id`, `userpass`, `tipo`, `recupero`) VALUES
-(20002222222, '4b0e27ca51d536eb87c843ebfdc2fdfc18496ec10bf9bb46bde9f91db67e5911', 2, ''),
+(20140076450, '4b0e27ca51d536eb87c843ebfdc2fdfc18496ec10bf9bb46bde9f91db67e5911', 2, ''),
 (44751263, '2c3a4249d77070058649dbd822dcaf7957586fce428cfb2ca88b94741eda8b07', 1, ''),
 (14235657, 'c4ffa7146bc75b1b1b3352d536340198f1f1e10ab4b2323b0523a1ccffb7e21c', 1, ''),
 (99, '25f43b1486ad95a1398e3eeb3d83bc4010015fcc9bedb35b432e00298d5021f7', 3, ''),
 (14843689, '4814d92093ac8a0f4a2163ab87dee509ba306a58f5888be0edcb2fcd0712028b', 1, ''),
-(111111, 'f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114', 1, ''),
+(10000003, 'f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114', 1, ''),
 (123456, 'd82494f05d6917ba02f7aaa29689ccb444bb73f20380876cb05d1f37537b7892', 3, ''),
 (432213456, 'df03496a85adf0604432db55e5285dae9aae35e6a1ff5795cfea0fc943be416a', 1, ''),
 (0, 'bdddede8ee815b0c32b9032ebe17a383df95629d2532fcbd77c0abddd7a2656e', 1, ''),
@@ -6693,10 +6668,13 @@ INSERT INTO `login` (`id`, `userpass`, `tipo`, `recupero`) VALUES
 (33445566, '6b3e853d75211964fb10c03c33fdb335e595a26db04807d7db54a0a738a135f8', 1, '678e731ce5cd1b257ae029de9a557c1bd2cb0783f487bbf244c7f8c789162800'),
 (123345678, '3818f06138f8eac7f0c6a1a334cc2cc086af15e4567d656c72fba0686d56d007', 1, '540b4f218f5631d9a98bc606f029a7c2dbde8013bfd5f778b2388ecd60f87154'),
 (77778888, 'f4f91ae5c32530054d07f7cf9e9f9861973efa55a1a3b9f99198bdcb647e3246', 1, '0d13fee574fc634c89dbeeb23155c6e655d8ef064cb685dd959b2e45ba9cdad2'),
-(20001222232, 'e8ac80cab3d29e20bdff202e16751ad984d70f44a7aa528d5e32cf637836336c', 2, 'd37d9b156d8b93380a88551223977e57caabc558461c4b5acfda1f242ce6aa86'),
+(30123456781, 'e8ac80cab3d29e20bdff202e16751ad984d70f44a7aa528d5e32cf637836336c', 2, 'd37d9b156d8b93380a88551223977e57caabc558461c4b5acfda1f242ce6aa86'),
 (45454545, 'cc55de49503ecee66a3a923efdec26ba2ab3217178454fa0dd0957cf645cb3a8', 1, '67499191496a4f77d512a8f0bec620822ba6a2229bdb8f9bda54e135eb3a5ea6'),
 (22345678, 'ded0817d7fa88d134659d992c4819ed7aca68922400b3c070f6ff7691b931ea2', 3, '1978b0c3efc170bd3571ecee31f350fb3882f818289666692df4891b89d129f0'),
-(23454455, '07bc75b7dc94ede5405bf988bfe7feb0899a091dda1e0a67b9b99647cc573e0a', 1, '07659f333b2517c2b878e92b3294a8decfc70f12f7f8b12441b543bdfd47a482');
+(23454455, '07bc75b7dc94ede5405bf988bfe7feb0899a091dda1e0a67b9b99647cc573e0a', 1, '07659f333b2517c2b878e92b3294a8decfc70f12f7f8b12441b543bdfd47a482'),
+(22332233, 'e762ff675796d684f64133f8f97a92fa12a1f9689d87b06a1e9a7f4bcd505e23', 1, ''),
+(99080808, '3e7c03c9861c85532398bbe2a894d7b274593297fe3e94449c781446b15f06f0', 1, ''),
+(21212121212, '50db054e532f70620ca8f99ff2afbed2c94276b78e730008521cda1a0df7051d', 2, '');
 
 -- --------------------------------------------------------
 
@@ -6704,14 +6682,11 @@ INSERT INTO `login` (`id`, `userpass`, `tipo`, `recupero`) VALUES
 -- Estructura de tabla para la tabla `movilidad_propia`
 --
 
-DROP TABLE IF EXISTS `movilidad_propia`;
-CREATE TABLE IF NOT EXISTS `movilidad_propia` (
-  `idmovilidad` int(5) NOT NULL AUTO_INCREMENT COMMENT 'idtabla',
+CREATE TABLE `movilidad_propia` (
+  `idmovilidad` int(5) NOT NULL COMMENT 'idtabla',
   `txmovilidad` char(2) NOT NULL,
-  `accion` varchar(30) NOT NULL,
-  PRIMARY KEY (`idmovilidad`),
-  UNIQUE KEY `txmovilidad` (`txmovilidad`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `accion` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `movilidad_propia`
@@ -6727,17 +6702,13 @@ INSERT INTO `movilidad_propia` (`idmovilidad`, `txmovilidad`, `accion`) VALUES
 -- Estructura de tabla para la tabla `postulaciones`
 --
 
-DROP TABLE IF EXISTS `postulaciones`;
-CREATE TABLE IF NOT EXISTS `postulaciones` (
-  `idpostulaciones` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id tabla',
+CREATE TABLE `postulaciones` (
+  `idpostulaciones` int(10) NOT NULL COMMENT 'id tabla',
   `DNI` int(10) NOT NULL COMMENT 'FK con Candidato',
   `idpuestopostulante` int(10) NOT NULL COMMENT 'FK con Puesto',
   `fcpostulacion` date NOT NULL COMMENT 'fecha de postulacion',
-  `estadopostulacion` int(2) NOT NULL,
-  PRIMARY KEY (`idpostulaciones`),
-  KEY `DNI` (`DNI`,`idpuestopostulante`),
-  KEY `idpuestopostulante` (`idpuestopostulante`)
-) ENGINE=InnoDB AUTO_INCREMENT=1599 DEFAULT CHARSET=utf8 COMMENT='Tabla para anotarse postularse con el idpuesto';
+  `estadopostulacion` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabla para anotarse postularse con el idpuesto';
 
 --
 -- Volcado de datos para la tabla `postulaciones`
@@ -8350,13 +8321,11 @@ INSERT INTO `postulaciones` (`idpostulaciones`, `DNI`, `idpuestopostulante`, `fc
 -- Estructura de tabla para la tabla `provincias`
 --
 
-DROP TABLE IF EXISTS `provincias`;
-CREATE TABLE IF NOT EXISTS `provincias` (
+CREATE TABLE `provincias` (
   `provincia` varchar(30) CHARACTER SET utf8 NOT NULL,
   `accion` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `idprov` int(3) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`idprov`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+  `idprov` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `provincias`
@@ -8395,12 +8364,10 @@ INSERT INTO `provincias` (`provincia`, `accion`, `idprov`) VALUES
 -- Estructura de tabla para la tabla `puestos`
 --
 
-DROP TABLE IF EXISTS `puestos`;
-CREATE TABLE IF NOT EXISTS `puestos` (
+CREATE TABLE `puestos` (
   `Id_puesto` int(10) NOT NULL COMMENT 'cod_ident del puesto',
   `tx_puesto` varchar(100) NOT NULL,
-  `accion` varchar(30) NOT NULL,
-  PRIMARY KEY (`Id_puesto`)
+  `accion` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -8641,27 +8608,187 @@ INSERT INTO `puestos` (`Id_puesto`, `tx_puesto`, `accion`) VALUES
 -- Estructura de tabla para la tabla `resultados`
 --
 
-DROP TABLE IF EXISTS `resultados`;
-CREATE TABLE IF NOT EXISTS `resultados` (
-  `idResultado` int(11) NOT NULL AUTO_INCREMENT,
-  `idBusqueda` int(10) DEFAULT NULL,
-  `DNI` int(10) DEFAULT NULL,
-  `fcestado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `cdestado` int(2) DEFAULT NULL,
-  `cdestadoimpresion` int(2) DEFAULT NULL,
-  `fcestadoimpresion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idResultado`),
-  KEY `idBusqueda` (`idBusqueda`,`DNI`),
-  KEY `idCandidato` (`DNI`),
-  KEY `cdestado` (`cdestado`,`cdestadoimpresion`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+CREATE TABLE `resultados` (
+  `idResultado` int(11) NOT NULL,
+  `idBusqueda` int(10) NOT NULL,
+  `DNI` int(10) NOT NULL,
+  `fcestado` datetime NOT NULL DEFAULT current_timestamp(),
+  `cdestado` int(2) NOT NULL,
+  `cdestadoimpresion` int(2) NOT NULL,
+  `fcestadoimpresion` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `resultados`
 --
 
 INSERT INTO `resultados` (`idResultado`, `idBusqueda`, `DNI`, `fcestado`, `cdestado`, `cdestadoimpresion`, `fcestadoimpresion`) VALUES
-(25, 1, 33000057, '2021-12-20 12:19:02', NULL, NULL, '2021-12-20 12:19:02');
+(8, 2, 10000003, '2021-12-14 03:58:51', 1, 1, '2021-12-14 03:58:51'),
+(9, 3, 10000003, '2021-12-16 03:58:51', 1, 1, '2021-12-11 03:58:51'),
+(12, 1, 33000057, '2021-12-21 12:33:14', 0, 0, '2021-12-21 12:33:14');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `busquedas`
+--
+ALTER TABLE `busquedas`
+  ADD PRIMARY KEY (`IdBusqueda`),
+  ADD KEY `IdEmpresa` (`IdEmpresa`),
+  ADD KEY `id_Carrera` (`id_Carrera`,`EstadoCivil`,`cdniveleducminimo`,`Cd_CP`,`Cd_Prov`,`Id_puesto`,`Genero`,`Movilidad_Propia`,`Estadobusqueda`);
+
+--
+-- Indices de la tabla `candidatos`
+--
+ALTER TABLE `candidatos`
+  ADD PRIMARY KEY (`DNI`),
+  ADD KEY `idgenero` (`idgenero`,`Estado`,`Movilidad`,`Postal`,`idprov`,`estado_civil`);
+
+--
+-- Indices de la tabla `carreras`
+--
+ALTER TABLE `carreras`
+  ADD PRIMARY KEY (`Id_carrera`);
+
+--
+-- Indices de la tabla `cod_postal_prov`
+--
+ALTER TABLE `cod_postal_prov`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `empresa`
+--
+ALTER TABLE `empresa`
+  ADD PRIMARY KEY (`Cuit`),
+  ADD KEY `Cd_postal` (`Cd_postal`,`cdProv`,`Estado`);
+
+--
+-- Indices de la tabla `estados`
+--
+ALTER TABLE `estados`
+  ADD PRIMARY KEY (`idestado`);
+
+--
+-- Indices de la tabla `estado_civil`
+--
+ALTER TABLE `estado_civil`
+  ADD PRIMARY KEY (`codestadocivil`);
+
+--
+-- Indices de la tabla `estudios`
+--
+ALTER TABLE `estudios`
+  ADD PRIMARY KEY (`ID_Estudio`),
+  ADD KEY `DNI` (`DNI`,`id_Carrera`);
+
+--
+-- Indices de la tabla `experiencia`
+--
+ALTER TABLE `experiencia`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indices de la tabla `generos`
+--
+ALTER TABLE `generos`
+  ADD PRIMARY KEY (`idgenero`);
+
+--
+-- Indices de la tabla `login`
+--
+ALTER TABLE `login`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `movilidad_propia`
+--
+ALTER TABLE `movilidad_propia`
+  ADD PRIMARY KEY (`idmovilidad`),
+  ADD UNIQUE KEY `txmovilidad` (`txmovilidad`);
+
+--
+-- Indices de la tabla `postulaciones`
+--
+ALTER TABLE `postulaciones`
+  ADD PRIMARY KEY (`idpostulaciones`),
+  ADD KEY `DNI` (`DNI`,`idpuestopostulante`),
+  ADD KEY `idpuestopostulante` (`idpuestopostulante`);
+
+--
+-- Indices de la tabla `provincias`
+--
+ALTER TABLE `provincias`
+  ADD PRIMARY KEY (`idprov`);
+
+--
+-- Indices de la tabla `puestos`
+--
+ALTER TABLE `puestos`
+  ADD PRIMARY KEY (`Id_puesto`);
+
+--
+-- Indices de la tabla `resultados`
+--
+ALTER TABLE `resultados`
+  ADD PRIMARY KEY (`idResultado`),
+  ADD KEY `idBusqueda` (`idBusqueda`,`DNI`),
+  ADD KEY `idCandidato` (`DNI`),
+  ADD KEY `cdestado` (`cdestado`,`cdestadoimpresion`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `busquedas`
+--
+ALTER TABLE `busquedas`
+  MODIFY `IdBusqueda` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id tabla', AUTO_INCREMENT=402;
+
+--
+-- AUTO_INCREMENT de la tabla `cod_postal_prov`
+--
+ALTER TABLE `cod_postal_prov`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3782;
+
+--
+-- AUTO_INCREMENT de la tabla `experiencia`
+--
+ALTER TABLE `experiencia`
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Cod Experiencia Personalizada', AUTO_INCREMENT=729;
+
+--
+-- AUTO_INCREMENT de la tabla `generos`
+--
+ALTER TABLE `generos`
+  MODIFY `idgenero` int(2) NOT NULL AUTO_INCREMENT COMMENT 'IdGenero', AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `movilidad_propia`
+--
+ALTER TABLE `movilidad_propia`
+  MODIFY `idmovilidad` int(5) NOT NULL AUTO_INCREMENT COMMENT 'idtabla', AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `postulaciones`
+--
+ALTER TABLE `postulaciones`
+  MODIFY `idpostulaciones` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id tabla', AUTO_INCREMENT=1599;
+
+--
+-- AUTO_INCREMENT de la tabla `provincias`
+--
+ALTER TABLE `provincias`
+  MODIFY `idprov` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT de la tabla `resultados`
+--
+ALTER TABLE `resultados`
+  MODIFY `idResultado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

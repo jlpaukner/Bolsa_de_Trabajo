@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/dbcon.php'; //funciones para conectar con la base de datos
+require_once('./dbcon.php'); //funciones para conectar con la base de datos
 require __DIR__ . '/encabezadoc.php';
 $dni=$_SESSION['id'];
 $consulta=sprintf("SELECT * FROM `experiencia` WHERE `Id`='%s' ",$_POST['Id']);
@@ -9,7 +9,7 @@ if ($experiencia=="0")
     //es una nueva entrada
     $Empresa="";
     $Contacto="";
-    $Cont_Tel="0";
+    $Cont_Tel="";
     $Puesto="";
     $Finicio=null;
     $Fin=null;
@@ -31,19 +31,64 @@ else
 };
 ?>
 <script> 
-            function experienciaId(){
-            var puesto=document.getElementById("Id_puesto");
-            var data='';
-            const dataList = document.getElementById("puestos");;
-            const textInput = puesto.value;
-            var data='';
-            for (let i = 0; i < dataList.options.length; i++) {
-                if (dataList.options[i].value === textInput) {
-                    data=dataList.options[i].getAttribute("data");
-                  }
-                 }
-                 puesto.value=data;
+    function experienciaId(){
+        var puesto=document.getElementById("Id_puesto");
+        var data='';
+        const dataList = document.getElementById("puestos");;
+        const textInput = puesto.value;
+        var data='';
+        for (let i = 0; i < dataList.options.length; i++) {
+            if (dataList.options[i].value === textInput) {
+                data=dataList.options[i].getAttribute("data");
             }
+        }
+         puesto.value=data;
+    }
+    function soloLetras(e) {
+      key = e.keyCode || e.which;
+      tecla = String.fromCharCode(key).toLowerCase();
+      letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+      especiales = [8, 37, 39, 46];
+  
+      tecla_especial = false
+      for(var i in especiales) {
+          if(key == especiales[i]) {
+              tecla_especial = true;
+              break;
+          }
+      }
+  
+      if(letras.indexOf(tecla) == -1 && !tecla_especial)
+          return false;
+  }
+
+  function soloNumeros(e) {
+      key = e.keyCode || e.which;
+      tecla = String.fromCharCode(key).toLowerCase();
+      letras = "1234567890";
+      especiales = [8, 37, 39, 46];
+  
+      tecla_especial = false
+      for(var i in especiales) {
+          if(key == especiales[i]) {
+              tecla_especial = true;
+              break;
+          }
+      }
+  
+      if(letras.indexOf(tecla) == -1 && !tecla_especial)
+          return false;
+  }
+
+  function limpia() {
+      var val = document.getElementById("miInput").value;
+      var tam = val.length;
+      for(i = 0; i < tam; i++) {
+          if(!isNaN(val[i]))
+              document.getElementById("miInput").value = '';
+      }
+  }
+
 </script>
 <style>
 /* <  estilos para quitar las flechas de input type number> */
@@ -58,6 +103,29 @@ input[type=number] {
 } 
 #my{
 zoom: 100%;
+}
+textarea,
+fieldset {
+  width : 100%;
+  border: 1px solid #333;
+  box-sizing: border-box;
+}
+input:invalid {
+  border: 2px dashed red;
+}
+
+input:invalid:required {
+  background-image: linear-gradient(to right, pink, lightgreen);
+}
+
+input:valid {
+  border: 2px solid black;
+}
+select:invalid:required {
+  background-image: linear-gradient(to right, pink, lightgreen);
+}
+select:invalid {
+  border: 2px dashed red;
 }
 </style>
 
@@ -91,37 +159,41 @@ zoom: 100%;
             <!--Empresa-->
             <div class="row">
                 <label for="Empresa" class="fw-lighter fs-4 fst-italic">Empresa:</label><br>
-                <input type="text" required maxlength="100"  placeholder="Nombre de la empresa" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Empresa" maxlength="30" name="Empresa" value= "<?php echo $Empresa?>" >
+                <input type="text" required maxlength="30"  placeholder="Nombre de la empresa" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Empresa" maxlength="30" name="Empresa" value= "<?php echo $Empresa?>" >
             </div><br>
             <!--contacto-->
             <div class="row">
                 <label for="Contacto" class="fw-lighter fs-4 fst-italic">Datos de contacto:</label><br>
-                <input type="text" required maxlength="60" placeholder="Nombre del contacto laboral " class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Contacto" name="Contacto" value="<?php echo $Contacto?>">
+                <input type="text" required maxlength="30" onkeypress="return soloLetras(event)" id="miInput" placeholder="Nombre del jefe o encargado " class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter"  name="Contacto" value="<?php echo $Contacto?>">
             </div><br>
             <!--Teléfono del contacto-->
             <div class="row">
                 <label for="Cont_Tel" class="fw-lighter fs-4 fst-italic">Teléfono del contacto:</label><br>
-                <input type="tel" pattern="[0-9]{10}" required  placeholder=" numero de 10 cifras" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Cont_Tel" name="Cont_Tel" value="<?php echo $Cont_Tel?>">
+                <input type="text" onkeypress="return soloNumeros(event)" minlength="10" maxlength="10" required  placeholder=" Ingrese su número" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Cont_Tel" name="Cont_Tel" value="<?php echo $Cont_Tel?>">
             </div><br>
             <!--sector-->
             <div class="row">
                 <label for="Sector" class="fw-lighter fs-4 fst-italic">Sector:</label><br>
-                <input type="text" required maxlength="60" placeholder="Sector en que se desempeñó " class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Sector" name="Sector" value="<?php echo $Sector?>">
+                <input type="text" required maxlength="30" placeholder="Sector en que se desempeñó " class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Sector" name="Sector" value="<?php echo $Sector?>">
             </div><br>
             <!--Indentificación-->
             <div class="row">
 
             <label for="Id_puesto" class="fw-lighter fs-4 fst-italic">Identificacion del puesto:</label><br>
-                <input type="list" required maxlength="60" placeholder="Puesto ejercido" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" list="puestos" id="Id_puesto" name="Id_puesto" placeholder="<?php echo $Puesto?>">
-                <datalist id="puestos">
+                <select class="form-control border border-primary fst-italic text-start fs-6"  required id="Movilidad" placeholder="Seleccione" name="Id_puesto" >
+                    <option  value="0" >Seleccione:</option>                                    
                     <?php                    
-                        $consulta=sprintf("SELECT `Id_puesto`,`tx_puesto` FROM `puestos`");
-                        $puestos=cunsultadbmultiple($consulta);
-                        foreach($puestos as $puesto){
-                        printf( '<option data="%s" value="%s">',$puesto["Id_puesto"] ,$puesto["tx_puesto"]);
-                    };                
-                    ?>
-                </datalist>
+                                //$consulta=sprintf("SELECT * FROM `estudios`");
+                                //$puestos=cunsultadbmultiple($consulta);
+                                $query = $mysqli -> query ("SELECT * FROM puestos order by tx_puesto");
+                                while ($valores = mysqli_fetch_array($query )) {
+                                    echo '<option value="'.$valores[Id_puesto].'">'.$valores[tx_puesto].'</option>';
+                                  }
+                                //foreach($puestos as $puesto){
+                                //printf( '<option data="%s" value="%s">',$puesto["codestadocivil"] ,$puesto["txestadocivil"],'</option>');
+                            //};                
+                            ?>
+                    </select>            
             </div><br>
 
             <!--Fecha inicio-->
@@ -137,7 +209,8 @@ zoom: 100%;
             <!--descripción-->
             <div class="row">
                 <label for="Descripcion" class="fw-lighter fs-4 fst-italic">Descripcion:</label><br>
-                <input type="text" required  maxlength="100" placeholder="Ingrese descripcion del puesto " class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Descripcion" name="Descripcion" value="<?php echo $Descripcion?>">
+                <!--input type="text" required  maxlength="100" placeholder="Ingrese descripcion del puesto " class="form-control border border-secundary fst-italic text-center fst-italic fs-5 fw-lighter" id="Descripcion" name="Descripcion" value="<php echo $Descripcion?>"-->
+                <textarea id="t3" class="form-control border border-primary text-center fst-italic fs-6 " required name="Descripcion"  maxlength="100" rows="5" placeholder="Ingrese descripcion del puesto " ><?php echo $Descripcion?></textarea> 
             </div><br>
         </div>
         <div class="col-sm-4">

@@ -1,6 +1,7 @@
 <?php
 session_start();
 require __DIR__ . '/dbcon.php';
+echo var_dump($_POST);
 $tabla = "busquedas";
 echo var_dump($_POST); 
 $nombrellave="IdBusqueda";
@@ -22,5 +23,5 @@ $consulta = sprintf("SELECT `%s` FROM `%s` WHERE `%s` = '%s' ",$nombrellave ,$ta
             $resultado = operaciondb($actualiza);
             if ($resultado==1)  {  echo "si lo hizo";       };
         } ;    
-header("location:busquedas.php");
+    header("location:busquedas.php");
 ?>

@@ -14,30 +14,37 @@ $_SESSION['tiempo']=time(); //Si hay actividad seteamos el valor al tiempo actua
 
 require_once('./dbcon.php');
 $dni= $_SESSION['id'];
-$consulta = sprintf("SELECT Estado FROM candidatos WHERE DNI = $dni");
+$consulta = sprintf("SELECT Estado FROM candidatos Where DNI = $dni");
 $resultado = cunsultadb($consulta);
 
-
+//echo $resultado['Estado'];
 if($resultado['Estado'] == 1){
   $estado_actual = "<a class='nav-link dropdown-toggle text-white   btn btn-sm btn-success rounded-pill '  id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Cuenta Activa</a>";
   $cambio_cuenta = "<li><a class='dropdown-item text-danger text-center border border-white fst-italic' href='cambiar_estado.php?estado=eliminar_candidato'>Eliminar Cuenta</a></li>";
+
   $consulta= "SELECT idBusqueda FROM resultados WHERE DNI='{$dni}'";
-$filas=cunsultadbmultiple($consulta);
-$numRes= count($filas);
-if( $numRes > 0){
-echo "<h4 class='text-center fs-4'style='color:white;'>   </h4>";
-echo "<h4 class='text-center fs-5'style='color:white;'>   </h4>";
-//echo "<script class='border border-info'>alert('Tu perfil es tenido en cuenta en {$numRes} busquedas laborales. Te deseamos éxitos y esperamos que pronto se contacten contigo!');</script>";
-echo "<script>$(function() { $('#modal_falla').modal('show'); });</script>";
-};
+  $filas=cunsultadbmultiple($consulta);
+  $numRes= count($filas);
+  if( $numRes > 0){
+    $class="class='nav-link  text-white   btn btn-sm btn-success rounded-pill'";
+    $mensaje ="Tu perfil es tenido en cuenta en {$numRes} busquedas laborales. Te deseamos éxitos y esperamos que pronto se contacten contigo";
+    //echo "<script class='border border-info'>alert('Tu perfil es tenido en cuenta en {$numRes} busquedas laborales. Te deseamos éxitos y esperamos que pronto se contacten contigo!');</script>";
+
+  }else{
+    $mensaje ="no tienes mensajes!";
+    $class="class='nav-link  text-white   btn btn-sm btn-danger rounded-pill'";
+  }
 }
 else if($resultado['Estado'] == 0){
   $estado_actual = "<a class='nav-link dropdown-toggle text-white   btn btn-sm btn-danger rounded-pill '  id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Cuenta Inactiva</a>";
   $cambio_cuenta = "<li><a class='dropdown-item text-success text-center border border-white fst-italic' href='cambiar_estado.php?estado=activa_candidato'>Activar Cuenta</a></li>";
+  $Mensajito ="";
+  $class="class='nav-link  text-dark   btn btn-sm btn-dark rounded-pill'";
 }
 else{
   $estado_actual = "<a class='nav-link dropdown-toggle text-white   btn btn-sm btn-danger rounded-pill '  id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Cuenta Pendiente</a>";
   $cambio_cuenta ="";
+  $Mensajito ="";
 }
 
 
@@ -46,7 +53,7 @@ else{
 <?php
 require_once('./extensionB.php');
 ?>
-<body class="bg-dark fst-italic">
+<body class="bg-dark  fst-italic">
     <!--Nuevo encabezado-->
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark bg-opacity-50 border border-success fst-italic " >
   <div class="container-fluid">
@@ -79,11 +86,18 @@ require_once('./extensionB.php');
             <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="fdatospersonales.php">Datos Personales</a></li>
             <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="experiencia.php">Experiencia Laboral</a></li>
             <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="estudios.php">Formación Académica</a></li>
+            <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="postulaciones.php">Postulaciones</a></li>
             <!--li><form action=borrarcuenta.php method="POST">
                   <input type="submit" name="boton" class="dropdown-item text-danger text-center border border-red fst-italic" value ="Eliminar Cuenta" onclick="return confirm('¿Seguro? Perderá todos los datos de su cuenta.')"> 
                 </form>
             </!--li-->
           </ul>
+          <!--Mensaje-->
+          <li class="nav-item">
+        
+        <a <?php echo $class; ?> id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'  onclick="return alert('<?php echo $mensaje; ?>')">Mensaje</a>
+        </li>
+        <!--Fin mensaje-->
         </li>
 
           <?php 

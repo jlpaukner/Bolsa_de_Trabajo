@@ -172,15 +172,11 @@ foreach($busquedas as $busqueda)
     join experiencia on candidatos.DNI = experiencia.DNI 
     join puestos on puestos.Id_puesto=experiencia.Id_puesto 
     join carreras on Carreras.Id_carrera=estudios.id_Carrera 
-    join generos on generos.idgenero=candidatos.idgenero
-    join cod_postal_prov on cod_postal_prov.idprov=candidatos.idprov    
-    where candidatos.Estado= 1
-    and estudios.id_Carrera ={$id_Carrera}
+    where estudios.id_Carrera ={$id_Carrera}
     and experiencia.id_Puesto ={$Id_puesto}
     and '{$FDnacMinima}' < Nacimiento 
-    and Nacimiento < '{$FDnacMaxima}'    
+    and Nacimiento < '{$FDnacMaxima}'
     ";
-    // echo $consulta;
     $candidatosEncontrados=cunsultadbmultiple($consulta);
     if(sizeof($candidatosEncontrados)>0){
         // añadir a tabla resultados
@@ -192,8 +188,7 @@ foreach($busquedas as $busqueda)
          $inserta="INSERT into Resultados (idBusqueda,DNI) VALUES ('{$idBusqueda}','{$candidato['DNI']}')";
          operaciondb($inserta);
         };
-        // echo "<center>Su busqueda $contador obtuvo resultados";
-        echo "<center>Una busqueda obtuvo resultados";
+        echo "<center>Su busqueda $contador obtuvo resultados";
     ?>
         <form action= muestramatchs.php method="POST" style="display: inline-block;"> 
         <input type = "hidden" name = "idBusqueda" value = <?=$idBusqueda?> >
@@ -202,10 +197,8 @@ foreach($busquedas as $busqueda)
         
     <?php 
     }
-    else {echo "<center><p align='center' class='text-dark fs-5'>  Le comunicaremos cuando su busqueda $contador obtenga candidatos.<p></center>";};
+    else {echo "<center><p align='center' class='text-dark fs-5'>  Le comunicaremos cuando sus busqueda $contador obtenga candidatos.<p></center>";};
     echo"<hr>";
-    // else {echo "<center><p align='center' class='text-dark fs-5'>  Le comunicaremos cuando obtenga candidatos a sus busquedas.<p></center>";};
-    // echo"<hr>";
 }
 }
 ?> 

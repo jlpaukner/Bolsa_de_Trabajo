@@ -11,6 +11,7 @@ if($estado == "eliminar_candidato"){
     
     $otro_estado=0;
     $insertar = sprintf("UPDATE `candidatos` SET `Estado` = '%s' WHERE `DNI` = '%d'",$otro_estado,$dni);
+    //$insertar = sprintf("UPDATE DATE `candidatos` SET `Estado` = '%s' WHERE `DNI` = '%d'",$otro_estado,$dni);
     $resultado = operaciondb($insertar);
     echo "<h1>Eliminaste candidato</h1>";
     header("location:iniciocandidato.php?ms=0");
@@ -23,6 +24,7 @@ if($estado == "eliminar_candidato"){
 }else if($estado == "activa_empresa"){
     $otro_estado=1;
     $insertar = sprintf("UPDATE `empresa` SET `Estado` = '%s' WHERE `Cuit` = '%d'",$otro_estado,$Cuit);
+    //$insertar = sprintf("UPDATE DATE `candidatos` SET `Estado` = '%s' WHERE `DNI` = '%d'",$otro_estado,$dni);
     $resultado = operaciondb($insertar);
     echo "<h1>no Eliminaste candidato</h1>";
     header("location:inicioempresa.php?ms=d");

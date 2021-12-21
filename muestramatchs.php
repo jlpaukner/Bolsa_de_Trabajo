@@ -3,7 +3,7 @@ require_once('./encabezadoe.php');
 require_once('./dbcon.php');
 require_once('./herramientas.php');
 //session_start();
-echo "<center><h4 class='text-dark'>Candidatos con similitud a tu busqueda</h4></center>";
+echo "<center><h4 class='text-dark'>Candidatos con similitud de tu busquedad</h4></center>";
 
 echo " <div class='container'>
 <table class='table text-center'>
@@ -18,7 +18,6 @@ echo " <div class='container'>
 $consulta=sprintf("SELECT * from candidatos WHERE DNI in (SELECT DNI from resultados where idbusqueda='{$_POST['idBusqueda']}')");
 $candidatos=cunsultadbmultiple($consulta);
 
-// echo $consulta;
 foreach($candidatos as $c) 
 { 
     //var_dump($c) 
