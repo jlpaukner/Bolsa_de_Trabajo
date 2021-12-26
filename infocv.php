@@ -4,9 +4,8 @@ if(!isset($_SESSION)) session_start();
 //require __DIR__ . '/dbcon.php';
 $dni=$_SESSION['id'];
 //--------------------
-
-if(!isset($consulta)) $consulta = "SELECT * FROM `candidatos` WHERE `DNI`='{$dni}'";
 $datosp = cunsultadb($consulta);
+if(!isset($consulta)) $consulta = "SELECT * FROM `candidatos` WHERE `DNI`='{$dni}'";
 $consulta=sprintf("SELECT * FROM experiencia JOIN puestos on experiencia.Id_puesto=puestos.Id_puesto WHERE DNI='%s' ",$_SESSION['id']);
 $experiencias=cunsultadbmultiple($consulta);
 $consulta=sprintf("SELECT * FROM estudios join carreras on estudios.id_Carrera=carreras.Id_carrera WHERE DNI='%s' ",$_SESSION['id']);

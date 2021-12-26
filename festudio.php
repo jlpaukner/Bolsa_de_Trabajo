@@ -112,13 +112,13 @@ else
             </div>
             <!--Fecha Incio-->
             <div class="row">
-                <label for="fc_inicio" class="font-weight-bold fs-4 fst-italic">Fecha inicio:</label><br>
-                <input type="date" id="fc_inicio" class="form-control border border-primary fst-italic text-center  fs-5" name="fc_inicio"  value="<?php echo $Fc_inicio?>"><br>
+                <label for="c_inicio" class="font-weight-bold fs-4 fst-italic">Fecha inicio:</label><br>
+                <input type="date" id="c_inicio" class="form-control border border-primary fst-italic text-center  fs-5" name="c_inicio"  value="<?php echo $Fc_inicio?>"><br>
             </div>
             <!--Fecha final-->
             <div class="row">
-                <label for="fc_fin" class="font-weight-bold fs-4 fst-italic">Fecha fin:</label><br>
-                <input type="date" id="fc_fin" class="form-control border border-primary fst-italic text-center  fs-5" name="fc_fin" value="<?php echo $Fc_fin?>"><br>
+                <label for="c_fin" class="font-weight-bold fs-4 fst-italic">Fecha fin:</label><br>
+                <input type="date" id="c_fin" class="form-control border border-primary fst-italic text-center  fs-5" name="c_fin" value="<?php echo $Fc_fin?>"><br>
             </div><br>
             <!--Botones-->
             <div class="row">

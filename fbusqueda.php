@@ -106,23 +106,6 @@ else{
                         ?>
                     </datalist>
             </div>
-            <div class="col-sm-3">
-                <label class="font-weight-bold  fs-4 fst-italic" for="">Nivel estudios</label><br>
-                <select class="form-control border border-success fst-italic text-center  fs-5" id="Movilidad" name="" >
-                    <option value="0">Seleccione:</option>                                    
-                    <?php                    
-                                //$consulta=sprintf("SELECT * FROM `estudios`");
-                                //$puestos=cunsultadbmultiple($consulta);
-                                $query = $mysqli -> query ("SELECT `nivel`,`cd_nivel` FROM `carreras`GROUP BY `nivel`,`cd_nivel`ORDER BY `nivel`");
-                                while ($valores = mysqli_fetch_array($query )) {
-                                    echo '<option value="'.$valores[cd_nivel].'">'.$valores[nivel].'</option>';
-                                  }
-                                //foreach($puestos as $puesto){
-                                //printf( '<option data="%s" value="%s">',$puesto["codestadocivil"] ,$puesto["txestadocivil"],'</option>');
-                            //};                
-                            ?>
-                    </select><br> 
-            </div>
             <!-- <div class="col-sm-3">
                 <label class="font-weight-bold  fs-4 fst-italic" for="EstadoCivil">Idioma:</label><br>
                     <select class="form-control border border-success fst-italic text-center  fs-5" id="" name="">

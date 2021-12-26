@@ -1,16 +1,10 @@
 <?php
-$servername = "localhost";
-$username = "bot";
-$password = "f4ideEb85YrUIXuU";
-$dbname = "bolsatrabajofinal"; 
-$conn = new mysqli($servername, $username, $password, $dbname);
-$mysqli = new mysqli($servername, $username, $password, $dbname);
 function cunsultadb($consulta)
 {   // para devolver solo una fila 
     $servername = "localhost";
     $username = "bot";
     $password = "f4ideEb85YrUIXuU";
-    $dbname = "bolsatrabajofinal"; 
+    $dbname = "bolsatrabajo"; 
     $conn = new mysqli($servername, $username, $password, $dbname);
     // Revisa connection
     if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error);}
@@ -35,7 +29,7 @@ function cunsultadb($consulta)
         $servername = "localhost";
         $username = "bot";
         $password = "f4ideEb85YrUIXuU";
-        $dbname = "bolsatrabajofinal"; 
+        $dbname = "bolsatrabajo"; 
         $conn = new mysqli($servername, $username, $password, $dbname);
         // Revisa connection
         if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error);}
@@ -60,7 +54,7 @@ function cunsultadb($consulta)
         $servername = "localhost";
         $username = "bot";
         $password = "f4ideEb85YrUIXuU";
-        $dbname = "bolsatrabajofinal"; 
+        $dbname = "bolsatrabajo"; 
         $conn = new mysqli($servername, $username, $password, $dbname);
         // Revisa connection
         if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error);}

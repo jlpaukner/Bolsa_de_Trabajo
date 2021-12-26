@@ -46,26 +46,8 @@ if (isset($_POST['genero'])){
 
   //Condicional para mostrar tablas..
   if($mostrar == "Todos los usuarios"){
-    $consulta=sprintf("SELECT DNI as iden, Concat(candidatos.apellido, ' ' ,candidatos.Nombre) AS Nombres, Email,estados.txestado as Estado_cta from candidatos inner join estados on candidatos.Estado=estados.idestado UNION SELECT empresa.Cuit, empresa.Razon_Social as Nombres, empresa.Email, estados.txestado FROM empresa inner join estados on empresa.Estado=estados.idestado order by Nombres;");
-    $respuesta = cunsultadbmultiple("$consulta");
-    if(count($respuesta)>0){
-      echo "<table class='table caption-top'>
-      <thead>
-        <tr>
-          <th scope='col'>Identificación</th>
-          <th scope='col'>Nombres</th>
-          <th scope='col'>Email</th>
-          <th scope='col'>Estado</th>          
-        </tr>
-      </thead>
-      <tbody>";
-      foreach ($respuesta as $fila){
-        printf("<tr><th scope='row'>%s</th><td>%s</td><td>%s</td><td>%s</td></tr>",$fila['iden'],$fila['Nombres'],$fila['Email'],$fila['Estado_cta']);
-  
-      }
-      echo"</tbody></table>";
-    }
-    //echo "primera opcion";
+
+    echo "primera opcion";
   }else if($mostrar == "Todos los activos"){
     echo "segunda opcion";
   }else if($mostrar == "Todos los Inactivos"){

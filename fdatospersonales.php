@@ -1,6 +1,6 @@
 <?php
-require_once('./dbcon.php'); 
-require_once('./encabezadoc.php');
+require __DIR__ . '/dbcon.php'; 
+require __DIR__ . '/encabezadoc.php';
 //llena el formulario
 //valores default -----------------
 $Apellido="";
@@ -71,47 +71,9 @@ input[type=number] {
 #my{
 zoom: 100%;
 }
-
-textarea,
-fieldset {
-  width : 100%;
-  border: 1px solid #333;
-  box-sizing: border-box;
-}
-input:invalid {
-  border: 2px dashed red;
-}
-
-input:invalid:required {
-  background-image: linear-gradient(to right, pink, lightgreen);
-}
-
-input:valid {
-  border: 2px solid black;
-}
 </style>
 
-<script>
-  function soloLetras(e) {
-      key = e.keyCode || e.which;
-      tecla = String.fromCharCode(key).toLowerCase();
-      letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-      especiales = [8, 37, 39, 46];
-  
-      tecla_especial = false
-      for(var i in especiales) {
-          if(key == especiales[i]) {
-              tecla_especial = true;
-              break;
-          }
-      }
-  
-      if(letras.indexOf(tecla) == -1 && !tecla_especial)
-          return false;
-  }
-  
 
-  </script>
 
 
 <!--Formulario de Datos Personales-->
@@ -129,16 +91,16 @@ input:valid {
         <div class="row text-dark">
         <div class="row">
             <div class="col-sm-4">
-                <label for="Nombres" class="font-weight-bold  fs-6 text-black">Nombres:</label><br>
-                <input type="text" maxlength="30" lid="Nombres" onkeypress="return soloLetras(event)"name="Nombre" required placeholder="Ingresar Nombres" class="form-control border border-primary text-center fs-6"  value="<?php echo $Nombre; ?>" ><br>
+                <label for="Nombre" class="font-weight-bold  fs-6 text-black">Nombres:</label><br>
+                <input type="text" maxlength="30" lid="Nombre" name="Nombre" required placeholder="Ingresar Nombres" class="form-control border border-primary text-center    fs-6" value= "<?php echo $Nombre?>" ><br>
             </div>
             <div class="col-sm-4">
                 <label for="Apellido" class="font-weight-bold  fs-6 text-black">Apellidos:</label><br>
-                <input type="text"  maxlength="30" lid="Apellido" name="Apellido" required placeholder="Ingresar Apellidos" class="form-control border border-primary text-center fs-6" onkeypress="return soloLetras(event)" value="<?php echo $Apellido?>"><br>
+                <input type="text"  maxlength="30" lid="Apellido" name="Apellido" required placeholder="Ingresar Apellidos" class="form-control border border-primary text-center    fs-6" value="<?php echo $Apellido?>"><br>
             </div>
             <div class="col-sm-4">
                 <label for="Nacionalidad" class="  fs-6 text-black ">Nacionalidad:</label><br>
-                <input type="text" maxlength="30" lid="Nacionalidad" required name="Nacionalidad" placeholder="Ingresar Nacionalidad" onkeypress="return soloLetras(event)" class="form-control border border-primary text-center   fs-6"  value="<?php echo $Nacionalidad ?>"><br>
+                <input type="text" maxlength="30" lid="Nacionalidad" required name="Nacionalidad" placeholder="Ingresar Nacionalidad" class="form-control border border-primary text-center   fs-6" value="<?php echo $Nacionalidad ?>"><br>
             </div>
         </div>
         <div class="row">
@@ -155,8 +117,8 @@ input:valid {
                     <div class="col-sm-6">
                         <label for="estado_civil" class="  fs-6 text-black ">Estado Civil:</label><br>
                             <!-- <input type="text"  lid="Estado" name="Estado" placeholder="Ingresar E. Civil" class="form-control border border-primary text-center    fs-6" value="<php// echo $Estado?>"> -->
-                        <select  maxlength="30" class="form-control border border-primary text-center    fs-6" required placeholder="Ingrese E. Civil" name="estado_civil" id="estado_civil" >
-                        <option value="<?php echo $estado_civil?>"><?php echo $estado_civil?></option>
+                        <select  maxlength="30" class="form-control border border-primary text-center    fs-6" required placeholder="Ingrese E. Civil" name="estado_civil" id="estado_civil" value="<?php echo $estado_civil?>"  >
+                        <option value="<?php echo $estado_civil?>"> No informado</option>
                         <option value="Casado">Casado</option>
                         <option value="Soltero">Soltero</option>
                         <option value="Divorciado">Divorciado</option>
@@ -217,38 +179,40 @@ input:valid {
             <div class="p-3 bg-white text-primary text-start   text-decoration-underline"><h3> Información del perfil</h3></div>
         </div>
 
-        <div class="row">            
-            <div class="row">
-                <div class="col-sm-6">
-                    <label for="Licencia" class="  fs-6 text-black ">Tipo de Licencia:</label><br>
-                    <select  class="form-control border border-primary text-center fs-6" required placeholder="Ingrese tipo de licencia" name="Licencia" id="Licencia" >
-                    <option value="<?php echo $Licencia ?>"><?php echo $Licencia ?></option>
-                    <option value="A">Clase A</option>
-                    <option value="B">Clase B</option>
-                    <option value="C">Clase C</option>
-                    <option value="D">Clase D</option>
-                    <option value="E">Clase E</option>
-                    <option value="F">Clase F</option>
-                    </select>
-                </div>            
-                <div class="col-sm-6">
-                    <label for="Movilidad"  maxlength="30" class="font-weight-bold  fs-6 text-black"for="Movilidad">Movilidad:</label><br>
-                    <select class="form-control border border-primary text-center    fs-6" id="Movilidad" name="Movilidad" >                                    
-                        <option value="<?php echo $Movilidad; ?>"><?php echo $Movilidad; ?></option>
-                        <option value="Automovil">Automovil</option>
-                        <option value="Motocicleta">Motocicleta</option>
-                        <option value="Ninguna">Ninguna</option>
-                    </select><br>  
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="Licencia" class="  fs-6 text-black ">Tipo de Licencia:</label><br>
+                        <select  class="form-control border border-primary text-center fs-6" required placeholder="Ingrese tipo de licencia" name="Licencia" id="Licencia" value="<?php echo $Licencia ?>"  >
+                        <option value="A">Clase A</option>
+                        <option value="B">Clase B</option>
+                        <option value="C">Clase C</option>
+                        <option value="D">Clase D</option>
+                        <option value="E">Clase E</option>
+                        <option value="F">Clase F</option>
+                        </select>
+                    </div>
+
+
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="Movilidad"  maxlength="30" class="font-weight-bold  fs-6 text-black"for="Movilidad">Movilidad:</label><br>
+                        <select class="form-control border border-primary text-center    fs-6" id="Movilidad" name="Movilidad" >
+                                    value="<?php echo $Movilidad ?>""
+                            <option value="No informado">No informado</option>
+                            <option value="Automovil">Automovil</option>
+                            <option value="Motocicleta">Motocicleta</option>
+                            <option value="Ninguna">Ninguna</option>
+                        </select><br>  
+                    </div>
                 </div>
             </div>
-        <div class="row">            
-            <div class="col-sm-12">
+            <div class="col-sm-8">
                 <label for="Comentario" class="font-weight-bold  fs-6 text-black ">Redacte su perfil:</label><br>
-                <!--input type="text"  maxlength="150" lid="Comentario" name="Comentario" placeholder="Ingresar tu motivo" class="form-control border border-primary text-center    fs-6" value="<hp echo $Comentario ?>"><br-->
-                <textarea id="t3" class="form-control border border-primary text-center    fs-6 " name="Comentario"  maxlength="150" rows="5"><?php echo $Comentario; ?></textarea> 
+                <input type="text"  maxlength="150" lid="Comentario" name="Comentario" placeholder="Ingresar tu motivo" class="form-control border border-primary text-center    fs-6" value="<?php echo $Comentario ?>"><br> 
             </div>
         </div>
-    </div>
 
      
         <div class="row p-3">

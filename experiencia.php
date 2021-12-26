@@ -63,7 +63,7 @@ if (count($experiencias)>0)
                         <form action=borraregistro.php method="POST">
                             <input type = "hidden" name = "tabla" value = "experiencia" >
                             <input type = "hidden" name = "nombreID" value = "Id" >
-                            <input type = "hidden" name = "retorno" value = "experiencia.php" >
+                            <input type = "hidden" name = "pagina" value = "experiencia.php" >
                             <input type = "hidden" name = "valorID" value = "<?php echo $fila["Id"]?>" >
                             <input type=  "submit" name="boton" class="form-control btn btn-dark border border-info text-center" value ="Borrar"> 
                         </form>
