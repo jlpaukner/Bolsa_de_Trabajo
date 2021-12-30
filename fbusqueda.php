@@ -5,51 +5,20 @@ require_once('./dbcon.php');
 $_SESSION['abierta']="si";
 //echo "<br>";
 $IdBusqueda=$_POST["IdBusqueda"];
-$consulta=sprintf("SELECT * FROM `busquedas` WHERE `IdBusqueda`='%s' ",$IdBusqueda);
+$consulta="SELECT * FROM busquedas 
+join carreras on carreras.Id_carrera=busquedas.id_Carrera 
+join puestos on puestos.Id_puesto=busquedas.Id_puesto 
+join provincias on provincias.idprov =busquedas.idprov 
+WHERE `IdBusqueda`='$IdBusqueda";
 $fila=cunsultadb($consulta);
-$consulta=sprintf("SELECT `tx_puesto`FROM `puestos`");
-$ocupaciones=cunsultadbmultiple($consulta);
-$consulta=sprintf("SELECT `tx_carrera`FROM `carreras`");
-$titulos=cunsultadbmultiple($consulta);
-$id_Carrera="";
-$Puesto="";
-
-if ($IdBusqueda=="0"){
-//echo"<h1> Nueva busqueda</h1>";
-}
-else{
-    //echo"<h1> Busqueda activa</h1><";
-};
+$id_Carrera="0";
+$Puesto="0";
+$idprov="0";
+$c1="font-weight-bold text-center fs-4 fst-italic";
+$c2="form-control border border-success fst-italic text-center fs-5";
 ?>
        
-<script> 
-    function IDS(){
-    var estudio=document.getElementById("id_Carrera");
-    var data='';
-    const dataList = document.getElementById("estudios");
-    const textInput = estudio.value;
-    var data='';
-    for (let i = 0; i < dataList.options.length; i++) {
-        if (dataList.options[i].value === textInput) {
-            data=dataList.options[i].getAttribute("data");
-            }
-            }
-    estudio.value=data;
-    var puesto=document.getElementById("Id_puesto");
-    var data='';
-    const dataList2 = document.getElementById("puestos");
-    const textInput2 = puesto.value;
-    var data='';
-    for (let i = 0; i < dataList2.options.length; i++) {
-        if (dataList2.options[i].value === textInput2) {
-            data=dataList2.options[i].getAttribute("data");
-            }
-            }
-            puesto.value=data;
-    }
-</script>
-
-<form class="formulario text-center" action="submitformbusqueda.php" method="POST" onsubmit="IDS()">
+<form class="formulario text-center" action="submitformbusqueda.php" method="POST" >
     <input type="hidden" id="IdBusqueda" name="IdBusqueda"value="<?php echo $IdBusqueda?>">
     <input type="hidden" id="IdEmpresa" name="IdEmpresa"value="<?php echo $_SESSION['id']?>">
     <div class="container">
@@ -57,54 +26,27 @@ else{
         <div class="row">
             <div class="col-sm-3"></div>
             <div class="col-sm-3">
-                <label for="Id_puesto" class="font-weight-bold  fs-4 fst-italic">Puesto:</label>
-                <input type="list" required  placeholder="Ingrese puesto " class="form-control border border-success fst-italic text-center  fs-5" list="puestos" id="Id_puesto" name="Id_puesto" placeholder="<?php echo $Puesto?>">
-                    <datalist id="puestos">
-                        <?php                    
-                            $consulta=sprintf("SELECT `Id_puesto`,`tx_puesto` FROM `puestos`");
-                            $puestos=cunsultadbmultiple($consulta);
-                            // printf( '<option data="%s" value="%s">','0' ,'No requiere');
-                            // echo '<option disabled="disabled">———————————————————————</option>';
-                            foreach($puestos as $puesto){
-                            printf( '<option data="%s" value="%s">',$puesto["Id_puesto"] ,$puesto["tx_puesto"]);
-                        };                
-                        ?>
-                    </datalist>
+                <label for="Id_puesto" class= "<?=$c1?>" > Puesto: </label><br>
+                    <select id="Id_puesto" name="Id_puesto" placeholder="Puesto" class="<?=$c2?>">
+                    <?php S1Motorcito('puestos','Id_puesto','tx_puesto',$Puesto) ?>
+                    </select>
             </div>
             <div class="col-sm-3">
-                <label for="id_Carrera" class="font-weight-bold text-center fs-4 fst-italic">Titulo adquirido:</label>
-                <input type="list" required  placeholder="Ingrese estudio" class="form-control border border-success fst-italic text-center  fs-5" list="estudios" id="id_Carrera" name="id_Carrera" placeholder="<?php echo $id_Carrera?>">
-                    <datalist id="estudios">
-                        <?php                    
-                            $consulta=sprintf("SELECT `id_carrera`,`tx_carrera`,`tipo_Carrera`,`nivel` FROM `carreras`");
-                            $titulos=cunsultadbmultiple($consulta);
-                            // printf( '<option data="%s" value="%s">','0' ,'No requiere');
-                            // echo '<option disabled="disabled">———————————————————————</option>';
-                            // echo var_dump($titulos); 
-                            foreach($titulos as $titulo){
-                            printf( '<option data="%s" value="%s">',$titulo["id_carrera"] ,$titulo["tx_carrera"].'  (Tipo: '.$titulo["tipo_Carrera"].' Nivel: '.$titulo["nivel"].')');
-                        };                
-                        ?>
-                    </datalist>
+                <label for="id_Carrera" class= "<?=$c1?>"> Titulo adquirido: </label><br>
+                    <select id="id_Carrera" name="id_Carrera" placeholder="Titulo" class="<?=$c2?>">
+                    <?php S1Motorcito('carreras','id_Carrera','tx_carrera',$id_Carrera) ?>
+                    </select>
             </div>
             <div class="col-sm-3"></div>
         </div>
         <!-- Segunda Fiia-->
         <div class="row">
             <div class="col-sm-3"></div>
-            <div class="col-sm-3">
-                <label for="" class="font-weight-bold  fs-4 fst-italic">Provincia:</label>
-                <input type="list" required  placeholder="Ingrese Provincia" class="form-control border border-success fst-italic text-center  fs-5" list="" id="" name="" >
-                    <datalist id="">
-                        <?php 
-                                         
-                            $consulta=sprintf("SELECT `Id_puesto`,`tx_puesto` FROM `puestos`");
-                            $puestos=cunsultadbmultiple($consulta);
-                            foreach($puestos as $puesto){
-                            printf( '<option data="%s" value="%s">',$puesto["Id_puesto"] ,$puesto["tx_puesto"]);
-                        };              
-                        ?>
-                    </datalist>
+            <div class="col-sm-3">   
+                <label for="idprov" class="<?=$c1?>"> Provincia: </label><br>
+                        <select id="idprov" name="idprov" placeholder="Provincia" class="<?=$c2?>">
+                        <?php S1Motorcito('Provincias','idprov','provincia',$idprov) ?>
+                        </select>
             </div>
             <!-- <div class="col-sm-3">
                 <label class="font-weight-bold  fs-4 fst-italic" for="EstadoCivil">Idioma:</label><br>
@@ -136,8 +78,8 @@ else{
                 </select>
             </div> -->
             <div class="col-sm-3">
-                <label class="font-weight-bold  fs-4 fst-italic" for="">Genero:</label><br>
-                    <select class="form-control border border-success fst-italic text-center  fs-5" id="" name="">
+                <label class="<?=$c1?>" for="">Genero:</label><br>
+                    <select class="<?=$c2?>" id="" name="">
                         <option value="Ambos">Ambos</option>
                         <option value="Mujer">Mujer</option>
                         <option value="Hombre">Hombre</option>
@@ -150,7 +92,7 @@ else{
             <div class="col-sm-3"></div>
             <div class="col-sm-3">
                 <label class="font-weight-bold  fs-4 fst-italic" for="EdadMinima">Edad Minima:</label><br>
-                <select class="form-control border border-success fst-italic text-center  fs-5" id="EdadMinima" name="EdadMinima">
+                <select class="<?=$c2?>" id="EdadMinima" name="EdadMinima">
                     <option value="18">sin restricción</option>
                     <option value="20">20</option>
                     <option value="30">30</option>
@@ -160,8 +102,8 @@ else{
                 </select>
             </div>
             <div class="col-sm-3">
-                <label class="font-weight-bold  fs-4 fst-italic" for="EdadMaxima">Edad Maxima:</label><br>
-                <select type="number" min="18" max="70" class="form-control border border-success fst-italic text-center  fs-5" id="EdadMaxima" name="EdadMaxima">
+                <label class="<?=$c1?>" for="EdadMaxima">Edad Maxima:</label><br>
+                <select type="number" min="18" max="70" class="<?=$c2?>" id="EdadMaxima" name="EdadMaxima">
                     <option value="20">20</option>
                     <option value="30">30</option>
                     <option value="40">40</option>
@@ -181,10 +123,10 @@ else{
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <input class=" form-control btn btn-dark centroventana border border-success fst-italic " type="submit" value="Enviar">
+                        <input  type="submit" value="Enviar" class="form-control btn btn-dark border border-success fst-italic">
                     </div>
                     <div class="col-sm-6">
-                        <a class=" form-control btn btn-dark centroventana border border-success fst-italic" href="busquedas.php">Cancelar</a>
+                        <a  href="busquedas.php" class=" form-control btn btn-dark border border-success fst-italic">Cancelar</a>
                     </div>
                 </div>
             </div>

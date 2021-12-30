@@ -1,31 +1,16 @@
 <?php
+
 session_start();
-require __DIR__ . '/dbcon.php';
-echo var_dump($_POST);
+require_once __DIR__ . '/dbcon.php';
 $Cuit=$_SESSION['id'];
-$tabla = "empresa";
-$_POST['Cuit']=$Cuit;
-echo var_dump($_POST);    
+$_POST['Cuit']= $Cuit;
+echo var_dump($_POST);
+
+$tabla = "empresa";    
 $nombrellave="Cuit";
-$valorllave=$Cuit;   
-$consulta = sprintf("SELECT `%s` FROM `%s` WHERE `%s` = '%s' ",$nombrellave ,$tabla, $nombrellave ,$valorllave);
-    $resultado = cunsultadb($consulta);
-    if ($resultado==0)
-        {
-            echo "inserta <br>";
-            $insertar=construyeinsert($_POST,"$tabla",$nombrellave);
-            echo $insertar;
-            $resultado = operaciondb($insertar);
-            if ($resultado==1)  {  echo "si lo hizo";};
-            
-        }
-    else
-        {           
-            echo "actualiza <br>";
-            $actualiza=construyeupdate($_POST,"$tabla",$nombrellave,$valorllave);
-            $resultado = operaciondb($actualiza);
-            if ($resultado==1)  {  echo "si lo hizo";       };
-        } ;
-    
-    header("location:inicioempresa.php?ms=ini");
+$valorllave= $Cuit;   
+$retorno="inicioempresa.php?ms=ini";
+
+EnviarFormulario($tabla,$nombrellave,$valorllave,$retorno,$_POST) ;
+
 ?>

@@ -1,0 +1,45 @@
+Base de datos
+        renombrada de  "bolsadetrabajo"     a   "YourJob"
+        estudios.provincia cambia a estudios.idprov  para selector de provincia mediante tabla provincias
+        provincias.cd_provincia cambia a provincias.idprov 
+        
+dbconn  
+        creado funcion EnviarFormulario($tabla,$nombrellave,$valorllave,$retorno,$form)  
+        creado funcion S1Motorcito($tabla,$valor,$texto,$valPrevio)
+        creado funcion creaConnexion()
+
+experiencia
+        arreglado de retorno al borrar una experiencia
+
+estudios
+        cambio a uso de idprov para selector de provincias
+        ídem
+        
+fdatospersonales 
+        implementado uso de S1Motorcito,  
+        casilla para seleccionar genero
+        uso de clases bootstrap usando variables <?=$c3?>
+        selector para generos
+
+fexperiencia
+        implementado uso de S1Motorcito
+        uso de clases bootstrap usando variables <?=$c3?>
+
+festudio
+        implementado uso de S1Motorcito
+        uso de clases bootstrap usando variables <?=$c3?>
+        Selector para Provincia
+
+submitformcandidato 
+        en caso de error al insertar queda en la página para mostrar fuente del error
+        implementacion de EnviarFormulario()
+
+Submitformexperiencia
+        ídem        
+
+Submitformestudio
+        ídem
+
+infocv
+        query y busqueda de provincias mediante tabla provincia
+

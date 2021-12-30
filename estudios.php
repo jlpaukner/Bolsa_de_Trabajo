@@ -50,7 +50,7 @@ if (count($estudios)>0)
 
 foreach ($estudios as $fila) 
 {
-    printf(" <div class='col-sm-2 text-center border-bottom border-info '>%s</div> <div class='col-sm-2 text-center border-bottom border-info'>%s</div> <div class='col-sm-1 text-center border-bottom border-info'>%s</div> <div class='col-sm-1 text-center border-bottom border-info'>%s</div> <div class='col-sm-1 text-center border-bottom border-info '>%s</div> <div class='col-sm-3 border-bottom border-info'><div class='row '> <div class='col-sm-6 text-center '>%s</div> <div class='col-sm-6 text-center'>%s</div></div></div> ",$fila['Institucion'],$fila['tx_carrera'],$fila['Localidad'],$fila['Provincia'],$fila['Pais'],$fila['Fc_inicio'],$fila['Fc_fin']);
+    printf(" <div class='col-sm-2 text-center border-bottom border-info '>%s</div> <div class='col-sm-2 text-center border-bottom border-info'>%s</div> <div class='col-sm-1 text-center border-bottom border-info'>%s</div> <div class='col-sm-1 text-center border-bottom border-info'>%s</div> <div class='col-sm-1 text-center border-bottom border-info '>%s</div> <div class='col-sm-3 border-bottom border-info'><div class='row '> <div class='col-sm-6 text-center '>%s</div> <div class='col-sm-6 text-center'>%s</div></div></div> ",$fila['Institucion'],$fila['tx_carrera'],$fila['Localidad'],$fila['idprov'],$fila['Pais'],$fila['Fc_inicio'],$fila['Fc_fin']);
     ?>
     <div class="col-sm-2 border-bottom border-info">
         <div class="row">
@@ -64,7 +64,7 @@ foreach ($estudios as $fila)
                 <form action=borraregistro.php method="POST">
                     <input type = "hidden" name = "tabla" value = "estudios" >
                     <input type = "hidden" name = "nombreID" value = "ID_Estudio" >
-                    <input type = "hidden" name = "pagina" value = "estudios.php" >
+                    <input type = "hidden" name = "retorno" value = "estudios.php" >
                     <input type = "hidden" name = "valorID" value = "<?php echo $fila["ID_Estudio"]?>" >
                     <input type=  "submit" name="boton" class="form-control centroventana btn btn-dark border border-info text-center" value ="Borrar"> 
                 </form>

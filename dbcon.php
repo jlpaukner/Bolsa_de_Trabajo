@@ -1,16 +1,22 @@
 <?php
-function cunsultadb($consulta)
-{   // para devolver solo una fila 
+
+function creaConnexion()
+{
     $servername = "localhost";
     $username = "bot";
     $password = "f4ideEb85YrUIXuU";
-    $dbname = "bolsatrabajo"; 
+    $dbname = "YourJob"; 
     $conn = new mysqli($servername, $username, $password, $dbname);
     // Revisa connection
     if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error);}
     // para ´ñ y tildes
     $conn->query("SET NAMES 'utf8'");
-    // Realiza query
+    return $conn;
+}
+
+function cunsultadb($consulta)
+{   // para devolver solo una fila de la query
+    $conn = creaConnexion();
     $resultado = $conn->query($consulta);
     $respfila="0";
     if (!empty($resultado))
@@ -26,16 +32,7 @@ function cunsultadb($consulta)
 
     function cunsultadbmultiple($consulta)
     {   // para devolver varias filas 
-        $servername = "localhost";
-        $username = "bot";
-        $password = "f4ideEb85YrUIXuU";
-        $dbname = "bolsatrabajo"; 
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        // Revisa connection
-        if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error);}
-        // para ´ñ y tildes
-        $conn->query("SET NAMES 'utf8'");
-        // Realiza query
+        $conn = creaConnexion();
         $resultado = $conn->query($consulta);
         $arrayRes=array();
         if($resultado){
@@ -50,19 +47,8 @@ function cunsultadb($consulta)
 
  function operaciondb($inserta)
     { 
-        
-        $servername = "localhost";
-        $username = "bot";
-        $password = "f4ideEb85YrUIXuU";
-        $dbname = "bolsatrabajo"; 
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        // Revisa connection
-        if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error);}
-        // para ´ñ y tildes
-        $conn->query("SET NAMES 'utf8'");
-        //quita burocracia respoecto forenign keys in db       
-        $conn->query("SET FOREIGN_KEY_CHECKS=0;SET GLOBAL FOREIGN_KEY_CHECKS=0");
-        // Realiza query
+        //retorna 1 o 0 si la query fue exitosa
+        $conn = creaConnexion();
         $resultado = $conn->query($inserta);
         if ($resultado === TRUE)
         {
@@ -105,6 +91,45 @@ function cunsultadb($consulta)
         $q3= " WHERE {$nombrellave} = {$valorllave} ";
         $actualizar=$q1.$q2.$q3;
         return $actualizar;
+    }
+
+function EnviarFormulario($tabla,$nombrellave,$valorllave,$retorno,$form)  
+    {    
+        // si es nueva entrada hace insert
+        // si ya existe entrada con esa llave hace update    
+        // si falla, queda en la pagina sin retornar para mostrar el error 
+        $consulta = sprintf("SELECT `%s` FROM `%s` WHERE `%s` = '%s' ",$nombrellave ,$tabla, $nombrellave ,$valorllave);
+        $ExisteEsaentrada = cunsultadb($consulta);
+        if ($ExisteEsaentrada == 0)
+            {
+                echo "inserta <br>";
+                $insertar=construyeinsert($form,"$tabla",$nombrellave);
+                echo $insertar;
+                $resultado = operaciondb($insertar);        
+            }
+        else
+            {           
+                echo "actualiza <br>";
+                $actualiza=construyeupdate($form,"$tabla",$nombrellave,$valorllave);
+                echo $actualiza;
+                $resultado = operaciondb($actualiza);
+            } ;        
+        if ($resultado==1)  {header("location:".$retorno) ; } else{echo'<br> fallo <br>'; };
+    }
+
+
+    function S1Motorcito($tabla,$valor,$texto,$valPrevio)
+    {
+        // opciones para un select de una sola tabla
+        // el valor previo seleccionado esta en $valPrevio
+        $conn = creaConnexion();
+        $isselected=' ';
+        $q="SELECT DISTINCT $valor , $texto FROM $tabla order by $texto";
+        $query= $conn -> query ($q);
+        while ($valores = mysqli_fetch_array($query )) {
+            if($valores[$valor]==$valPrevio){$isselected=' selected ';} else {$isselected=' ';};
+            echo '<option'.$isselected.'value="'.$valores[$valor].'">'.$valores[ $texto].'</option>';
+        }
     }
 
  ?>

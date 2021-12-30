@@ -30,21 +30,7 @@ else
     $ID=$_POST['Id'];
 };
 ?>
-<script> 
-            function experienciaId(){
-            var puesto=document.getElementById("Id_puesto");
-            var data='';
-            const dataList = document.getElementById("puestos");;
-            const textInput = puesto.value;
-            var data='';
-            for (let i = 0; i < dataList.options.length; i++) {
-                if (dataList.options[i].value === textInput) {
-                    data=dataList.options[i].getAttribute("data");
-                  }
-                 }
-                 puesto.value=data;
-            }
-</script>
+
 <style>
 /* <  estilos para quitar las flechas de input type number> */
 input::-webkit-outer-spin-button,
@@ -69,7 +55,9 @@ zoom: 100%;
 </div>
 
 
-<form class="formulario bg-white fst-italic " action="submitformexperiencia.php" method="POST" onsubmit="experienciaId()">
+<form class="formulario bg-white fst-italic " action="submitformexperiencia.php" method="POST">
+    <input type="hidden" id="Id" name="Id"value="<?=$ID?>">
+    <input type="hidden" id="DNI" name="DNI"value="<?=$dni?>">
     <div class="row">
         <div class="col-sm-4">
             <div class="row">
@@ -110,18 +98,10 @@ zoom: 100%;
             </div><br>
             <!--Indentificación-->
             <div class="row">
-
-            <label for="Id_puesto" class="fw-lighter fs-4 fst-italic">Identificacion del puesto:</label><br>
-                <input type="list" required maxlength="60" placeholder="Puesto ejercido" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" list="puestos" id="Id_puesto" name="Id_puesto" placeholder="<?php echo $Puesto?>">
-                <datalist id="puestos">
-                    <?php                    
-                        $consulta=sprintf("SELECT `Id_puesto`,`tx_puesto` FROM `puestos`");
-                        $puestos=cunsultadbmultiple($consulta);
-                        foreach($puestos as $puesto){
-                        printf( '<option data="%s" value="%s">',$puesto["Id_puesto"] ,$puesto["tx_puesto"]);
-                    };                
-                    ?>
-                </datalist>
+            <label for="Id_puesto" class="  fs-6 text-black ">Identificacion del puesto:</label><br>
+                        <select id="Id_puesto" name="Id_puesto" placeholder="Puesto ejercido" class="form-control border border-secundary fst-italic text-center fs-5 fw-lighter">
+                        <?php S1Motorcito('Puestos','Id_puesto','tx_puesto',$Puesto) ?>
+                        </select>
             </div><br>
 
             <!--Fecha inicio-->
@@ -157,8 +137,6 @@ zoom: 100%;
             </div>
         </div>
     </div><br>
-    <input type="hidden" id="Id" name="Id"value="<?=$ID?>">
-    <input type="hidden" id="DNI" name="DNI"value="<?=$dni?>">
     <datalist id="puestos">
         <?php
             foreach($ocupaciones as $ocupacion){

@@ -12,7 +12,7 @@ SELECT * FROM candidatos JOIN estudios
 on candidatos.DNI = estudios.DNI
 JOIN carreras ON
 carreras.Id_carrera= estudios.id_Carrera
-WHERE estado_civil='casado' 
+WHERE idestadoc='casado' 
 and '1979-04-12'<Nacimiento
 and Nacimiento<'2010-04-12'
 and carreras.tx_carrera='Auxiliar en topografía'
