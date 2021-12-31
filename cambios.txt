@@ -5,51 +5,52 @@ Base de datos
         busquedas.movilidad_propia --->  busquedas.movilidad
         busquedas.estadocivil --->  busquedas.idestadoc
         busquedas.genero --->  busquedas.idgenero
-        cdniveleducminimo default null
-        
+        cdniveleducminimo null
+        experiencia campos pueden ser null        
 dbconn  
         creado funcion creaConnexion()
         creado funcion EnviarFormulario($tabla,$nombrellave,$valorllave,$retorno,$form)  
         creado funcion S1Motorcito($tabla,$valor,$texto,$valPrevio)
         creado funcion S2Motorcito($query,$valor,$texto,$valPrevio)
-
 experiencia
-        arreglado de retorno al borrar una experiencia
-        
+        arreglado de retorno al borrar una experiencia        
 estudios
         cambio a uso de idprov para selector de provincias
-
-
+        reformulacion de query
+        reformulacion de lista de estudios
 fbusqueda
         campos extras de búsqueda
         validacion de edad maxima mayor a edad minima
-
 fdatospersonales 
         implementado uso de S1Motorcito,  
         casilla para seleccionar genero
         uso de clases bootstrap usando variables <?=$c3?>
         selector para generos
-
 fexperiencia
+        reconstruccion de query y lista mas legible
         implementado S1Motorcito
         implementado S2Motorcito
         uso de clases bootstrap usando variables <?=$c3?>
-
+        <script> function validaciones() (fecha inicio, fin)
+        campo de telefono con patern y mejor texto de validacion
 festudio
         implementado uso de S1Motorcito
         uso de clases bootstrap usando variables <?=$c3?>
         Selector para Provincia
-
+        <script> function validaciones() (fecha inicio, fin)
+rtabla
+        reparacion por base de datos distinta        
 submitformcandidato 
         en caso de error al insertar queda en la página para mostrar fuente del error
         implementacion de EnviarFormulario()
-
 Submitformexperiencia
-        ídem        
-
+        en caso de error al insertar queda en la página para mostrar fuente del error
+        implementacion de EnviarFormulario()      
 Submitformestudio
-        ídem
-
+        en caso de error al insertar queda en la página para mostrar fuente del error
+        implementacion de EnviarFormulario()
 infocv
         query y busqueda de provincias mediante tabla provincia
-
+        estado civil
+        reformulacion lista de estudios
+        reformulacion lista de experiencias

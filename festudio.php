@@ -34,20 +34,6 @@ $c1= "font-weight-bold fs-4 fst-italic";
 $c2= "form-control border border-primary fst-italic text-center fs-5";
 ?>
         <script> 
-            // function estudioID(){
-            // var estudio=document.getElementById("id_Carrera");
-            // var data='';
-            // const dataList = document.getElementById("estudios");;
-            // const textInput = estudio.value;
-            // var data='';
-            // for (let i = 0; i < dataList.options.length; i++) {
-            //     if (dataList.options[i].value === textInput) {
-            //         data=dataList.options[i].getAttribute("data");
-            //       }
-            //      }
-            // estudio.value=data;
-            // }
-
         function validaciones(){
         Fc_inicio =  new Date(document.getElementById("Fc_inicio").value);
         Fc_fin = new Date(document.getElementById("Fc_fin").value);
@@ -66,7 +52,7 @@ $c2= "form-control border border-primary fst-italic text-center fs-5";
         </div>
 
 
-<form id="festudio" class="formulario bg-white fst-italic " action="submitformestudio.php" method="POST" onsubmit="return validaciones()">
+<form id="festudio" class="formulario bg-white fst-italic " action="submitformestudio.php" method="POST" onsubmit="return validaciones()" >
     <input type="hidden" id="ID_Estudio" name="ID_Estudio"value="<?= $ID_Estudio?>">
     <input type="hidden" id="DNI" name="DNI" value="<?=$dni?>">
     <div class="row">
@@ -90,12 +76,14 @@ $c2= "form-control border border-primary fst-italic text-center fs-5";
             <!--Institución-->
             <div class="row">
                 <label for="Institucion" class="<?=$c1?>">Institucion:</label><br>
-                <input type="text" maxlength="30" id="Institucion" required  placeholder="Ingrese Institución" class="<?=$c2?>"   name="Institucion" value= "<?= $institucion?>" ><br>
+                <input type="text" maxlength="30" id="Institucion" required  placeholder="Ingrese Institución" class="<?=$c2?>"
+                       name="Institucion" value= "<?= $institucion?>" ><br>
             </div>
             <!--Localidad-->
             <div class="row">
                 <label for="Localidad" class="<?=$c1?>">Localidad:</label><br>
-                <input type="text" maxlength="100" id="Localidad" required  placeholder="Ingrese Localidad" class="<?=$c2?>"  name="Localidad" value="<?= $localidad?>"><br>
+                <input type="text" maxlength="100" id="Localidad" required  placeholder="Ingrese Localidad" class="<?=$c2?>"  
+                       name="Localidad" value="<?= $localidad?>"><br>
             </div>
             <!--Provincia-->
             <div class="row">
@@ -138,7 +126,8 @@ $c2= "form-control border border-primary fst-italic text-center fs-5";
                     <input class=" form-control btn btn-dark centroventana border border-info fst-italic" type="submit" value="Enviar">
                 </div>
                 <div class="col-sm-5">                    
-                    <button class=" form-control btn btn-dark centroventana border border-info fst-italic" > <a class=" text-decoration-none text-light" href="estudios.php">Cancelar</a></button>
+                    <button class=" form-control btn btn-dark centroventana border border-info fst-italic" > 
+                        <a class=" text-decoration-none text-light" href="estudios.php">Cancelar</a></button>
                 </div>
                 <div class="col-sm-1"></div>
             

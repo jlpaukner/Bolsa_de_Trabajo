@@ -23,24 +23,22 @@
             barra.appendChild(filtro);
             };
 		$(document).ready(function() {$('#example').DataTable();muevenodo(); }  );
-        // document.addEventListener("DOMContentLoaded", function(){
-        // muevenodo();});
-
-
 </script>
 <body >
 <?php
- require __DIR__ . '/encabezadoadmin.php';
- require __DIR__ . '/dbcon.php';
+require_once __DIR__ . '/encabezadoadmin.php';
+require_once __DIR__ . '/dbcon.php';
 $tabla=$_GET['t'];
 $_SESSION['ntabla']=$tabla;
-$consulta=sprintf("SELECT `COLUMN_NAME`,`DATA_TYPE` from INFORMATION_SCHEMA.COLUMNS where table_schema = 'bolsatrabajo' and table_name = '%s'",$tabla);
+$consulta= "SELECT `COLUMN_NAME`,`DATA_TYPE` 
+from INFORMATION_SCHEMA.COLUMNS 
+where table_schema = 'yourjob' and table_name = '$tabla'";
 $columnas=cunsultadbmultiple($consulta);
 $_SESSION['cols']=$columnas;
 $consulta=sprintf("SELECT * FROM %s ",$tabla);
 $filas=cunsultadbmultiple($consulta);
 $_SESSION['tabl']=$filas;
-$consulta=sprintf("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'bolsatrabajo' AND TABLE_NAME = '%s' AND COLUMN_KEY = 'PRI'",$tabla);
+$consulta=sprintf("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'yourjob' AND TABLE_NAME = '%s' AND COLUMN_KEY = 'PRI'",$tabla);
 $resp=cunsultadb($consulta);
 $idFila=$resp['COLUMN_NAME'];
 $_SESSION['llave']=$idFila;

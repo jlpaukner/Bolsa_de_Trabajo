@@ -103,20 +103,20 @@ $estudios=cunsultadbmultiple($qt);
                 foreach ($estudios as $fila) 
                         {
                            $carrera= $fila["tx_carrera"].'  (Tipo: '.$fila["tipo_Carrera"].' Nivel: '.$fila["nivel"].')';
-                            printf(" <div class='row'>
+                           ?>
+                            <div class='row'>
                             <div class='col-1'></div>
                             <div class='col-7'>
-                            <div class='row text-start fw-bolder fs-5 lh-2'><p class='card-text'>%s</p></div>
-                            <div class='row fw-normal fs-6 lh-2'><p class='card-text'>-%s</p></div>
-                            <div class='row fw-normal fs-6 lh-2'><p class='card-text'>%s - %s - %s</p></div>
+                            <div class='row text-start fw-bolder fs-5 lh-2'><p class='card-text'><?=$carrera?></p></div>
+                            <div class='row fw-normal fs-6 lh-2'><p class='card-text'><?=$fila['Institucion'] ?></p></div>
+                            <div class='row fw-normal fs-6 lh-2'><p class='card-text'<?=$fila['Pais']."-".$fila['provincia']."-".$fila['Localidad']?>></p></div>
                             </div>
                             <div class='col-3'>
-                            <div class='row'><p class='card-text'>%s   /   %s</p></div>
+                            <div class='row'><p class='card-text'><?=$fila['Fc_inicio']." / ".$fila['Fc_fin']   ?></p></div>
                             </div>
                             <div class='col-1'></div>
-                        </div>",$carrera,$fila['Institucion'],$fila['Pais'],$fila['provincia'],$fila['Localidad'],$fila['Fc_inicio'],$fila['Fc_fin']);?>
+                        </div>
                         <hr width="100%" color="white"><?php
-
                         };   
                     }; 
                 ?>
@@ -131,22 +131,23 @@ $estudios=cunsultadbmultiple($qt);
                 {            
                 foreach ($experiencias as $fila) 
                         {
-                            printf(" <div class='row'>
+                          ?>  
+                            <div class='row'>
                             <div class='col-1'></div>
                             <div class='col-7'>
-                            <div class='row text-start fw-bolder fs-5 lh-2'><p class='card-text'>%s</p></div>
-                            <div class='row fw-normal fs-6 lh-2'><p class='card-text'>-%s</p></div>
-                            <div class='row fw-normal fs-6 lh-2'><p class='card-text'>-%s</p></div>
-                            <div class='row fw-normal fs-6 lh-2'><p class='card-text'>-%s</p></div>
-                            <div class='row fw-normal fs-6 lh-2'><p class='card-text'>-%s</p></div>
+                            <div class='row text-start fw-bolder fs-5 lh-2'><p class='card-text'><?=$fila['tx_puesto'] ?></p></div>
+                            <div class='row fw-normal fs-6 lh-2'><p class='card-text'>Empresa:   <?=$fila['Empresa']?></p></div>
+                            <div class='row fw-normal fs-6 lh-2'><p class='card-text'>Contacto:   <?=$fila['Contacto'] ?></p></div>
+                            <div class='row fw-normal fs-6 lh-2'><p class='card-text'>Tel contacto:   <?=$fila['Cont_Tel'] ?></p></div>
+                            <div class='row fw-normal fs-6 lh-2'><p class='card-text'>Descripcion:   <?=$fila['Descripcion'] ?></p></div>
                             </div>
                             <div class='col-3'>
-                            <div class='row'><p class='card-text'>%s   /   %s</p></div>
+                            <div class='row'><p class='card-text'><?=$fila['Fc_inicio']."/".$fila['Fc_fin']?></p></div>
                             </div>
                             <div class='col-1'></div>
-
-                        </div>",$fila['tx_puesto'],$fila['Empresa'],$fila['Sector'],$fila['Contacto'],$fila['Descripcion'],$fila['Fc_inicio'],$fila['Fc_fin']);?>
-                        <hr width="100%" color="white"><?php
+                        </div>
+                        <hr width="100%" color="white">
+                        <?php
                         };   
                     }; 
                 ?>

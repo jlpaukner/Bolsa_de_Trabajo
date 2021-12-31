@@ -29,6 +29,11 @@ else
     $Descripcion=$experiencia['Descripcion'];
     $ID=$_POST['Id'];
 };
+// clase para label
+$c1="fw-lighter fs-4 fst-italic";
+// clase para input
+$c2="form-control border border-secundary fst-italic text-center fs-5 fw-lighter";
+
 ?>
 
 <style>
@@ -47,6 +52,15 @@ zoom: 100%;
 }
 </style>
 
+<script>
+        function validaciones(){
+        Fc_inicio =  new Date(document.getElementById("Fc_inicio").value);
+        Fc_fin = new Date(document.getElementById("Fc_fin").value);
+        if(Fc_fin<Fc_inicio){ continua= false ;   window.alert("Fecha de inicio debe ser menor a fecha de fin" ); } 
+        else {continua=true;}
+        return continua;
+        };
+</script>
 
 <div class="container">
     <div class="row">
@@ -55,7 +69,7 @@ zoom: 100%;
 </div>
 
 
-<form class="formulario bg-white fst-italic " action="submitformexperiencia.php" method="POST">
+<form class="formulario bg-white fst-italic " action="submitformexperiencia.php" method="POST" onsubmit="return validaciones()"> 
     <input type="hidden" id="Id" name="Id"value="<?=$ID?>">
     <input type="hidden" id="DNI" name="DNI"value="<?=$dni?>">
     <div class="row">
@@ -78,46 +92,46 @@ zoom: 100%;
         <div class="col-sm-4"><br>
             <!--Empresa-->
             <div class="row">
-                <label for="Empresa" class="fw-lighter fs-4 fst-italic">Empresa:</label><br>
-                <input type="text" required maxlength="100"  placeholder="Nombre de la empresa" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Empresa" maxlength="30" name="Empresa" value= "<?php echo $Empresa?>" >
+                <label for="Empresa" class="<?=$c1?>">Empresa:</label><br>
+                <input type="text" required maxlength="100"  placeholder="Nombre de la empresa" class="<?=$c2?>" id="Empresa" maxlength="30" name="Empresa" value= "<?=$Empresa?>" >
             </div><br>
             <!--contacto-->
             <div class="row">
-                <label for="Contacto" class="fw-lighter fs-4 fst-italic">Datos de contacto:</label><br>
-                <input type="text" required maxlength="60" placeholder="Nombre del contacto laboral " class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Contacto" name="Contacto" value="<?php echo $Contacto?>">
+                <label for="Contacto" class="<?=$c1?>">Nombre del contacto:</label><br>
+                <input type="text" required maxlength="50" placeholder="Nombre del contacto laboral " class="<?=$c2?>" id="Contacto" name="Contacto" value="<?=$Contacto?>">
             </div><br>
             <!--Teléfono del contacto-->
             <div class="row">
-                <label for="Cont_Tel" class="fw-lighter fs-4 fst-italic">Teléfono del contacto:</label><br>
-                <input type="tel" pattern="[0-9]{10}" required  placeholder=" numero de 10 cifras" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Cont_Tel" name="Cont_Tel" value="<?php echo $Cont_Tel?>">
+                <label for="Cont_Tel" class="<?=$c1?>">Teléfono del contacto:</label><br>
+                <input type="tel" pattern="(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}" required  title="Numero de telefono o celular con codigo de area sin espacions ni símbolos" class="<?=$c2?>" id="Cont_Tel" name="Cont_Tel" value="<?=$Cont_Tel?>">
             </div><br>
             <!--sector-->
-            <div class="row">
-                <label for="Sector" class="fw-lighter fs-4 fst-italic">Sector:</label><br>
-                <input type="text" required maxlength="60" placeholder="Sector en que se desempeñó " class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Sector" name="Sector" value="<?php echo $Sector?>">
-            </div><br>
+            <!-- <div class="row">
+                <label for="Sector" class="<?=$c1?>">Sector:</label><br>
+                <input type="text" required maxlength="60" placeholder="Sector en que se desempeñó " class="<?=$c2?>" id="Sector" name="Sector" value="<?=$Sector?>">
+            </div><br> -->
             <!--Indentificación-->
             <div class="row">
-            <label for="Id_puesto" class="  fs-6 text-black ">Identificacion del puesto:</label><br>
-                        <select id="Id_puesto" name="Id_puesto" placeholder="Puesto ejercido" class="form-control border border-secundary fst-italic text-center fs-5 fw-lighter">
+            <label for="Id_puesto" class="<?=$c1?>">Identificacion del puesto:</label><br>
+                        <select id="Id_puesto" name="Id_puesto" placeholder="Puesto ejercido" class="<?=$c2?>">
                         <?php S1Motorcito('Puestos','Id_puesto','tx_puesto',$Puesto) ?>
                         </select>
             </div><br>
 
             <!--Fecha inicio-->
             <div class="row">
-                <label for="Estado" class="fw-lighter fs-4 fst-italic">Fecha Inicio (aproximada):</label><br>
-                <input type="date" required  placeholder="Fecha aproximada de ingreso?" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Fc_inicio" name="Fc_inicio"  value="<?php echo $Finicio?>">
+                <label for="Estado" class="<?=$c1?>">Fecha Inicio (aproximada):</label><br>
+                <input type="date" required  placeholder="Fecha aproximada de ingreso?" class="<?=$c2?>" id="Fc_inicio" name="Fc_inicio"  value="<?=$Finicio?>">
             </div><br>
             <!--fecha final-->
             <div class="row">
-                <label for="Fc_fin" class="fw-lighter fs-4 fst-italic">Fecha Fin (aproximada):</label><br>
-                <input type="date" required  placeholder="Fecha aproximada de egreso?" class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Fc_fin" name="Fc_fin"  value="<?php echo $Fin?>">
+                <label for="Fc_fin" class="<?=$c1?>">Fecha Fin (aproximada):</label><br>
+                <input type="date" required  placeholder="Fecha aproximada de egreso?" class="<?=$c2?>" id="Fc_fin" name="Fc_fin"  value="<?=$Fin?>">
             </div><br>
             <!--descripción-->
             <div class="row">
-                <label for="Descripcion" class="fw-lighter fs-4 fst-italic">Descripcion:</label><br>
-                <input type="text" required  maxlength="100" placeholder="Ingrese descripcion del puesto " class="form-control border border-secundary fst-italic text-center  fs-5 fw-lighter" id="Descripcion" name="Descripcion" value="<?php echo $Descripcion?>">
+                <label for="Descripcion" class="<?=$c1?>">Descripcion:</label><br>
+                <input type="text" required  maxlength="100" title="maximo 100 caracteres" placeholder="Ingrese descripcion del puesto " class="<?=$c2?>" id="Descripcion" name="Descripcion" value="<?=$Descripcion?>">
             </div><br>
         </div>
         <div class="col-sm-4">
@@ -160,8 +174,7 @@ zoom: 100%;
                 </div>
             </div>
             <div class="col-sm-4"></div>
-        </div>
-    
+        </div>    
     </div><br>
 </form> 
 

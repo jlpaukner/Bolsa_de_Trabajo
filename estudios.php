@@ -1,10 +1,11 @@
 <?php
 require_once('./encabezadoc.php');
 require_once('./dbcon.php');
-$consulta=sprintf("SELECT * FROM `estudios`JOIN carreras on estudios.id_Carrera=carreras.Id_carrera where `DNI`='%s' ",$_SESSION['id']);
-/*echo "<br>";
-echo $consulta;
-echo "<br>";*/
+$dni=$_SESSION['id'];
+$consulta= " SELECT * FROM `estudios`
+JOIN carreras on estudios.id_Carrera=carreras.Id_carrera 
+JOIN provincias on estudios.idprov = provincias.idprov
+where `DNI`='$dni' ";
 $estudios=cunsultadbmultiple($consulta);
 if (count($estudios)>0)
     {
@@ -49,9 +50,18 @@ if (count($estudios)>0)
         <?php
 
 foreach ($estudios as $fila) 
-{
-    printf(" <div class='col-sm-2 text-center border-bottom border-info '>%s</div> <div class='col-sm-2 text-center border-bottom border-info'>%s</div> <div class='col-sm-1 text-center border-bottom border-info'>%s</div> <div class='col-sm-1 text-center border-bottom border-info'>%s</div> <div class='col-sm-1 text-center border-bottom border-info '>%s</div> <div class='col-sm-3 border-bottom border-info'><div class='row '> <div class='col-sm-6 text-center '>%s</div> <div class='col-sm-6 text-center'>%s</div></div></div> ",$fila['Institucion'],$fila['tx_carrera'],$fila['Localidad'],$fila['idprov'],$fila['Pais'],$fila['Fc_inicio'],$fila['Fc_fin']);
+{   
     ?>
+<div class='col-sm-2 text-center border-bottom border-info'><?=$fila['Institucion'] ?></div> 
+<div class='col-sm-2 text-center border-bottom border-info'><?=$fila['tx_carrera'] ?></div> 
+<div class='col-sm-1 text-center border-bottom border-info'><?=$fila['Localidad'] ?></div> 
+<div class='col-sm-1 text-center border-bottom border-info '><?=$fila['provincia'] ?></div>
+<div class='col-sm-1 text-center border-bottom border-info '><?=$fila['Pais'] ?></div>  
+<div class='col-sm-3 border-bottom border-info'><div class='row '> 
+<div class='col-sm-6 text-center '><?=$fila['Fc_inicio']?></div> 
+<div class='col-sm-6 text-center'><?=$fila['Fc_fin'] ?></div>
+</div>
+</div>
     <div class="col-sm-2 border-bottom border-info">
         <div class="row">
             <div class="col-sm-6">

@@ -1,9 +1,12 @@
 <?php
 require_once('./encabezadoc.php');
 require_once('./dbcon.php');
-$consulta=sprintf("SELECT * FROM `experiencia` join puestos on experiencia.Id_puesto=puestos.Id_puesto WHERE `DNI`='%s' ",$_SESSION['id']);
+$dni=$_SESSION['id'];
+$consulta=
+"SELECT Id,Empresa,Contacto,Cont_Tel,puestos.Id_puesto,Fc_inicio,Fc_fin,Descripcion,tx_puesto
+FROM experiencia join puestos 
+on experiencia.Id_puesto=puestos.Id_puesto WHERE `DNI`='$dni'";
 $experiencias=cunsultadbmultiple($consulta);
-// echo $consulta;
 if (count($experiencias)>0)
     {
         ?>
@@ -21,7 +24,7 @@ if (count($experiencias)>0)
                     <th class="text-center bg-success">Contacto</th>
                 </div>
                 <div class="col-sm-1 text-center fs-5 fw-bold border border-primary">
-                    <th class="text-center bg-success">Sector</th>
+                    <th class="text-center bg-success">Contacto Tel</th>
                 </div>
                 <div class="col-sm-1 text-center fs-5 fw-bold border border-primary">
                     <th class="text-center bg-success">Puesto</th>
@@ -47,10 +50,20 @@ if (count($experiencias)>0)
         <?php
 
     foreach ($experiencias as $fila) 
-        {
-            printf(" <div class='col-sm-1 text-center border-bottom  border-info '>%s</div> <div class='col-sm-1 text-center border-bottom border-info'>%s</div> <div class='col-sm-1 text-center border-bottom border-info'>%s</div> <div class='col-sm-1 text-center border-bottom border-info'>%s</div> <div class='col-sm-3 text-center text-break border-bottom border-info '>%s</div> <div class='col-sm-3 border-bottom border-info'><div class='row '> <div class='col-sm-6 text-center '>%s</div> <div class='col-sm-6 text-center'>%s</div></div></div> ",$fila['Empresa'],$fila['Contacto'],$fila['Sector'],$fila['tx_puesto'],$fila['Descripcion'],$fila['Fc_inicio'],$fila['Fc_fin']);
-
+        {           
             ?>
+         <div class='col-sm-1 text-center border-bottom  border-info '><?=$fila['Empresa']?></div> 
+         <div class='col-sm-1 text-center border-bottom border-info'><?=$fila['Contacto']?></div> 
+         <div class='col-sm-1 text-center border-bottom border-info'><?=$fila['Cont_Tel']?></div> 
+         <div class='col-sm-1 text-center border-bottom border-info'><?=$fila['tx_puesto']?></div> 
+         <div class='col-sm-3 text-center text-break border-bottom border-info '><?=$fila['Descripcion']?></div> 
+         <div class='col-sm-3 border-bottom border-info'>
+             <div class='row '> 
+            <div class='col-sm-6 text-center '><?=$fila['Fc_inicio']?></div> 
+            <div class='col-sm-6 text-center'><?=$fila['Fc_fin']?></div>
+            </div>
+        </div> 
+
             <div class="col-sm-2 border-bottom border-info">
                 <div class="row">
                     <div class="col-sm-6">
