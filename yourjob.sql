@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 30-12-2021 a las 01:10:38
+-- Tiempo de generación: 31-12-2021 a las 02:11:12
 -- Versión del servidor: 5.7.31
 -- Versión de PHP: 7.3.21
 
@@ -32,35 +32,35 @@ CREATE TABLE IF NOT EXISTS `busquedas` (
   `IdBusqueda` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id tabla',
   `IdEmpresa` bigint(11) NOT NULL COMMENT 'fk tbl empresa',
   `id_Carrera` int(10) DEFAULT NULL COMMENT 'fk tbl carrra',
-  `EstadoCivil` int(1) NOT NULL,
-  `cdniveleducminimo` int(2) NOT NULL,
+  `idestadoc` int(1) DEFAULT NULL,
+  `cdniveleducminimo` int(2) DEFAULT NULL,
   `Cd_CP` int(4) DEFAULT NULL,
   `idprov` int(2) DEFAULT NULL COMMENT 'es para por prov  filtrar',
   `EdadMinima` int(2) DEFAULT NULL COMMENT 'edad desde a filtrar',
   `EdadMaxima` int(2) DEFAULT NULL COMMENT 'edad hasta a filtrar',
   `Id_puesto` int(10) DEFAULT NULL COMMENT 'fk tabla puestos',
-  `Genero` int(2) DEFAULT NULL COMMENT 'sexo del candidato ',
-  `Movilidad_Propia` varchar(2) DEFAULT NULL COMMENT 'si requiere tener movilidad propia para el puesto',
+  `idgenero` int(2) DEFAULT NULL COMMENT 'sexo del candidato ',
+  `Movilidad` varchar(2) DEFAULT NULL COMMENT 'si requiere tener movilidad propia para el puesto',
   `FC_HM_lim_req` date DEFAULT NULL,
   `Estadobusqueda` int(2) DEFAULT NULL,
   `fc_alta` date DEFAULT NULL,
   PRIMARY KEY (`IdBusqueda`),
   KEY `IdEmpresa` (`IdEmpresa`),
-  KEY `id_Carrera` (`id_Carrera`,`EstadoCivil`,`cdniveleducminimo`,`Cd_CP`,`idprov`,`Id_puesto`,`Genero`,`Movilidad_Propia`,`Estadobusqueda`)
-) ENGINE=InnoDB AUTO_INCREMENT=400 DEFAULT CHARSET=utf8 COMMENT='tabla complementaria para solicitar candidatos o publicar los req para el puesto';
+  KEY `id_Carrera` (`id_Carrera`,`idestadoc`,`cdniveleducminimo`,`Cd_CP`,`idprov`,`Id_puesto`,`idgenero`,`Movilidad`,`Estadobusqueda`)
+) ENGINE=InnoDB AUTO_INCREMENT=402 DEFAULT CHARSET=utf8 COMMENT='tabla complementaria para solicitar candidatos o publicar los req para el puesto';
 
 --
 -- Volcado de datos para la tabla `busquedas`
 --
 
-INSERT INTO `busquedas` (`IdBusqueda`, `IdEmpresa`, `id_Carrera`, `EstadoCivil`, `cdniveleducminimo`, `Cd_CP`, `idprov`, `EdadMinima`, `EdadMaxima`, `Id_puesto`, `Genero`, `Movilidad_Propia`, `FC_HM_lim_req`, `Estadobusqueda`, `fc_alta`) VALUES
+INSERT INTO `busquedas` (`IdBusqueda`, `IdEmpresa`, `id_Carrera`, `idestadoc`, `cdniveleducminimo`, `Cd_CP`, `idprov`, `EdadMinima`, `EdadMaxima`, `Id_puesto`, `idgenero`, `Movilidad`, `FC_HM_lim_req`, `Estadobusqueda`, `fc_alta`) VALUES
 (1, 20140076450, 335, 0, 1, 1050, 3, 18, 55, 38, 0, 'Si', '2021-11-16', 0, '2021-09-16'),
 (2, 27140836492, 335, 0, 2, 1078, 3, 23, 60, 39, 1, 'Si', '2021-11-21', 0, '2021-09-15'),
 (3, 33141216513, 335, 0, 3, 1050, 3, 18, 34, 40, 2, 'Si', '2021-11-26', 0, '2021-09-14'),
 (4, 20141596534, 137, 0, 4, 1045, 3, 33, 52, 41, 3, 'Si', '2021-12-01', 0, '2021-09-13'),
 (5, 24141976555, 138, 0, 0, 1036, 3, 30, 49, 42, 1, 'Si', '2021-12-06', 0, '2021-09-12'),
 (6, 27142356576, 139, 0, 0, 1031, 3, 29, 48, 43, 2, 'Si', '2021-12-11', 0, '2021-09-11'),
-(7, 33142736597, 140, 0, 1, 1008, 3, 33, 52, 44, 3, 'NA', '2021-12-21', 0, '2021-09-10'),
+(7, 33142736597, 140, 0, 1, 1008, 3, 33, 52, 44, 3, 'No', '2021-12-21', 0, '2021-09-10'),
 (8, 20143116618, 141, 0, 2, 1003, 0, 21, 40, 45, 1, 'Si', '2022-01-05', 0, '2021-09-09'),
 (9, 24143496639, 142, 0, 3, 1008, 0, 22, 41, 46, 2, 'Si', '2022-01-10', 0, '2021-09-08'),
 (10, 27143876650, 143, 0, 4, 1017, 0, 24, 43, 47, 3, 'Si', '2021-11-19', 0, '2021-09-07'),
@@ -452,7 +452,8 @@ INSERT INTO `busquedas` (`IdBusqueda`, `IdEmpresa`, `id_Carrera`, `EstadoCivil`,
 (396, 27146916818, 160, 0, 0, 0, 0, 29, 48, 55, 0, 'Si', '2021-11-01', 0, '2021-08-17'),
 (397, 20140076450, 161, 0, 0, 0, 0, 33, 52, 56, 0, 'Si', '2021-11-16', 0, '2021-08-16'),
 (398, 27140836492, 162, 0, 0, 0, 0, 21, 40, 57, 0, 'Si', '2021-11-21', 0, '2021-08-15'),
-(399, 33141216513, 163, 0, 0, 0, 0, 22, 41, 58, 0, 'Si', '2021-11-26', 0, '2021-08-14');
+(399, 33141216513, 163, 0, 0, 0, 0, 22, 41, 58, 0, 'Si', '2021-11-26', 0, '2021-08-14'),
+(401, 20000000002, 137, 2, NULL, NULL, 9, 20, 60, 220, 0, 'Si', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -5873,7 +5874,9 @@ INSERT INTO `estudios` (`ID_Estudio`, `DNI`, `id_Carrera`, `Institucion`, `Local
 (476, 33006627, 144, 'CEIP Nro: 8', '', '17', '2014-10-07', '2021-10-07', NULL),
 (477, 33006642, 145, 'CEIP Nro: 9', '', '21', '2014-10-07', '2021-10-07', NULL),
 (478, 33006657, 146, 'CEIP Nro: 10', '', '22', '2014-10-07', '2021-10-07', NULL),
-(479, 32172601, 147, 'CEIP Nro: 11', '', '18', '2014-10-07', '2021-10-07', NULL);
+(479, 32172601, 147, 'CEIP Nro: 11', '', '18', '2014-10-07', '2021-10-07', NULL),
+(480, 10000003, 4, 'Instit A', 'Flores', '23', '2021-12-01', '2021-12-24', 'Argentina'),
+(482, 10000003, 52, 'Instit', 'fds', '14', '2021-12-01', '2021-12-31', 'fadfda');
 
 -- --------------------------------------------------------
 
@@ -6629,7 +6632,7 @@ INSERT INTO `experiencia` (`Id`, `DNI`, `Empresa`, `Contacto`, `Cont_Tel`, `Id_p
 (726, 33556102, 'kiosco Compu', 'Francisco Gonzalez', '1120599241', 54, '2015-06-23', '2014-12-18', 'finanzas', 'administrativo'),
 (727, 33557453, 'kiosco El polaco', 'Franchesco Gonzalez', '1120599242', 55, '2020-06-21', '2019-12-17', 'operario', 'tareas mantenimiento'),
 (728, 33558804, 'kiosco Tomy', 'Lautaro Gonzalez', '1120599243', 56, '2019-06-21', '2018-12-16', 'tecnico', 'Electrico'),
-(731, 10000003, 'Empresita', 'gfd', '1234567890', 6, '2022-01-05', '2022-01-09', 'caminata', 'tenia muchas esperanzas');
+(731, 10000003, 'Empresita', 'Llamar a Dr Pedrin 1127156875', '1234567890', 6, '2022-01-05', '2022-01-09', 'Planeamiento Urbano', 'Le decia a la gente cuando hacia un buen trabajo');
 
 -- --------------------------------------------------------
 
