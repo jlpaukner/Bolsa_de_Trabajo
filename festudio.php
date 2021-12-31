@@ -34,19 +34,29 @@ $c1= "font-weight-bold fs-4 fst-italic";
 $c2= "form-control border border-primary fst-italic text-center fs-5";
 ?>
         <script> 
-            function estudioID(){
-            var estudio=document.getElementById("id_Carrera");
-            var data='';
-            const dataList = document.getElementById("estudios");;
-            const textInput = estudio.value;
-            var data='';
-            for (let i = 0; i < dataList.options.length; i++) {
-                if (dataList.options[i].value === textInput) {
-                    data=dataList.options[i].getAttribute("data");
-                  }
-                 }
-            estudio.value=data;
-            }
+            // function estudioID(){
+            // var estudio=document.getElementById("id_Carrera");
+            // var data='';
+            // const dataList = document.getElementById("estudios");;
+            // const textInput = estudio.value;
+            // var data='';
+            // for (let i = 0; i < dataList.options.length; i++) {
+            //     if (dataList.options[i].value === textInput) {
+            //         data=dataList.options[i].getAttribute("data");
+            //       }
+            //      }
+            // estudio.value=data;
+            // }
+
+        function validaciones(){
+        Fc_inicio =  new Date(document.getElementById("Fc_inicio").value);
+        Fc_fin = new Date(document.getElementById("Fc_fin").value);
+        if(Fc_fin<Fc_inicio){ continua= false ;   window.alert("Fecha de inicio debe ser menor a fecha de fin" ); } 
+        else {continua=true;}
+        return continua;
+        };
+
+            
         </script>
 
     <div class="container border border-info bg-light fst-italic">
@@ -56,7 +66,7 @@ $c2= "form-control border border-primary fst-italic text-center fs-5";
         </div>
 
 
-<form id="festudio" class="formulario bg-white fst-italic " action="submitformestudio.php" method="POST" onsubmit="estudioID()">
+<form id="festudio" class="formulario bg-white fst-italic " action="submitformestudio.php" method="POST" onsubmit="return validaciones()">
     <input type="hidden" id="ID_Estudio" name="ID_Estudio"value="<?= $ID_Estudio?>">
     <input type="hidden" id="DNI" name="DNI" value="<?=$dni?>">
     <div class="row">
@@ -79,12 +89,12 @@ $c2= "form-control border border-primary fst-italic text-center fs-5";
         <div class="col-sm-4"><br><!--Formulario-->
             <!--Institución-->
             <div class="row">
-                <label for="Institucion" class="$c1">Institucion:</label><br>
+                <label for="Institucion" class="<?=$c1?>">Institucion:</label><br>
                 <input type="text" maxlength="30" id="Institucion" required  placeholder="Ingrese Institución" class="<?=$c2?>"   name="Institucion" value= "<?= $institucion?>" ><br>
             </div>
             <!--Localidad-->
             <div class="row">
-                <label for="Localidad" class="$c1">Localidad:</label><br>
+                <label for="Localidad" class="<?=$c1?>">Localidad:</label><br>
                 <input type="text" maxlength="100" id="Localidad" required  placeholder="Ingrese Localidad" class="<?=$c2?>"  name="Localidad" value="<?= $localidad?>"><br>
             </div>
             <!--Provincia-->
@@ -97,33 +107,28 @@ $c2= "form-control border border-primary fst-italic text-center fs-5";
 
             <!--Pais-->
             <div class="row">
-                <label for="Pais" class="$c1">Pais:</label><br>
+                <label for="Pais" class="<?=$c1?>">Pais:</label><br>
                 <input type="text" maxlength="30" id="Pais" required  placeholder="Ingrese Pais" class="<?=$c2?>"  name="Pais"  value="<?= $pais?>"><br>
             </div>
             <!--Titulo adquirido-->
             <div class="row">
 
-            <label for="id_Carrera" class="$c1">Titulo adquirido:</label><br>
-                <input type="list" maxlength="100" required  placeholder="Ingrese estudio" class="<?=$c2?>"  list="estudios" id="id_Carrera" name="id_Carrera" placeholder="<?= $id_Carrera?>"><br>
-                <datalist id="estudios">
-                    <?php                    
-                        $consulta=sprintf("SELECT `id_carrera`,`tx_carrera`,`tipo_Carrera`,`nivel` FROM `carreras`");
-                        $titulos=cunsultadbmultiple($consulta);
-                        echo var_dump($titulos); 
-                        foreach($titulos as $titulo){
-                        printf( '<option data="%s" value="%s">',$titulo["id_carrera"] ,$titulo["tx_carrera"].'  (Tipo: '.$titulo["tipo_Carrera"].' Nivel: '.$titulo["nivel"].')');
-                    };                
-                    ?>
-                </datalist>
+            <label for="id_Carrera" class="<?=$c1?>">Titulo adquirido:</label><br>
+                <select id="id_Carrera" name="id_Carrera" placeholder="Titulo adquirido:" class="<?=$c2?>" >
+                <?php 
+                 $query=" SELECT `id_carrera`, Concat(`tx_carrera`,'  Tipo: ',`tipo_Carrera`,'  Nivel: ',`nivel`) as texto FROM `carreras`";
+                 S2Motorcito($query,'id_carrera','texto',$id_Carrera);
+                 ?>
+                </select>
             </div>
             <!--Fecha Incio-->
             <div class="row">
-                <label for="Fc_inicio" class="$c1">Fecha inicio:</label><br>
+                <label for="Fc_inicio" class="<?=$c1?>">Fecha inicio:</label><br>
                 <input type="date" id="Fc_inicio" class="<?=$c2?>"  name="Fc_inicio"  value="<?= $Fc_inicio?>"><br>
             </div>
             <!--Fecha final-->
             <div class="row">
-                <label for="Fc_fin" class="$c1">Fecha fin:</label><br>
+                <label for="Fc_fin" class="<?=$c1?>">Fecha fin:</label><br>
                 <input type="date" id="Fc_fin" class="<?=$c2?>"  name="Fc_fin" value="<?= $Fc_fin?>"><br>
             </div><br>
             <!--Botones-->

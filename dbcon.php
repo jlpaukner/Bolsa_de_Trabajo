@@ -132,4 +132,21 @@ function EnviarFormulario($tabla,$nombrellave,$valorllave,$retorno,$form)
         }
     }
 
+    function S2Motorcito($query,$valor,$texto,$valPrevio)
+    {
+        //opciones para un select formado por una query, puede ser de varias tablas unidas
+        $conn = creaConnexion();
+        $isselected=' ';
+        $q= $conn -> query ($query);
+        while ($valores = mysqli_fetch_array($q)) {
+            if($valores[$valor]==$valPrevio){$isselected=' selected ';} else {$isselected=' ';};
+            echo '<option'.$isselected.'value="'.$valores[$valor].'">'.$valores[ $texto].'</option>';
+        }
+    }
+
+
+
+
+
+
  ?>

@@ -17,8 +17,19 @@ $idprov="0";
 $c1="font-weight-bold text-center fs-4 fst-italic";
 $c2="form-control border border-success fst-italic text-center fs-5";
 ?>
-       
-<form class="formulario text-center" action="submitformbusqueda.php" method="POST" >
+
+<script>
+function validaciones() {
+    var x;
+    EdadMaxima = document.getElementById("EdadMaxima").value;
+    EdadMinima= document.getElementById("EdadMinima").value;
+    continua=true;
+    if(EdadMinima>EdadMaxima){ continua= false ;   window.alert("Edad maxima debe ser mayor a la Edad minima" ) } 
+    return continua;
+    };
+</script>
+
+<form class="formulario text-center" action="submitformbusqueda.php" method="POST" onsubmit="return validaciones()">
     <input type="hidden" id="IdBusqueda" name="IdBusqueda"value="<?php echo $IdBusqueda?>">
     <input type="hidden" id="IdEmpresa" name="IdEmpresa"value="<?php echo $_SESSION['id']?>">
     <div class="container">
@@ -48,44 +59,29 @@ $c2="form-control border border-success fst-italic text-center fs-5";
                         <?php S1Motorcito('Provincias','idprov','provincia',$idprov) ?>
                         </select>
             </div>
-            <!-- <div class="col-sm-3">
-                <label class="font-weight-bold  fs-4 fst-italic" for="EstadoCivil">Idioma:</label><br>
-                    <select class="form-control border border-success fst-italic text-center  fs-5" id="" name="">
-                        <option value="Español">Español</option>
-                        <option value="Ingles">Ingles</option>
-                        <option value="Portugues">Portugues</option>
-                        <option value="Italiano">Italiano</option>
-                        <option value="Frances">Frances</option>
-                        <option value="Español_Ingles">Español y Ingles</option>
-                        <option value="Portugues_Ingles">Portugues y Ingles</option>
-                        <option value="Frances_Ingles">Frances y Ingles</option>
-                        <option value="Italiano_Ingles">Italiano y Ingles</option>
-                        <option value="Varios">Varios</option>
-                    </select>
-            </div> -->
+            <div class="col-sm-3">   
+                <label for="idprov" class="<?=$c1?>"> Movilidad Propia: </label><br>
+                    <select class="<?=$c2?>" id="movilidad" name="movilidad">
+                        <option value="No">No requiere</option>
+                        <option value="Si">Requiere movilidad Propia</option>
+                      </select>
+            </div>
             <div class="col-sm-3"></div>
         </div>
         <!-- Tercera Fiia-->
         <div class="row">
-            <div class="col-sm-3"></div>
-            <!-- <div class="col-sm-3">
-                <label class="font-weight-bold  fs-4 fst-italic" for="EstadoCivil">Estado Civil:</label><br>
-                <select class="form-control border border-success fst-italic text-center  fs-5" id="EstadoCivil" name="EstadoCivil">
-                    <option value="Soltero">Soltero/a</option>
-                    <option value="Casado">Casado/a</option>
-                    <option value="Concuvino">Concuvino/a</option>
-                    <option value="Sin Restriccion">Sin Restriccion</option>
-                </select>
-            </div> -->
-            <div class="col-sm-3">
-                <label class="<?=$c1?>" for="">Genero:</label><br>
-                    <select class="<?=$c2?>" id="" name="">
-                        <option value="Ambos">Ambos</option>
-                        <option value="Mujer">Mujer</option>
-                        <option value="Hombre">Hombre</option>
-                    </select>
-            </div>
-            <div class="col-sm-3"></div>
+            <div class="col-sm-3"> </div>
+            <div class="col-sm-3">            
+                <label for="idestadoc" class="<?=$c1?>">Estado Civil:</label><br>                       
+                <select required  placeholder="Ingrese E. Civil" name="idestadoc" id="idestadoc" class="<?=$c2?>"  >
+                <?php S1Motorcito("estado_civil","idestadoc","txestadoc",$idestadoc ) ?>
+                </select> </div>
+            <div class="col-sm-3">                 
+                <label for="idgenero" class= "<?=$c1?>" > Genero: </label><br>
+                <select id="idgenero" name="idgenero" placeholder="Genero" class="<?=$c2?>">
+                <?php S1Motorcito('generos','idgenero','txgenero',$idgenero) ?>
+                </select></div>
+            <div class="col-sm-3"> </div>
         </div>
         <!-- Cuarta Fiia-->
         <div class="row">
@@ -123,7 +119,7 @@ $c2="form-control border border-success fst-italic text-center fs-5";
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <input  type="submit" value="Enviar" class="form-control btn btn-dark border border-success fst-italic">
+                        <input  type="submit" value="Enviar" onClick="return validaciones()" class="form-control btn btn-dark border border-success fst-italic" >
                     </div>
                     <div class="col-sm-6">
                         <a  href="busquedas.php" class=" form-control btn btn-dark border border-success fst-italic">Cancelar</a>

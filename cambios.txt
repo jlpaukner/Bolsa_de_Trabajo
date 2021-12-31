@@ -1,20 +1,29 @@
 Base de datos
-        renombrada de  "bolsadetrabajo"     a   "YourJob"
-        estudios.provincia cambia a estudios.idprov  para selector de provincia mediante tabla provincias
-        provincias.cd_provincia cambia a provincias.idprov 
+        renombrada de  "bolsadetrabajo"     a     "YourJob"
+        estudios.provincia --->  estudios.idprov  para selector de provincia mediante tabla provincias
+        provincias.cd_provincia --->  provincias.idprov 
+        busquedas.movilidad_propia --->  busquedas.movilidad
+        busquedas.estadocivil --->  busquedas.idestadoc
+        busquedas.genero --->  busquedas.idgenero
+        cdniveleducminimo default null
         
 dbconn  
+        creado funcion creaConnexion()
         creado funcion EnviarFormulario($tabla,$nombrellave,$valorllave,$retorno,$form)  
         creado funcion S1Motorcito($tabla,$valor,$texto,$valPrevio)
-        creado funcion creaConnexion()
+        creado funcion S2Motorcito($query,$valor,$texto,$valPrevio)
 
 experiencia
         arreglado de retorno al borrar una experiencia
-
+        
 estudios
         cambio a uso de idprov para selector de provincias
-        ídem
-        
+
+
+fbusqueda
+        campos extras de búsqueda
+        validacion de edad maxima mayor a edad minima
+
 fdatospersonales 
         implementado uso de S1Motorcito,  
         casilla para seleccionar genero
@@ -22,7 +31,8 @@ fdatospersonales
         selector para generos
 
 fexperiencia
-        implementado uso de S1Motorcito
+        implementado S1Motorcito
+        implementado S2Motorcito
         uso de clases bootstrap usando variables <?=$c3?>
 
 festudio

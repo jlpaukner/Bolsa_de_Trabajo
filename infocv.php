@@ -57,7 +57,7 @@ $estudios=cunsultadbmultiple($qt);
 
             <!--Direccion + n° de dirección-->
             <h6 class="card-title text-white">Dirección:</h6>
-            <p class="card-text text-white text-center text-break"><?= $datosp['Domicilio'];echo" ";$datosp['NumDireccion'] ?></p>
+            <p class="card-text text-white text-center text-break"><?= $datosp['Domicilio']." ".$datosp['NumDireccion'] ?></p>
 
             <!--Codigo Postal-->
             <h6 class="card-title text-white">Código Postal:</h6>
