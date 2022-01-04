@@ -2,7 +2,7 @@
 require __DIR__ . '/dbcon.php'; //funciones para conectar con la base de datos
 require __DIR__ . '/encabezadoc.php';
 $dni=$_SESSION['id'];
-$consulta=sprintf("SELECT * FROM `estudios` WHERE `ID_Estudio`='%s' ",$_POST['ID_Estudio']);
+$consulta=sprintf("SELECT * FROM `estudios` WHERE `id_estudio`='%s' ",$_POST['id_estudio']);
 $estudio=cunsultadb($consulta);
 
 if ($estudio=="0")
@@ -10,23 +10,23 @@ if ($estudio=="0")
     //es una nueva entrada
     $institucion="";
     $localidad="";
-    $idprov="0";
+    $id_prov="0";
     $pais="";
     $Fc_inicio=null;
     $Fc_fin=null;
-    $id_Carrera="0";
-    $ID_Estudio="0";
+    $id_carrera="0";
+    $id_estudio="0";
     }
 else
 {
     $institucion=$estudio['Institucion'];
     $localidad=$estudio['Localidad'];
-    $idprov=$estudio['idprov'];
+    $id_prov=$estudio['id_prov'];
     $pais=$estudio['Pais'];
     $Fc_inicio=$estudio['Fc_inicio'];
     $Fc_fin=$estudio['Fc_fin'];
-    $id_Carrera=$estudio['id_Carrera'];
-    $ID_Estudio=$estudio['ID_Estudio'];
+    $id_carrera=$estudio['id_carrera'];
+    $id_estudio=$estudio['id_estudio'];
 }
 //estilos para Label
 $c1= "font-weight-bold fs-4 fst-italic";
@@ -53,7 +53,7 @@ $c2= "form-control border border-primary fst-italic text-center fs-5";
 
 
 <form id="festudio" class="formulario bg-white fst-italic " action="submitformestudio.php" method="POST" onsubmit="return validaciones()" >
-    <input type="hidden" id="ID_Estudio" name="ID_Estudio"value="<?= $ID_Estudio?>">
+    <input type="hidden" id="id_estudio" name="id_estudio"value="<?= $id_estudio?>">
     <input type="hidden" id="DNI" name="DNI" value="<?=$dni?>">
     <div class="row">
         <div class="col-sm-4">
@@ -87,9 +87,9 @@ $c2= "form-control border border-primary fst-italic text-center fs-5";
             </div>
             <!--Provincia-->
             <div class="row">
-                <label for="idprov" class="  fs-6 text-black ">Provincia:</label><br>
-                        <select id="idprov" name="idprov" placeholder="Provincia" class="<?=$c2?>">
-                        <?php S1Motorcito('Provincias','idprov','provincia',$idprov) ?>
+                <label for="id_prov" class="  fs-6 text-black ">Provincia:</label><br>
+                        <select id="id_prov" name="id_prov" placeholder="Provincia" class="<?=$c2?>">
+                        <?php S1Motorcito('Provincias','id_prov','provincia',$id_prov) ?>
                         </select>
             </div>
 
@@ -101,11 +101,11 @@ $c2= "form-control border border-primary fst-italic text-center fs-5";
             <!--Titulo adquirido-->
             <div class="row">
 
-            <label for="id_Carrera" class="<?=$c1?>">Titulo adquirido:</label><br>
-                <select id="id_Carrera" name="id_Carrera" placeholder="Titulo adquirido:" class="<?=$c2?>" >
+            <label for="id_carrera" class="<?=$c1?>">Titulo adquirido:</label><br>
+                <select id="id_carrera" name="id_carrera" placeholder="Titulo adquirido:" class="<?=$c2?>" >
                 <?php 
                  $query=" SELECT `id_carrera`, Concat(`tx_carrera`,'  Tipo: ',`tipo_Carrera`,'  Nivel: ',`nivel`) as texto FROM `carreras`";
-                 S2Motorcito($query,'id_carrera','texto',$id_Carrera);
+                 S2Motorcito($query,'id_carrera','texto',$id_carrera);
                  ?>
                 </select>
             </div>
@@ -123,10 +123,10 @@ $c2= "form-control border border-primary fst-italic text-center fs-5";
             <div class="row">
                 <div class="col-sm-1"></div>
                 <div class="col-sm-5">
-                    <input class=" form-control btn btn-dark centroventana border border-info fst-italic" type="submit" value="Enviar">
+                    <input class=" form-control btn btn-dark  border border-info fst-italic" type="submit" value="Enviar">
                 </div>
                 <div class="col-sm-5">                    
-                    <button class=" form-control btn btn-dark centroventana border border-info fst-italic" > 
+                    <button class=" form-control btn btn-dark  border border-info fst-italic" > 
                         <a class=" text-decoration-none text-light" href="estudios.php">Cancelar</a></button>
                 </div>
                 <div class="col-sm-1"></div>

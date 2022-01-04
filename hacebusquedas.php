@@ -11,8 +11,8 @@ $datosp = cunsultadb($consulta);
 SELECT * FROM candidatos JOIN estudios
 on candidatos.DNI = estudios.DNI
 JOIN carreras ON
-carreras.Id_carrera= estudios.id_Carrera
-WHERE idestadoc='casado' 
+carreras.id_carrera= estudios.id_carrera
+WHERE id_estadoc='casado' 
 and '1979-04-12'<Nacimiento
 and Nacimiento<'2010-04-12'
 and carreras.tx_carrera='Auxiliar en topografía'

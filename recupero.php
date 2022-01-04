@@ -61,7 +61,7 @@
             </figure>
         </div><br><br><br>
 
-        <form class=" text-center bg-white centroventana text-stars border border-white" action="frecupero.php" method="POST">
+        <form class=" text-center bg-white  text-stars border border-white" action="frecupero.php" method="POST">
             <!--Label de email-->
             <div class="contain">
                 <div class="row text-center">
@@ -101,11 +101,11 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <!-- Boton de guardar-->
-                                <button type="submit" class="btn btn-dark centroventana border border-info fst-italic" name="login" id="sign_in">Verificar</button>
+                                <button type="submit" class="btn btn-dark  border border-info fst-italic" name="login" id="sign_in">Verificar</button>
                             </div>
                             <div class="col-sm-6">
                                 <!-- Boton de cancelar-->
-                                <button class="border border-while " > <a class="form-control btn btn-dark centroventana border border-info fst-italic" href="index.php">Cancelar</a></button>
+                                <button class="border border-while " > <a class="form-control btn btn-dark  border border-info fst-italic" href="index.php">Cancelar</a></button>
                             </div>
                         </div>
                     </div>

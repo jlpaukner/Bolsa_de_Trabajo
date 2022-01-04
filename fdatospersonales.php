@@ -21,8 +21,8 @@ $Postal="";
 $estudio="";
 $RedSocial1="";
 $RedSocial2="";
-$idestadoc="0";
-$idgenero="0";
+$id_estadoc="0";
+$id_genero="0";
 $d=strtotime("tomorrow");
 //---------------------------------
 $dni=$_SESSION['id'];
@@ -40,7 +40,7 @@ else{
         $Email=$resultado['Email'];
         $Estado=$resultado['Estado'];
         $Hijos=$resultado['Hijos'];
-        $idgenero=$resultado['idgenero'];
+        $id_genero=$resultado['id_genero'];
         $Licencia=$resultado['Licencia'];
         $LugarNac=$resultado['LugarNac'];
         $Movilidad=$resultado['Movilidad'];
@@ -51,7 +51,7 @@ else{
         $Postal=$resultado['Postal'];
         $RedSocial1=$resultado['RedSocial1'];
         $RedSocial2=$resultado['RedSocial2'];
-        $idestadoc=$resultado['idestadoc'];
+        $id_estadoc=$resultado['id_estadoc'];
     } 
 }
 // input
@@ -118,9 +118,9 @@ zoom: 100%;
                 <input type="text" maxlength="30" lid="LugarNac" required name="LugarNac" placeholder="Ingresar Lugar de Nacimiento" class="<?=$c1?>" value="<?php echo $LugarNac?>"><br>
             </div>
             <div class="col-sm-4">
-                <label for="idestadoc" class="<?=$c3?>">Estado Civil:</label><br>                       
-                <select required  placeholder="Ingrese E. Civil" name="idestadoc" id="idestadoc" class="<?=$c1?>"  >
-                <?php S1Motorcito("estado_civil","idestadoc","txestadoc",$idestadoc ) ?>
+                <label for="id_estadoc" class="<?=$c3?>">Estado Civil:</label><br>                       
+                <select required  placeholder="Ingrese E. Civil" name="id_estadoc" id="id_estadoc" class="<?=$c1?>"  >
+                <?php S1Motorcito("estado_civil","id_estadoc","txestadoc",$id_estadoc ) ?>
                 </select>
             </div>
         </div>
@@ -130,9 +130,9 @@ zoom: 100%;
                             <input type="number" min="0" max="22" lid="Hijos" name="Hijos" required placeholder="Ingresar Cantidad de Hijos" class="<?=$c1?>" value="<?php echo $Hijos ?>">
             </div>
             <div class="col-sm-4">
-            <label for="idgenero" class= "<?=$c3?>" > Genero: </label><br>
-                    <select id="idgenero" name="idgenero" placeholder="Genero" class="<?=$c1?>">
-                    <?php S1Motorcito('generos','idgenero','txgenero',$idgenero) ?>
+            <label for="id_genero" class= "<?=$c3?>" > Genero: </label><br>
+                    <select id="id_genero" name="id_genero" placeholder="Genero" class="<?=$c1?>">
+                    <?php S1Motorcito('generos','id_genero','txgenero',$id_genero) ?>
                     </select>
             </div>
     

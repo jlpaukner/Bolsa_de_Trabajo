@@ -4,19 +4,19 @@ if(!isset($_SESSION)) session_start();
 $dni=$_SESSION['id'];
 //--------------------
 $qd = "SELECT * FROM `candidatos` join estado_civil
-on estado_civil.idestadoc= candidatos.idestadoc
+on estado_civil.id_estadoc= candidatos.id_estadoc
 join provincias 
-on candidatos.idprov = provincias.idprov
+on candidatos.id_prov = provincias.id_prov
 WHERE `DNI`='$dni'";
 $datosp = cunsultadb($qd);
 $qe = "SELECT * FROM experiencia JOIN puestos 
-on experiencia.Id_puesto=puestos.Id_puesto 
+on experiencia.id_puesto=puestos.id_puesto 
 WHERE DNI='$dni'";
 $experiencias=cunsultadbmultiple($qe);
 $qt=
 "SELECT * FROM estudios join carreras
-on estudios.id_Carrera=carreras.Id_carrera 
-join provincias on provincias.idprov=estudios.idprov
+on estudios.id_carrera=carreras.id_carrera 
+join provincias on provincias.id_prov=estudios.id_prov
 WHERE DNI= '{$dni}'";
 $estudios=cunsultadbmultiple($qt);
 ?>

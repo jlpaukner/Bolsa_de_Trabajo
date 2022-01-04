@@ -1,11 +1,8 @@
 <?php
 require_once('./dbcon.php');
 require_once('./encabezadoe.php');
-if(!isset($_GET["ms"])){
-    $_GET["ms"]="nada";
-}
+if(!isset($_GET["ms"])){$_GET["ms"]="nada";} //si no nay mensajes
 $_SESSION['abierta']="si";
-
 $Razon_Social="";
 $FC_Inicio_Actividades="";
 $Domicilio="";
@@ -18,8 +15,8 @@ $Email="";
 $Cuit=$_SESSION['id'];
 $consulta = "SELECT * FROM `empresa` WHERE `Cuit`='$Cuit'";
 $resultado = cunsultadb($consulta);
-$contador = 1;
-//echo $recultado['Razon_Social'];
+
+
 if ($resultado=="0"){
    // echo"<h3 class='text-center text-dark'> Cargue los campos vacíos</h3>";
 }
@@ -54,12 +51,6 @@ switch ($_GET["ms"]) {
     echo "<h3 class='text-center'>".$mensaje."</h3>";
 ?>
 <ls>
-<!-- <h1> El Cuit de la empresa es 
-    <?//=$resultado["Cuit"]   ?>
-    <h1><br>
-<h1> El Email de la empresa es 
-    <?//=$resultado["Email"]   ?>
-    <h1><br> -->
 <body>
     <div class="container">
         <div class="row">
@@ -147,55 +138,55 @@ switch ($_GET["ms"]) {
 
 <?php  // para mostrar si hay matchs a la busquedas
 include_once('./herramientas.php');
-//vemos si esta activo o inactivo
+//vemos si empresa esta activa o inactiva
 $consulta=sprintf("SELECT * FROM empresa WHERE Cuit='%s' ",$_SESSION['id']);
 $resultado=cunsultadb($consulta);
-$cargar =$resultado['Estado'];
-if($cargar == 1){
-
+$activa = $resultado['Estado']==1;
+if($activa){
 $consulta=sprintf("SELECT * FROM busquedas WHERE idEmpresa='%s' ",$_SESSION['id']);
 $busquedas=cunsultadbmultiple($consulta);
 if(sizeof($busquedas)==0){
 echo "Realize una búsqueda de personal seleccoinando 'Busqueda' en el menú";
-
 }
+$contador = 0;
 foreach($busquedas as $busqueda) 
 {
-    $idBusqueda=$busqueda['IdBusqueda'];
+    $contador = $contador + 1; 
+    $id_busqueda=$busqueda['id_busqueda'];
     $FDnacMinima=nacimiento($busqueda['EdadMaxima']);
     $FDnacMaxima=nacimiento($busqueda['EdadMinima']);
-    $id_Carrera=$busqueda['id_Carrera'];
-    $Id_puesto=$busqueda['Id_puesto'];
-    $consulta=
-    "SELECT * from 
-    candidatos JOIN estudios on candidatos.DNI = estudios.DNI 
-    join experiencia on candidatos.DNI = experiencia.DNI 
-    join puestos on puestos.Id_puesto=experiencia.Id_puesto 
-    join carreras on Carreras.Id_carrera=estudios.id_Carrera 
-    where estudios.id_Carrera ={$id_Carrera}
-    and experiencia.id_Puesto ={$Id_puesto}
-    and '{$FDnacMinima}' < Nacimiento 
-    and Nacimiento < '{$FDnacMaxima}'
-    ";
+    $id_carrera=$busqueda['id_carrera'];
+    $id_puesto=$busqueda['id_puesto'];
+    $sq = "SELECT candidatos.DNI from candidatos ";
+    $wq = " Where Nacimiento < '{$FDnacMaxima}' and '{$FDnacMinima}' < Nacimiento ";
+    if($busqueda['id_puesto']!="0"){
+        $sq = $sq." JOIN experiencia on candidatos.DNI = experiencia.DNI  
+        JOIN puestos on puestos.id_puesto = experiencia.id_puesto ";
+        $wq = $wq."and experiencia.id_puesto ={$id_puesto} ";
+                                    }
+    if($busqueda['id_carrera']!="0"){
+        $sq = $sq." JOIN estudios on estudios.DNI = candidatos.DNI   
+        JOIN carreras on estudios.id_carrera = carreras.id_carrera ";
+        $wq = $wq." and estudios.id_carrera ={$id_carrera}";
+                                    }
+    $consulta= $sq.$wq;
     $candidatosEncontrados=cunsultadbmultiple($consulta);
     if(sizeof($candidatosEncontrados)>0){
-        // añadir a tabla resultados
-        $contador = $contador + 1;   
-        $aborrar = " DELETE FROM resultados WHERE idBusqueda = '{$idBusqueda}'";
+        // añadir a tabla resultados          
+        $aborrar = " DELETE FROM resultados WHERE id_busqueda = '{$id_busqueda}'";
         operaciondb($aborrar);
         foreach($candidatosEncontrados as $candidato)
         {
-         $inserta="INSERT into Resultados (idBusqueda,DNI) VALUES ('{$idBusqueda}','{$candidato['DNI']}')";
+         $inserta="INSERT into Resultados (id_busqueda,DNI) VALUES ('{$id_busqueda}','{$candidato['DNI']}')";
          operaciondb($inserta);
         };
         echo "<center>Su busqueda $contador obtuvo resultados";
-    ?>
+        ?>
         <form action= muestramatchs.php method="POST" style="display: inline-block;"> 
-        <input type = "hidden" name = "idBusqueda" value = <?=$idBusqueda?> >
-        <input type=  "submit" class="form-control btn btn-dark centroventana border border-success fst-italic  lh-1" name="boton" value ="Ver candidatos"  >
-        </form></center>
-        
-    <?php 
+        <input type = "hidden" name = "id_busqueda" value = <?=$id_busqueda?> >
+        <input type=  "submit" class="form-control btn btn-dark  border border-success fst-italic  lh-1" name="boton" value ="Ver candidatos"  >
+        </form></center>        
+        <?php 
     }
     else {echo "<center><p align='center' class='text-dark fs-5'>  Le comunicaremos cuando sus busqueda $contador obtenga candidatos.<p></center>";};
     echo"<hr>";

@@ -130,11 +130,11 @@ zoom: 100%;
             <div class="row">
                 <div class="col-sm-6"><!--boton guardar-->
                 
-                <button type="submit" class="form-control btn btn-dark centroventana border border-primary" value="Enviar">Guardar</button>
+                <button type="submit" class="form-control btn btn-dark  border border-primary" value="Enviar">Guardar</button>
 
                 </div>
                 <div class="col-sm-6"><!--boton cancelar-->
-                <button class=" form-control btn btn-dark centroventana border border-success fst-italic" ><a class=" text-decoration-none text-light" href="inicioempresa?ms=ini.php">Cancelar</a></button>
+                <button class=" form-control btn btn-dark  border border-success fst-italic" ><a class=" text-decoration-none text-light" href="inicioempresa?ms=ini.php">Cancelar</a></button>
                 </div>
             </div>
         </div>

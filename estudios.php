@@ -3,8 +3,8 @@ require_once('./encabezadoc.php');
 require_once('./dbcon.php');
 $dni=$_SESSION['id'];
 $consulta= " SELECT * FROM `estudios`
-JOIN carreras on estudios.id_Carrera=carreras.Id_carrera 
-JOIN provincias on estudios.idprov = provincias.idprov
+JOIN carreras on estudios.id_carrera=carreras.id_carrera 
+JOIN provincias on estudios.id_prov = provincias.id_prov
 where `DNI`='$dni' ";
 $estudios=cunsultadbmultiple($consulta);
 if (count($estudios)>0)
@@ -66,17 +66,17 @@ foreach ($estudios as $fila)
         <div class="row">
             <div class="col-sm-6">
                 <form action=festudio.php method="POST">
-                    <input type = "hidden" name = "ID_Estudio" value = "<?php echo $fila["ID_Estudio"]?>" >
-                    <input type=  "submit" name="boton" class="form-control centroventana btn btn-dark border border-info text-center" value ="Modificar"> 
+                    <input type = "hidden" name = "id_estudio" value = "<?php echo $fila["id_estudio"]?>" >
+                    <input type=  "submit" name="boton" class="form-control  btn btn-dark border border-info text-center" value ="Modificar"> 
                 </form>
             </div>
             <div class="col-sm-6">
                 <form action=borraregistro.php method="POST">
                     <input type = "hidden" name = "tabla" value = "estudios" >
-                    <input type = "hidden" name = "nombreID" value = "ID_Estudio" >
+                    <input type = "hidden" name = "nombreID" value = "id_estudio" >
                     <input type = "hidden" name = "retorno" value = "estudios.php" >
-                    <input type = "hidden" name = "valorID" value = "<?php echo $fila["ID_Estudio"]?>" >
-                    <input type=  "submit" name="boton" class="form-control centroventana btn btn-dark border border-info text-center" value ="Borrar"> 
+                    <input type = "hidden" name = "valorID" value = "<?php echo $fila["id_estudio"]?>" >
+                    <input type=  "submit" name="boton" class="form-control  btn btn-dark border border-info text-center" value ="Borrar"> 
                 </form>
             </div>
         </div>
@@ -97,8 +97,8 @@ else
         <div class="row">
             <div class="col-sm-5"></div>
             <div class="col-sm-2">
-                <input type = "hidden" name = "ID_Estudio" value = "0" >
-                <input type=  "submit" name="boton" class="form-control btn btn-dark centroventana border border-info" value ="Añadir estudio"> 
+                <input type = "hidden" name = "id_estudio" value = "0" >
+                <input type=  "submit" name="boton" class="form-control btn btn-dark  border border-info" value ="Añadir estudio"> 
             </div>
             <div class="col-sm-5"></div>
         </div>

@@ -3,9 +3,9 @@ require_once('./encabezadoc.php');
 require_once('./dbcon.php');
 $dni=$_SESSION['id'];
 $consulta=
-"SELECT Id,Empresa,Contacto,Cont_Tel,puestos.Id_puesto,Fc_inicio,Fc_fin,Descripcion,tx_puesto
+"SELECT Id,Empresa,Contacto,Cont_Tel,puestos.id_puesto,Fc_inicio,Fc_fin,Descripcion,tx_puesto
 FROM experiencia join puestos 
-on experiencia.Id_puesto=puestos.Id_puesto WHERE `DNI`='$dni'";
+on experiencia.id_puesto=puestos.id_puesto WHERE `DNI`='$dni'";
 $experiencias=cunsultadbmultiple($consulta);
 if (count($experiencias)>0)
     {
@@ -52,16 +52,16 @@ if (count($experiencias)>0)
     foreach ($experiencias as $fila) 
         {           
             ?>
-         <div class='col-sm-1 text-center border-bottom  border-info '><?=$fila['Empresa']?></div> 
-         <div class='col-sm-1 text-center border-bottom border-info'><?=$fila['Contacto']?></div> 
-         <div class='col-sm-1 text-center border-bottom border-info'><?=$fila['Cont_Tel']?></div> 
-         <div class='col-sm-1 text-center border-bottom border-info'><?=$fila['tx_puesto']?></div> 
-         <div class='col-sm-3 text-center text-break border-bottom border-info '><?=$fila['Descripcion']?></div> 
-         <div class='col-sm-3 border-bottom border-info'>
-             <div class='row '> 
-            <div class='col-sm-6 text-center '><?=$fila['Fc_inicio']?></div> 
-            <div class='col-sm-6 text-center'><?=$fila['Fc_fin']?></div>
-            </div>
+        <div class='col-sm-1 text-center border-bottom  border-info '><?=$fila['Empresa']?></div> 
+        <div class='col-sm-1 text-center border-bottom border-info'><?=$fila['Contacto']?></div> 
+        <div class='col-sm-1 text-center border-bottom border-info'><?=$fila['Cont_Tel']?></div> 
+        <div class='col-sm-1 text-center border-bottom border-info'><?=$fila['tx_puesto']?></div> 
+        <div class='col-sm-3 text-center text-break border-bottom border-info '><?=$fila['Descripcion']?></div> 
+        <div class='col-sm-3 border-bottom border-info'>
+        <div class='row '> 
+        <div class='col-sm-6 text-center '><?=$fila['Fc_inicio']?></div> 
+        <div class='col-sm-6 text-center'><?=$fila['Fc_fin']?></div>
+        </div>
         </div> 
 
             <div class="col-sm-2 border-bottom border-info">
@@ -101,7 +101,7 @@ else
             <div class="col-sm-5"></div>
             <div class="col-sm-2">
                 <input type = "hidden" name = "Id" value = "0" >
-                <input type=  "submit" name="boton" class="form-control btn btn-dark centroventana border border-info" value ="Añadir experiencia">  
+                <input type=  "submit" name="boton" class="form-control btn btn-dark  border border-info" value ="Añadir experiencia">  
             </div>
             <div class="col-sm-5"></div>
         </div>

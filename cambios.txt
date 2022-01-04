@@ -1,26 +1,40 @@
 Base de datos
         renombrada de  "bolsadetrabajo"     a     "YourJob"
-        estudios.provincia --->  estudios.idprov  para selector de provincia mediante tabla provincias
-        provincias.cd_provincia --->  provincias.idprov 
+        idXxx, IDXxx,Idxxx ,cdxxx,   a  id_xxx en varias tablas     
+        estudios.provincia --->  estudios.id_prov  para selector de provincia mediante tabla provincias
+        provincias.cd_provincia --->  provincias.id_prov 
         busquedas.movilidad_propia --->  busquedas.movilidad
-        busquedas.estadocivil --->  busquedas.idestadoc
-        busquedas.genero --->  busquedas.idgenero
+        busquedas.estadocivil --->  busquedas.id_estadoc
+        busquedas.genero --->  busquedas.id_genero
         cdniveleducminimo null
-        experiencia campos pueden ser null        
+        experiencia campos pueden ser null 
+        resultados , campos nulos en default
 dbconn  
         creado funcion creaConnexion()
         creado funcion EnviarFormulario($tabla,$nombrellave,$valorllave,$retorno,$form)  
         creado funcion S1Motorcito($tabla,$valor,$texto,$valPrevio)
         creado funcion S2Motorcito($query,$valor,$texto,$valPrevio)
+
+busquedas 
+        numera las busquedas mediante query y la presenta en la tabla
+ctabla
+        funcion para crear tabla con opciones de modificacion y borrar pero que no muestra ID
 experiencia
         arreglado de retorno al borrar una experiencia        
 estudios
-        cambio a uso de idprov para selector de provincias
+        cambio a uso de id_prov para selector de provincias
         reformulacion de query
         reformulacion de lista de estudios
+inicioempresa
+        construye querys distintas segun se requiera o no experiencia, estudios,
 fbusqueda
         campos extras de búsqueda
         validacion de edad maxima mayor a edad minima
+        previo selecionado edad maxima
+        previo seleccionado edad minima
+        previo seleccionado movilidad propia
+fsubs
+        usuario_registrase ---> reg_email
 fdatospersonales 
         implementado uso de S1Motorcito,  
         casilla para seleccionar genero
@@ -39,7 +53,9 @@ festudio
         Selector para Provincia
         <script> function validaciones() (fecha inicio, fin)
 rtabla
-        reparacion por base de datos distinta        
+        reparacion por base de datos distinta    
+submitsubs
+        validacion por email ya usado
 submitformcandidato 
         en caso de error al insertar queda en la página para mostrar fuente del error
         implementacion de EnviarFormulario()

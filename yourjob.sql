@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 31-12-2021 a las 02:11:12
+-- Tiempo de generación: 04-01-2022 a las 01:04:35
 -- Versión del servidor: 5.7.31
 -- Versión de PHP: 7.3.21
 
@@ -29,31 +29,31 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `busquedas`;
 CREATE TABLE IF NOT EXISTS `busquedas` (
-  `IdBusqueda` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id tabla',
+  `id_busqueda` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id tabla',
   `IdEmpresa` bigint(11) NOT NULL COMMENT 'fk tbl empresa',
-  `id_Carrera` int(10) DEFAULT NULL COMMENT 'fk tbl carrra',
-  `idestadoc` int(1) DEFAULT NULL,
+  `id_carrera` int(10) DEFAULT NULL COMMENT 'fk tbl carrra',
+  `id_estadoc` int(1) DEFAULT NULL,
   `cdniveleducminimo` int(2) DEFAULT NULL,
   `Cd_CP` int(4) DEFAULT NULL,
-  `idprov` int(2) DEFAULT NULL COMMENT 'es para por prov  filtrar',
+  `id_prov` int(2) DEFAULT NULL COMMENT 'es para por prov  filtrar',
   `EdadMinima` int(2) DEFAULT NULL COMMENT 'edad desde a filtrar',
   `EdadMaxima` int(2) DEFAULT NULL COMMENT 'edad hasta a filtrar',
-  `Id_puesto` int(10) DEFAULT NULL COMMENT 'fk tabla puestos',
-  `idgenero` int(2) DEFAULT NULL COMMENT 'sexo del candidato ',
+  `id_puesto` int(10) DEFAULT NULL COMMENT 'fk tabla puestos',
+  `id_genero` int(2) DEFAULT NULL COMMENT 'sexo del candidato ',
   `Movilidad` varchar(2) DEFAULT NULL COMMENT 'si requiere tener movilidad propia para el puesto',
   `FC_HM_lim_req` date DEFAULT NULL,
   `Estadobusqueda` int(2) DEFAULT NULL,
   `fc_alta` date DEFAULT NULL,
-  PRIMARY KEY (`IdBusqueda`),
+  PRIMARY KEY (`id_busqueda`),
   KEY `IdEmpresa` (`IdEmpresa`),
-  KEY `id_Carrera` (`id_Carrera`,`idestadoc`,`cdniveleducminimo`,`Cd_CP`,`idprov`,`Id_puesto`,`idgenero`,`Movilidad`,`Estadobusqueda`)
-) ENGINE=InnoDB AUTO_INCREMENT=402 DEFAULT CHARSET=utf8 COMMENT='tabla complementaria para solicitar candidatos o publicar los req para el puesto';
+  KEY `id_Carrera` (`id_carrera`,`id_estadoc`,`cdniveleducminimo`,`Cd_CP`,`id_prov`,`id_puesto`,`id_genero`,`Movilidad`,`Estadobusqueda`)
+) ENGINE=InnoDB AUTO_INCREMENT=403 DEFAULT CHARSET=utf8 COMMENT='tabla complementaria para solicitar candidatos o publicar los req para el puesto';
 
 --
 -- Volcado de datos para la tabla `busquedas`
 --
 
-INSERT INTO `busquedas` (`IdBusqueda`, `IdEmpresa`, `id_Carrera`, `idestadoc`, `cdniveleducminimo`, `Cd_CP`, `idprov`, `EdadMinima`, `EdadMaxima`, `Id_puesto`, `idgenero`, `Movilidad`, `FC_HM_lim_req`, `Estadobusqueda`, `fc_alta`) VALUES
+INSERT INTO `busquedas` (`id_busqueda`, `IdEmpresa`, `id_carrera`, `id_estadoc`, `cdniveleducminimo`, `Cd_CP`, `id_prov`, `EdadMinima`, `EdadMaxima`, `id_puesto`, `id_genero`, `Movilidad`, `FC_HM_lim_req`, `Estadobusqueda`, `fc_alta`) VALUES
 (1, 20140076450, 335, 0, 1, 1050, 3, 18, 55, 38, 0, 'Si', '2021-11-16', 0, '2021-09-16'),
 (2, 27140836492, 335, 0, 2, 1078, 3, 23, 60, 39, 1, 'Si', '2021-11-21', 0, '2021-09-15'),
 (3, 33141216513, 335, 0, 3, 1050, 3, 18, 34, 40, 2, 'Si', '2021-11-26', 0, '2021-09-14'),
@@ -453,7 +453,8 @@ INSERT INTO `busquedas` (`IdBusqueda`, `IdEmpresa`, `id_Carrera`, `idestadoc`, `
 (397, 20140076450, 161, 0, 0, 0, 0, 33, 52, 56, 0, 'Si', '2021-11-16', 0, '2021-08-16'),
 (398, 27140836492, 162, 0, 0, 0, 0, 21, 40, 57, 0, 'Si', '2021-11-21', 0, '2021-08-15'),
 (399, 33141216513, 163, 0, 0, 0, 0, 22, 41, 58, 0, 'Si', '2021-11-26', 0, '2021-08-14'),
-(401, 20000000002, 137, 2, NULL, NULL, 9, 20, 60, 220, 0, 'Si', NULL, NULL, NULL);
+(401, 20000000002, 137, 0, NULL, NULL, 14, 20, 60, 220, 0, 'si', NULL, NULL, NULL),
+(402, 20000000002, 0, 1, NULL, NULL, 1, 18, 70, 220, 1, 'si', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -476,26 +477,26 @@ CREATE TABLE IF NOT EXISTS `candidatos` (
   `Movilidad` varchar(2) DEFAULT 'No',
   `Nacimiento` date DEFAULT NULL,
   `Nacionalidad` varchar(30) DEFAULT NULL,
-  `idgenero` int(2) DEFAULT NULL COMMENT 'Codigo de la tabla Genero',
+  `id_genero` int(2) DEFAULT NULL COMMENT 'Codigo de la tabla Genero',
   `Nombre` varchar(30) DEFAULT NULL,
   `NumDireccion` varchar(30) DEFAULT NULL,
   `Postal` int(4) DEFAULT NULL,
-  `idprov` int(2) DEFAULT NULL,
+  `id_prov` int(2) DEFAULT NULL,
   `RedSocial1` varchar(100) DEFAULT NULL,
   `RedSocial2` varchar(100) DEFAULT NULL,
-  `idestadoc` int(1) DEFAULT NULL,
+  `id_estadoc` int(1) DEFAULT NULL,
   PRIMARY KEY (`DNI`),
-  KEY `idgenero` (`idgenero`,`Estado`,`Movilidad`,`Postal`,`idprov`,`idestadoc`)
+  KEY `idgenero` (`id_genero`,`Estado`,`Movilidad`,`Postal`,`id_prov`,`id_estadoc`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `candidatos`
 --
 
-INSERT INTO `candidatos` (`DNI`, `Apellido`, `Comentario`, `Contacto`, `Domicilio`, `Email`, `Estado`, `Hijos`, `Licencia`, `LugarNac`, `Movilidad`, `Nacimiento`, `Nacionalidad`, `idgenero`, `Nombre`, `NumDireccion`, `Postal`, `idprov`, `RedSocial1`, `RedSocial2`, `idestadoc`) VALUES
+INSERT INTO `candidatos` (`DNI`, `Apellido`, `Comentario`, `Contacto`, `Domicilio`, `Email`, `Estado`, `Hijos`, `Licencia`, `LugarNac`, `Movilidad`, `Nacimiento`, `Nacionalidad`, `id_genero`, `Nombre`, `NumDireccion`, `Postal`, `id_prov`, `RedSocial1`, `RedSocial2`, `id_estadoc`) VALUES
 (666, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Ninguna', NULL, 'No', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (111111, 'Rodriguez', '', '1123423234', 'Av.Rivadavia', 'okahito18@gmail.com', 0, 3, 'Particular', 'Buenos Aires', '', '2021-12-23', 'Argentino', 0, 'Diego', '12', 1232, 0, 'Facebook', 'Instagram', 0),
-(10000003, 'Motzart', 'Escribire operas por dinero', '1122045379', 'ARMENIA ', 'RUZO_ASOC@gmail.com', 1, 2, 'Particular', 'Santa Fe', 'Si', '1990-08-29', 'Austriaco', 1, 'Wolfgang Amadeus', '120', 2417, 0, 'RUZOASOC.facebook.com', 'ASOCRUZO.instagram', 1),
+(10000003, 'Motzart', 'Escribire operas por dinero, el suficiente.', '1122045379', 'ARMENIA ', 'RUZO_ASOC@gmail.com', 1, 3, 'Particular', 'Santa Fe', 'Si', '1989-08-29', 'Austriaco', 1, 'Wolfgang Amadeus', '111', 2417, 0, 'RUZOASOC.facebook.com', 'ASOCRUZO.instagram', 1),
 (10000018, 'ARRIETA', 'En busca de empleo como plan de mejora de calidad de vida', '1122046086', 'CALLE 146 ', 'OSORIO_ARRIETA@gmail.com', 1, 4, 'Particular', 'Tucuman', 'Si', '1982-05-01', 'Argentina', 1, 'OSORIO', '665', 2720, 0, 'OSORIOARRIETA.facebook.com', 'ARRIETAOSORIO.instagram', 1),
 (10000033, 'BAGNIOTTI', 'En busca de empleo como plan de mejora de calidad de vida', '1122040345', 'DR JOSE MANUEL GALVEZ ', 'SEGOVIA_BAGNIOTTI@gmail.com', 1, 4, 'Particular', 'Santiago Del Estero', 'Si', '2002-01-01', 'Venezuela', 1, 'SEGOVIA', '1190', 3011, 0, 'SEGOVIABAGNIOTTI.facebook.com', 'BAGNIOTTISEGOVIA.instagram', 1),
 (10000048, 'AZERRAD', 'En busca de empleo como plan de mejora de calidad de vida', '1122041136', 'AV 29 - AV EVA DUARTE DE PERON', 'POTRO_AZERRAD@gmail.com', 1, 4, '', 'Santiago Del Estero', 'No', '1993-09-03', 'Bolivia', 1, 'POTRO', '1715', 3116, 0, 'POTROAZERRAD.facebook.com', 'AZERRADPOTRO.instagram', 1),
@@ -647,7 +648,7 @@ INSERT INTO `candidatos` (`DNI`, `Apellido`, `Comentario`, `Contacto`, `Domicili
 (33002037, 'DI LAURO ', 'En busca de empleo como plan de mejora de calidad de vida', '1122043638', '6 DE ABRIL ', 'ELENA_DILAURO@hotmail.com', 1, 3, 'Particular', 'Corrientes', 'Si', '1994-07-27', 'Argentina', 2, ' ELENA', '3913', 2326, 0, 'ELENADILAURO.facebook.com', 'DILAUROELENA.instagram', 2),
 (33002052, 'DIAMANTE ', 'En busca de empleo como plan de mejora de calidad de vida', '1122043653', 'ADOLFO CALLE ', 'ELENAPEREZDE_DIAMANTE@hotmail.com', 0, 1, 'Particular', 'Santiago Del Estero', 'Si', '1994-02-27', 'Argentina', 2, ' ELENA PEREZ DE', '3982', 2354, 0, 'ELENAPEREZDEDIAMANTE.facebook.com', 'DIAMANTEELENAPEREZDE.instagram', 1),
 (33002067, 'EBERHARD ', 'En busca de empleo como plan de mejora de calidad de vida', '1122043668', 'ALSINA ', 'ELIANAMONICA_EBERHARD@hotmail.com', 1, 3, 'Particular', 'Chaco', 'Si', '1993-09-30', 'Uruguay', 2, ' ELIANA MONICA', '4116', 2356, 0, 'ELIANAMONICAEBERHARD.facebook.com', 'EBERHARDELIANAMONICA.instagram', 4);
-INSERT INTO `candidatos` (`DNI`, `Apellido`, `Comentario`, `Contacto`, `Domicilio`, `Email`, `Estado`, `Hijos`, `Licencia`, `LugarNac`, `Movilidad`, `Nacimiento`, `Nacionalidad`, `idgenero`, `Nombre`, `NumDireccion`, `Postal`, `idprov`, `RedSocial1`, `RedSocial2`, `idestadoc`) VALUES
+INSERT INTO `candidatos` (`DNI`, `Apellido`, `Comentario`, `Contacto`, `Domicilio`, `Email`, `Estado`, `Hijos`, `Licencia`, `LugarNac`, `Movilidad`, `Nacimiento`, `Nacionalidad`, `id_genero`, `Nombre`, `NumDireccion`, `Postal`, `id_prov`, `RedSocial1`, `RedSocial2`, `id_estadoc`) VALUES
 (33002082, 'ESCUDERO ', 'En busca de empleo como plan de mejora de calidad de vida', '1122043683', 'ARAOZ ', 'ELIDANIEVES_ESCUDERO@gmail.com', 2, 1, 'Profesional', 'Chaco', 'No', '1993-05-03', 'Argentina', 2, ' ELIDA NIEVES', '4185', 2413, 0, 'ELIDANIEVESESCUDERO.facebook.com', 'ESCUDEROELIDANIEVES.instagram', 3),
 (33002097, 'FALGIONE ', 'En busca de empleo como plan de mejora de calidad de vida', '1122043698', 'AV ALSINA ', 'ELIRIO_FALGIONE@gmail.com', 1, 3, 'Profesional', 'Formosa', 'Si', '1992-12-04', 'Argentina', 2, ' ELIRIO', '4254', 2424, 0, 'ELIRIOFALGIONE.facebook.com', 'FALGIONEELIRIO.instagram', 1),
 (33002112, 'FERRUCCI ', 'En busca de empleo como plan de mejora de calidad de vida', '1122043713', 'AV LIBERTAD ', 'ELISABETH_FERRUCCI@gmail.com', 3, 1, 'Particular', 'Formosa', 'Si', '1992-07-07', 'Argentina', 1, ' ELISABETH', '4323', 2445, 0, 'ELISABETHFERRUCCI.facebook.com', 'FERRUCCIELISABETH.instagram', 1),
@@ -803,7 +804,7 @@ INSERT INTO `candidatos` (`DNI`, `Apellido`, `Comentario`, `Contacto`, `Domicili
 (33004392, 'TEGALDO ', 'En busca de empleo como plan de mejora de calidad de vida', '1122045993', 'CALLE 2 ', 'LORENALAURA_TEGALDO@yahoo.com.ar', 1, 2, 'Particular', 'Santa Fe', 'No', '2002-05-30', 'Argentina', 1, ' LORENA LAURA', '1102', 1739, 0, 'LORENALAURATEGALDO.facebook.com', 'TEGALDOLORENALAURA.instagram', 3),
 (33004407, 'TINELLI ', 'En busca de empleo como plan de mejora de calidad de vida', '1122046008', 'CALLE 42 ', 'LORIS_TINELLI@yahoo.com.ar', 1, 1, 'Particular', 'Entre Rios', 'Si', '2002-04-15', 'Argentina', 1, ' LORIS', '1171', 1787, 0, 'LORISTINELLI.facebook.com', 'TINELLILORIS.instagram', 1),
 (33004422, 'TORELLI ', 'En busca de empleo como plan de mejora de calidad de vida', '1122046023', 'CALLE 61 ', 'LUCASRUFINO_TORELLI@yahoo.com.ar', 1, 2, 'Particular', 'Entre Rios', 'Si', '2002-03-01', 'Argentina', 1, ' LUCAS RUFINO', '1305', 1841, 0, 'LUCASRUFINOTORELLI.facebook.com', 'TORELLILUCASRUFINO.instagram', 1);
-INSERT INTO `candidatos` (`DNI`, `Apellido`, `Comentario`, `Contacto`, `Domicilio`, `Email`, `Estado`, `Hijos`, `Licencia`, `LugarNac`, `Movilidad`, `Nacimiento`, `Nacionalidad`, `idgenero`, `Nombre`, `NumDireccion`, `Postal`, `idprov`, `RedSocial1`, `RedSocial2`, `idestadoc`) VALUES
+INSERT INTO `candidatos` (`DNI`, `Apellido`, `Comentario`, `Contacto`, `Domicilio`, `Email`, `Estado`, `Hijos`, `Licencia`, `LugarNac`, `Movilidad`, `Nacimiento`, `Nacionalidad`, `id_genero`, `Nombre`, `NumDireccion`, `Postal`, `id_prov`, `RedSocial1`, `RedSocial2`, `id_estadoc`) VALUES
 (33004437, 'TRUMPIO ', 'En busca de empleo como plan de mejora de calidad de vida', '1122046038', 'CAMPANA ', 'LUCIAISABEL_TRUMPIO@hotmail.com', 1, 1, 'Profesional', 'Entre Rios', 'Si', '2002-01-15', 'Argentina', 1, ' LUCIA ISABEL', '1374', 1883, 0, 'LUCIAISABELTRUMPIO.facebook.com', 'TRUMPIOLUCIAISABEL.instagram', 1),
 (33004452, 'UZCUDUN ', 'En busca de empleo como plan de mejora de calidad de vida', '1122046053', 'CAVALLARI ', 'LUCIANANATIVIDAD_UZCUDUN@hotmail.com', 1, 2, 'Profesional', 'Corrientes', 'No', '2001-12-01', 'Argentina', 1, ' LUCIANA NATIVIDAD', '1443', 1915, 0, 'LUCIANANATIVIDADUZCUDUN.facebook.com', 'UZCUDUNLUCIANANATIVIDAD.instagram', 2),
 (33004467, 'VECCHIO ', 'En busca de empleo como plan de mejora de calidad de vida', '1122046068', 'COBOS JUAN F ', 'LUCIODARIO_VECCHIO@hotmail.com', 1, 1, 'Profesional', 'Entre Rios', 'Si', '2001-10-17', 'Argentina', 1, ' LUCIO DARIO', '1512', 1983, 0, 'LUCIODARIOVECCHIO.facebook.com', 'VECCHIOLUCIODARIO.instagram', 1),
@@ -962,7 +963,7 @@ INSERT INTO `candidatos` (`DNI`, `Apellido`, `Comentario`, `Contacto`, `Domicili
 (33006762, 'PABON ', 'En busca de empleo como plan de mejora de calidad de vida', '1122048363', 'EREZCANO ', 'ROBERTODOMINGO_PABON@gmail.com', 1, 1, 'Particular', 'Capital Federal', 'No', '1982-12-11', 'Argentina', 1, ' ROBERTO DOMINGO', '2728', 1090, 0, 'ROBERTODOMINGOPABON.facebook.com', 'PABONROBERTODOMINGO.instagram', 2),
 (33006777, 'PARRA ', 'En busca de empleo como plan de mejora de calidad de vida', '1122048378', 'FRANCIA ', 'ROBERTOJ_PARRA@gmail.com', 1, 1, 'Particular', 'Buenos Aires', 'Si', '1982-10-27', 'Chile', 1, ' ROBERTO J', '2797', 1143, 0, 'ROBERTOJPARRA.facebook.com', 'PARRAROBERTOJ.instagram', 1),
 (33006792, 'PERIN ', 'En busca de empleo como plan de mejora de calidad de vida', '1122048393', 'GONZALEZ ELPIDIO ', 'ROBERTOMARTIN_PERIN@gmail.com', 1, 1, 'Particular', 'Buenos Aires', 'Si', '1982-09-12', 'Argentina', 1, ' ROBERTO MARTIN', '2931', 1197, 0, 'ROBERTOMARTINPERIN.facebook.com', 'PERINROBERTOMARTIN.instagram', 4);
-INSERT INTO `candidatos` (`DNI`, `Apellido`, `Comentario`, `Contacto`, `Domicilio`, `Email`, `Estado`, `Hijos`, `Licencia`, `LugarNac`, `Movilidad`, `Nacimiento`, `Nacionalidad`, `idgenero`, `Nombre`, `NumDireccion`, `Postal`, `idprov`, `RedSocial1`, `RedSocial2`, `idestadoc`) VALUES
+INSERT INTO `candidatos` (`DNI`, `Apellido`, `Comentario`, `Contacto`, `Domicilio`, `Email`, `Estado`, `Hijos`, `Licencia`, `LugarNac`, `Movilidad`, `Nacimiento`, `Nacionalidad`, `id_genero`, `Nombre`, `NumDireccion`, `Postal`, `id_prov`, `RedSocial1`, `RedSocial2`, `id_estadoc`) VALUES
 (33006807, 'PIANA ', 'En busca de empleo como plan de mejora de calidad de vida', '1122048408', '6 DE MAYO ', 'ROBERTOSALVADOR_PIANA@gmail.com', 1, 1, 'Particular', 'Santa Fe', 'No', '1982-07-29', 'Argentina', 1, ' ROBERTO SALVADOR', '3000', 1246, 0, 'ROBERTOSALVADORPIANA.facebook.com', 'PIANAROBERTOSALVADOR.instagram', 3),
 (33006822, 'PIRRA ', 'En busca de empleo como plan de mejora de calidad de vida', '1122048423', 'AGOTE LUIS ', 'RODOLFOANTONIO_PIRRA@gmail.com', 1, 1, 'Profesional', 'Santa Fe', 'Si', '1982-06-14', 'Argentina', 1, ' RODOLFO ANTONIO', '3069', 1302, 0, 'RODOLFOANTONIOPIRRA.facebook.com', 'PIRRARODOLFOANTONIO.instagram', 1),
 (33006837, 'PORRO ', 'En busca de empleo como plan de mejora de calidad de vida', '1122048438', 'ALTOLAGUIRRE ', 'RODOLFOHECTOR_PORRO@gmail.com', 1, 1, 'Profesional', 'Santa Fe', 'Si', '1982-04-30', 'Paraguay', 1, ' RODOLFO HECTOR', '3138', 1355, 0, 'RODOLFOHECTORPORRO.facebook.com', 'PORRORODOLFOHECTOR.instagram', 1),
@@ -1063,7 +1064,8 @@ INSERT INTO `candidatos` (`DNI`, `Apellido`, `Comentario`, `Contacto`, `Domicili
 (43611203, 'BACHMANN', 'En busca de empleo como plan de mejora de calidad de vida', '1122041232', 'AV LIB SAN MARTIN ', 'QUIROGA_BACHMANN@gmail.com', 1, 1, 'Ninguna', 'Salta', 'Si', '1978-08-19', 'Argentina', 1, 'QUIROGA', '3540', 3129, 0, 'QUIROGABACHMANN.facebook.com', 'BACHMANNQUIROGA.instagram', 2),
 (44181233, 'BAGRIO', 'En busca de empleo como plan de mejora de calidad de vida', '1122041361', 'AVELLANEDA ', 'RED_BAGRIO@yahoo.com', 1, 4, 'Particular', 'Salta', 'No', '1991-08-05', 'Argentina', 2, 'RED', '3609', 3142, 0, 'REDBAGRIO.facebook.com', 'BAGRIORED.instagram', 1),
 (44751263, 'BALBIANO', 'En busca de empleo como plan de mejora de calidad de vida', '1122041435', 'BARTOLOME MITRE ', 'RIVERA_BALBIANO@yahoo.com', 1, 1, 'Particular', 'Jujuy', 'Si', '1976-07-20', 'Argentina', 2, 'RIVERA', '3678', 3155, 0, 'RIVERABALBIANO.facebook.com', 'BALBIANORIVERA.instagram', 4),
-(45321293, 'ARRIOLA', 'En busca de empleo como plan de mejora de calidad de vida', '1122041505', 'BOLIVAR ', 'ROSA_ARRIOLA@yahoo.com', 1, 4, 'Particular', 'Salta', 'No', '1989-07-05', 'Paraguay', 2, 'ROSA', '3747', 3174, 0, 'ROSAARRIOLA.facebook.com', 'ARRIOLAROSA.instagram', 3);
+(45321293, 'ARRIOLA', 'En busca de empleo como plan de mejora de calidad de vida', '1122041505', 'BOLIVAR ', 'ROSA_ARRIOLA@yahoo.com', 1, 4, 'Particular', 'Salta', 'No', '1989-07-05', 'Paraguay', 2, 'ROSA', '3747', 3174, 0, 'ROSAARRIOLA.facebook.com', 'ARRIOLAROSA.instagram', 3),
+(99999999, NULL, NULL, NULL, NULL, 'a@g.com', 1, NULL, 'Ninguna', NULL, 'No', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1073,21 +1075,21 @@ INSERT INTO `candidatos` (`DNI`, `Apellido`, `Comentario`, `Contacto`, `Domicili
 
 DROP TABLE IF EXISTS `carreras`;
 CREATE TABLE IF NOT EXISTS `carreras` (
-  `Id_carrera` int(10) NOT NULL COMMENT 'codigo propio ',
+  `id_carrera` int(10) NOT NULL COMMENT 'codigo propio ',
   `tx_carrera` varchar(100) NOT NULL COMMENT 'descripcion sacada de listados oficiales',
   `tipo_Carrera` varchar(30) DEFAULT NULL COMMENT 'descripcion sacada de listados oficiales',
   `nivel` varchar(30) DEFAULT NULL COMMENT 'informacio Propia',
   `cd_nivel` int(2) NOT NULL,
   `accion` varchar(30) NOT NULL,
   `accionnivel` varchar(30) NOT NULL,
-  PRIMARY KEY (`Id_carrera`)
+  PRIMARY KEY (`id_carrera`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabla que complementa la informacion del candidato y lo que necesita el cliente ';
 
 --
 -- Volcado de datos para la tabla `carreras`
 --
 
-INSERT INTO `carreras` (`Id_carrera`, `tx_carrera`, `tipo_Carrera`, `nivel`, `cd_nivel`, `accion`, `accionnivel`) VALUES
+INSERT INTO `carreras` (`id_carrera`, `tx_carrera`, `tipo_Carrera`, `nivel`, `cd_nivel`, `accion`, `accionnivel`) VALUES
 (0, 'No requiere', 'No Aplica', 'No Aplica', 0, '<>0', '<>0'),
 (1, 'Accidentología Vial', 'Corta', 'Terciario', 4, '=1', '=4'),
 (2, 'Acompañante Terapéutico', 'Corta', 'Terciario', 4, '=2', '=4'),
@@ -1472,7 +1474,7 @@ CREATE TABLE IF NOT EXISTS `cod_postal_prov` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_cp` int(4) NOT NULL,
   `provincia` varchar(100) NOT NULL,
-  `idprov` int(3) NOT NULL,
+  `id_prov` int(3) NOT NULL,
   `accion` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3782 DEFAULT CHARSET=utf8;
@@ -1481,7 +1483,7 @@ CREATE TABLE IF NOT EXISTS `cod_postal_prov` (
 -- Volcado de datos para la tabla `cod_postal_prov`
 --
 
-INSERT INTO `cod_postal_prov` (`id`, `id_cp`, `provincia`, `idprov`, `accion`) VALUES
+INSERT INTO `cod_postal_prov` (`id`, `id_cp`, `provincia`, `id_prov`, `accion`) VALUES
 (1, 1001, 'Capital Federal', 4, '=1001'),
 (2, 1002, 'Capital Federal', 4, '=1002'),
 (3, 1003, 'Capital Federal', 4, '=1003'),
@@ -2760,7 +2762,7 @@ INSERT INTO `cod_postal_prov` (`id`, `id_cp`, `provincia`, `idprov`, `accion`) V
 (1276, 3131, 'Entre Rios', 8, '=3131'),
 (1277, 3132, 'Entre Rios', 8, '=3132'),
 (1278, 3133, 'Entre Rios', 8, '=3133');
-INSERT INTO `cod_postal_prov` (`id`, `id_cp`, `provincia`, `idprov`, `accion`) VALUES
+INSERT INTO `cod_postal_prov` (`id`, `id_cp`, `provincia`, `id_prov`, `accion`) VALUES
 (1279, 3134, 'Entre Rios', 8, '=3134'),
 (1280, 3135, 'Entre Rios', 8, '=3135'),
 (1281, 3136, 'Entre Rios', 8, '=3136'),
@@ -4113,7 +4115,7 @@ INSERT INTO `cod_postal_prov` (`id`, `id_cp`, `provincia`, `idprov`, `accion`) V
 (2628, 5649, 'Mendoza', 14, '=5649'),
 (2629, 5650, 'Mendoza', 14, '=5650'),
 (2630, 5651, 'Mendoza', 14, '=5651');
-INSERT INTO `cod_postal_prov` (`id`, `id_cp`, `provincia`, `idprov`, `accion`) VALUES
+INSERT INTO `cod_postal_prov` (`id`, `id_cp`, `provincia`, `id_prov`, `accion`) VALUES
 (2631, 5652, 'Mendoza', 14, '=5652'),
 (2632, 5653, 'Mendoza', 14, '=5653'),
 (2633, 5654, 'Mendoza', 14, '=5654'),
@@ -5282,7 +5284,7 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   `FC_Inicio_Actividades` date DEFAULT NULL,
   `Domicilio` varchar(100) DEFAULT NULL,
   `Cd_postal` int(4) DEFAULT NULL,
-  `cdProv` int(3) DEFAULT NULL,
+  `id_prov` int(3) DEFAULT NULL,
   `Rubro` varchar(30) DEFAULT NULL,
   `Tel_Contacto` varchar(10) DEFAULT NULL,
   `Email` varchar(100) DEFAULT NULL,
@@ -5290,14 +5292,14 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   `Estado` int(2) DEFAULT '1' COMMENT 'con tbl estados',
   `fc_alta` date DEFAULT NULL,
   PRIMARY KEY (`Cuit`),
-  KEY `Cd_postal` (`Cd_postal`,`cdProv`,`Estado`)
+  KEY `Cd_postal` (`Cd_postal`,`id_prov`,`Estado`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `empresa`
 --
 
-INSERT INTO `empresa` (`Cuit`, `Apellido_Apoderado`, `Num_DNI_Apoderado`, `Razon_Social`, `FC_Inicio_Actividades`, `Domicilio`, `Cd_postal`, `cdProv`, `Rubro`, `Tel_Contacto`, `Email`, `Nombre_Apoderado`, `Estado`, `fc_alta`) VALUES
+INSERT INTO `empresa` (`Cuit`, `Apellido_Apoderado`, `Num_DNI_Apoderado`, `Razon_Social`, `FC_Inicio_Actividades`, `Domicilio`, `Cd_postal`, `id_prov`, `Rubro`, `Tel_Contacto`, `Email`, `Nombre_Apoderado`, `Estado`, `fc_alta`) VALUES
 (2345678901, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (20000000002, 'Dias', NULL, 'Empresa de Luz', '1989-12-13', 'Chiclana 231', 1234, NULL, 'Creacion de Velas', '1234567890', 'empresa@luz.com', 'Polillo', 1, NULL),
 (20140076450, 'Perez', 28711212, 'Administracion Enrique Duhau Saac', '2006-10-07', 'Sarmiento 663', 1001, 4, 'Administracion Consorcios', '1122041052', 'AdministracionEnriqueDuhauSaac@FULLCERO.COM', 'Jose', 1, '2020-10-06'),
@@ -5328,16 +5330,16 @@ INSERT INTO `empresa` (`Cuit`, `Apellido_Apoderado`, `Num_DNI_Apoderado`, `Razon
 
 DROP TABLE IF EXISTS `estados`;
 CREATE TABLE IF NOT EXISTS `estados` (
-  `idestado` int(2) NOT NULL,
+  `id_estado` int(2) NOT NULL,
   `txestado` varchar(15) NOT NULL,
-  PRIMARY KEY (`idestado`)
+  PRIMARY KEY (`id_estado`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `estados`
 --
 
-INSERT INTO `estados` (`idestado`, `txestado`) VALUES
+INSERT INTO `estados` (`id_estado`, `txestado`) VALUES
 (0, 'Inactivo'),
 (1, 'Activo'),
 (3, 'Impreso'),
@@ -5353,17 +5355,17 @@ INSERT INTO `estados` (`idestado`, `txestado`) VALUES
 
 DROP TABLE IF EXISTS `estado_civil`;
 CREATE TABLE IF NOT EXISTS `estado_civil` (
-  `idestadoc` varchar(2) NOT NULL,
+  `id_estadoc` varchar(2) NOT NULL,
   `txestadoc` varchar(20) NOT NULL,
   `accion` varchar(30) NOT NULL COMMENT 'es para facilitar coinidencias',
-  PRIMARY KEY (`idestadoc`)
+  PRIMARY KEY (`id_estadoc`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `estado_civil`
 --
 
-INSERT INTO `estado_civil` (`idestadoc`, `txestadoc`, `accion`) VALUES
+INSERT INTO `estado_civil` (`id_estadoc`, `txestadoc`, `accion`) VALUES
 ('0', 'No Aplica', '<>0'),
 ('1', 'Casada_o', '=1'),
 ('2', 'En Concuvinato', '=2'),
@@ -5379,24 +5381,24 @@ INSERT INTO `estado_civil` (`idestadoc`, `txestadoc`, `accion`) VALUES
 
 DROP TABLE IF EXISTS `estudios`;
 CREATE TABLE IF NOT EXISTS `estudios` (
-  `ID_Estudio` int(10) NOT NULL AUTO_INCREMENT,
+  `id_estudio` int(10) NOT NULL AUTO_INCREMENT,
   `DNI` int(10) NOT NULL,
-  `id_Carrera` int(10) NOT NULL,
+  `id_carrera` int(10) NOT NULL,
   `Institucion` varchar(30) NOT NULL,
   `Localidad` varchar(100) DEFAULT NULL,
-  `idprov` varchar(30) NOT NULL,
+  `id_prov` varchar(30) NOT NULL,
   `Fc_inicio` date DEFAULT NULL,
   `Fc_fin` date DEFAULT NULL,
   `Pais` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID_Estudio`),
-  KEY `DNI` (`DNI`,`id_Carrera`)
-) ENGINE=InnoDB AUTO_INCREMENT=483 DEFAULT CHARSET=utf8 COMMENT='complementa tabla candidato';
+  PRIMARY KEY (`id_estudio`),
+  KEY `DNI` (`DNI`,`id_carrera`)
+) ENGINE=InnoDB AUTO_INCREMENT=484 DEFAULT CHARSET=utf8 COMMENT='complementa tabla candidato';
 
 --
 -- Volcado de datos para la tabla `estudios`
 --
 
-INSERT INTO `estudios` (`ID_Estudio`, `DNI`, `id_Carrera`, `Institucion`, `Localidad`, `idprov`, `Fc_inicio`, `Fc_fin`, `Pais`) VALUES
+INSERT INTO `estudios` (`id_estudio`, `DNI`, `id_carrera`, `Institucion`, `Localidad`, `id_prov`, `Fc_inicio`, `Fc_fin`, `Pais`) VALUES
 (1, 14007645, 335, 'CEIP Nro: 1', '', '1', '2014-10-07', '2021-10-06', NULL),
 (2, 14045647, 335, 'CEIP Nro: 2', '', '2', '2014-10-07', '2021-10-07', NULL),
 (3, 28220393, 335, 'CEIP Nro: 3', '', '5', '2014-10-07', '2021-10-07', NULL),
@@ -5875,8 +5877,8 @@ INSERT INTO `estudios` (`ID_Estudio`, `DNI`, `id_Carrera`, `Institucion`, `Local
 (477, 33006642, 145, 'CEIP Nro: 9', '', '21', '2014-10-07', '2021-10-07', NULL),
 (478, 33006657, 146, 'CEIP Nro: 10', '', '22', '2014-10-07', '2021-10-07', NULL),
 (479, 32172601, 147, 'CEIP Nro: 11', '', '18', '2014-10-07', '2021-10-07', NULL),
-(480, 10000003, 4, 'Instit A', 'Flores', '23', '2021-12-01', '2021-12-24', 'Argentina'),
-(482, 10000003, 52, 'Instit', 'fds', '14', '2021-12-01', '2021-12-31', 'fadfda');
+(482, 10000003, 31, 'Academia Antigua', 'Zeballos', '14', '2021-09-26', '2021-12-01', 'Argentina'),
+(483, 10000003, 137, 'Colegio de Abogados', 'Las Avellanas', '15', '2022-01-01', '2022-01-30', 'Argentina');
 
 -- --------------------------------------------------------
 
@@ -5889,15 +5891,15 @@ CREATE TABLE IF NOT EXISTS `experiencia` (
   `Id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Cod Experiencia Personalizada',
   `DNI` int(10) NOT NULL COMMENT 'Codigo Dni de TBL Candidato',
   `Empresa` varchar(100) DEFAULT NULL,
-  `Contacto` varchar(30) DEFAULT NULL,
+  `Contacto` varchar(50) DEFAULT NULL,
   `Cont_Tel` varchar(10) DEFAULT NULL COMMENT 'Escribir Tel de Contacto para referencias',
-  `Id_puesto` int(10) NOT NULL,
-  `Fc_inicio` date NOT NULL,
-  `Fc_fin` date NOT NULL,
-  `Sector` varchar(30) NOT NULL,
-  `Descripcion` varchar(100) NOT NULL,
+  `Id_puesto` int(10) DEFAULT NULL,
+  `Fc_inicio` date DEFAULT NULL,
+  `Fc_fin` date DEFAULT NULL,
+  `Sector` varchar(30) DEFAULT NULL,
+  `Descripcion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=732 DEFAULT CHARSET=utf8 COMMENT='Tabla complementaria para poder asociar la experiencia laboral';
+) ENGINE=InnoDB AUTO_INCREMENT=733 DEFAULT CHARSET=utf8 COMMENT='Tabla complementaria para poder asociar la experiencia laboral';
 
 --
 -- Volcado de datos para la tabla `experiencia`
@@ -6632,7 +6634,8 @@ INSERT INTO `experiencia` (`Id`, `DNI`, `Empresa`, `Contacto`, `Cont_Tel`, `Id_p
 (726, 33556102, 'kiosco Compu', 'Francisco Gonzalez', '1120599241', 54, '2015-06-23', '2014-12-18', 'finanzas', 'administrativo'),
 (727, 33557453, 'kiosco El polaco', 'Franchesco Gonzalez', '1120599242', 55, '2020-06-21', '2019-12-17', 'operario', 'tareas mantenimiento'),
 (728, 33558804, 'kiosco Tomy', 'Lautaro Gonzalez', '1120599243', 56, '2019-06-21', '2018-12-16', 'tecnico', 'Electrico'),
-(731, 10000003, 'Empresita', 'Llamar a Dr Pedrin 1127156875', '1234567890', 6, '2022-01-05', '2022-01-09', 'Planeamiento Urbano', 'Le decia a la gente cuando hacia un buen trabajo');
+(731, 10000003, 'Empresita', 'Dr Pedrin ', '1122334455', 6, '2022-01-05', '2022-01-09', 'Cajas', 'Le decia a la gente cuando hacia un buen trabajo'),
+(732, 10000003, 'Empresita Grande', 'Dr Amigo', '1122334455', 220, '2021-12-11', '2021-12-30', NULL, 'Instigaba discordia para obtener ganancia propia');
 
 -- --------------------------------------------------------
 
@@ -6642,17 +6645,17 @@ INSERT INTO `experiencia` (`Id`, `DNI`, `Empresa`, `Contacto`, `Cont_Tel`, `Id_p
 
 DROP TABLE IF EXISTS `generos`;
 CREATE TABLE IF NOT EXISTS `generos` (
-  `idgenero` int(2) NOT NULL AUTO_INCREMENT COMMENT 'IdGenero',
+  `id_genero` int(2) NOT NULL AUTO_INCREMENT COMMENT 'IdGenero',
   `txgenero` varchar(15) NOT NULL COMMENT 'descripción',
   `Accion` varchar(30) NOT NULL,
-  PRIMARY KEY (`idgenero`)
+  PRIMARY KEY (`id_genero`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `generos`
 --
 
-INSERT INTO `generos` (`idgenero`, `txgenero`, `Accion`) VALUES
+INSERT INTO `generos` (`id_genero`, `txgenero`, `Accion`) VALUES
 (0, 'No Aplica', '<>0'),
 (1, 'Masculino', '=1'),
 (2, 'Femenino', '=2'),
@@ -6682,7 +6685,8 @@ INSERT INTO `login` (`id`, `userpass`, `tipo`, `recupero`) VALUES
 (99, '25f43b1486ad95a1398e3eeb3d83bc4010015fcc9bedb35b432e00298d5021f7', 3, ''),
 (10000003, 'f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114', 1, ''),
 (123456, 'd82494f05d6917ba02f7aaa29689ccb444bb73f20380876cb05d1f37537b7892', 3, ''),
-(21212121212, '50db054e532f70620ca8f99ff2afbed2c94276b78e730008521cda1a0df7051d', 2, '');
+(21212121212, '50db054e532f70620ca8f99ff2afbed2c94276b78e730008521cda1a0df7051d', 2, ''),
+(99999999, 'fb80df08b074771f4f25c604368d2a2cd2127c537f141229f8bf6015292c4436', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -8340,15 +8344,15 @@ DROP TABLE IF EXISTS `provincias`;
 CREATE TABLE IF NOT EXISTS `provincias` (
   `provincia` varchar(30) CHARACTER SET utf8 NOT NULL,
   `accion` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `idprov` int(3) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`idprov`)
+  `id_prov` int(3) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id_prov`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `provincias`
 --
 
-INSERT INTO `provincias` (`provincia`, `accion`, `idprov`) VALUES
+INSERT INTO `provincias` (`provincia`, `accion`, `id_prov`) VALUES
 ('no aplica', '<>0', 0),
 ('Buenos Aires', '=1', 1),
 ('Catamarca', '=2', 2),
@@ -8383,17 +8387,17 @@ INSERT INTO `provincias` (`provincia`, `accion`, `idprov`) VALUES
 
 DROP TABLE IF EXISTS `puestos`;
 CREATE TABLE IF NOT EXISTS `puestos` (
-  `Id_puesto` int(10) NOT NULL COMMENT 'cod_ident del puesto',
+  `id_puesto` int(10) NOT NULL COMMENT 'cod_ident del puesto',
   `tx_puesto` varchar(100) NOT NULL,
   `accion` varchar(30) NOT NULL,
-  PRIMARY KEY (`Id_puesto`)
+  PRIMARY KEY (`id_puesto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `puestos`
 --
 
-INSERT INTO `puestos` (`Id_puesto`, `tx_puesto`, `accion`) VALUES
+INSERT INTO `puestos` (`id_puesto`, `tx_puesto`, `accion`) VALUES
 (0, 'No requiere', '<>0'),
 (1, 'Adjunto de dirección', '=1'),
 (2, 'Agente Comercial', '=2'),
@@ -8629,26 +8633,28 @@ INSERT INTO `puestos` (`Id_puesto`, `tx_puesto`, `accion`) VALUES
 
 DROP TABLE IF EXISTS `resultados`;
 CREATE TABLE IF NOT EXISTS `resultados` (
-  `idResultado` int(11) NOT NULL AUTO_INCREMENT,
-  `idBusqueda` int(10) NOT NULL,
-  `DNI` int(10) NOT NULL,
+  `id_resultado` int(11) NOT NULL AUTO_INCREMENT,
+  `id_busqueda` int(10) DEFAULT NULL,
+  `DNI` int(10) DEFAULT NULL,
   `fcestado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `cdestado` int(2) NOT NULL,
-  `cdestadoimpresion` int(2) NOT NULL,
+  `id_estado` int(2) DEFAULT NULL,
+  `cdestadoimpresion` int(2) DEFAULT NULL,
   `fcestadoimpresion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idResultado`),
-  KEY `idBusqueda` (`idBusqueda`,`DNI`),
+  PRIMARY KEY (`id_resultado`),
+  KEY `idBusqueda` (`id_busqueda`,`DNI`),
   KEY `idCandidato` (`DNI`),
-  KEY `cdestado` (`cdestado`,`cdestadoimpresion`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+  KEY `cdestado` (`id_estado`,`cdestadoimpresion`)
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `resultados`
 --
 
-INSERT INTO `resultados` (`idResultado`, `idBusqueda`, `DNI`, `fcestado`, `cdestado`, `cdestadoimpresion`, `fcestadoimpresion`) VALUES
-(8, 2, 10000003, '2021-12-14 03:58:51', 1, 1, '2021-12-14 03:58:51'),
-(9, 3, 10000003, '2021-12-16 03:58:51', 1, 1, '2021-12-11 03:58:51');
+INSERT INTO `resultados` (`id_resultado`, `id_busqueda`, `DNI`, `fcestado`, `id_estado`, `cdestadoimpresion`, `fcestadoimpresion`) VALUES
+(52, 401, 10000003, '2022-01-03 21:48:59', NULL, NULL, '2022-01-03 21:48:59'),
+(53, 402, 33002787, '2022-01-03 21:48:59', NULL, NULL, '2022-01-03 21:48:59'),
+(54, 402, 33006147, '2022-01-03 21:48:59', NULL, NULL, '2022-01-03 21:48:59'),
+(55, 402, 10000003, '2022-01-03 21:48:59', NULL, NULL, '2022-01-03 21:48:59');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

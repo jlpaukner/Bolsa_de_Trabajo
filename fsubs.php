@@ -22,7 +22,10 @@ switch ($_GET["t"]){
     default:
         header("Location: /403.php");
         }
-
+// label
+$c1="font-weight-bold fs-4 fst-italic";
+// input
+$c2="form-control border border-primary fst-italic text-center fs-5";
 ?>
 <style>
 /* <  estilos para quitar las flechas de input type number> */
@@ -106,31 +109,30 @@ zoom: 100%;
       </div>
     </div>
     <div class="col-sm-4">
-                <form class=" text-center bg-white centroventana text-stars border border-white" action="submitsubs.php" method="POST">
-                    <!-- ingreso de dato de nombre usuario-->
-                    <div class="mb-3">
-                        <label  for="usuario_registrarse" class="font-weight-bold fs-4 fst-italic" > <?php echo $nombre?></label>
-                        <input type="email" class="form-control border border-primary fst-italic text-center  fs-5" name="usuario_registrarse" id="usuario_registrarse"required placeholder="Ingrese el Email">
-                        
-                    </div>
-                    <!-- ingreso de dato de dni o cuit-->
-                    <div class="mb-3">
-                        <label for="id" class=" font-weight-bold fs-4 fst-italic" > <?php echo $docum?></label>
-                        <input type="number"  class="form-control border border-primary fst-italic text-center  fs-5" name="id" id="id" patter="[0-9]+" aria-describedby="emailHelp" min="<?php echo $min?>"  required  max="<?php echo $max?>" placeholder="Ingrese su número">
-                     
+        <form class=" text-center bg-white  text-stars border border-white" action="submitsubs.php" method="POST">
+            <!-- ingreso de dato de nombre usuario-->
+            <div class="mb-3">
+                <label  for="reg_email" class="<?=$c1?>" > <?php echo $nombre?></label>
+                <input type="email" class="<?=$c2?>" name="reg_email" id="reg_email"required placeholder="Ingrese el Email">
+                
+            </div>
+            <!-- ingreso de dato de dni o cuit-->
+            <div class="mb-3">
+                <label for="id" class=" <?=$c1?>" > <?php echo $docum?></label>
+                <input type="number"  class="<?=$c2?>" name="id" id="id" patter="[0-9]+"  min="<?php echo $min?>"  required  max="<?php echo $max?>" placeholder="Ingrese su número">                   
 
-                    </div>
-                    <!-- ingreso de dato de password-->
-                    <div class="mb-3">
-                        <label  for="password_registrarse"class=" font-weight-bold fs-4 fst-italic" > Contraseña</label>
-                        <input type="password" minlength="8"class="form-control border border-primary fst-italic text-center  fs-5" name="password_registrarse" id="password_registrarse" required  placeholder="Ingrese la contraseña">
-                    </div>
-                    <input type="text" hidden name="tipo" value="<?php echo $tipo ?>">
-                    <!-- Boton de guardar-->
-                    <button type="submit" class="btn btn-dark centroventana border border-info fst-italic" name="login" id="sign_in">Guardar</button>
-                    <!-- Boton de cancelar-->
-                    <button class="border border-while" > <a class="btn btn-dark centroventana border border-info fst-italic" href="index.php">Cancelar</a></button>
-                </form>
+            </div>
+            <!-- ingreso de dato de password-->
+            <div class="mb-3">
+                <label  for="password_registrarse"class=" <?=$c1?>" > Contraseña</label>
+                <input type="password" minlength="8"class="<?=$c2?>" name="password_registrarse" id="password_registrarse" required  placeholder="Ingrese la contraseña">
+            </div>
+            <input type="text" hidden name="tipo" value="<?php echo $tipo ?>">
+            <!-- Boton de guardar-->
+            <button type="submit" class="btn btn-dark  border border-info fst-italic" name="login" id="sign_in">Guardar</button>
+            <!-- Boton de cancelar-->
+            <button class="border border-while" > <a class="btn btn-dark  border border-info fst-italic" href="index.php">Cancelar</a></button>
+        </form>
     </div>
     <div class="col-sm-4">
       <div class="row">
@@ -149,7 +151,6 @@ zoom: 100%;
     <div class="col-12"> <br><br> <br><br> <br> </div>
   </div>
   <!-- Pie de Pagina -->
-  <!--div class="p-3 mb-2 bg-dark text-white text-center fst-italic"> <h3>Tu oportunidad esta aquí!</h3></div-->
   <footer class="p-3 mb-2 bg-dark">
     <h3 class="  text-white text-center fst-italic">¡Tu oportunidad esta aquí!</h3>
   </footer>

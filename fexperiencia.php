@@ -22,7 +22,7 @@ else
     $Empresa=$experiencia['Empresa'];
     $Cont_Tel=$experiencia['Cont_Tel'];
     $Contacto=$experiencia['Contacto'];
-    $Puesto=$experiencia['Id_puesto'];
+    $Puesto=$experiencia['id_puesto'];
     $Finicio=$experiencia['Fc_inicio'];
     $Fin=$experiencia['Fc_fin'];
     $Sector=$experiencia['Sector'];
@@ -112,9 +112,9 @@ zoom: 100%;
             </div><br> -->
             <!--Indentificación-->
             <div class="row">
-            <label for="Id_puesto" class="<?=$c1?>">Identificacion del puesto:</label><br>
-                        <select id="Id_puesto" name="Id_puesto" placeholder="Puesto ejercido" class="<?=$c2?>">
-                        <?php S1Motorcito('Puestos','Id_puesto','tx_puesto',$Puesto) ?>
+            <label for="id_puesto" class="<?=$c1?>">Identificacion del puesto:</label><br>
+                        <select id="id_puesto" name="id_puesto" placeholder="Puesto ejercido" class="<?=$c2?>">
+                        <?php S1Motorcito('Puestos','id_puesto','tx_puesto',$Puesto) ?>
                         </select>
             </div><br>
 
@@ -165,11 +165,11 @@ zoom: 100%;
                 <div class="row">
                     <!--boton guardar-->
                     <div class="col-sm-6">
-                        <input class=" form-control btn btn-dark centroventana border border-info fst-italic" type="submit" value="Guardar">
+                        <input class=" form-control btn btn-dark  border border-info fst-italic" type="submit" value="Guardar">
                     </div>
                     <!--boton cancelar-->
                     <div class="col-sm-6">
-                        <button class=" form-control btn btn-dark centroventana border border-info fst-italic" > <a class="text-decoration-none text-light" href="experiencia.php">Cancelar</a></button>
+                        <button class=" form-control btn btn-dark  border border-info fst-italic" > <a class="text-decoration-none text-light" href="experiencia.php">Cancelar</a></button>
                     </div>
                 </div>
             </div>

@@ -2,10 +2,10 @@
 require_once('./encabezadoe.php');
 require_once('./dbcon.php');
 require_once('./herramientas.php');
-//session_start();
-echo "<center><h4 class='text-dark'>Candidatos con similitud de tu busquedad</h4></center>";
+?>
 
-echo " <div class='container'>
+<center><h4 class='text-dark'>Candidatos que cumplen la búsqueda</h4></center>;
+<div class='container'>
 <table class='table text-center'>
     <thead>
         <tr>
@@ -14,8 +14,13 @@ echo " <div class='container'>
         <th scope='col'>Email</th>
         <th scope='col'>Red social</th>
         </tr>
-    </thead>";
-$consulta=sprintf("SELECT * from candidatos WHERE DNI in (SELECT DNI from resultados where idbusqueda='{$_POST['idBusqueda']}')");
+    </thead>
+
+<?php
+$id_busqueda=$_POST['id_busqueda'];
+$consulta=
+"SELECT * from candidatos 
+WHERE DNI in (SELECT DNI from resultados where id_busqueda='$id_busqueda')";
 $candidatos=cunsultadbmultiple($consulta);
 
 foreach($candidatos as $c) 

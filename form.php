@@ -81,10 +81,10 @@ zoom: 100%;
         <div class="row p-3">
             <div class="col-sm-4"></div>
             <div class="col-sm-2">
-                <button type="submit" class="form-control btn btn-dark centroventana border border-primary" value="Enviar">Guardar</button>                
+                <button type="submit" class="form-control btn btn-dark  border border-primary" value="Enviar">Guardar</button>                
             </div>
             <div class="col-sm-2">
-            <a class="form-control btn btn-dark centroventana border border-primary" href=<?=$_POST['pagretorno']?>>Cancelar</a>
+            <a class="form-control btn btn-dark  border border-primary" href=<?=$_POST['pagretorno']?>>Cancelar</a>
             </div>
             <div class="col-sm-4"></div>
         </div>

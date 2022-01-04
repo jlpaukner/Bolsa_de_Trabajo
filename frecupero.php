@@ -62,7 +62,7 @@ if($resultado != True){
             </figure>
         </div><br><br><br>
 
-        <form class=" text-center bg-white centroventana text-stars border border-white" action="submitrecupero.php" method="POST">
+        <form class=" text-center bg-white  text-stars border border-white" action="submitrecupero.php" method="POST">
             <!--Label de email-->
             <div class="contain">
                 <!--Label de dni-->
@@ -89,11 +89,11 @@ if($resultado != True){
                                 <!-- Boton de guardar-->
                                 <input type = "hidden" name = "email_nuevo" value = "<?php echo $email?>" >
                                 <input type = "hidden" name = "recupero" value = "<?php echo $hash_recupero?>" >
-                                <button type="submit" class="btn btn-dark centroventana border border-info fst-italic" name="login" id="sign_in">Verificar</button>
+                                <button type="submit" class="btn btn-dark  border border-info fst-italic" name="login" id="sign_in">Verificar</button>
                             </div>
                             <div class="col-sm-6">
                                 <!-- Boton de cancelar-->
-                                <button class="border border-while " > <a class="form-control btn btn-dark centroventana border border-info fst-italic" href="index.php">Cancelar</a></button>
+                                <button class="border border-while " > <a class="form-control btn btn-dark  border border-info fst-italic" href="index.php">Cancelar</a></button>
                             </div>
                         </div>
                     </div>

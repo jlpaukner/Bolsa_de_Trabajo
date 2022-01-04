@@ -28,7 +28,7 @@ $estado = 1;
                         <?php 
                             $query = $mysqli -> query ("SELECT * FROM puestos group by tx_puesto order by tx_puesto");
                             while ($valores = mysqli_fetch_array($query )) {
-                                echo '<option value="'.$valores[Id_puesto].'">'.$valores[tx_puesto].'</option>';
+                                echo '<option value="'.$valores[id_puesto].'">'.$valores[tx_puesto].'</option>';
                             }
                         ?>
                     </select>
@@ -37,7 +37,7 @@ $estado = 1;
                     <input type="hidden" name="time" value="<?php echo $time; ?>">
                     <input type="hidden" name="dni" value="<?php echo $dni; ?>">
                     <input type="hidden" name="estado" value="<?php echo $estado; ?>">
-                    <input class=" form-control btn btn-dark  centroventana border border-success fst-italic " type="submit" value="guardar">
+                    <input class=" form-control btn btn-dark   border border-success fst-italic " type="submit" value="guardar">
                 </div>
                 
             </div><br><br>
