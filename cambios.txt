@@ -54,6 +54,10 @@ festudio
         <script> function validaciones() (fecha inicio, fin)
 rtabla
         reparacion por base de datos distinta    
+postulaciones
+        mandar fecha envez de time para submit
+submit_postulaciones
+
 submitsubs
         validacion por email ya usado
 submitformcandidato 
