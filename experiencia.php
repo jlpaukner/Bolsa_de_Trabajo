@@ -7,6 +7,9 @@ $consulta=
 FROM experiencia join puestos 
 on experiencia.id_puesto=puestos.id_puesto WHERE `DNI`='$dni'";
 $experiencias=cunsultadbmultiple($consulta);
+$c1="col-sm-1 text-center fs-6 fw-bold border border-primary";
+$c2="col-sm-6 text-center fw-bold border border-primary";
+
 if (count($experiencias)>0)
     {
         ?>
@@ -17,16 +20,16 @@ if (count($experiencias)>0)
         </div>
         <div class="container-fluid border border-primary bg-light  fst-italic">
             <div class="row">
-                <div class="col-sm-1 text-center fs-5 fw-bold border border-primary">
+                <div class="<?=$c1?>">
                     <th class="text-center bg-success">Empresa</th>
                 </div>
-                <div class="col-sm-1 text-center fs-5 fw-bold border border-primary">
+                <div class="<?=$c1?>">
                     <th class="text-center bg-success">Contacto</th>
                 </div>
-                <div class="col-sm-1 text-center fs-5 fw-bold border border-primary">
-                    <th class="text-center bg-success">Contacto Tel</th>
+                <div class="<?=$c1?>">
+                    <th class="text-center bg-success">ContactoTel</th>
                 </div>
-                <div class="col-sm-1 text-center fs-5 fw-bold border border-primary">
+                <div class="<?=$c1?>">
                     <th class="text-center bg-success">Puesto</th>
                 </div>
                 <div class="col-sm-3 text-center fs-5 fw-bold border border-primary">
@@ -34,10 +37,10 @@ if (count($experiencias)>0)
                 </div>
                 <div class="col-sm-3 text-center fs-5 ">
                     <div class="row">
-                        <div class="col-sm-6 text-center fw-bold border border-primary">
+                        <div class="<?=$c2?>">
                             <th class="border border-primary">Fecha Inicio</th>
                         </div>
-                        <div class="col-sm-6 text-center fw-bold border border-primary">
+                        <div class="<?=$c2?>">
                             <th class="border border-primary">Fecha Final</th>
                         </div>
                     </div>

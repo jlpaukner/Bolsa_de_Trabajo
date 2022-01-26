@@ -4,7 +4,7 @@ if ($_SESSION["abierta"]!="si") header("Location:index.php");
 if (!isset($_SESSION['tiempo'])) {
   $_SESSION['tiempo']=time();
 }
-else if (time() - $_SESSION['tiempo'] > 600) {
+else if (time() - $_SESSION['tiempo'] > 60000) {
   session_destroy();
   /* Aquí redireccionas a la url especifica */
   header("Location:index.php");
@@ -79,10 +79,7 @@ require_once('./extensionB.php');
             <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="fdatospersonales.php">Datos Personales</a></li>
             <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="experiencia.php">Experiencia Laboral</a></li>
             <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="estudios.php">Formación Académica</a></li>
-            <!--li><form action=borrarcuenta.php method="POST">
-                  <input type="submit" name="boton" class="dropdown-item text-danger text-center border border-red fst-italic" value ="Eliminar Cuenta" onclick="return confirm('¿Seguro? Perderá todos los datos de su cuenta.')"> 
-                </form>
-            </!--li-->
+            <li><a class="dropdown-item text-info text-center border border-white fst-italic" href="postulaciones.php">Postulaciones</a></li>
           </ul>
         </li>
 

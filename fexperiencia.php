@@ -19,10 +19,11 @@ if ($experiencia=="0")
     }
 else
 {
+    //existe esta entrada, cargar los datos de la BD
     $Empresa=$experiencia['Empresa'];
     $Cont_Tel=$experiencia['Cont_Tel'];
     $Contacto=$experiencia['Contacto'];
-    $Puesto=$experiencia['id_puesto'];
+    $Puesto=$experiencia['Id_puesto'];
     $Finicio=$experiencia['Fc_inicio'];
     $Fin=$experiencia['Fc_fin'];
     $Sector=$experiencia['Sector'];
@@ -64,7 +65,9 @@ zoom: 100%;
 
 <div class="container">
     <div class="row">
-        <div class="  text-white  text-opacity-25 text-center  text-decoration-underline fw-lighter fst-italic"><h2> Datos de la experiencia laboral</h2></div>
+        <div class="text-white text-opacity-25 text-center text-decoration-underline fw-lighter fst-italic">
+            <h2> Datos de la experiencia laboral</h2>
+        </div>
     </div>
 </div>
 
@@ -93,27 +96,27 @@ zoom: 100%;
             <!--Empresa-->
             <div class="row">
                 <label for="Empresa" class="<?=$c1?>">Empresa:</label><br>
-                <input type="text" required maxlength="100"  placeholder="Nombre de la empresa" class="<?=$c2?>" id="Empresa" maxlength="30" name="Empresa" value= "<?=$Empresa?>" >
+                <input type="text" required maxlength="100"  placeholder="Nombre de la empresa" 
+                class="<?=$c2?>" id="Empresa" maxlength="30" name="Empresa" value= "<?=$Empresa?>" >
             </div><br>
             <!--contacto-->
             <div class="row">
                 <label for="Contacto" class="<?=$c1?>">Nombre del contacto:</label><br>
-                <input type="text" required maxlength="50" placeholder="Nombre del contacto laboral " class="<?=$c2?>" id="Contacto" name="Contacto" value="<?=$Contacto?>">
+                <input type="text" required maxlength="50" placeholder="Nombre del contacto laboral " 
+                class="<?=$c2?>" id="Contacto" name="Contacto" value="<?=$Contacto?>">
             </div><br>
             <!--Teléfono del contacto-->
             <div class="row">
                 <label for="Cont_Tel" class="<?=$c1?>">Teléfono del contacto:</label><br>
-                <input type="tel" pattern="(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}" required  title="Numero de telefono o celular con codigo de area sin espacions ni símbolos" class="<?=$c2?>" id="Cont_Tel" name="Cont_Tel" value="<?=$Cont_Tel?>">
+                <input type="text" pattern="(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}" 
+                required title="Numero de telefono o celular con codigo de area sin espacions ni símbolos" 
+                oninvalid="setCustomValidity('Ingrese Numero de telefono o celular con codigo de area sin espacions ni símbolos')"
+                class="<?=$c2?>" id="Cont_Tel" name="Cont_Tel" value="<?=$Cont_Tel?>">
             </div><br>
-            <!--sector-->
-            <!-- <div class="row">
-                <label for="Sector" class="<?=$c1?>">Sector:</label><br>
-                <input type="text" required maxlength="60" placeholder="Sector en que se desempeñó " class="<?=$c2?>" id="Sector" name="Sector" value="<?=$Sector?>">
-            </div><br> -->
-            <!--Indentificación-->
             <div class="row">
             <label for="id_puesto" class="<?=$c1?>">Identificacion del puesto:</label><br>
-                        <select id="id_puesto" name="id_puesto" placeholder="Puesto ejercido" class="<?=$c2?>">
+                        <select id="id_puesto" name="id_puesto" placeholder="Puesto ejercido" 
+                        class="<?=$c2?>">
                         <?php S1Motorcito('Puestos','id_puesto','tx_puesto',$Puesto) ?>
                         </select>
             </div><br>
@@ -121,17 +124,20 @@ zoom: 100%;
             <!--Fecha inicio-->
             <div class="row">
                 <label for="Estado" class="<?=$c1?>">Fecha Inicio (aproximada):</label><br>
-                <input type="date" required  placeholder="Fecha aproximada de ingreso?" class="<?=$c2?>" id="Fc_inicio" name="Fc_inicio"  value="<?=$Finicio?>">
+                <input type="date" required  placeholder="Fecha aproximada de ingreso?" 
+                class="<?=$c2?>" id="Fc_inicio" name="Fc_inicio"  value="<?=$Finicio?>">
             </div><br>
             <!--fecha final-->
             <div class="row">
                 <label for="Fc_fin" class="<?=$c1?>">Fecha Fin (aproximada):</label><br>
-                <input type="date" required  placeholder="Fecha aproximada de egreso?" class="<?=$c2?>" id="Fc_fin" name="Fc_fin"  value="<?=$Fin?>">
+                <input type="date" required  placeholder="Fecha aproximada de egreso?" 
+                class="<?=$c2?>" id="Fc_fin" name="Fc_fin"  value="<?=$Fin?>">
             </div><br>
             <!--descripción-->
             <div class="row">
                 <label for="Descripcion" class="<?=$c1?>">Descripcion:</label><br>
-                <input type="text" required  maxlength="100" title="maximo 100 caracteres" placeholder="Ingrese descripcion del puesto " class="<?=$c2?>" id="Descripcion" name="Descripcion" value="<?=$Descripcion?>">
+                <input type="text" required  maxlength="100" title="maximo 100 caracteres" placeholder="Ingrese descripcion del puesto" 
+                class="<?=$c2?>" id="Descripcion" name="Descripcion" value="<?=$Descripcion?>">
             </div><br>
         </div>
         <div class="col-sm-4">
@@ -169,7 +175,9 @@ zoom: 100%;
                     </div>
                     <!--boton cancelar-->
                     <div class="col-sm-6">
-                        <button class=" form-control btn btn-dark  border border-info fst-italic" > <a class="text-decoration-none text-light" href="experiencia.php">Cancelar</a></button>
+                        <button class=" form-control btn btn-dark  border border-info fst-italic" > 
+                            <a class="text-decoration-none text-light" href="experiencia.php">Cancelar</a>
+                        </button>
                     </div>
                 </div>
             </div>

@@ -163,7 +163,14 @@ zoom: 100%;
             </div>
             <div class="col-sm-4">
                 <label for="Contacto" class="<?=$c3?> ">N° de Celular:</label><br>
-                <input type="number" min="1100000000" max="1599999999"lid="Contacto" required name="Contacto" placeholder="Ingresar N° de Teléfono" class="form-control border border-primary text-center  fs-6" pattern="[0-9\(\)\+\-]+" title="numero de telefono" value="<?php echo $Contacto?>"><br> 
+                <input type="text" lid="Contacto" 
+                required="" name="Contacto"                 
+                class="<?=$c1?>" id="Cont_Tel" name="Cont_Tel" 
+                pattern="(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}" 
+                title="Numero de telefono o celular con codigo de area,sin espacions ni símbolos" 
+                oninvalid="setCustomValidity('Ingrese Numero de telefono o celular con codigo de area sin espacions ni símbolos')"
+                value="<?=$Contacto?>"/><br>
+
             </div>
         </div>
         <div class="row">

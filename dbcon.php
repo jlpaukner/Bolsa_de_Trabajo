@@ -67,6 +67,8 @@ function cunsultadb($consulta)
 
     function construyeinsert($columnas,$tabla,$nombrellave)
     {   // construye query para insertar datos
+        echo "construyeinsert  (dbcon)";
+        var_dump($columnas,$tabla,$nombrellave);
         if ( array_key_exists( $nombrellave, $columnas) ){unset($columnas[$nombrellave]);};  //para autoasignar valor de llave       
         $q1="INSERT INTO `".$tabla."` (";
         $q2=" VALUES (";
@@ -98,18 +100,20 @@ function EnviarFormulario($tabla,$nombrellave,$valorllave,$retorno,$form)
         // si es nueva entrada hace insert
         // si ya existe entrada con esa llave hace update    
         // si falla, queda en la pagina sin retornar para mostrar el error 
+        echo"EnviarFormulario (dbcon)";
+        // var_dump($tabla,$nombrellave,$valorllave,$retorno,$form);
         $consulta = sprintf("SELECT `%s` FROM `%s` WHERE `%s` = '%s' ",$nombrellave ,$tabla, $nombrellave ,$valorllave);
         $ExisteEsaentrada = cunsultadb($consulta);
         if ($ExisteEsaentrada == 0)
             {
-                echo "inserta <br>";
+                echo "quiere insertar <br>";
                 $insertar=construyeinsert($form,"$tabla",$nombrellave);
                 echo $insertar;
                 $resultado = operaciondb($insertar);        
             }
         else
             {           
-                echo "actualiza <br>";
+                echo "quiere actualizar <br>";
                 $actualiza=construyeupdate($form,"$tabla",$nombrellave,$valorllave);
                 echo $actualiza;
                 $resultado = operaciondb($actualiza);
