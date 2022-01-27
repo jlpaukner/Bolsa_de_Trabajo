@@ -9,7 +9,7 @@ echo var_dump($_POST);
 $tabla = "empresa";    
 $nombrellave="Cuit";
 $valorllave= $Cuit;   
-$retorno="inicioempresa.php?ms=ini";
+$retorno="inicioempresa.php?ms=demx";
 
 EnviarFormulario($tabla,$nombrellave,$valorllave,$retorno,$_POST) ;
 

@@ -108,7 +108,7 @@ zoom: 100%;
             <!--Teléfono del contacto-->
             <div class="row">
                 <label for="Cont_Tel" class="<?=$c1?>">Teléfono del contacto:</label><br>
-                <input type="text" pattern="(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}" 
+                <input type="text" pattern="(?:549)*([0-9]{10})" 
                 required title="Numero de telefono o celular con codigo de area sin espacions ni símbolos" 
                 oninvalid="setCustomValidity('Ingrese Numero de telefono o celular con codigo de area sin espacions ni símbolos')"
                 class="<?=$c2?>" id="Cont_Tel" name="Cont_Tel" value="<?=$Cont_Tel?>">

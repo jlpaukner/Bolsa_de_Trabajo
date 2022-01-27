@@ -38,18 +38,20 @@ else{
 
 switch ($_GET["ms"]) {
     case "demx":
-        $mensaje = "Datos de la empresa guardados exitosamente ";       break;
+        $mensaje = "Datos de la empresa guardados exitosamente ";    $display="display:center";   break;
     case "ex":
-        $mensaje = "Información de estudios guardado exitosamente";     break;
+        $mensaje = "Información de estudios guardado exitosamente";  $display="display:center";   break;
     case "nada":
-        $mensaje = "Por favor introduzca datos de su empresa en el menu 'Datos de empresa'";   break;
+        $mensaje = "Por favor introduzca datos de su empresa en el menu 'Datos de empresa'"; $display="display:center";  break;
     case "pv":
-        $mensaje="   Bienvenido , puede modificar datos de su empresa,<br>   o hacer una busqueda de personal en el menú correspondiente.";
+        $mensaje="   Bienvenido , puede modificar datos de su empresa,<br>  o hacer una busqueda de personal en el menú correspondiente.";
+        $display="display:center";  break;
     default:
-        $mensaje="";
+        $mensaje="";  $display="display:none";  break;
     };
-    echo "<h3 class='text-center'>".$mensaje."</h3>";
 ?>
+<div id="popUp" class="alert alert-success" style="<?=$display?>"> <?=$mensaje?></div>
+
 <ls>
 <body>
     <div class="container">

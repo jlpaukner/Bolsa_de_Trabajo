@@ -166,7 +166,7 @@ zoom: 100%;
                 <input type="text" lid="Contacto" 
                 required="" name="Contacto"                 
                 class="<?=$c1?>" id="Cont_Tel" name="Cont_Tel" 
-                pattern="(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}" 
+                pattern="(?:549)*([0-9]{10})" 
                 title="Numero de telefono o celular con codigo de area,sin espacions ni símbolos" 
                 oninvalid="setCustomValidity('Ingrese Numero de telefono o celular con codigo de area sin espacions ni símbolos')"
                 value="<?=$Contacto?>"/><br>

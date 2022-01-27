@@ -45,6 +45,11 @@ else{
         $Email=$resultado['Email'];
     } 
 }
+$c1="form-control border border-success fst-italic text-center fs-5";
+$c2="font-weight-bold fs-4  fst-italic";
+
+
+
 ?>
 <style>
 /* <  estilos para quitar las flechas de input type number> */
@@ -74,49 +79,59 @@ zoom: 100%;
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <label class="font-weight-bold fs-4 fst-italic" for="Razon_Social">Razon Social:</label><br>
-                        <input type="text" maxlength="100" required  placeholder="Ingrese Razon Social" class="form-control border border-success fst-italic text-center  fs-5" id="Razon_Social" name="Razon_Social" value= "<?php echo $Razon_Social?>" >
+                        <label class="<?=$c2?>" for="Razon_Social">Razon Social:</label><br>
+                        <input type="text" maxlength="100" required  placeholder="Ingrese Razon Social" class="<?=$c1?>" id="Razon_Social" name="Razon_Social" value= "<?=$Razon_Social?>" >
                     </div>
                     <div class="col-sm-6">
-                        <label class="font-weight-bold fs-4 fst-italic" for="FC_Inicio_Actividades">Fecha Incio Actividades:</label><br>
-                        <input type="date" required  placeholder="Ingrese Fecha de Inicio actividades de la Empresa" class="form-control border border-success fst-italic text-center  fs-5" id="FC_Inicio_Actividades" name="FC_Inicio_Actividades" value="<?php echo $FC_Inicio_Actividades?>">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label class="font-weight-bold fs-4 fst-italic" for="Domicilio"> Domicilio:</label><br>
-                        <input type="text" maxlength="100" required  placeholder="Ingrese domicilio" class="form-control border border-success fst-italic text-center  fs-5" id="Domicilio" name="Domicilio" value="<?php echo $Domicilio?>">
-                    </div>
-                    <div class="col-sm-6">
-                        <label class="font-weight-bold fs-4 fst-italic" for="Cd_postal">Codigo Postal:</label><br>
-                        <input type="number" min="1000" max="2500" required  placeholder="Ingrese el código postal" class="form-control border border-success fst-italic text-center  fs-5" id="Cd_postal" name="Cd_postal" value="<?php echo $Cd_postal?>">                        
+                        <label class="<?=$c2?>" for="FC_Inicio_Actividades">Fecha Incio Actividades:</label><br>
+                        <input type="date" required  placeholder="Ingrese Fecha de Inicio actividades de la Empresa" class="<?=$c1?>" id="FC_Inicio_Actividades" name="FC_Inicio_Actividades" value="<?=$FC_Inicio_Actividades?>">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <label class="font-weight-bold fs-4 fst-italic" for="Rubro">Rubro:</label><br>
-                        <input type="text" maxlength="30" required  placeholder="Ingrese Rubro principal de la empresa" class="form-control border border-success fst-italic text-center  fs-5" id="Rubro" name="Rubro" value= "<?php echo $Rubro?>" >
+                        <label class="<?=$c2?>" for="Domicilio"> Domicilio:</label><br>
+                        <input type="text" maxlength="100" required  placeholder="Ingrese domicilio" class="<?=$c1?>" id="Domicilio" name="Domicilio" value="<?=$Domicilio?>">
                     </div>
                     <div class="col-sm-6">
-                        <label class="font-weight-bold fs-4 fst-italic" for="Apellido_Apoderado">Apellido del Apoderado:</label><br>
-                        <input type="text" maxlength="30" required  placeholder="Ingrese Apellido Apoderado de la Firma" class="form-control border border-success fst-italic text-center  fs-5" id="Apellido_Apoderado" name="Apellido_Apoderado" value="<?php echo $Apellido_Apoderado?>">
+                        <label class="<?=$c2?>" for="Cd_postal">Codigo Postal:</label><br>
+                        <input type="number" min="1000" max="2500" required  placeholder="Ingrese el código postal" class="<?=$c1?>" id="Cd_postal" name="Cd_postal" value="<?=$Cd_postal?>">                        
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <label class="font-weight-bold fs-4 fst-italic" for="Nombre_Apoderado">Nombre del Apoderado:</label><br>
-                        <input type="text" maxlength="30" required  placeholder="Ingrese Nombre del Apoderado de la Firma" class="form-control border border-success fst-italic text-center  fs-5" id="Nombre_Apoderado" name="Nombre_Apoderado" value="<?php echo $Nombre_Apoderado?>">
+                        <label class="<?=$c2?>" for="Rubro">Rubro:</label><br>
+                        <input type="text" maxlength="30" required  placeholder="Ingrese Rubro principal de la empresa" class="<?=$c1?>" id="Rubro" name="Rubro" value= "<?=$Rubro?>" >
                     </div>
                     <div class="col-sm-6">
-                        <label class="font-weight-bold fs-4 fst-italic" for="Tel_Contacto">Tel de Contacto:</label><br>
-                        <input type="number" min="1100000000" max="1599999999"required  placeholder="Ingrese un numero telefónico para contactarnos" class="form-control border border-success fst-italic text-center  fs-5" id="Tel_Contacto" name="Tel_Contacto" value="<?php echo $Tel_Contacto?>">                        
+                        <label class="<?=$c2?>" for="Apellido_Apoderado">Apellido del Apoderado:</label><br>
+                        <input type="text" maxlength="30" required  
+                        placeholder="Ingrese Apellido Apoderado de la Firma" 
+                        class="<?=$c1?>" id="Apellido_Apoderado" name="Apellido_Apoderado" value="<?=$Apellido_Apoderado?>">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label class="<?=$c2?>" for="Nombre_Apoderado">Nombre del Apoderado:</label><br>
+                        <input type="text" maxlength="30" 
+                        required  placeholder="Ingrese Nombre del Apoderado de la Firma" 
+                        class="<?=$c1?>" id="Nombre_Apoderado" name="Nombre_Apoderado" 
+                        value="<?=$Nombre_Apoderado?>">
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="<?=$c2?>" for="Tel_Contacto">Telefono de Contacto:</label><br>                        
+                        <input  class="<?=$c1?>" type="text" required               
+                        name="Tel_Contacto"  id="Tel_Contacto"
+                        pattern="(?:549)*([0-9]{10})"
+                        title="Numero de telefono o celular con codigo de area,sin espacions ni símbolos" 
+                        oninvalid="setCustomValidity('Ingrese Numero de telefono o celular con codigo de area sin espacions ni símbolos')"
+                        value="<?=$Tel_Contacto?>">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-0"></div>
                     <div class="col-sm-12">
-                        <label class="font-weight-bold fs-4 fst-italic" for="Email">Correo Electrónico:</label><br>
-                        <input type="email" required  placeholder="Ingrese Correo Elctrónico" class="form-control border border-success fst-italic text-center  fs-5" id="Email" name="Email" value="<?php echo $Email?>">                                                
+                        <label class="<?=$c2?>" for="Email">Correo Electrónico:</label><br>
+                        <input type="email" required  placeholder="Ingrese Correo Elctrónico" class="<?=$c1?>" id="Email" name="Email" value="<?=$Email?>">                                                
                     </div>
                     <div class="col-sm-3"></div>
                 </div>               
@@ -128,10 +143,8 @@ zoom: 100%;
         <div class="col-sm-4"></div>
         <div class="col-sm-4">
             <div class="row">
-                <div class="col-sm-6"><!--boton guardar-->
-                
+                <div class="col-sm-6"><!--boton guardar-->                
                 <button type="submit" class="form-control btn btn-dark  border border-primary" value="Enviar">Guardar</button>
-
                 </div>
                 <div class="col-sm-6"><!--boton cancelar-->
                 <button class=" form-control btn btn-dark  border border-success fst-italic" ><a class=" text-decoration-none text-light" href="inicioempresa?ms=ini.php">Cancelar</a></button>
@@ -140,11 +153,6 @@ zoom: 100%;
         </div>
         <div class="col-sm-4"></div>
     </div>
-    <input type="hidden"   name="Estado" value="<?php echo $Estado?>"><br>
-            <!--Cuit-->
-    <!--label for="Cuit" hidden >Cuit :</!--label><br>
-    <input type="number" hidden required id="Cuit" name="Cuit" value="<php echo $Cuit?>"><br-->
-            
-
+    <input type="hidden"   name="Estado" value="<?=$Estado?>"><br>
 </form> 
 
