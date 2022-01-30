@@ -27,12 +27,10 @@ else
     $id_prov=$busqueda['id_prov'];
     $EdadMinima=$busqueda['EdadMinima'];   
     $EdadMaxima=$busqueda['EdadMaxima'];
-    $Movilidad=$busqueda['Movilidad'];  
+    $Movilidad=$busqueda['movilidad'];  
     $id_estadoc=$busqueda['id_estadoc'];
     $id_genero=$busqueda['id_genero'];         
 }
-
-
 
 $c1="font-weight-bold text-center fs-4 fst-italic";
 $c2="form-control border border-success fst-italic text-center fs-5";
@@ -50,7 +48,7 @@ function validaciones() {
 
 <form class="formulario text-center" action="submitformbusqueda.php" method="POST" onsubmit="return validaciones()">
     <input type="hidden" id="id_busqueda" name="id_busqueda"value="<?php echo $id_busqueda?>">
-    <input type="hidden" id="IdEmpresa" name="IdEmpresa"value="<?php echo $_SESSION['id']?>">
+    <input type="hidden" id="id_empresa" name="id_empresa"value="<?php echo $_SESSION['id']?>">
     <div class="container">
         <!-- Primera Fiia-->
         <div class="row">
@@ -151,7 +149,8 @@ function validaciones() {
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <input  type="submit" value="Enviar" onClick="return validaciones()" class="form-control btn btn-dark border border-success fst-italic" >
+                        <input  type="submit" value="Enviar" onClick="return validaciones()" 
+                        class="form-control btn btn-dark border border-success fst-italic" >
                     </div>
                     <div class="col-sm-6">
                         <a  href="busquedas.php" class=" form-control btn btn-dark border border-success fst-italic">Cancelar</a>

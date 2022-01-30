@@ -145,7 +145,7 @@ $consulta=sprintf("SELECT * FROM empresa WHERE Cuit='%s' ",$_SESSION['id']);
 $resultado=cunsultadb($consulta);
 $activa = $resultado['Estado']==1;
 if($activa){
-$consulta=sprintf("SELECT * FROM busquedas WHERE idEmpresa='%s' ",$_SESSION['id']);
+$consulta=sprintf("SELECT * FROM busquedas WHERE id_empresa='%s' ",$_SESSION['id']);
 $busquedas=cunsultadbmultiple($consulta);
 if(sizeof($busquedas)==0){
 echo "Realize una búsqueda de personal seleccoinando 'Busqueda' en el menú";

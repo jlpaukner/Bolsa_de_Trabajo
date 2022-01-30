@@ -44,8 +44,8 @@
 
     <?php   
          session_start();
-        if (isset($_SESSION["abierta"])){ 
-          echo var_dump($_SESSION);
+        // var_dump($_SESSION);
+        if (isset($_SESSION["abierta"]) and isset($_SESSION["iniciosesion"]) ){ 
           header($_SESSION['iniciosesion']);
          }
          else { require __DIR__ . '/flogin.html';}       

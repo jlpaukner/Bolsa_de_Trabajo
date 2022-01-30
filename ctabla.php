@@ -62,7 +62,8 @@ function ctabla($tabla,$columnas,$alias,$tituloIdDueño,$iddueño,$idFila,$form,
                   <td>
                     <form action=<?php echo $form?> method="POST"> 
                       <input type = "hidden" name = <?php echo $idFila?> value = "<?php echo $fila[$idFila]?>">
-                      <input type=  "submit" class="form-control btn btn-dark  border border-success fst-italic  lh-1" name="boton" value ="Modificar"> 
+                      <input type=  "submit" 
+                      class="form-control btn btn-darkborder border-success fst-italiclh-1" name="boton" value ="Modificar"> 
                     </form>
                   </td>
                   <td>
@@ -71,7 +72,9 @@ function ctabla($tabla,$columnas,$alias,$tituloIdDueño,$iddueño,$idFila,$form,
                           <input type = "hidden" name = "nombreID" value = "<?php echo $idFila?>">
                           <input type = "hidden" name = "retorno" value = "<?php echo $return?>">
                           <input type = "hidden" name = "valorID" value = "<?php echo $fila[$idFila]?>">
-                          <input type=  "submit" name="boton" class="form-control btn btn-dark  border border-success fst-italic  lh-1" value ="Borrar" onclick="return confirm('¿Seguro? Perderá esos datos.')"> 
+                          <input type=  "submit" name="boton" 
+                          class="form-control btn btn-dark border border-success fst-italic lh-1" 
+                          value ="Borrar" onclick="return confirm('¿Seguro? Perderá esos datos.')"> 
                   </form>
                   </td>
                 </tr>
@@ -95,7 +98,7 @@ function ctabla($tabla,$columnas,$alias,$tituloIdDueño,$iddueño,$idFila,$form,
         foreach($alias as $alia){                  
           printf('<th style="text-align:center">%s</th>',$alia);
         };
-        printf('<th>%s</th><th>%s</th>','Modificar','Eliminar');
+        printf('<th style="text-align:center">%s</th><th style="text-align:center">%s</th>','Modificar','Eliminar');
         echo '</tr></thead><tbody>';
         foreach($filas as $fila){ 
             echo '<tr>';
@@ -108,7 +111,8 @@ function ctabla($tabla,$columnas,$alias,$tituloIdDueño,$iddueño,$idFila,$form,
             <td>
               <form action=<?php echo $form?> method="POST"> 
                 <input type = "hidden" name = <?php echo $idFila?> value = "<?php echo $fila[$idFila]?>">
-                <input type=  "submit" class="form-control btn btn-dark border border-success fst-italic  lh-1" name="boton" value ="Modificar"> 
+                <input type=  "submit" class="form-control btn btn-dark border border-success fst-italic  lh-1"
+                name="boton" value ="Modificar"> 
               </form>
             </td>
             <td>
@@ -117,7 +121,9 @@ function ctabla($tabla,$columnas,$alias,$tituloIdDueño,$iddueño,$idFila,$form,
                     <input type = "hidden" name = "nombreID" value = "<?php echo $idFila?>">
                     <input type = "hidden" name = "retorno" value = "<?php echo $return?>">
                     <input type = "hidden" name = "valorID" value = "<?php echo $fila[$idFila]?>">
-                    <input type=  "submit" name="boton" class="form-control btn btn-dark  border border-success fst-italic  lh-1" value ="Borrar" onclick="return confirm('¿Seguro? Perderá esos datos.')"> 
+                    <input type=  "submit" name="boton" 
+                    class="form-control btn btn-dark  border border-success fst-italic  lh-1" 
+                    value ="Borrar" onclick="return confirm('¿Seguro? Perderá esos datos.')"> 
             </form>
             </td>
           </tr>
