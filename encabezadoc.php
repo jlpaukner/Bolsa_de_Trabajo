@@ -20,7 +20,7 @@ $resultado = cunsultadb($consulta);
 
 if($resultado['Estado'] == 1){
   $estado_actual = "<a class='nav-link dropdown-toggle text-white   btn btn-sm btn-success rounded-pill '  id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Cuenta Activa</a>";
-  $cambio_cuenta = "<li><a class='dropdown-item text-danger text-center border border-white fst-italic' href='cambiar_estado.php?estado=eliminar_candidato'>Eliminar Cuenta</a></li>";
+  $cambio_cuenta = "<li><a class='dropdown-item text-danger text-center border border-white fst-italic' title='No aparecerá en busquedas de empresas'  href='cambiar_estado.php?estado=eliminar_candidato'>Desactivar Cuenta</a></li>";
   $consulta= "SELECT id_busqueda FROM resultados WHERE DNI='{$dni}'";
 $filas=cunsultadbmultiple($consulta);
 $numRes= count($filas);

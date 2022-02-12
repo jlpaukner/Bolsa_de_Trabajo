@@ -1,6 +1,7 @@
 <?php
 require_once('./encabezadoc.php');
 require_once('./dbcon.php');
+require __DIR__ . '/mensajes.php';
 $dni=$_SESSION['id'];
 $consulta= " SELECT * FROM `estudios`
 JOIN carreras on estudios.id_carrera=carreras.id_carrera 

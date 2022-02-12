@@ -7,12 +7,12 @@ include __DIR__ . '/mensajes.php';
 <h3>Resumen de sus búsquedas</h3>
 
 <?php
-$iddueño= $_SESSION['id'];
+$cuil= $_SESSION['id'];
 $consulta="SELECT  @i:=@i+1 AS N,  t.*  FROM 
     ((SELECT id_busqueda,EdadMaxima,EdadMinima,tx_puesto,tx_carrera
     FROM `busquedas` join puestos on busquedas.id_puesto=puestos.id_puesto 
     join carreras on busquedas.id_carrera=carreras.id_carrera 
-    where `id_empresa`='$iddueño' ) AS t ,
+    where `id_empresa`='$cuil' ) AS t ,
     (SELECT @i:=0) AS foo)
 ";
 $filas=cunsultadbmultiple($consulta);

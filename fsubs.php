@@ -119,7 +119,7 @@ zoom: 100%;
             <!-- ingreso de dato de dni o cuit-->
             <div class="mb-3">
                 <label for="id" class=" <?=$c1?>" > <?php echo $docum?></label>
-                <input type="number"  class="<?=$c2?>" name="id" id="id" patter="[0-9]+"  min="<?php echo $min?>"  required  max="<?php echo $max?>" placeholder="Ingrese su número">                   
+                <input type="number"  class="<?=$c2?>" name="id" id="id" patter="[0-9]+" placeholder="Ingrese su número">                   
 
             </div>
             <!-- ingreso de dato de password-->

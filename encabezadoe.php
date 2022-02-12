@@ -23,11 +23,11 @@ $resultado = cunsultadb($consulta);
 
 if($resultado['Estado'] == 1){
   $estado_actual = "<a class='nav-link dropdown-toggle text-white   btn btn-sm btn-success rounded-pill '  id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Cuenta Activa</a>";
-  $cambio_cuenta = "<li><a class='dropdown-item text-danger text-center border border-white fst-italic' href='cambiar_estado.php?estado=eliminar_empresa'>Eliminar Cuenta</a></li>";
+  $cambio_cuenta = "<li><a class='dropdown-item text-danger text-center border border-white fst-italic' title='Sus busquedas quedaran suspendidas' href='cambiar_estado.php?estado=eliminar_empresa'>Desactivar Cuenta</a></li>";
 }
 else if($resultado['Estado'] == 0){
   $estado_actual = "<a class='nav-link dropdown-toggle text-white   btn btn-sm btn-danger rounded-pill '  id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Cuenta Inactiva</a>";
-  $cambio_cuenta = "<li><a class='dropdown-item text-success text-center border border-white fst-italic' href='cambiar_estado.php?estado=activa_empresa'>Activar Cuenta</a></li>";
+  $cambio_cuenta = "<li><a class='dropdown-item text-success text-center border border-white fst-italic' title='Sus busquedas serán efectuadas' href='cambiar_estado.php?estado=activa_empresa'>Activar Cuenta</a></li>";
 }
 else{
   $estado_actual = "<a class='nav-link dropdown-toggle text-white   btn btn-sm btn-secundary rounded-pill '  id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Cuenta Pendiente</a>";
@@ -78,7 +78,7 @@ else{
             <li><a class="dropdown-item text-dark text-center border border-white fst-italic" href="fdatosempresa.php">Datos Empresa</a></li>
             <li><a class="dropdown-item text-dark text-center border border-white fst-italic" href="busquedas.php">Búsqueda</a></li>            
             <li><form action=borrarcuenta.php method="POST">
-                  <input type="submit" name="boton" class="dropdown-item text-danger text-center border border-red fst-italic" value ="Eliminar Cuenta" onclick="return confirm('¿Seguro? Perderá todos los datos de su cuenta.')"> 
+                  <input type="submit" name="boton" class="dropdown-item text-danger text-center border border-red fst-italic" value ="Desactivar Cuenta" onclick="return confirm('¿Seguro? Perderá todos los datos de su cuenta.')"> 
                 </form>
             </li>
 

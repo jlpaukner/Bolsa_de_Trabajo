@@ -60,14 +60,14 @@
                 </blockquote>
             </figure>
         </div><br><br><br>
-
+                                                                                                    
         <form class=" text-center bg-white  text-stars border border-white" action="frecupero.php" method="POST">
             <!--Label de email-->
             <div class="contain">
                 <div class="row text-center">
                     <div class="col-sm-5"></div>
                     <div class="col-sm-2">
-                        <label for="email_recupero" class="form-label fs-5 fst-italic text-center">Email</label>
+                        <label for="Email" class="form-label fs-5 fst-italic text-center">Email</label>
                     </div>
                     <div class="col-sm-5"></div>
                 </div>
@@ -75,7 +75,8 @@
                 <div class="row">
                     <div class="col-sm-5"></div>
                     <div class="col-sm-2">
-                        <input type="email" class="text-center form-control border border-info fst-italic " name="email" id="email_recupero"  placeholder="Ingrese su Email" >
+                        <input type="email" class="text-center form-control border border-info fst-italic "
+                         name="Email" id="Email"  placeholder="Ingrese su email" >
                     </div>
                     <div class="col-sm-5"></div>
                 </div><br>
@@ -83,7 +84,8 @@
                 <div class="row text-center">
                     <div class="col-sm-5"></div>
                     <div class="col-sm-2">
-                        <label for="dni_recupero" class="form-label fs-5 fst-italic text-center">Número del DNI</label>
+                        <label for="DNI" 
+                        class="form-label fs-5 fst-italic text-center">Número del DNI</label>
                     </div>
                     <div class="col-sm-5"></div>
                 </div>
@@ -91,7 +93,9 @@
                 <div class="row">
                     <div class="col-sm-5"></div>
                     <div class="col-sm-2">
-                        <input type="number" class="text-center form-control border border-info fst-italic " name="dni" id="dni_recupero" min="8000000"  required  max="99999999999" placeholder="Ingrese su DNI" >
+                        <input type="number" class="text-center form-control border border-info fst-italic " 
+                        name="DNI" id="DNI" min="8000000"  required  max="99999999999" 
+                        placeholder="Ingrese su DNI" >
                     </div>
                     <div class="col-sm-5"></div>
                 </div><br>
@@ -101,11 +105,13 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <!-- Boton de guardar-->
-                                <button type="submit" class="btn btn-dark  border border-info fst-italic" name="login" id="sign_in">Verificar</button>
+                                <button type="submit" class="btn btn-dark border border-info fst-italic" 
+                                name="login" id="sign_in">Verificar</button>
                             </div>
                             <div class="col-sm-6">
                                 <!-- Boton de cancelar-->
-                                <button class="border border-while " > <a class="form-control btn btn-dark  border border-info fst-italic" href="index.php">Cancelar</a></button>
+                                <a class="btn btn-dark border border-info fst-italic" 
+                                href="index.php">Cancelar</a></button>
                             </div>
                         </div>
                     </div>

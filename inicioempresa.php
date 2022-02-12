@@ -160,7 +160,9 @@ foreach($busquedas as $busqueda)
     $id_carrera=$busqueda['id_carrera'];
     $id_puesto=$busqueda['id_puesto'];
     $sq = "SELECT candidatos.DNI from candidatos ";
-    $wq = " Where Nacimiento < '{$FDnacMaxima}' and '{$FDnacMinima}' < Nacimiento ";
+    $wq = " Where Estado=1 and
+        Nacimiento < '{$FDnacMaxima}' 
+        and '{$FDnacMinima}' < Nacimiento ";
     if($busqueda['id_puesto']!="0"){
         $sq = $sq." JOIN experiencia on candidatos.DNI = experiencia.DNI  
         JOIN puestos on puestos.id_puesto = experiencia.id_puesto ";
@@ -174,9 +176,10 @@ foreach($busquedas as $busqueda)
     $consulta= $sq.$wq;
     $candidatosEncontrados=cunsultadbmultiple($consulta);
     if(sizeof($candidatosEncontrados)>0){
-        // añadir a tabla resultados          
+        // limpiar previos resultados       
         $aborrar = " DELETE FROM resultados WHERE id_busqueda = '{$id_busqueda}'";
         operaciondb($aborrar);
+        // añadir a tabla resultados  
         foreach($candidatosEncontrados as $candidato)
         {
          $inserta="INSERT into Resultados (id_busqueda,DNI) VALUES ('{$id_busqueda}','{$candidato['DNI']}')";
