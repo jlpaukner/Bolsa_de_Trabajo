@@ -5,10 +5,11 @@ $dni=$_SESSION['id'];
 //--------------------
 $qd = "SELECT * FROM `candidatos` join estado_civil
 on estado_civil.id_estadoc= candidatos.id_estadoc
-join provincias 
-on candidatos.id_prov = provincias.id_prov
+-- join provincias 
+-- on candidatos.id_prov = provincias.id_prov
 WHERE `DNI`='$dni'";
 $datosp = cunsultadb($qd);
+if ($datosp==0){$no_personal_data_hidden="hidden";};
 $qe = "SELECT * FROM experiencia JOIN puestos 
 on experiencia.id_puesto=puestos.id_puesto 
 WHERE DNI='$dni'";
@@ -19,18 +20,35 @@ on estudios.id_carrera=carreras.id_carrera
 join provincias on provincias.id_prov=estudios.id_prov
 WHERE DNI= '{$dni}'";
 $estudios=cunsultadbmultiple($qt);
+
+$no_personal_data_hidden="";
+$no_experiencias="";
+$no_estudios="";
+if ($datosp==0){$no_personal_data_hidden="hidden";
+    echo "<p align='center'  style='color:white'>  Para que las empresas le encuentren, añada sus datos personales en el menu Editar</p>";
+    };
+    
+if (count($experiencias)==0){$no_experiencias="hidden";
+    echo "<p align='center'  style='color:white'>  Registre datos de su experiencia laboral en el menu Editar</p>";
+    };
+
+if (count($estudios)==0){$no_estudios="hidden";
+    echo "<p align='center'  style='color:white'>  Añada datos de sus estudios en el menu Editar</p>";
+    };
+
 ?>
 
 <body >   
 <div class="container bg-dark fst-italic border border-info">
             <div class="row">
-                <h1 class="text-center text-white text-decoration-underline fw-bolder text-uppercase"> Mi Curriculum Vitae </h1>
+                <h1 <?=$no_personal_data_hidden?> 
+                class="text-center text-white text-decoration-underline fw-bolder text-uppercase"> Mi Curriculum Vitae </h1>
             </div>
         </div>
 <div class="container fst-italic">
     <div class="row">
-        <div class="col-2 bg-primary bg-opacity-25 ">
-
+        <div <?=$no_personal_data_hidden?> 
+        class="col-2 bg-primary bg-opacity-25 ">
             <hr width="100%" color="white">
             <!--Nacionalidad-->
             <h6 class="card-title text-white">DNI:</h6>
@@ -88,22 +106,25 @@ $estudios=cunsultadbmultiple($qt);
             <hr>
         </div>
 
-        <div class="col-10">
-            <div class="row border bg-primary bg-opacity-25 text-white ">
+        <div  class="col-10">
+            <div <?=$no_personal_data_hidden?> class="row border bg-primary bg-opacity-25 text-white ">
                 <h2 class="text-center text-uppercase fw-bolder"> <?= $datosp['Nombre'] ?></h2>
                 <h2 class="text-center text-uppercase fw-bolder"> <?= $datosp['Apellido'] ?></h2>
             </div>
 
             <div class="row">
-            <div class="card border-light mb-3" style="max-width: S3rem;">
-                <div class="card-header bg-dark bg-opacity-75 text-white fs-4 fw-bolder ">Formación Académica</div><hr>
+            <div <?=$no_estudios?>
+            class="card border-light mb-3" style="max-width: S3rem;">
+                <div  
+                class="card-header bg-dark bg-opacity-75 text-white fs-4 fw-bolder ">Formación Académica</div><hr>
                 <!--Empezar el foreach para la formacion academica-->
-                <?php if (count($estudios)>0)
+                <?php 
+                if (count($estudios)>0)
                 {            
-                foreach ($estudios as $fila) 
+                    foreach ($estudios as $fila) 
                         {
-                           $carrera= $fila["tx_carrera"].'  (Tipo: '.$fila["tipo_Carrera"].' Nivel: '.$fila["nivel"].')';
-                           ?>
+                        $carrera= $fila["tx_carrera"].'  (Tipo: '.$fila["tipo_Carrera"].' Nivel: '.$fila["nivel"].')';
+                        ?>
                             <div class='row'>
                             <div class='col-1'></div>
                             <div class='col-7'>
@@ -117,15 +138,15 @@ $estudios=cunsultadbmultiple($qt);
                             <div class='col-1'></div>
                         </div>
                         <hr width="100%" color="white"><?php
-                        };   
+                         };   
                     }; 
                 ?>
                 <!--Termina el Foreach-->
             </div>
             </div>
-            <div class="row">            
+            <div <?=$no_experiencias?> class="row">            
             <div class="card border-light mb-3" style="max-width: S3rem;">
-                <div class="card-header bg-dark bg-opacity-75 fw-bolder text-white fs-4">Experiencia Laboral</div><hr>
+                <div  class="card-header bg-dark bg-opacity-75 fw-bolder text-white fs-4">Experiencia Laboral</div><hr>
                 <!--Empezar el foreach para la experiencia laboral-->
                 <?php if (count($experiencias)>0)
                 {            
