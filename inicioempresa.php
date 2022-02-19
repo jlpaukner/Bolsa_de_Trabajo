@@ -165,7 +165,9 @@ foreach($busquedas as $busqueda)
         and '{$FDnacMinima}' < Nacimiento ";
     if($busqueda['id_puesto']!="0"){
         $sq = $sq." JOIN experiencia on candidatos.DNI = experiencia.DNI  
-        JOIN puestos on puestos.id_puesto = experiencia.id_puesto ";
+        JOIN puestos on puestos.id_puesto = experiencia.id_puesto 
+        JOIN postulaciones on postulaciones.DNI = candidatos.DNI
+        and  postulaciones.id_puesto=puestos.id_puesto";
         $wq = $wq."and experiencia.id_puesto ={$id_puesto} ";
                                     }
     if($busqueda['id_carrera']!="0"){
